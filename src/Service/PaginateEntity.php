@@ -7,7 +7,7 @@ namespace App\Service;
 class PaginateEntity
 {
     public int $currentPage = 0;
-    public int $limitRows = 0;
+    public int $limit = 0;
     public int $offset = 0;
     public int $countRows = 0;
     public int $totalLimit = 0;
@@ -20,13 +20,13 @@ class PaginateEntity
     {
         $this->currentPage = $currentPage;
     }
-    public function getLimitRows(): int
+    public function getLimit(): int
     {
-        return $this->limitRows;
+        return $this->limit;
     }
-    public function setLimitRows(int $limitRows): void
+    public function setLimit(int $limit): void
     {
-        $this->limitRows = $limitRows;
+        $this->limit = $limit;
     }
     public function getOffset(): int
     {

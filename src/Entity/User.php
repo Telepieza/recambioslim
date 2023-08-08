@@ -7,9 +7,10 @@ namespace App\Entity;
 final class User extends BaseValidate
 {
 
+    private $prefix     = "oc_";
     private $tablename  = "user";
-    private $fieldid    = 'id';                
-    private $field01    = 'name';             
+    private $fieldid    = 'user_id';                
+    private $field01    = 'username';             
     private $field02    = 'email';         
     private $field03    = 'password';          
     
@@ -18,8 +19,9 @@ final class User extends BaseValidate
     private string $value02;            // field02 (email)
     private String $value03;           // field03 (password)
     
-    public function __construct(array $inputs)
+    public function __construct(string $prefix,array $inputs)
     {
+        $this->prefix = $prefix;
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0 );  
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '');  
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : ''); 
@@ -41,7 +43,8 @@ final class User extends BaseValidate
 
     public function toTable(): string
     {
-        return $this->tablename;
+        $tableDB = $this->prefix . $this->tablename;
+        return $tableDB;
     }
 
     public function toPrimaryKey(): array 
@@ -49,6 +52,11 @@ final class User extends BaseValidate
         $arr[$this->field01] = $this->field01;
         $arr[$this->field02] = $this->field02;
         return $arr;
+    }
+
+    public function toSortOrder(): ?string
+    {
+        return $this->fieldid;
     }
 
     public function toMapfields(): array 
@@ -62,6 +70,11 @@ final class User extends BaseValidate
 
     public function toCheckValue($results)
     {
+        if (isset($results[$this->fieldid]))
+        {
+            $this->setid($this->validateInteger($results[$this->fieldid]));
+            $results[$this->fieldid] = $this->getid();
+        } 
         if (isset($results[$this->field01])) {
            $this->setvalue01($this->validateString($results[$this->field01]));
            $results[$this->field01] = $this->getvalue01();
@@ -78,14 +91,20 @@ final class User extends BaseValidate
         return $results;
     }
 
+    public function getFieldsId(): string 
+    {
+        return $this->fieldid;
+    }
+
     public function getid(): int
     {
         return $this->id;
     }
 
-    public function setid($id) 
+    public function setid($id):self 
     {
         $this->id = $id;
+        return $this;
     }
 
     public function getvalue01(): string
@@ -110,7 +129,6 @@ final class User extends BaseValidate
         return $this;
     }
 
-    
     public function getvalue03(): string
     {
         return $this->value03;
@@ -128,3 +146,4 @@ final class User extends BaseValidate
     }
 
 }
+

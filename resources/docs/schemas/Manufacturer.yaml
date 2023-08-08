@@ -1,0 +1,448 @@
+openapi: 3.0.2
+servers:
+  - url: https://telepieza.com/recambios
+    description: Production server using Opencart.
+  - url: http://recambioslim.com
+    description: My localhost server using PHP built-in web server.
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+info:
+  version: "1.0.0"
+  title: API Recambios Opencart
+  description:  |-
+    API Recambios Opencart [https://telepieza.com/recambios/](https://telepieza.com/recambios/).
+  contact: 
+    email: telepieza@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+- name: manufacturer
+  description: Manage manufacturer.
+  externalDocs:
+      description: Find out more about our store
+      url: 'https://telepieza.com/recambios'
+
+paths:
+  /api/manufacturer/read:
+    get:
+      tags:
+      - manufacturer
+      summary: Get All categories
+      operationId: GetAll
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: limit
+        in: query
+        description: How many rows to return at one time (max 100)
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 20
+      - name: offset
+        in: query
+        description: Gives the rows from the given position+1
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetAll'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/InvalidStatus'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+          
+  /api/manufacturer/read/{manufacturer_id}:
+    get:
+      tags:
+        - manufacturer
+      summary: Get One manufacturer by ID
+      operationId: GetOne
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: manufacturer_id
+        in: path
+        description: ID of manufacturer to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOne'
+        '400':
+          $ref: '#/components/responses/InvalidID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/manufacturer/new:
+    post:
+      tags:
+        - manufacturer
+      summary: Add a new manufacturer
+      description: Register a new manufacturer.
+      operationId: Create
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+              
+      responses:
+        '201':
+            $ref: '#/components/responses/CreateID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/NotCreate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/manufacturer'
+        required: true
+         
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/manufacturer/update/{manufacturer_id}:
+    put:
+      tags:
+        - manufacturer
+      summary: Update an existing manufacturer
+      description: Update an existing manufacturer by manufacturer_id.
+      operationId: Update
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: manufacturer_id
+        in: path
+        description: ID of manufacturer to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotUpdate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Update an existent manufacturer in the table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/manufacturer'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+
+  /api/manufacturer/delete/{manufacturer_id}:
+    delete:
+      tags:
+        - manufacturer
+      summary: Delete manufacturer
+      description: Delete a manufacturer.
+      operationId: Deletemanufacturer
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: manufacturer_id
+        in: path
+        description: manufacturer_id of manufacturer to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '202':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/InvalidID'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+ 
+components:
+
+  schemas:
+  
+    GetAll:
+      title: GetHelp
+      properties:
+        status: 
+          type: integer
+          format: int32
+          example : 200
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        manufacturer:
+          type: array
+          xml:
+            wrapped: true
+          items:
+             $ref: '#/components/schemas/manufacturer'
+    
+    GetOne:
+      title: GetOne
+      properties:
+        status:
+          type: integer
+          format: int200
+          example: 200
+        manufacturer:
+          $ref: '#/components/schemas/manufacturer'
+          
+    manufacturer:
+       title: manufacturer
+       type: object
+       properties:
+        manufacturer_id:
+          type: integer
+          format: int64
+          example: 3
+        name:
+          type: string
+          example: Filtros Filtron
+        image:
+          type: string
+          example: manufacturer/filtronlogo.jpg
+        sort_order:
+          type: integer
+          format: int32
+          example: 1
+        
+       required:
+         - name
+         - sort_order
+         
+       example:
+          manufacturer_id: 3
+          name: Filtros Filtron
+          image: image/en-US.jpg
+          sort_order: 1
+ 
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int64
+          example: 1
+        limit: 
+          type: integer
+          format: int32
+          example: 20
+        offset: 
+          type: integer
+          format: int32
+          example: 0
+        countRows:
+          type: integer
+          format: int64
+          example: 27
+        totalLimit: 
+          type: integer
+          format: int64
+          example: 1
+      required:
+          - currentPage
+          - limit
+          - offset
+          - countRows
+          - totalLimit
+      example:
+        currentPage: 1
+        limit: 20
+        offset: 0
+        countRows: 27
+        totalLimit: 1
+  
+    Token:
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ945rtyRTWTQYW
+      required:
+        - token_type
+        - access_token
+      example:
+        token_type: Bearer
+        access_token: '{{jwt}}'
+          
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 0
+        error: Access token is missing or invalid
+
+  responses:
+  
+    Successful:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  
+    NotFound:
+      description: Information not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    CreateID:
+      description: The data has been created in the database with ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotCreate:
+      description: There has been an error creating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+            
+    NotUpdate:
+      description: There has been an error updating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+            
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    ExpiredToken:
+      description: Token invalid or Token required or Expired Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    InvalidID:
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'        
+     
+    InvalidStatus:
+      description: Invalid status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'           
+
+    ErrorInDataBase:
+      description: Problems connecting to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error' 
+ 
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

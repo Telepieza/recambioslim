@@ -8,6 +8,9 @@ use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
+
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -29,10 +32,13 @@ $settings($containerBuilder);
 $logger = require __DIR__ . '/../app/Logger.php';
 $logger($containerBuilder);
 
-
 // Services 
  $services = require __DIR__ . '/../app/Services.php';
  $services($containerBuilder);
+
+ // Views
+$views     = require __DIR__ . '/../app/Config/Views.php';
+$views($containerBuilder);
 
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
@@ -49,9 +55,13 @@ $container = $app->getContainer();
 // DataBase Mysql 
 require __DIR__ . '/../app/Config/Dependencies.php';
 
-// Register routes
 
+// Create App
+$app = AppFactory::create();
+
+// Register routes
 $routes = require __DIR__ . '/../app/Routes.php';
+
 $routes($app);
 
 /** SettingsInterface $settings */

@@ -25,14 +25,14 @@ class HttpErrorHandler extends SlimErrorHandler
     protected function respond(): Response
     {
         $exception = $this->exception;
-        $statusCode = 500;
+        $status = 500;
         $error = new ActionError(
             ActionError::SERVER_ERROR,
             'An internal error has occurred while processing your request.'
         );
 
         if ($exception instanceof HttpException) {
-            $statusCode = $exception->getCode();
+            $status = $exception->getCode();
             $error->setDescription($exception->getMessage());
 
             if ($exception instanceof HttpNotFoundException) {
@@ -58,10 +58,10 @@ class HttpErrorHandler extends SlimErrorHandler
             $error->setDescription($exception->getMessage());
         }
 
-        $payload = new ActionPayload($statusCode, null, $error);
+        $payload = new ActionPayload($status, null, $error);
         $encodedPayload = json_encode($payload, JSON_PRETTY_PRINT);
 
-        $response = $this->responseFactory->createResponse($statusCode);
+        $response = $this->responseFactory->createResponse($status);
         $response->getBody()->write($encodedPayload);
 
         return $response->withHeader('Content-Type', 'application/json');

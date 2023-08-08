@@ -6,7 +6,7 @@ namespace App\Application\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Exception;
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 use App\Service\User\Find;     
@@ -15,7 +15,7 @@ use PDO;
 class Auth
 {
     private int $code = 400;                           // default = 400
-    private string $status = 'Error';                  // default = 'Error'
+    private string $status = 'error';                  // default = 'error'
     private string $message = '';                
     private int $count = 0;
     private $request;
@@ -23,37 +23,40 @@ class Auth
     private $decoded = array();
     private $payload = array();
 
-    public function __construct(Request $request,string $keySecret)            // Constructor, pasa el request y keySecret a global
+    public function __construct(Request $request,string $keySecret)    // Constructor, pasa el request y keySecret a global
     {
-        $this->request   = $request;
-        $this->keySecret = $keySecret;
+        $this->request     = $request;
+        $this->keySecret   = $keySecret;
     }
 
     public function verifyToken()                                              // verificamos el token que nos llega del cliente
     {            
-        $jwtHeader = (string) $this->request->getHeaderLine('Authorization');   // getHeaderLine
-        $authorization = explode(' ',$jwtHeader);                               // pasar a array
+        $jwtHeader = $this->request->getHeaderLine('Authorization');   // getHeaderLine        $authorization = explode(' ',$jwtHeader);                               // pasar a array
+        $authorization = explode(' ',$jwtHeader); 
         $this->count   = count($authorization);                                 // count array
 
         (string) $type = '';
         (string) $credentials = '';
         $result = array();
         
-        if ($this->count > 1)                                                  // count > 1 tenemos el token
-        {
-          $type        = trim($authorization[0]);                              // pasamos el tipo
-          $credentials = trim($authorization[1]);                              // pasamos el token
+        if (is_array($authorization)) {
+            if (isset($authorization[0])) {
+               $type = trim($authorization[0]);                              // pasamos el tipo
+            }
+            if (isset($authorization[1])) {
+              $credentials = trim($authorization[1]);                              // pasamos el token
+            }
         }
 
         if ($type !== 'Bearer')                                                // si tipo != Bearer mensaje de error
         {
             $this->code = 403;                                                 // cambiamos el code 400 por 403
-            $this->message = 'Forbidden: You are not authorized. Token invalid.';
+            $this->message = 'Forbidden: (Bearer) You are not authorized. Token invalid.';
         }
         elseif (empty($credentials))                                           // si no existe token mensaje error
         {
             $this->code   = 403;                                                // cambiamos el code 400 por 403
-            $this->message = 'Forbidden: You are not authorized. Token required.';
+            $this->message = 'Forbidden: (Credentials) You are not authorized. Token required.';
         }
 
         if ($this->code !== 403)                                               // si es 400 o != 403
@@ -94,21 +97,22 @@ class Auth
        return $this->payload;                                                 // enviamos el payload.   
     }  
 
-    public function verifyUser(PDO $db)                                       // Verificamos el usuario de los datos recuperados del token.
+    public function verifyUser(PDO $db,$prefix)                                       // Verificamos el usuario de los datos recuperados del token.
     {
         $result = array();
         if (isset($this->payload['message']))                                 // analizamos si hay datos en el payload["menssage"]
         {
           (array) $body = (array) $this->payload['message'];                  // Pasamos a array body el array de payload (id,name,email)
           $body['auth'] = 'no_password';                                      // grabamos el key auth,se indica al objeto Find, es una verificacion tocken
-          $find = new Find($db,$body);                                        // creamos la clase Find con su constructor. 
+          $find = new Find($db,$body,$prefix);                                // creamos la clase Find con su constructor. 
           $jsonResult = $find->getUser();                                     // la funcion getUser nos indicara si la información es correcta del tocken
         } else {
             $result['code'] = 403;                                            // Si no existe en payload la key "mensagge", genera un code = 403 con error.
-            $result['message'] = 'Forbidden: You are not authorized. Verify User.';
+            $result['message'] = '(Users) Forbidden: You are not authorized. Verify User.';
             $jsonResult = json_encode($result);                               // convierte el array en string json (Motivo es para picar menos codigo).
         }
         return $jsonResult;                                                   // return en json_encode
     }
+
 }
     

@@ -1,2 +1,3 @@
 <?php
-require __DIR__ . '/../src/App.php';
+  header("Location: /frontend/index.php");
+?>

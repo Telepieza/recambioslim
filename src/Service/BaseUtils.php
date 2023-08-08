@@ -6,62 +6,82 @@ namespace App\Service;
 
 // Monta en un string el sql de la sentencia INSERT TO
 class BaseUtils {
-    public function buildingSqlInsert($data, string $tablename) {
-        $keys = array_keys($data);
-        $sql = "INSERT INTO ".$tablename." (";
-        $sql .= implode(",",  $keys );
-        $sql .= ")";
-        $sql .= " VALUES ";
-        $sql .= "(";
-        $sql .= ":" .implode(",:", $keys);
-        $sql .= ")";
+    public function buildingSqlInsert($data, string $table) {
+        $sql = '';
+        if (is_array($data)) {
+           $keys = array_keys($data);
+           $aks  = array();
+           foreach ($keys as $key) 
+           {
+              $aks[$key] = '`' . $key . '`';
+           }
+           $sql = "INSERT INTO ".$table." (";
+           $sql .= implode(",",  $aks );
+           $sql .= ")";
+           $sql .= " VALUES ";
+           $sql .= "(";
+           $sql .= ":" .implode(",:", $keys);
+           $sql .= ")";
+        }
         return $sql;
     }
 
     // Monta el string el sql de la sentencia UPDATE, controlando el id y los campos de la key principal.
-    public function buildingSqlUpdate(array $data, string $tablename, array $primaryKey)
+    public function buildingSqlUpdate(array $data, string $table, string $fieldId, array $primaryKey)
     {
         $keys        = array_keys($data);
         $countKeys   = count($keys);
         $countPriKey = count(array_keys($primaryKey));
         $countIteration = 0;
-        $sql = "UPDATE ".$tablename." SET ";
-        foreach ($keys as $key) {
+        $fields = '';
+        $sql    = '';
+        foreach ($keys as $key) 
+        {
            $countIteration = $countIteration + 1;
-           if ($countPriKey > 0 && isset($primaryKey[$key])) {
-                   continue;
+           if ($countPriKey > 0 && isset($primaryKey[$key]))
+           {
+               continue;
            }
-           if ($key != 'id') {
+           if ($key !=  $fieldId)
+           {
               $str = ', ';
-              if($countIteration == $countKeys) {
+              if($countIteration == $countKeys)
+              {
                  $str = '';
               }
-              $sql .= $key." = :".$key.$str;
+               $fields .= '`' . $key . '`' . " = :" . $key . $str;
            }
         }
-        $sql .= " WHERE id = :id";
+        
+        if (!empty($fields)) 
+        {
+          $sql  = "UPDATE " . $table . " SET " . $fields ;
+          $sql .= " WHERE " . '`' . $fieldId . '`' . " = :" . $fieldId ;
+        }
         return $sql;
     } 
 
     // Monta en un string los valores del WHERE de las sentencia SELECT 
-    public function buildingSqlWhere(array $inputs)
+    public function buildingSqlWhere(array $inputs,string $fieldId)
     {
         $keys      = array_keys($inputs);
         $countKeys = count($keys);
         $countIteration = 0;
         $where = '';
-        foreach ($keys as $key) {
+        foreach ($keys as $key)
+        {
            $countIteration = $countIteration + 1;
-           if ($key === 'id' && $inputs['id'] === 0) {
-                continue;
+           if ($key ===  $fieldId && $inputs[$fieldId] === 0)
+           {
+               continue;
            }
            $str = ', ';
            if($countIteration == $countKeys) {
               $str = '';
            }
-              $where .= $key ." = :".$key . $str;
-         }
-         return $where;
+           $where .= '`' . $key . '`' . " = :". $key . $str;
+        }
+        return $where;
     } 
 
     // Monta en un string los campos para la sentencia SELECT $fields, si no hay campos pone un *
@@ -74,7 +94,7 @@ class BaseUtils {
            if (!empty($fields)) {
               $fields .= ', ';
            }
-           $fields = $fields . $key;
+            $fields .=  '`' . $key . '`';
          }   
       }
       if (empty($fields)) {
@@ -84,7 +104,7 @@ class BaseUtils {
   }
 
     // Monta el array params para (parametros y valor) del SQL, con control del id en la accion "create" y valor 0.
-    public function buildingSqlParams(array $inputs, string $action, array $primaryKey)
+    public function buildingSqlParams(array $inputs, string $action, string $fieldId, array $primaryKey)
     {
        $count       = count(array_keys($inputs));
        $params      = array();
@@ -95,14 +115,14 @@ class BaseUtils {
           {
             if (!empty($key)) 
             {
-               if($key === 'id' && $action === 'create') {
+               if($key ===  $fieldId && $action === 'create') {
                   continue;
                } 
-               if ($key === 'id' && $value === 0)
+               if ($key ===  $fieldId && $value === 0)
                {
                   continue;
                }
-               if ($action === "update" && $countPriKey > 0 && isset($primaryKey[$key])) {
+               if ($action === 'update' && $countPriKey > 0 && isset($primaryKey[$key])) {
                   continue;
                }
                $params[$key] = $value;

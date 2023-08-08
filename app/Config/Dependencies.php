@@ -24,5 +24,3 @@ $container->set('db',function(ContainerInterface $ci){
     return $pdo;
    
 });
-
-

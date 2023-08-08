@@ -1,0 +1,478 @@
+openapi: 3.0.2
+servers:
+  - url: https://telepieza.com/recambios
+    description:  [Telepieza Recambios](https://telepieza.com/recambios) Production server using Opencart.
+    
+  - url: https://recambioslim.com/recambios
+    description: My localhost server using PHP built-in web server.
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+info:
+  version: "1.0.0"
+  title: API Recambios Opencart
+  description:  |-
+    API Recambios Opencart [https://telepieza.com/recambios/](https://telepieza.com/recambios/).
+  contact: 
+    email: telepieza@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+- name: category
+  description: Manage category.
+  externalDocs:
+      description: Find out more about our store
+      url: 'https://telepieza.com/recambios'
+
+paths:
+  /api/category/read:
+    get:
+      tags:
+      - category
+      summary: Get All categories
+      operationId: GetAll
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: limit
+        in: query
+        description: How many rows to return at one time (max 100)
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 20
+      - name: offset
+        in: query
+        description: Gives the rows from the given position+1
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetAll'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/InvalidStatus'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+          
+  /api/category/read/{category_id}:
+    get:
+      tags:
+        - category
+      summary: Get One category by ID
+      operationId: GetOne
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: ID of category to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOne'
+        '400':
+          $ref: '#/components/responses/InvalidID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/category/new:
+    post:
+      tags:
+        - category
+      summary: Add a new category
+      description: Register a new category.
+      operationId: Create
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+              
+      responses:
+        '201':
+            $ref: '#/components/responses/CreateID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/NotCreate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category'
+        required: true
+         
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/category/update/{category_id}:
+    put:
+      tags:
+        - category
+      summary: Update an existing category
+      description: Update an existing category by category_id.
+      operationId: Update
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: ID of category to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotUpdate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Update an existent category in the table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+
+  /api/category/delete/{category_id}:
+    delete:
+      tags:
+        - category
+      summary: Delete category
+      description: Delete a category.
+      operationId: Deletecategory
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: category_id of category to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '202':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/InvalidID'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+ 
+components:
+
+  schemas:
+  
+    GetAll:
+      title: GetHelp
+      properties:
+        status: 
+          type: integer
+          format: int32
+          example : 200
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        category:
+          type: array
+          xml:
+            wrapped: true
+          items:
+             $ref: '#/components/schemas/category'
+    
+    GetOne:
+      title: GetOne
+      properties:
+        status:
+          type: integer
+          format: int200
+          example: 200
+        category:
+          $ref: '#/components/schemas/category'
+          
+    category:
+       title: category
+       type: object
+       properties:
+        category_id:
+          type: integer
+          format: int64
+          example: 3
+        image:
+          type: string
+          example: categories/photo05_175x175.jpg
+        parent_id:
+          type: integer
+          format: int64
+          example: 1
+        top:
+          type: integer
+          format: int32
+        column:
+          type: integer
+          format: int32
+          example: 1
+        sort_order:
+          type: integer
+          format: int32
+          example : 7
+        status:
+          type: integer
+          format: int32
+          example: 1
+        date_added: 
+          type : string
+          format: date-time
+          example: 2023-08-01 12:42:14
+        date_modified: 
+          type : string
+          format: date-time
+          example: 2023-08-05 15:42:10
+        
+       required:
+         - parent_id
+         - top
+         - column
+         - sort_order
+         - status
+         
+       example:
+          category_id: 3
+          image: categories/photo05_175x175.jpg
+          parent_id: 1
+          top: 0
+          column: 1
+          sort_order: 7
+          status: 1
+          date_added: 2023-08-01 12:42:14
+          date_modified: 2023-08-05 15:42:10
+ 
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int64
+          example: 1
+        limit: 
+          type: integer
+          format: int32
+          example: 20
+        offset: 
+          type: integer
+          format: int32
+          example: 0
+        countRows:
+          type: integer
+          format: int64
+          example: 27
+        totalLimit: 
+          type: integer
+          format: int64
+          example: 1
+      required:
+          - currentPage
+          - limit
+          - offset
+          - countRows
+          - totalLimit
+      example:
+        currentPage: 1
+        limit: 20
+        offset: 0
+        countRows: 27
+        totalLimit: 1
+  
+    Token:
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ945rtyRTWTQYW
+      required:
+        - token_type
+        - access_token
+      example:
+        token_type: Bearer
+        access_token: '{{jwt}}'
+          
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 0
+        error: Access token is missing or invalid
+
+  responses:
+  
+    Successful:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  
+    NotFound:
+      description: Information not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    CreateID:
+      description: The data has been created in the database with ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotCreate:
+      description: There has been an error creating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+            
+    NotUpdate:
+      description: There has been an error updating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+            
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    ExpiredToken:
+      description: Token invalid or Token required or Expired Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    
+    InvalidID:
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'        
+     
+    InvalidStatus:
+      description: Invalid status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'           
+
+    ErrorInDataBase:
+      description: Problems connecting to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error' 
+ 
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

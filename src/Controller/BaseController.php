@@ -10,142 +10,118 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use App\Application\Settings\SettingsInterface;
+use App\Controller\BaseParameters;
 use App\Application\Middleware\Auth;
-use PDO;
 
-class BaseController 
+class BaseController
 {
-   protected $container;
-   protected $db;
-   protected LoggerInterface $logger;
-   protected bool   $debug;
-   protected string $locale;
-   protected ?string $appName = null;
-   protected ?string $keyToken = null;
-   protected int $perPage = 0;
-   protected ?string $dev = null;
-   protected ?string $tableController = null;
-   protected $settings = null; 
+  protected ContainerInterface $container;
+  protected $settings = null; 
+  protected BaseParameters $baseParameters;
 
-   public function __construct(ContainerInterface $ci, LoggerInterface $logger) {
-      $this->container = $ci;
-      if (isset($this->container) && !isset($this->db)) {
-          $this->db = $this->container->get('db');
-      }
-    
-      if (is_null($this->appName) || is_null($this->settings)) {
-          $this->appConfig($this->container);    
-      }
-      $this->logger = $logger;
-   }
+  public function __construct(ContainerInterface $ci, LoggerInterface $logger)
+  {
+     $this->container = $ci;
+     if (is_null($this->settings))
+     {
+        $this->baseParameters = new BaseParameters();  
+        if (isset($this->container)) 
+        {
+          $this->baseParameters->setDb($this->container->get('db'));
+          $this->appConfig($this->container);
+        }
+      }    
+      $this->baseParameters->setLogger($logger);
+  }
+  
+  private function appConfig($container) {
+     $this->baseParameters->setAppName('appName');  
+     $this->baseParameters->setLocale('es');  
+     $this->baseParameters->setDebug(false);
+     $this->baseParameters->setDev('development'); 
+     $this->baseParameters->setKeyToken('t2l2p3ez1');   
+     $this->baseParameters->setPrefix('co_');
+     $this->baseParameters->setPerPage(0) ;
+     $this->baseParameters->setLanguage(2) ;
+     $this->baseParameters->setDomain('appDomain') ;
+     $this->baseParameters->setCountry('es_ES') ;
+     $this->baseParameters->setTimeZone('UTC') ;
+     $this->settings = $container->get(SettingsInterface::class);
+     if (!is_null($this->settings)) 
+     {
+         $config = $this->settings->get("app");
+         if (isset($config['name']))
+         {
+           $this->baseParameters->setAppName($config['name']);
+         }
+         if (isset($config['locale'])) 
+         {
+           $this->baseParameters->setLocale($config['locale']);
+         }
+         if (isset($config['timezone'])) 
+         {
+          $this->baseParameters->setTimeZone($config['timezone']);
+         }
+         if (isset($config['country'])) 
+         {
+          $this->baseParameters->setCountry($config['country']);
+         }
+         if (isset($config['debug'])) 
+         {
+           $this->baseParameters->setDebug($config['debug']);
+         }
+         if (isset($config['dev']))
+         {
+           $this->baseParameters->setDev($config['dev']);
+         }
+         if (isset($config['secret'])) 
+         {
+           $this->baseParameters->setKeyToken($config['secret']);
+         }
+         if (isset($config['perPage'])) 
+         {
+           $this->baseParameters->setPerPage($config['perPage']);
+         }
+         if (isset($config['prefix'])) 
+         {
+           $this->baseParameters->setPrefix($config['prefix']);
+         }
+         if (isset($config['language'])) 
+         {
+          $this->baseParameters->setLanguage($config['language']);
+         }
+         if (isset($config['domain'])) 
+         {
+          $this->baseParameters->setDomain($config['domain']);
+         }
+     }
+  }
 
-   private function appConfig($container) {
-      $this->appName   = 'appName';  
-      $this->locale    = 'es';  
-      $this->debug     = false;
-      $this->dev       = 'development'; 
-      $this->keyToken  = 't2l2p3ez1';   
-      if (is_null($this->settings)) 
-      {
-         $this->settings = $container->get(SettingsInterface::class);
-      }
-      
-      if (!is_null($this->settings)) 
-      {
-          $config = $this->settings->get("app");
-          if (isset($config['name']))
-          {
-            $this->appName = $config['name'];
-          }
-          if (isset($config['locale'])) 
-          {
-            $this->locale = $config['locale'];
-          }
-          if (isset($config['debug'])) 
-          {
-            $this->debug = $config['debug'];
-          }
-          if (isset($config['dev']))
-          {
-            $this->dev = $config['dev'];
-          }
-          if (isset($config['secret'])) 
-          {
-            $this->keyToken = $config['secret'];
-          }
-          if (isset($config['perpage'])) 
-          {
-            $this->perPage = $config['perpage'];
-          }
-      }
-   }
+ protected function getAuthUser(Request $request) {
+   $auth = new Auth($request,$this->baseParameters->getKeyToken());
+   $result = $auth->verifyToken();        
+   if ($result['code'] === 200) {
+      $jsonRecord = $auth->verifyUser($this->baseParameters->getDb(),$this->baseParameters->getPrefix());
+      $result = (array) json_decode($jsonRecord);
+   } 
+   return $result;
+}
 
-   protected function setTableController(string $tableController) {
-     $this->tableController = $tableController;
-   }
-
-   protected function getTableController() {
-    if (is_null($this->tableController)) {
-        $this->settableController('undefined');
+ protected function getPayload($result) {
+    $payload = new BasePayLoad($result);
+    if ($payload->getStatus() === 'error') {
+       $this->baseParameters->getLogger()->error($this->baseParameters->getTableController() . ' ' . $payload->getCode() . ' ' . $payload->getMessage());
     }
-    return $this->tableController;
-  }
-
-  protected function getDebug() : bool 
-  {
-    return $this->debug;
-  }
-
-  protected function getLogger() 
-  {
-    return $this->logger;
-  }
-
-  protected function getDb() : PDO
-  {
-    return $this->db;
-  }
-
-  protected function getKeyToken() : string
-  {
-    return $this->keyToken;
-  }
-
-  protected function getDev() : string
-  {
-    return $this->dev;
-  }
-
-  protected function getPerPage() : int
-  {
-    return $this->perPage;
-  }
-
-  protected function getAuthUser(Request $request) {
-    $auth = new Auth($request,$this->getKeyToken());
-    $result = $auth->verifyToken();        
-    if ($result['code'] === 200) {
-       $jsonRecord = $auth->verifyUser($this->getDb());
-       $result = (array) json_decode($jsonRecord);
-    } 
-    return $result;
+    return $payload;
  }
 
-  protected function getPayload($result) {
-     $payload = new BasePayload($result);
-     if ($payload->getStatus() === 'Error') {
-          $this->logger->error($this->getTableController() . ' ' . $payload->getCode() . ' ' . $payload->getMessage());
-     }
-     return $payload;
+  protected function jsonWithData(Response $response, BasePayLoad $payload): Response 
+  {
+      $json = json_encode($payload, JSON_PRETTY_PRINT);
+      $response->getBody()->write($json);
+      return $response
+             ->withHeader('Content-Type', 'application/json')
+             ->withStatus($payload->getCode());
   }
-
-   protected function jsonWithData(Response $response, BasePayload $payload): Response 
-   {
-       $json = json_encode($payload, JSON_PARTIAL_OUTPUT_ON_ERROR);
-       $response->getBody()->write($json);
-       return $response
-              ->withHeader('Content-Type', 'application/json')
-              ->withStatus($payload->getCode());
-   }
 
 }

@@ -16,9 +16,22 @@ class BaseValidate {
         return $result;
     }
 
+    public function validateBoolean($value)
+    {
+       (bool) $result = false;
+        if (is_bool($value)) 
+        {
+           $result = $value ? true : false;
+        }
+        else if (is_numeric($value)) 
+        {
+           $result = $value === 1 ? true : false;
+        }
+        return $result;
+    }
+
     public function validateDateTimeImmutable($value)
     {
-    
         $result = $value;
         if (!$result instanceof DateTimeImmutable) 
         {
@@ -32,19 +45,19 @@ class BaseValidate {
   
     public function validateInteger($value)
     {
-       $result = $value;
-       if (empty($result) || is_null($result)) {
-          $result = 0;
-       } 
-
-       if (!is_numeric($result)) {
+       if (empty($value) || is_null($value)) {
+          $value = 0;
+       } else {
+         if (is_string($value)) {
+           $value = trim(str_replace("\"", '', $value));
+           $value = trim(str_replace("'" , '', $value));
+         }
+       }
+       if (!is_numeric($value)) {
          $result = 0;
+       } else {
+        $result = (int) $value;
        }
-
-       if (!is_int($result)) {
-          $result = 0;
-       }
-
        return $result;
     }
 
