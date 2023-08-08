@@ -1,4 +1,1 @@
 .env
-**/.env
-var/cache/*.*
-var/logs/*.log
