@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.4/swagger-ui.css">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap5.min.css">
+<link type="text/css" rel="stylesheet" href="/css/style.css">   
+<script src="/js/include.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.4/swagger-ui-bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.52.4/swagger-ui-standalone-preset.js"></script>
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16" />
+
+<html lang="en">
+<header>
+    <meta charset="UTF-8">
+    <title>API Specification - Swagger UI</title>
+</head>
+<body>
+  <div class="row">
+     <include src="/template/navbar.php"></include>
+  </div>
+   <div class="col-md-8">
+  <div class="container-fluid">
+    <div class="row">
+         <div class="color-1" id="swagger-ui"></div>
+      </div>
+    </div>
+  </div>
+
+     <script>
+    window.onload = function () {
+        const ui = SwaggerUIBundle({
+            spec: {{ spec|raw }},
+            dom_id: '#swagger-ui',
+            deepLinking: true,
+            presets: [
+                SwaggerUIBundle.presets.apis,
+            ],
+            plugins: [
+                SwaggerUIBundle.plugins.DownloadUrl
+            ],
+        })
+        window.ui = ui
+    }
+
+</script>
+ 
+
+</body>
+</html>
+
+
+
