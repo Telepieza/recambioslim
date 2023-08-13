@@ -8,16 +8,16 @@
 BackEnd  : API REST with MVC Technology in Slim 4.
 FrontEnd : API REST PHP 7 Templates with Bootstrap 5 and dataTables, with their methods (GET and POST).
 ## Technologies
-Language - [PHP 7.4](http://php.net)
-Database - [MySQL 5.4](https://www.mysql.com/)
-Web framework - [Slim 4](https://www.slimframework.com/)
-JSON Web Tokens (JWT)
-Swagger  - [Swagger](https://swagger.io/)
-Bootstrap  - [Bootstrap 5](https://getbootstrap.com/)
+Language - [PHP 7.4](http://php.net) </br>
+Database - [MySQL 5.4](https://www.mysql.com/)</br>
+Web framework - [Slim 4](https://www.slimframework.com/)</br>
+JSON Web Tokens (JWT)</br>
+Swagger  - [Swagger](https://swagger.io/)</br>
+Bootstrap  - [Bootstrap 5](https://getbootstrap.com/)</br>
 
 ## Demonstration 
 
-the REST API in the hosting of Telepieza: [RecambioSlim API REST](https://www.telepieza.com/recambios/frontend/)
+The REST API in the hosting of Telepieza: [RecambioSlim API REST](https://www.telepieza.com/recambios/frontend/)
 
 ## Getting Started
 
@@ -98,9 +98,10 @@ SECRET_KEY  = 'your SECRET_KEY'
 
 If you do not have the Opencart database installed, there is a DDBB in the project path /resources/database/mysql/Opencart.sql
 
-The call to the BackEnd api with the route _http://yourdomain/opencard/   , example : _http://recambioslim.com/opencard/
+The call to the BackEnd api with the route "http://yourdomain/opencard/"   , example : "http://recambioslim.com/opencard/"
 
 The .htaccess file is correct call index.php.
+
 ```
   RewriteEngine On
   RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -198,4 +199,4 @@ This project is licensed under the APACHE 2.0 License - see the [LICENSE](https:
 
 ## Release History
 
-- 2023-08-31 - 1.0.0 Stable release.
+- 2023-08-14 - 1.0.0 Stable release.
