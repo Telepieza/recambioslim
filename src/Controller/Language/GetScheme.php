@@ -1,5 +1,10 @@
 <?php
-
+/** 
+* GetScheme.php
+* Description: language read structure and schemas.
+* @Author : M.V.M
+* @Version
+**/
 declare(strict_types=1);
 
 namespace App\Controller\Language;

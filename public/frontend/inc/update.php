@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * update.php
+  * Description: Endpoind /update/id with call to the Api server and testing with id
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 if ('Update' == $action && is_numeric($id)) {
   $endpoint = "/update/{$id}";
   if ($methodPUT) {

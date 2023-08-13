@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * BaseFind.php
+  * Description: Principal object update class of all templates
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Service;                                                 // (1) Modificar en la clase nueva el valor, si se copia la clase.
@@ -10,8 +15,9 @@ use App\Controller\BaseParameters;
 use PDOException;
 
 /*
-  Observaciones :
+  Observations :
     ROUTE : $group->put('/{$this->tableClass->toTable()}/update/{id}','App\Controller\{$this->tableClass->toTable()}\Update:update');
+    ROUTE : $group->post('/{$this->tableClass->toTable()}/update/{id}','App\Controller\{$this->tableClass->toTable()}\Update:update');
 */
 
 final class BaseUpdate extends BaseRepository 
@@ -142,7 +148,7 @@ final class BaseUpdate extends BaseRepository
             'message' => $message
            ];
   }
-
+// Si el debug = true, se grabara la información en el logger
   private function toDebugger(LoggerInterface $logger, $action, $message) 
   {     
     if ($this->parameters->getDebug()) {

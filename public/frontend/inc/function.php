@@ -1,8 +1,13 @@
 <?php
-
+/** 
+  * function.php
+  * Description: Create start session and FontEnd functions
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 session_start();
 
-// Localizar token por inicio de session o por cookie
+// Locate token by session or by cookie
 function session_login() {
   $jwt = '';
   if (isset($_SESSION['token'])) {
@@ -20,7 +25,7 @@ function session_login() {
   }
    return $jwt;
 }
-// Mensajes de error o info
+// Message error or info
 function msgError( $action, $status, $error, $info, $id ) {
    if ($status == 500) 
    {
@@ -68,7 +73,7 @@ function msgError( $action, $status, $error, $info, $id ) {
    }
    return $msg;
 }
-
+// Analyze if the device is Desktop or Mobile
 function isMobile()
 {
    (boolean) $isMobile = false;
@@ -89,15 +94,14 @@ function isMobile()
   return $isMobile;
 }
 
-// curl llamada al servidor
-
+// curl call to server
 function CallAPI($method, $url, $token, $data = false)
 {
     $curl      = curl_init();
     $arrHeader = array();
 
     switch ($method) {
-        case 'POST':  // CREATE / LOGIN
+        case 'POST':  // CREATE / UPDATE/ DELETE/ LOGIN
             curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
             if ($data) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
@@ -161,7 +165,7 @@ function CallAPI($method, $url, $token, $data = false)
     return $result;
 }
 
-
+// Pagination request variables
 function setPageFields() 
 {
    $limit  = 0;
@@ -175,7 +179,7 @@ function setPageFields()
    return $formFields;
 }
 
-// Header
+// Header (Parent)
 function showParent($parent)
 {
   header("Location: " . $parent); 

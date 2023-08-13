@@ -1,4 +1,10 @@
 <?php
+/** 
+  * category.php
+  * Description: category template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 function setFormFields() {
     $category_id   = $_REQUEST['id'];
     $image         = $_REQUEST['image'];

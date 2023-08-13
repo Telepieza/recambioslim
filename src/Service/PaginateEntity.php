@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * PaginateEntity.php
+  * Description: Principal object pagibnate entity class of all templates
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Service;

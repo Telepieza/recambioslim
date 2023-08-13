@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * User.php
+  * Description: user template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -17,7 +22,7 @@ final class User extends BaseValidate
     private int $id;                    // id
     private string $value01;            // field01 (username)
     private string $value02;            // field02 (email)
-    private String $value03;           // field03 (password)
+    private String $value03;            // field03 (password)
     
     public function __construct(string $prefix,array $inputs)
     {
@@ -37,7 +42,6 @@ final class User extends BaseValidate
        if (trim($this->getvalue01()))  { $arr[$this->field01] = $this->getvalue01()  ; }  // string  
        if (trim($this->getvalue02()))  { $arr[$this->field02] = $this->getvalue02()  ; }  // string
        if (trim($this->getvalue03()))  { $arr[$this->field03] = $this->getvalue03()  ; }  // string
-
        return $arr;
     }
 

@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * login.php
+  * Description: endpoint /login -Action login with call to the Api server and testing token
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
   if ('login' == $action) {
      $endpoint = "/login";
      $response = json_decode(CallAPI('POST', $url.$endpoint, $jwt , setFormFields()),true);

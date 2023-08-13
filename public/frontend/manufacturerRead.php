@@ -1,16 +1,21 @@
 <?php
-
-(string) $endpoint = 'api/manufacturer';    // endpoint
-include 'entity/manufacturer.php';          // structure
+/** 
+  * manufacturerRead.php
+  * Description: Read all language with datatable
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+(string) $endpoint = 'api/manufacturer';   // endpoint manufacturer
+include 'entity/manufacturer.php';         // template  manufacturer
 
 include 'inc/function.php';
-include 'inc/variables.php';
+include 'inc/setting.php';
 
 $pageParent  = 'manufacturerRead.php';       // read all
 if ($isMobile) { 
-  $pageCreate = 'manufacturerFormMovil.php'; // read id Movil
+  $pageCreate = 'manufacturerFormMovil.php'; // read id Mobile
  } else { 
-  $pageCreate = 'manufacturerForm.php';      // read id Desk
+  $pageCreate = 'manufacturerForm.php';      // read id Desktop
 }
 
 $urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/

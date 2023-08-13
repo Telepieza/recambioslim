@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * Language.php
+  * Description: language template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -144,7 +149,6 @@ final class Language extends BaseValidate
            $this->setvalue07($this->validateInteger($results[$this->field07]));
            $results[$this->field07] = $this->getvalue07();
         } 
-       
         return $results;
     }
 

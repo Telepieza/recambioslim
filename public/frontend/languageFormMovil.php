@@ -1,10 +1,15 @@
 <?php
-
- (string) $endpoint = 'api/language'; // endpoint
- include 'entity/language.php';       // structure
+/** 
+  * languageFormMovil.php
+  * Description: Mobile language form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+ (string) $endpoint = 'api/language'; // endpoint language
+ include 'entity/language.php';       // template language
 
  include 'inc/function.php';
- include 'inc/variables.php';
+ include 'inc/setting.php';
  include 'inc/getAction.php';
  
  include 'inc/create.php';

@@ -1,4 +1,11 @@
-<!-- NAVBAR -->
+<?php
+/** 
+  * navbar.php
+  * Description: navbar of the page
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+?>
 <div class="container-fluid position-relative p-0"> 
   <div class="row">
      <div class="col-md-8">

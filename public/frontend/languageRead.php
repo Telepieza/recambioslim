@@ -1,16 +1,21 @@
 <?php
-
-(string) $endpoint = 'api/language';  // endpoint
-include 'entity/language.php';        // structure
+/** 
+  * languageRead.php
+  * Description: Read all language with datatable
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+(string) $endpoint = 'api/language';  // endpoint language
+include 'entity/language.php';        // template language
 
 include 'inc/function.php';
-include 'inc/variables.php';
+include 'inc/setting.php';
 
-$pageParent  = 'languageRead.php';
+$pageParent  = 'languageRead.php';              
 if ($isMobile) { 
-  $pageCreate = 'languageFormMovil.php';
+  $pageCreate = 'languageFormMovil.php';     // read id Mobile
  } else { 
-  $pageCreate = 'languageForm.php';
+  $pageCreate = 'languageForm.php';          // read id Desktop
 }
 
 $urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/

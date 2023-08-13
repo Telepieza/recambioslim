@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * GetAll.php
+  * Description: language Services route path read all with token verification
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Controller\Language;

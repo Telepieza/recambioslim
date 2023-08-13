@@ -1,10 +1,15 @@
 <?php
-
+/** 
+  * login.php
+  * Description: Login form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 (string) $endpoint = 'api/users';         // endpoint
 include 'entity/login.php';               // structure
 
 include 'inc/function.php';
-include 'inc/variables.php';
+include 'inc/setting.php';
 include 'inc/getAction.php';
 
 if (!empty($jwt)) 

@@ -1,5 +1,11 @@
-
-<?php if ($isMobile):?>
+<?php 
+/** 
+  * viewMsg.php
+  * Description: view message of the page
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+if ($isMobile):?>
     <div class="form-floating my-2">
 <?php else: ?>
     <div class="form-group row mb-0">

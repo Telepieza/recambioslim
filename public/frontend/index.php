@@ -1,6 +1,12 @@
 <?php
+/** 
+  * index.php
+  * Description: Homepage or index
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 include 'inc/function.php';
-include 'inc/variables.php';
+include 'inc/setting.php';
 
 include 'template/header.php';
 include 'template/navbar.php';
@@ -39,11 +45,11 @@ include 'template/navbar.php';
                     <td>Desktop category of all rows table form.</td>
                   </tr>
                   <tr class="table-info">
-                  <td><a target="new" href="categoryForm.php">Desk category POST GET PUT DELETE /api/category</a></td>
+                  <td><a target="new" href="categoryForm.php">Desk category GET and POST /api/category</a></td>
                     <td>Desktop test form category table by ID</td>
                   </tr>
                   <tr class="table-light">
-                   <td><a target="new" href="categoryFormMovil.php">Mobile category POST GET PUT DELETE /api/category</a></td>
+                   <td><a target="new" href="categoryFormMovil.php">Mobile category GET and POST /api/category</a></td>
                    <td>Mobile test form category table by ID</td>
                   </tr>
                   <tr class="table-warning">
@@ -55,11 +61,11 @@ include 'template/navbar.php';
                     <td>Desktop language of all rows table form.</td>
                   </tr>
                   <tr class="table-info">
-                    <td><a target="new" href="languageForm.php">Desk language POST GET PUT DELETE /api/language</a></td>
+                    <td><a target="new" href="languageForm.php">Desk language GET and POST /api/language</a></td>
                     <td>Desktop test form language table by ID</td>
                   </tr>
                   <tr class="table-light">
-                    <td><a target="new" href="languageFormMovil.php">Mobile language POST GET PUT DELETE /api/language</a></td>
+                    <td><a target="new" href="languageFormMovil.php">Mobile language GET and POST /api/language</a></td>
                     <td>Mobile test form language table by ID</td>
                   </tr>
                   <tr class="table-warning">
@@ -72,11 +78,11 @@ include 'template/navbar.php';
                     <td>Desktop test manufacturer of all rows table form.</td>
                   </tr>
                   <tr class="table-info">
-                    <td><a target="new" href="manufacturerForm.php">Desk manufacturer POST GET PUT DELETE /api/manufacturer</a></td>
+                    <td><a target="new" href="manufacturerForm.php">Desk manufacturer GET and POST /api/manufacturer</a></td>
                     <td>Desktop test form manufacturer table by ID</td>
                   </tr>
                   <tr class="table-light">
-                    <td><a target="new" href="manufacturerFormMovil.php">Mobile manufacturer POST GET PUT DELETE /api/manufacturer</a></td>
+                    <td><a target="new" href="manufacturerFormMovil.php">Mobile manufacturer GET and POST /api/manufacturer</a></td>
                     <td>Mobile test form manufacturer table by ID</td>
                   </tr>
                 </tbody>

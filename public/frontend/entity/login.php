@@ -1,4 +1,10 @@
 <?php
+/** 
+  * login.php
+  * Description: login template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 function setFormFields() {
   (string) $name      = '';
   (string) $email     = '';

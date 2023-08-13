@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * CategoryDescription.php
+  * Description: category Description template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -16,7 +21,7 @@ final class CategoryDescription extends BaseValidate
     private $field04    = 'meta_description';  
     private $field05    = 'meta_keyword';   
   
-    private int $id;                           // id
+    private int $id;                          // id
     private int    $value01;                  // field01 (language_id)
     private string $value02;                  // field02 (name)
     private string $value03;                  // field03 (meta_title)
@@ -107,7 +112,6 @@ final class CategoryDescription extends BaseValidate
             $this->setvalue05($this->validateString($results[$this->field05]));
             $results[$this->field05] = $this->getvalue05();
          } 
- 
         return $results;
     }
 

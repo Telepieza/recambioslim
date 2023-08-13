@@ -1,10 +1,15 @@
 <?php
-
- (string) $endpoint = 'api/category'; // endpoint
- include 'entity/category.php';        // structure
+/** 
+  * categoryFormMovil.php
+  * Description: Mobile category form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+ (string) $endpoint = 'api/category'; // endpoint category
+ include 'entity/category.php';       // template category
 
  include 'inc/function.php';
- include 'inc/variables.php';
+ include 'inc/setting.php';
  include 'inc/getAction.php';
 
  include 'inc/create.php';  

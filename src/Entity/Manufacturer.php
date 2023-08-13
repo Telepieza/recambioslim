@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * Manufacture.php
+  * Description: manufacture template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -103,7 +108,6 @@ final class manufacturer extends BaseValidate
            $this->setvalue03($this->validateInteger($results[$this->field03]));
            $results[$this->field03] = $this->getvalue03();
         } 
-       
         return $results;
     }
 

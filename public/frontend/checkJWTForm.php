@@ -1,6 +1,12 @@
 <?php
+/** 
+  * checkJWTForm.php
+  * Description: check JWT (token) form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
     include 'inc/function.php';
-    include 'inc/variables.php';
+    include 'inc/setting.php';
 
     include 'template/header.php';
     include 'template/navbar.php';

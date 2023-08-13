@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * App.php
+  * Description: Start the app (launch)
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 use App\Application\Handlers\HttpErrorHandler;
@@ -8,8 +13,6 @@ use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
-use Slim\Views\Twig;
-use Slim\Views\TwigMiddleware;
 
 
 require __DIR__ . '/../vendor/autoload.php';

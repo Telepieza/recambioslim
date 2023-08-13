@@ -1,5 +1,10 @@
 <?php
-
+/** 
+  * Routes.php
+  * Description: APP Routes
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -20,12 +25,12 @@ use App\Controller\User;
 return function (App $app) 
 {
 
-    $app->group('/opencard/api',function(Group $group) 
+    $app->group('/opencard/api',function(Group $group)                                    // adaptar a la ruta del BackEnd
     {
     
       $group->get('/', function (Request $request, Response $response)
         {
-            $result = ["hello" => 'Telepieza'];
+            $result = ["hello" => 'Telepieza'];                                              
             $response->getBody()->write((string)json_encode($result,JSON_PRETTY_PRINT));
             $response->withHeader('Content-Type', 'application/json');
             return $response;

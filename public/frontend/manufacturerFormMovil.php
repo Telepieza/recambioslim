@@ -1,10 +1,15 @@
 <?php
-
-(string) $endpoint = 'api/manufacturer'; // endpoint
-include 'entity/manufacturer.php';       // structure
+/** 
+  * manufacturerFormMovil.php
+  * Description: Mobile manufacturer form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+(string) $endpoint = 'api/manufacturer'; // endpoint manufacturer
+include 'entity/manufacturer.php';       // template  manufacturer
 
  include 'inc/function.php';
- include 'inc/variables.php'; 
+ include 'inc/setting.php';
  include 'inc/getAction.php';
 
  include 'inc/create.php';

@@ -1,15 +1,21 @@
 <?php 
-
+/** 
+  * BaseFind.php
+  * Description: Principal object repository class of all templates
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Service;
 
 use PDOException;
 use PDO;
-
+// Clase principal extends de las clases BaseCreate, BaseDelete, BaseFind, BaseUpdate
 class BaseRepository 
 {
     protected string $query;
+    // Monta la sentencia "Select" de los fields and parameters para el query del PDO
     public function query(PDO $db, string $table, string $fieldsId, string $fieldOrder, $pfields=array(), $pparams=array(), int $limit, int $offset)
     {
         $params       = array();
@@ -117,6 +123,7 @@ class BaseRepository
         ];
     }
 
+    // Monta la sentencia "Select count" para el query del PDO.
     public function count(PDO $db, string $table,string $fieldsId, $pparams=array())
     {
         $params      = array();
@@ -193,7 +200,8 @@ class BaseRepository
                  'message' => $message
         ];
     }
-
+    
+    // Calculos y control de las datos de paginacion 
     public function toPagination(int $perPage, int $count, int $limit, int $offset) 
     {
            

@@ -1,3 +1,11 @@
+<?php
+/** 
+  * footer.php
+  * Description: footer of the page
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+?>
 <div class="container-fluid position-relative"> 
   <div class="col-md-12"> 
     <footer class="footer">

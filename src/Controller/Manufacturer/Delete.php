@@ -1,5 +1,10 @@
 <?php
-
+ /** 
+  * Delete.php
+  * Description: manufacturer Services route path delete with token verification
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Controller\Manufacturer;

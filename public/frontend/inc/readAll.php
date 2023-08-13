@@ -1,5 +1,10 @@
 <?php
-   
+/** 
+  * readAll.php
+  * Description: Endpoind /read with call to the Api server and testing pagination limit and offset
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
    $endpoint = "/read";
    $actionParent = '';
    if ('Pagination' == $action)  
@@ -10,7 +15,6 @@
      $endpoint    .= '?limit=' . $limit . '&offset=' . $offset;
      $actionParent = '?action=Pagination&limit=' . $limit . '&offset=' . $offset;
    } 
-
 
    (string) $urlSend = $url . $endpoint; 
 
@@ -48,7 +52,7 @@
   $msg = msgError($action, $status, $error, $info, $id );    
 
   if (empty($msg)) {
-    $msg = 'Select action Create (Post), Read (Get), Update (Put) or Delete';
+    $msg = 'Select action Create (Post), Read (Get), Update (Put) or Delete';  // next action
   }
 
 ?>

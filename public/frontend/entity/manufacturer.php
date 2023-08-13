@@ -1,4 +1,10 @@
 <?php
+/** 
+  * manufacturer.php
+  * Description: manufacturer template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 function setFormFields() {
   $manufacturer_id   = $_REQUEST['id'];
   $name              = $_REQUEST['name'];

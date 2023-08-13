@@ -1,7 +1,13 @@
 <?php
+/** 
+  * logout.php
+  * Description: logout form
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
   include 'inc/function.php';
   
-// Si existe token, elimina session y cookie           
+// If token exists, remove session and cookie           
   if (isset($_SESSION['token'])) {
     unset($_SESSION['token']);
     if (isset($_COOKIE['Authorization'])) {
@@ -9,7 +15,7 @@
     }
     session_destroy();
   }
-// Redireccionar a login
+// Redirect to login
   header('Location: login.php'); 
   exit;  
 ?>

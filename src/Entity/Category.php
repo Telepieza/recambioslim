@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * Category.php
+  * Description: category template
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -22,7 +27,7 @@ final class Category extends BaseValidate
     private $field07    = 'date_added'; 
     private $field08    = 'date_modified';             
 
-    private int $id;                           // id
+    private int $id;                          // id
     private string $value01;                  // field01 (image)
     private int    $value02;                  // field02 (parent_id)
     private int    $value03;                  // field03 (top)

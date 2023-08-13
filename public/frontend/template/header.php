@@ -1,3 +1,11 @@
+<?php
+/** 
+  * header.php
+  * Description: header of the page
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+?>
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]><html dir="ltr" lang="es" class="ie8"><![endif]-->

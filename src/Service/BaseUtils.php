@@ -1,5 +1,10 @@
 <?php 
-
+/** 
+  * BaseUtils.php
+  * Description: Principal object utils class of all templates
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Service;

@@ -1,16 +1,21 @@
 <?php
-
-(string) $endpoint = 'api/category';  // endpoint
-include 'entity/category.php';        // structure
+/** 
+  * categoryRead.php
+  * Description: Read all categories with datatable
+  * @Author : M.V.M
+  * @Version 1.0.0
+**/
+(string) $endpoint = 'api/category';  // endpoint category
+include 'entity/category.php';        // template category
 
 include 'inc/function.php';
-include 'inc/variables.php';
+include 'inc/setting.php';
 
 $pageParent  = 'categoryRead.php';
 if ($isMobile) { 
-  $pageCreate = 'categoryFormMovil.php';
+  $pageCreate = 'categoryFormMovil.php';     // read id Mobile
  } else { 
-  $pageCreate = 'categoryForm.php';
+  $pageCreate = 'categoryForm.php';           // read id Desktop
 }
 
 $urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/
