@@ -22,7 +22,7 @@ The REST API in the hosting of Telepieza: [RecambioSlim API REST](https://www.te
 ## Getting Started
 
 Download the [proyect RecambioSlim](https://github.com/Telepieza/recambioslim) to server JSON using REST API, unzip, move recambioslim folder to your localhost computer o hosting.
-Manual the [proyect RecambioSlim](https://www.telepieza.com/wordpress/2023/08/15/manual-recambioslim/) installation and configuration of the BackEnd and FrontEnd.
+Manual   the [proyect RecambioSlim](https://www.telepieza.com/wordpress/2023/08/15/manual-recambioslim) installation and configuration of the BackEnd and FrontEnd.
 
 ### Prerequisites
 
@@ -149,7 +149,7 @@ example domain : recambioslim.com
     ServerName  recambioslim.com
 	  ServerAlias recambioslim
     ErrorLog   "logs/localhost-recambioslim-error.log"
-    CustomLog  "logs/localhost-recambioslim-access.log"
+    CustomLog  "logs/localhost-recambioslim-access.log" 
 </VirtualHost>
 
 ```

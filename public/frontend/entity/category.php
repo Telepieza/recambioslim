@@ -98,7 +98,7 @@ function viewTableRows($data, $pageAction) {
       echo '</tr>';
     
     endforeach;
-  }
+  } 
 
 }
 

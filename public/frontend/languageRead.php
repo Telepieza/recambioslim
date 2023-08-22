@@ -95,14 +95,14 @@ include 'template/navbar.php';
         </div>
       </div>
       <?php
-      if (!is_array($data) && !empty($data) && isset($error) && !empty($error)) {
-         echo '<div class="row">
+        if (!is_array($data) && empty($data)) {
+        $error = "There is no token, you need to login";
+        echo '<div class="row">
                  <div class="col d-flex justify-content-center">
                    <div class="alert alert-success" role="alert">' . $error . '</div>
                  </div>
                </div>';
       } ?>
-
     </div>
   </div>
   
