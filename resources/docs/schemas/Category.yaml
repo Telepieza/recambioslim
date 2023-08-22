@@ -390,14 +390,14 @@ components:
         status:
           type: integer
           format: int32
-        error:
+        info:
           type: string
       required:
         - code
         - message
       example:
         status: 200
-        error: successful operation
+        info: successful operation
 
     Status_201:
       type: object
@@ -405,14 +405,14 @@ components:
         status:
           type: integer
           format: int32
-        error:
+        info:
           type: string
       required:
         - code
         - message
       example:
         status: 201
-        error: The data has been created in the database with ID
+        info: The data has been created in the database with ID
 
     Status_400:
       type: object

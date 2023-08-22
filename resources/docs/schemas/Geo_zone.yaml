@@ -1,8 +1,9 @@
 openapi: 3.0.2
 servers:
   - url: https://telepieza.com/recambios
-    description: Production server using Opencart.
-  - url: http://recambioslim.com
+    description:  [Telepieza Recambios](https://telepieza.com/recambios) Production server using Opencart.
+    
+  - url: https://recambioslim.com/recambios
     description: My localhost server using PHP built-in web server.
     variables:
       protocol:
@@ -10,6 +11,7 @@ servers:
           - http
           - https
         default: https
+
 info:
   version: "1.0.0"
   title: API Recambios Opencart
@@ -22,17 +24,17 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 
 tags:
-- name: language
-  description: Manage language.
+- name: geo_zone
+  description: Manage geo_zone.
   externalDocs:
       description: Find out more about our store
       url: 'https://telepieza.com/recambios'
 
 paths:
-  /api/language/read:
+  /api/geo_zone/read:
     get:
       tags:
-      - language
+      - geo_zone
       summary: Get All categories
       operationId: GetAll
       parameters:
@@ -79,11 +81,11 @@ paths:
       security:
         - bearerAuth: [] 
           
-  /api/language/read/{language_id}:
+  /api/geo_zone/read/{geo_zone_id}:
     get:
       tags:
-        - language
-      summary: Get One language by ID
+        - geo_zone
+      summary: Get One geo_zone by ID
       operationId: GetOne
       parameters:
       - name: token
@@ -94,9 +96,9 @@ paths:
           items:
               $ref: '#/components/schemas/Token'
 
-      - name: language_id
+      - name: geo_zone_id
         in: path
-        description: ID of language to return
+        description: ID of geo_zone to return
         required: true
         schema:
           type: integer
@@ -121,12 +123,12 @@ paths:
       security:
         - bearerAuth: [] 
       deprecated: false  
-  /api/language/new:
+  /api/geo_zone/new:
     post:
       tags:
-        - language
-      summary: Add a new language
-      description: Register a new language.
+        - geo_zone
+      summary: Add a new geo_zone
+      description: Register a new geo_zone.
       operationId: Create
       parameters:
       - name: token
@@ -153,18 +155,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/language'
+              $ref: '#/components/schemas/geo_zone'
         required: true
          
       security:
         - bearerAuth: [] 
       deprecated: false  
-  /api/language/update/{language_id}:
+  /api/geo_zone/update/{geo_zone_id}:
     post:
       tags:
-        - language
-      summary: Update an existing language
-      description: Update an existing language by language_id.
+        - geo_zone
+      summary: Update an existing geo_zone
+      description: Update an existing geo_zone by geo_zone_id.
       operationId: Update
       parameters:
       - name: token
@@ -175,9 +177,9 @@ paths:
           items:
               $ref: '#/components/schemas/Token'
 
-      - name: language_id
+      - name: geo_zone_id
         in: path
-        description: ID of language to return
+        description: ID of geo_zone to return
         required: true
         schema:
           type: integer
@@ -194,23 +196,23 @@ paths:
         '500':
            $ref: '#/components/responses/ErrorInDataBase'
       requestBody:
-        description: Update an existent language in the table
+        description: Update an existent geo_zone in the table
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/language'
+              $ref: '#/components/schemas/geo_zone'
       security:
         - bearerAuth: [] 
       deprecated: false  
 
-  /api/language/delete/{language_id}:
+  /api/geo_zone/delete/{geo_zone_id}:
     post:
       tags:
-        - language
-      summary: Delete language
-      description: Delete a language.
-      operationId: Deletelanguage
+        - geo_zone
+      summary: Delete geo_zone
+      description: Delete a geo_zone.
+      operationId: Deletegeo_zone
       parameters:
       - name: token
         in: header
@@ -220,9 +222,9 @@ paths:
           items:
               $ref: '#/components/schemas/Token'
 
-      - name: language_id
+      - name: geo_zone_id
         in: path
-        description: language_id of language to return
+        description: geo_zone_id of geo_zone to return
         required: true
         schema:
           type: integer
@@ -256,12 +258,12 @@ components:
           example : 200
         pagination:
           $ref: '#/components/schemas/Pagination'
-        language:
+        geo_zone:
           type: array
           xml:
             wrapped: true
           items:
-             $ref: '#/components/schemas/language'
+             $ref: '#/components/schemas/geo_zone'
     
     GetOne:
       title: GetOne
@@ -270,58 +272,42 @@ components:
           type: integer
           format: int200
           example: 200
-        language:
-          $ref: '#/components/schemas/language'
+        geo_zone:
+          $ref: '#/components/schemas/geo_zone'
           
-    language:
-       title: language
+    geo_zone:
+       title: geo_zone
        type: object
        properties:
-        language_id:
+        geo_zone_id:
           type: integer
           format: int64
           example: 3
         name:
           type: string
-          example: English
-        code:
+          example: España
+        description:
           type: string
-          example: en-US
-        locale:
-          type: string
-          example: en-US,en_US.UTF-8,en_US,en-gb,english
-        image:
-          type: string
-          example: image/en-US.jpg
-        directory:
-          type: string
-          example : english
-        sort_order:
-          type: integer
-          format: int32
-          example: 1
-        status: 
-          type: integer
-          format: int32
-          example: 1
+          example: Tienda Telepieza (España)
+        date_added: 
+          type : string
+          format: date-time
+          example: 2023-08-01 12:42:14
+        date_modified: 
+          type : string
+          format: date-time
+          example: 2023-08-05 15:42:10
         
        required:
          - name
-         - code
-         - locale
-         - directory
-         - sort_order
-         - status
+         - description
          
        example:
-          language_id: 3
-          name: English
-          code:  en-US
-          locale: en-US,en_US.UTF-8,en_US,en-gb,english
-          image: image/en-US.jpg
-          directory: english
-          sort_order: 1
-          status: 1
+          geo_zone_id: 3
+          name: España
+          description: Tienda Telepieza (España)
+          date_added: "2023-08-01 12:42:14"
+          date_modified: "2023-08-05 15:42:10"
  
     Pagination:
       title: Pagination
