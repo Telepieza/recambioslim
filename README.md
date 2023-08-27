@@ -203,4 +203,6 @@ This project is licensed under the APACHE 2.0 License - see the [LICENSE](https:
 
 ## Release History
 
-- 2023-08-14 - 1.0.0 Stable release.
+ * check CHANGELOG.md
+ * 
+ * 2023-08-14 - 1.0.0 Stable release.

@@ -48,7 +48,7 @@
 
                         <div class="form-floating mb-1 w-50">
                           <input type="number"  class="form-control" readonly disabled name="geo_zone_id" placeholder="geo_zone_id" value="<?php { echo $id ; } ?>"/> 
-                          <label for="geo_zone_id">geo_zone_id:</label>
+                          <label for="geo_zone_id">Geo_zone_id:</label>
                         </div>
 
                         <div class="form-floating mb-1">
