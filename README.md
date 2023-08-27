@@ -22,19 +22,15 @@ The REST API in the hosting of Telepieza: [RecambioSlim API REST](https://www.te
 ## Getting Started
 
 Download the [proyect RecambioSlim](https://github.com/Telepieza/recambioslim) to server JSON using REST API, unzip, move recambioslim folder to your localhost computer o hosting.
-<<<<<<< HEAD
 Manual   the [proyect RecambioSlim](https://www.telepieza.com/wordpress/2023/08/15/manual-recambioslim) installation and configuration of the BackEnd and FrontEnd.
-=======
-Manual   the [proyect RecambioSlim](https://www.telepieza.com/wordpress/2023/08/15/manual-recambioslim/) installation and configuration of the BackEnd and FrontEnd.
->>>>>>> a978c4238293b24d39b9eead3896530fae9aa2d1
 
 ### Prerequisites
 
   If you have a hosting with APACHE + PHP 7 + Mysql 5.7, and the DDBB with Opencart eCommerce, starting is very easy, you have to configure the route and  setting to running the BackEnd.
-
   If you want to install the BackEnd on a local computer, there are two different environments:
 
 ####  (First environment)
+
 ##### Install the Visual Studio code and extensions:
 
 | Extensions                | Description                                                                       |
@@ -204,5 +200,4 @@ This project is licensed under the APACHE 2.0 License - see the [LICENSE](https:
 ## Release History
 
  * check CHANGELOG.md
- * 
  * 2023-08-14 - 1.0.0 Stable release.
