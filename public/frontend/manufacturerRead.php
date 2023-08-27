@@ -100,10 +100,22 @@ include 'template/navbar.php';
         </div>
       </div>
 
+<<<<<<< HEAD
       <div class="col-md-12 col-md-10 col-md-8 col-mod-6">
           <?php include 'template/viewMsg.php'; ?>
       </div>
       
+=======
+      <?php
+       if (!is_array($data) && empty($data)) {
+        $error = "There is no token, you need to login";
+        echo '<div class="row">
+                 <div class="col d-flex justify-content-center">
+                   <div class="alert alert-success" role="alert">' . $error . '</div>
+                 </div>
+               </div>';
+      } ?>
+>>>>>>> a978c4238293b24d39b9eead3896530fae9aa2d1
     </div>
   </div>
   
