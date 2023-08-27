@@ -29,22 +29,26 @@ include 'entity/manufacturer.php';       // template  manufacturer
        <hr>
         <div class="row m-auto">
           <main class="container-fluid">
-            <div class="p-1 col-12 col-lg-6 order-2 order-lg-1 bg-dark">
+            <div class="p-1 col-12 col-md-6 order-2 order-lg-1 bg-dark">
                 <form class="mb-2" role = "form" aria-activedescendant="" method="post" action="manufacturerFormMovil.php?action=Read" onsubmit="return verifForm([id],'Error : fields marked with an asterisk are mandatory!');">
-                     <div class="form-group row ">
-                       <div class="col-sm-2">
-                         <input  type="text" class="form-control pe-3" name="id" placeholder="id" value="<?php echo $id; ?>"/> 
-                       </div>
-                       <button type="submit" class="col-sm-2 btn btn-success btn-secondary">Read</button>
-                     </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-3 w-75">
+                        <input  type="text" class="form-control pe-3" name="id" placeholder="id" value="<?php echo $id; ?>"/> 
+                      </div>
+                      <div class="col-sm-3 w-25">
+                        <button type="submit" class="btn btn-success btn-secondary">Read</button>
+                      </div>
+                    </div>
+                  </div>
                 </form>
 
                 <form method="post" action="manufacturerFormMovil.php?action=<?php echo $action."&amp;id={$id}"; ?>"
                            onsubmit="return verifForm([name,sort_order],'Error : fields marked with an asterisk are mandatory!');">
 
-                        <div class="form-floating mb-1 w-25">
-                          <label for="manufacturer_id">manufacturer_id:</label>
+                        <div class="form-floating mb-1 w-50">
                           <input type="number"  class="form-control" readonly disabled name="manufacturer_id" placeholder="manufacturer_id" value="<?php { echo $id ; } ?>"/> 
+                          <label for="manufacturer_id">Manufacturer_id:</label>
                         </div>
     
                         <div class="form-floating mb-1">
@@ -57,22 +61,22 @@ include 'entity/manufacturer.php';       // template  manufacturer
                           <label for="image">Image:</label>
                         </div>
 
-                        <div class="form-floating mb-1 w-25">
+                        <div class="form-floating mb-1 w-50">
                           <input type="number"  class="form-control" name="sort_order" min="0" id="sort_order" placeholder="sort_order" value="<?php if (isset($val[0]['sort_order'])) {echo $val[0]['sort_order'];};?>"/>
                           <label for="sort_order">* Sort_order:</label>
                         </div>
       
                       <div class="form-floating mb-1">
-                         <button class="col-lg-2 btn btn-success btn-default text-blank pe-4"><?php echo $action; ?></button>
-                         <button type="button" class="col-lg-2 btn btn-success btn-info pe-4" ><a href="manufacturerFormMovil.php?action=Cancel">Cancel</a></button>
+                         <button class="col-lg-2 btn btn-success btn-default text-blank pe-3"><?php echo $action; ?></button>
+                         <button type="button" class="col-lg-2 btn btn-success btn-info pe-3" ><a href="manufacturerFormMovil.php?action=Cancel">Cancel</a></button>
                          <?php  if ('' != $id && $status == 200) { 
-                           echo "<button type=\"button\" class=\"col-lg-2 btn btn-success text-danger btn-warning pe-4 \">
+                           echo "<button type=\"button\" class=\"col-lg-2 btn btn-success text-danger btn-warning pe-3 \">
                            <a onclick=\"return confirm('Delete customer #{$id}');\" href=\"manufacturerFormMovil.php?action=Delete&amp;id={$id}\">Delete</a>
                            </button>"; } ?>
                          
                          <?php if (isset ($_SESSION['parent_PAGE']) && isset($_SESSION['parent_ACTION'])) { 
                            $url =  $_SESSION['parent_PAGE'] . trim($_SESSION['parent_ACTION']) ;
-                           echo "<button type=\"button\" class=\"col-lg-2 btn btn-success text-danger btn-default pe-4 \">
+                           echo "<button type=\"button\" class=\"col-lg-2 btn btn-success text-danger btn-default pe-3 \">
                            <a href=\" {$url} \">Salir</a></button></div>"; } ?>
                       </div>
                 </form>

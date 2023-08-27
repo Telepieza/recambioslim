@@ -20,7 +20,7 @@ include 'template/navbar.php';
           <div class="col-md-10 col-lg-10">
             <aside class="pt-lg-2 pb-lg-2">  
             <div class="table-responsive">
-              <table id="tableMain" class="table table-hover table-striped table-bordered table-condensed m-0">
+              <table id="tableMain" class="table table-sm table-hover table-striped table-bordered table-condensed m-0">
                 <thead>
                   <tr class="table-secondary">
                     <th class="text-center">URL</th>
@@ -84,6 +84,22 @@ include 'template/navbar.php';
                   <tr class="table-light">
                     <td><a target="new" href="manufacturerFormMovil.php">Mobile manufacturer GET and POST /api/manufacturer</a></td>
                     <td>Mobile test form manufacturer table by ID</td>
+                  </tr>
+                  <tr class="table-warning">
+                    <td><a target="new" href="<?php echo $route;?>api/geo_zone/">geo_zone table documentation /api/geo_zone/</a></td>
+                    <td>Schemas, json structure, type of data and error code</td>
+                  </tr>
+                  <tr class="table-light">
+                    <td><a target="new" href="geo_zoneRead.php">Desk geo_zone GET ALL /api/geo_zone</a></td>
+                    <td>Desktop test geo_zone of all rows table form.</td>
+                  </tr>
+                  <tr class="table-info">
+                    <td><a target="new" href="geo_zoneForm.php">Desk geo_zone GET and POST /api/geo_zone</a></td>
+                    <td>Desktop test form geo_zone table by ID</td>
+                  </tr>
+                  <tr class="table-light">
+                    <td><a target="new" href="geo_zoneFormMovil.php">Mobile geo_zone GET and POST /api/geo_zone</a></td>
+                    <td>Mobile test form geo_zone table by ID</td>
                   </tr>
                 </tbody>
               </table>

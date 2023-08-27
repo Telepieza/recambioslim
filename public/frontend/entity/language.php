@@ -33,8 +33,12 @@ function setFormFields() {
 }
 
 function viewTableThead($data) {
-  (string) $header = '<thead><tr>
-     <th>order</th>
+  (string) $header = '<thead><tr>';
+  if (is_array($data) && count($data) > 0) {
+    $header .= '<th>action</th>';
+  }
+    $header .= 
+    '<th>order</th>
      <th>id</th>
      <th>name</th>
      <th>code</th>
@@ -42,9 +46,6 @@ function viewTableThead($data) {
      <th>image</th>
      <th>directory</th>
      <th>status</th>' ;
-     if (is_array($data) && count($data) > 0) {
-         $header .= '<th>action</th>';
-     }
    return $header;
 }
 
@@ -72,15 +73,15 @@ function viewTableRows($data, $pageAction) {
       if (isset($row['status']))       $status = $row['status'];
 
       echo '<tr>';
-       echo '<td>' . $sort_order   . '</td>'; 
-       echo '<td>' . $language_id  . '</td>'; 
-       echo '<td>' . $name         . '</td>'; 
-       echo '<td>' . $code         . '</td>'; 
-       echo '<td>' . $locale       . '</td>'; 
-       echo '<td>' . $image        . '</td>'; 
-       echo '<td>' . $directory    . '</td>'; 
-       echo '<td>' . $status       . '</td>'; 
-       echo '<td><a href=' . $pageAction . $language_id . ' target="_blank" class="btn btn-secondary btn-sm"><i class="fa fa-angle-double-right"></i>Details</a></td>';
+        echo '<td><a href=' . $pageAction . $language_id . ' target="_blank" class="btn btn-secondary btn-sm"><i class="fa fa-angle-double-right"></i>Details</a></td>';
+        echo '<td>' . $sort_order   . '</td>'; 
+        echo '<td>' . $language_id  . '</td>'; 
+        echo '<td>' . $name         . '</td>'; 
+        echo '<td>' . $code         . '</td>'; 
+        echo '<td>' . $locale       . '</td>'; 
+        echo '<td>' . $image        . '</td>'; 
+        echo '<td>' . $directory    . '</td>'; 
+        echo '<td>' . $status       . '</td>'; 
       echo '</tr>';
     
     endforeach;

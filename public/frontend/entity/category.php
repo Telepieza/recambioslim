@@ -43,8 +43,13 @@ function setFormFields() {
 }
 
 function viewTableThead($data) {
-   (string) $header = '<thead><tr>
-      <th>order</th>
+  (string) $header = '<thead><tr>';
+  if (is_array($data) && count($data) > 0) {
+    $header .= '<th>action</th>';
+  }
+
+ $header .= 
+     '<th>order</th>
       <th>id</th>
       <th>image</th>
       <th>parent</th>
@@ -52,9 +57,6 @@ function viewTableThead($data) {
       <th>column</th>
       <th>status</th>
       <th>date add</th> ';
-      if (is_array($data) && count($data) > 0) {
-          $header .= '<th>action</th>';
-      }
     return $header;
 }
 
@@ -86,6 +88,7 @@ function viewTableRows($data, $pageAction) {
       if (strlen($date_modified) > 10)  {$date_modified = substr($date_modified,0,10); }
 
       echo '<tr>';
+       echo '<td><a href=' . $pageAction . $category_id . ' target="_blank" class="btn btn-secondary btn-sm"><i class="fa fa-angle-double-right"></i>Details</a></td>';
        echo '<td>' . $sort_order   . '</td>'; 
        echo '<td>' . $category_id  . '</td>'; 
        echo '<td>' . $image        . '</td>'; 
@@ -94,7 +97,6 @@ function viewTableRows($data, $pageAction) {
        echo '<td>' . $column       . '</td>'; 
        echo '<td>' . $status       . '</td>'; 
        echo '<td>' . $date_added   . '</td>'; 
-       echo '<td><a href=' . $pageAction . $category_id . ' target="_blank" class="btn btn-secondary btn-sm"><i class="fa fa-angle-double-right"></i>Details</a></td>';
       echo '</tr>';
     
     endforeach;

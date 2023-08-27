@@ -10,6 +10,7 @@ declare(strict_types=1);
 use App\Service\Category;
 use App\Service\Language;
 use App\Service\Manufacturer;
+use App\Service\Geo_zone;
 
 use App\Service\User;
 
@@ -33,6 +34,12 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Manufacturer_create_service'] = static fn (): Manufacturer\Create=>new Manufacturer\Create();
   $container['Manufacturer_update_service'] = static fn (): Manufacturer\Update=>new Manufacturer\Update();
   $container['Manufacturer_delete_service'] = static fn (): Manufacturer\Delete=>new Manufacturer\Delete();
+  // Geo_zone
+  $container['Geo_zone_find_service']   = static fn (): Geo_zone\Find  =>new Geo_zone\Find();
+  $container['Geo_zone_create_service'] = static fn (): Geo_zone\Create=>new Geo_zone\Create();
+  $container['Geo_zone_update_service'] = static fn (): Geo_zone\Update=>new Geo_zone\Update();
+  $container['Geo_zone_delete_service'] = static fn (): Geo_zone\Delete=>new Geo_zone\Delete();
+
 
   // User
   // $container['user_find_service'] = static fn (): User\Find=>new User\Find();

@@ -199,4 +199,6 @@ This project is licensed under the APACHE 2.0 License - see the [LICENSE](https:
 
 ## Release History
 
+check CHANDELOG.md
+
 - 2023-08-14 - 1.0.0 Stable release.

@@ -21,6 +21,7 @@ use App\Controller\Category;
 use App\Controller\Language;
 use App\Controller\Manufacturer;
 use App\Controller\User;
+use App\Controller\Geo_zone;
 
 return function (App $app) 
 {
@@ -92,6 +93,21 @@ return function (App $app)
           $group->put('/update/{manufacturer_id:[0-9]+}',Manufacturer\Update::class);     // servidor (admite put y delete) 
           $group->delete('/delete/{manufacturer_id:[0-9]+}',Manufacturer\Delete::class);  // servidor (admite put y delete) 
        });
+
+       $group->group('/geo_zone', function (Group $group) 
+       {
+         $group->get('/',Geo_zone\GetScheme::class);
+         $group->get('/read',Geo_zone\GetAll::class);
+         $group->get('/read/{geo_zone_id:[0-9]+}',Geo_zone\GetOne::class);
+         $group->post('/new',geo_zone\Create::class);
+         $group->post('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);     
+         $group->post('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class); 
+         $group->put('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class);     // servidor (admite put y delete) 
+         $group->delete('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);  // servidor (admite put y delete)    
+      });
+
+
+
     });
 
     /*

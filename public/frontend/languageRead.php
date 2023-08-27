@@ -81,28 +81,26 @@ include 'template/navbar.php';
       <hr>
         
       <div class="row">
-        <div class="col-log-12">
-           <?php if (is_array($data) && count($data) > 0):?>
-             <table id="tableSimple" class="table table-hover table-striped table-bordered table-condensed" style="width:100%" >                           
-           <?php else: ?>
-             <table id="tableNoData" class="table table-striped table-bordered" style="width:100%" >
-           <?php endif; ?>
-            <?php echo viewTableThead($data); ?>
-            <tbody>
-               <?php viewTableRows($data, $pageAction); ?>
-            </tbody>
-          </table>
+        <div class="col-log-12 col-mod-10 col-mod-8 col-mod-6" >
+          <div class="table-responsive">
+            <?php if (is_array($data) && count($data) > 0):?>
+              <table id="tableSimple" class="table table-sm table-hover table-striped table-bordered table-condensed" style="width:100%" >                           
+            <?php else: ?>
+              <table id="tableNoData" class="table table-sm table-striped table-bordered" style="width:100%" >
+            <?php endif; ?>
+               <?php echo viewTableThead($data); ?>
+                 <tbody>
+                   <?php viewTableRows($data, $pageAction); ?>
+                 </tbody>
+              </table>
+          </div>
         </div>
       </div>
-      <?php
-        if (!is_array($data) && empty($data)) {
-        $error = "There is no token, you need to login";
-        echo '<div class="row">
-                 <div class="col d-flex justify-content-center">
-                   <div class="alert alert-success" role="alert">' . $error . '</div>
-                 </div>
-               </div>';
-      } ?>
+
+      <div class="col-md-12 col-md-10 col-md-8 col-mod-6">
+          <?php include 'template/viewMsg.php'; ?>
+      </div>
+
     </div>
   </div>
   

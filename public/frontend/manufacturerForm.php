@@ -6,7 +6,7 @@
   * @Version 1.0.0
 **/
   (string) $endpoint = 'api/manufacturer'; // endpoint manufacturer
-  include 'entity/manufacturer.php';      // template  manufacturer
+  include 'entity/manufacturer.php';       // template  manufacturer
 
   include 'inc/function.php';
   include 'inc/setting.php';
@@ -105,7 +105,6 @@
             <div class="col-md-8">
                 <?php include 'template/viewMsg.php'; ?>
             </div>
-
           </main>
         </div>
       </div>

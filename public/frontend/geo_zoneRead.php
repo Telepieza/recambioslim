@@ -1,29 +1,30 @@
 <?php
 /** 
-  * manufacturerRead.php
-  * Description: Read all language with datatable
+  * geo_zoneRead.php
+  * Description: Read all categories with datatable
   * @Author : M.V.M
   * @Version 1.0.0
 **/
-(string) $endpoint = 'api/manufacturer';   // endpoint manufacturer
-include 'entity/manufacturer.php';         // template  manufacturer
+(string) $endpoint = 'api/geo_zone';  // endpoint geo_zone
+include 'entity/geo_zone.php';        // template geo_zone
 
 include 'inc/function.php';
 include 'inc/setting.php';
 
-$pageParent  = 'manufacturerRead.php';       // read all
+$pageParent  = 'geo_zoneRead.php';
 if ($isMobile) { 
-  $pageCreate = 'manufacturerFormMovil.php'; // read id Mobile
+  $pageCreate = 'geo_zoneFormMovil.php';     // read id Mobile
  } else { 
-  $pageCreate = 'manufacturerForm.php';      // read id Desktop
+  $pageCreate = 'geo_zoneForm.php';           // read id Desktop
 }
 
 $urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/
-$pageAction  = $urlParent . $pageCreate . $actionReadId ; // https://www.telepieza.com/recambios/frontend/manufacturerRead.php?action=Read&id=
-$pageCreate .= $actionCreate;                             // manufacturerForm.php?action=create
-$urlParent  .= $pageParent ;                              // https://www.telepieza.com/recambios/frontend/manufacturerRead.php
+$pageAction  = $urlParent . $pageCreate . $actionReadId ; // https://www.telepieza.com/recambios/frontend/geo_zoneForm.php?action=Read&id=
+$pageCreate .= $actionCreate;                             // geo_zoneForm.php?action=create
+$urlParent  .= $pageParent ;                              // https://www.telepieza.com/recambios/frontend/geo_zoneRead.php
 
 include 'inc/getAction.php';
+
 include 'inc/readAll.php';
 
 include 'template/header.php';
@@ -38,7 +39,7 @@ include 'template/navbar.php';
         <div class="row">
            <div class="d-lg-flex align-items-center mb-2">
 					     <a href="index.php"><img src="images/company_98x82.png" alt="" width="98" height="82"></a>
-               <h1 class="text-white"><?php echo $company ; ?> TEST API Manufacturer</h1>
+               <h1 class="text-white"><?php echo $company ; ?> TEST API geo_zone</h1>
             </div>
             <img class = "mb-3" src="images/bg_table.jpg" alt="">
         </div>
@@ -46,7 +47,7 @@ include 'template/navbar.php';
 
       <div class="row">
         <div class="container-fluid">
-          <form class="mb-2" role = "form" aria-activedescendant="" method="post" action="manufacturerRead.php?action=Pagination" onsubmit="return verifForm([offset,limit],'Error : fields marked with an asterisk are mandatory!');">
+          <form class="mb-2" role = "form" aria-activedescendant="" method="post" action="geo_zoneRead.php?action=Pagination" onsubmit="return verifForm([offset,limit],'Error : fields marked with an asterisk are mandatory!');">
             <div class="form-group row">
               <label for="limit" class="col-sm-2 d-flex justify-content-end align-items-center pe-3">limit:</label> 
               <div class="col-sm-2">
@@ -58,14 +59,12 @@ include 'template/navbar.php';
               </div>
               <div class="col-sm-4">
                 <button type="submit" class="col-sm-4 btn btn-success ">Pagination</button>
-                <button type="button" class="col-sm-4 ms-3 btn btn-info" ><a href="<?php echo $pageCreate; ?>" target="_blank" >Create</a></button>
+                <button type="button" class="col-sm-4 ms-3 btn btn-info" ><a href="<?php echo $pageCreate; ?>" target="_blank">Create</a></button>
               </div>
-
             </div>
           </form>
         </div>
       </div>
-
       <div class="form-group row mb-2">
         <label for="CurrentPage" class="col-sm-2 d-flex justify-content-end align-items-center ">CurrentPage:</label> 
         <div class="col-sm-2">
@@ -87,15 +86,15 @@ include 'template/navbar.php';
           <div class="table-responsive">
              <?php if (is_array($data) && count($data) > 0):?>
                <table id="tableSimple" class="table table-hover table-striped table-bordered table-condensed" style="width:100%" >                           
-             <?php else: ?>
-               <table id="tableNoData" class="table table-striped table-bordered" style="width:100%" >
-             <?php endif; ?>
+              <?php else: ?>
+                <table id="tableNoData" class="table table-striped table-bordered" style="width:100%" >
+              <?php endif; ?>
            
               <?php echo viewTableThead($data); ?>
               <tbody>
-                 <?php viewTableRows($data, $pageAction); ?>
+                <?php viewTableRows($data, $pageAction); ?>
               </tbody>
-            </table>
+             </table>
           </div>
         </div>
       </div>
@@ -103,7 +102,7 @@ include 'template/navbar.php';
       <div class="col-md-12 col-md-10 col-md-8 col-mod-6">
           <?php include 'template/viewMsg.php'; ?>
       </div>
-      
+
     </div>
   </div>
   
