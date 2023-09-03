@@ -47,18 +47,6 @@ include_once $ruteInc.'readAll.php';
 include_once $ruteTheme.'header.php';
 include_once $ruteTheme.'navbar.php';
 
-/*
-echo " urlParent >   " . $urlParent    . " <-----" . "<br>";
-echo " pageAction>   " . $pageAction   . " <-----" . "<br>";
-echo " pageCreate>   " . $pageCreate   . " <-----" . "<br>";
-echo " urlParent >   " . $urlParent    . " <-----" . "<br>";
-echo " actionParent> " . $actionParent . " <-----" . "<br>";
-echo " urlSend > " .   $urlSend  . " <-----" . "<br>";
-echo " SESSION['parent_URL'] > "  .  $_SESSION['parent_URL']      . " <-----" . "<br>";
-echo " SESSION[parent_PAGE]   > " .  $_SESSION['parent_PAGE']     . " <-----" . "<br>";
-echo " SESSION[parent_ACTION] > " .  $_SESSION['parent_ACTION']   . " <-----" . "<br>";
-*/
-
 ?>
 
 <body>
