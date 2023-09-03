@@ -131,10 +131,10 @@
                 </form>
                 <?php if (!$isMobile) { $isMobile = true; }  ?>
                   <div class="col-md-6">
-                  <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'viewMsg.php'; ?>
+                  <?php include_once $ruteTheme.'viewMsg.php'; ?>
                </div>
             </div>
           </main>
         </div>
       </div>
-      <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php'; ?>
+      <?php include_once $ruteTheme.'footer.php'; ?>

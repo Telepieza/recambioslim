@@ -47,4 +47,4 @@
         </div>
     </div>
   </div>
-  <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php'; ?>
+  <?php include_once $ruteTheme.'footer.php'; ?>

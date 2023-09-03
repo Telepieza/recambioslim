@@ -82,10 +82,10 @@ include_once $ruteTheme.'navbar.php';
                   </div>
                   <button class="btn btn-primary px-4 me-2 text-center"><b>Login</b></button>
               </form>
-                <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'viewMsg.php'; ?>
+                <?php include_once $ruteTheme.'viewMsg.php'; ?>
             </div>
           </div>
       </div>
     </div>
                   
-    <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php'; ?>
+    <?php include_once $ruteTheme.'footer.php'; ?>

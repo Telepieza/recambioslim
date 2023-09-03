@@ -129,11 +129,11 @@ echo " SESSION[parent_ACTION] > " .  $_SESSION['parent_ACTION']   . " <-----" . 
       </div>
 
       <div class="col-md-12 col-md-10 col-md-8 col-mod-6">
-         <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'viewMsg.php'; ?>
+         <?php include_once $ruteTheme.'viewMsg.php'; ?>
       </div>
       
     </div>
   </div>
   
-  <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php' ?>
+  <?php include_once $ruteTheme.'footer.php' ?>
 

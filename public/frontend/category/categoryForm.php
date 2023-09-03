@@ -182,11 +182,11 @@ echo " SESSION[parent_ACTION] > " .  $_SESSION['parent_ACTION']   . " <-----" . 
 
             </form>
             <div class="col-md-10">
-               <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'viewMsg.php'; ?>
+               <?php include_once $ruteTheme.'viewMsg.php'; ?>
             </div>
           </main>
         </div>
       </div>
     </div>
 
-    <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php'; ?>
+    <?php include_once $ruteTheme.'footer.php'; ?>

@@ -146,11 +146,11 @@ include_once $ruteTheme.'navbar.php';
                </div>
             </form>
             <div class="col-md-8">
-               <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'viewMsg.php'; ?>
+               <?php include_once $ruteTheme.'viewMsg.php'; ?>
             </div>
           </main>
         </div>
       </div>
     </div>
 
-    <?php include_once $ruteTheme.DIRECTORY_SEPARATOR.'footer.php'; ?>
+    <?php include_once $ruteTheme.'footer.php'; ?>
