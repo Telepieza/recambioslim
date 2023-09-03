@@ -1,7 +1,7 @@
 <?php
- /** 
+ /**
   * Create.php
-  * Description: maniufacturery Services route path create with token verification
+  * Description: manufacturer Services route path create with token verification
   * @Author : M.V.M.
   * @Version: 1.0.5
 **/

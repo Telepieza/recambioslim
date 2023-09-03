@@ -2,7 +2,7 @@
 /**
 * Update.php
 * Description: category Services route path delete for id with token verification
-*  * @Author : M.V.M.
+* @Author : M.V.M.
 * @Version 1.0.5
 **/
 declare(strict_types=1);
@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 final class Update extends Base
 {
     public function __invoke(Request $request,Response $response,array $args) 
-    {   
+    {
         $this->baseParameters->setTableController($this->getCategoryTable());
         $result = $this->getAuthUser($request);
         if ($result['code'] === 200) {

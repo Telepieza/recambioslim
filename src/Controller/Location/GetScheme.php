@@ -1,8 +1,8 @@
 <?php
-/** 
+/**
 * GetScheme.php
 * Description: Location read structure and schemas.
-*  * @Author : M.V.M.
+* @Author : M.V.M.
 * @Version: 1.0.5
 **/
 declare(strict_types=1);

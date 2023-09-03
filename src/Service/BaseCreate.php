@@ -34,8 +34,8 @@ final class BaseCreate extends BaseRepository
         $id           = 0;                                                     // Se inicia el id con valor 0.
         $code         = 404;                                                   // Status = 404. Nos evitamos de gestionar todos los else de cada uno de los if.
         $status       = 'error';                                               // Status default = "Error"
-        $count        = 0;                                                     // count = 0    
-        $noPrimaryKey = 'NoPrimaryKey';                                        // variable indicando no tiene tiene la tabla clave primaria         
+        $count        = 0;                                                     // count = 0
+        $noPrimaryKey = 'NoPrimaryKey';                                        // variable indicando no tiene tiene la tabla clave primaria
         $this->toDebugger($this->parameters->getLogger(),'body', $this->tableClass->toJson());  // Si debug = true, graba la informacion de entrada en logger
         $inputs     = (array) $this->tableClass->toCheckValue($this->tableClass->toTextCreate(),$body);
         $this->toDebugger($this->parameters->getLogger(),'inputs', $inputs);                      // Si debug = true, graba la informacion chequeda en el logger

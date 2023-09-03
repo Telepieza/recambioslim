@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
   * GetAll.php
   * Description: category Services route path read all with token verification
   * @Author : M.V.M.

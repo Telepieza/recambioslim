@@ -7,7 +7,7 @@
 **/
 declare(strict_types=1);
 
-namespace App\Service;                                                 // (1) Modificar en la clase nueva el valor, si se copia la clase.
+namespace App\Service;
 use Psr\Log\LoggerInterface;
 use App\Service\BaseRepository;
 use App\Service\BaseUtils;
@@ -95,7 +95,7 @@ final class BaseUpdate extends BaseRepository
                     $isUpdate = true;                                                           // Indicamos que se puede realizar el UPDATE
                 }
 
-                if ($isUpdate)                                                         // Se procede al UPDATE                                                      
+                if ($isUpdate)                                                                  // Se procede al UPDATE
                 {
                     $sql  = $baseUtils->buildingSqlUpdate($inputs, $this->tableClass->toTable(),$this->tableClass->getFieldsId(), $primaryKey );    // Montar la sentencia UPDATE
                     if (!empty($sql))

@@ -28,13 +28,13 @@ class Auth
     private $decoded = array();
     private $payload = array();
 
-    public function __construct(Request $request,string $keySecret)    // Constructor, pasa el request y keySecret a global
+    public function __construct(Request $request,string $keySecret)    // Constructor, request y keySecret a global
     {
         $this->request     = $request;
         $this->keySecret   = $keySecret;
     }
 
-    public function verifyToken()                                      // verificamos el token que nos llega del cliente
+    public function verifyToken()                                      // verificamos el token del input request del cliente
     {
         $jwtHeader = $this->request->getHeaderLine('Authorization');   // getHeaderLine   $authorization = explode(' ',$jwtHeader);
         $authorization = explode(' ',$jwtHeader); 

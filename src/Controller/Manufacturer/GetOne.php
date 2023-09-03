@@ -1,7 +1,7 @@
 <?php
 /** 
   * GetOne.php
-  * Description: menufacturer Services route path read id with token verification
+  * Description: manufacturer Services route path read id with token verification
   * @Author : M.V.M.
   * @Version: 1.0.5
 **/

@@ -3,7 +3,7 @@
   * BasePayLoad.php
   * Description: Base payload for all templates
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -20,14 +20,14 @@ class BasePayLoad implements JsonSerializable
     private string $token;
     private string $pagination;
 
-    public function __construct($result ) 
+    public function __construct($result )
     {
-        $this->setStatus(isset($result['status'])    ? $result['status']  : '');  
-        $this->setCode(isset($result['code'])        ? $result['code']    : 0 );  
-        $this->setCount(isset($result['count'])      ? $result['count']   : 0 );  
-        $this->setToken(isset($result['token'])      ? $result['token']   : '' );  
-        $this->setMessage(isset($result['message'])  ? $result['message'] : '' );  
-        $this->setPagination(isset($result['pagination']) ? $result['pagination'] : '' ); 
+        $this->setStatus(isset($result['status'])    ? $result['status']  : '');
+        $this->setCode(isset($result['code'])        ? $result['code']    : 0 );
+        $this->setCount(isset($result['count'])      ? $result['count']   : 0 );
+        $this->setToken(isset($result['token'])      ? $result['token']   : '' );
+        $this->setMessage(isset($result['message'])  ? $result['message'] : '' );
+        $this->setPagination(isset($result['pagination']) ? $result['pagination'] : '' );
     }
 
     public function getStatus(): string
@@ -57,7 +57,7 @@ class BasePayLoad implements JsonSerializable
         $this->count = $count;
     }
 
-    public function getMessage() 
+    public function getMessage()
     {
         return $this->message;
     }
@@ -66,7 +66,7 @@ class BasePayLoad implements JsonSerializable
         $this->message = $message;
     }
 
-    public function getToken() 
+    public function getToken()
     {
         return $this->token;
     }
@@ -75,7 +75,7 @@ class BasePayLoad implements JsonSerializable
         $this->token = $token;
     }
 
-    public function getPagination() 
+    public function getPagination()
     {
         return $this->pagination;
     }
@@ -90,17 +90,17 @@ class BasePayLoad implements JsonSerializable
             'status' => $this->getCode(),
         ]; 
         if (!empty(trim($this->getToken()))) {
-            $this->setstatus('token');    
+            $this->setstatus('token');
             $payload[$this->getstatus()] = trim($this->getToken());
         }
         else 
         { 
-            if (!empty(trim($this->getPagination()))) 
+            if (!empty(trim($this->getPagination())))
             {
                 $payload['pagination'] = json_decode($this->getPagination());
             }
 
-            if (is_null($this->getstatus() && is_array($this->getMessage()))) 
+            if (is_null($this->getstatus() && is_array($this->getMessage())))
             {
                $this->setstatus('data');
             } 
@@ -109,7 +109,7 @@ class BasePayLoad implements JsonSerializable
                 $this->setstatus('info');
             }
 
-            if ($this->getMessage() !== null) 
+            if ($this->getMessage() !== null)
             {
                $payload[$this->getstatus()] = $this->getMessage();
             }

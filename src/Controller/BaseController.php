@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -21,7 +21,7 @@ use App\Application\Middleware\Auth;
 class BaseController
 {
   protected ContainerInterface $container;
-  protected $settings = null; 
+  protected $settings = null;
   protected BaseParameters $baseParameters;
 
   public function __construct(ContainerInterface $ci, LoggerInterface $logger)
@@ -29,8 +29,8 @@ class BaseController
      $this->container = $ci;
      if (is_null($this->settings))
      {
-        $this->baseParameters = new BaseParameters();  
-        if (isset($this->container)) 
+        $this->baseParameters = new BaseParameters();
+        if (isset($this->container))
         {
           $this->baseParameters->setDb($this->container->get('db'));
           $this->appConfig($this->container);
@@ -40,11 +40,11 @@ class BaseController
   }
   
   private function appConfig($container) {
-     $this->baseParameters->setAppName('appName');  
-     $this->baseParameters->setLocale('es');  
+     $this->baseParameters->setAppName('appName');
+     $this->baseParameters->setLocale('es');
      $this->baseParameters->setDebug(false);
      $this->baseParameters->setDev('development'); 
-     $this->baseParameters->setKeyToken('t2l2p3ez1');   
+     $this->baseParameters->setKeyToken('t2l2p3ez1');
      $this->baseParameters->setPrefix('co_');
      $this->baseParameters->setPerPage(0) ;
      $this->baseParameters->setLanguage(2) ;
@@ -52,26 +52,26 @@ class BaseController
      $this->baseParameters->setCountry('es_ES') ;
      $this->baseParameters->setTimeZone('UTC') ;
      $this->settings = $container->get(SettingsInterface::class);
-     if (!is_null($this->settings)) 
+     if (!is_null($this->settings))
      {
          $config = $this->settings->get("app");
          if (isset($config['name']))
          {
            $this->baseParameters->setAppName($config['name']);
          }
-         if (isset($config['locale'])) 
+         if (isset($config['locale']))
          {
            $this->baseParameters->setLocale($config['locale']);
          }
-         if (isset($config['timezone'])) 
+         if (isset($config['timezone']))
          {
           $this->baseParameters->setTimeZone($config['timezone']);
          }
-         if (isset($config['country'])) 
+         if (isset($config['country']))
          {
           $this->baseParameters->setCountry($config['country']);
          }
-         if (isset($config['debug'])) 
+         if (isset($config['debug']))
          {
            $this->baseParameters->setDebug($config['debug']);
          }
@@ -79,23 +79,23 @@ class BaseController
          {
            $this->baseParameters->setDev($config['dev']);
          }
-         if (isset($config['secret'])) 
+         if (isset($config['secret']))
          {
            $this->baseParameters->setKeyToken($config['secret']);
          }
-         if (isset($config['perPage'])) 
+         if (isset($config['perPage']))
          {
            $this->baseParameters->setPerPage($config['perPage']);
          }
-         if (isset($config['prefix'])) 
+         if (isset($config['prefix']))
          {
            $this->baseParameters->setPrefix($config['prefix']);
          }
-         if (isset($config['language'])) 
+         if (isset($config['language']))
          {
           $this->baseParameters->setLanguage($config['language']);
          }
-         if (isset($config['domain'])) 
+         if (isset($config['domain']))
          {
           $this->baseParameters->setDomain($config['domain']);
          }
@@ -104,7 +104,7 @@ class BaseController
 
  protected function getAuthUser(Request $request) {
    $auth = new Auth($request,$this->baseParameters->getKeyToken());
-   $result = $auth->verifyToken();        
+   $result = $auth->verifyToken();
    if ($result['code'] === 200) {
       $jsonRecord = $auth->verifyUser($this->baseParameters->getDb(),$this->baseParameters->getPrefix());
       $result = (array) json_decode($jsonRecord);

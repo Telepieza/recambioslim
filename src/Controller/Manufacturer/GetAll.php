@@ -1,7 +1,7 @@
 <?php
-/** 
+/**
   * GetAll.php
-  * Description: menufacturer Services route path read all with token verification
+  * Description: manufacturer Services route path read all with token verification
   * @Author : M.V.M.
   * @Version: 1.0.5
 **/

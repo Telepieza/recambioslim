@@ -1,7 +1,7 @@
 <?php
-/** 
+/**
   * Update.php
-  * Description: manufacture Services route path delete for id with token verification
+  * Description: manufacturer Services route path delete for id with token verification
   * @Author : M.V.M.
   * @Version: 1.0.5
 **/

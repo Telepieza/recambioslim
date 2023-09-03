@@ -38,7 +38,6 @@
  include_once $ruteInc.'readId.php';
  include_once $ruteInc.'action.php';
 
-
  include_once $ruteTheme.'header.php';
  include_once $ruteTheme.'navbar.php';
 

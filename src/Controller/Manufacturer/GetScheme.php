@@ -1,7 +1,7 @@
 <?php
-/** 
+/**
 * GetScheme.php
-* Description: category read structure and schemas.
+* Description: manufacturer read structure and schemas.
 *  * @Author : M.V.M.
 * @Version 1.0.5
 **/

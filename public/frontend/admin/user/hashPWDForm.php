@@ -3,7 +3,7 @@
   * hashPWDForm.php
   * Description: hash password form
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 
   if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;

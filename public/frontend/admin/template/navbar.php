@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * navbar.php
   * Description: navbar of the page
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
@@ -20,7 +20,7 @@ $urlUser     = $urlParent    . $pathWebUser;
 			            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
 			      	       <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
 			           </svg>
-		        </button>          
+		        </button>
             <a href="index.php" class="navbar-brand d-md-none">Telepieza</a>
             <div class="container">
               <div class="collapse navbar-collapse" id="nav_principal">

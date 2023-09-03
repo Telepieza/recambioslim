@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseParameter.php
   * Description: Base parameter for all templates
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -41,16 +41,16 @@ class BaseParameters {
     {
       return $this->locale;
     }
-    public function setLocale(string $locale) 
+    public function setLocale(string $locale)
     {
         $this->locale = $locale;
     }
 
-    public function getDebug() : bool 
+    public function getDebug() : bool
     {
       return $this->debug;
     }
-    public function setDebug(bool $debug) 
+    public function setDebug(bool $debug)
     {
         $this->debug = $debug;
     }
@@ -59,7 +59,7 @@ class BaseParameters {
     {
       return $this->keyToken;
     }
-    public function setKeyToken(string $keyToken) 
+    public function setKeyToken(string $keyToken)
     {
         $this->keyToken = $keyToken;
     }
@@ -68,7 +68,7 @@ class BaseParameters {
     {
       return $this->dev;
     }
-    public function setDev(string $dev) 
+    public function setDev(string $dev)
     {
         $this->dev = $dev;
     }
@@ -77,7 +77,7 @@ class BaseParameters {
     {
       return $this->perPage;
     }
-    public function setPerPage(int $perPage) 
+    public function setPerPage(int $perPage)
     {
         $this->perPage = $perPage;
     }
@@ -86,7 +86,7 @@ class BaseParameters {
     {
       return $this->prefix;
     }
-    public function setPrefix(string $prefix) 
+    public function setPrefix(string $prefix)
     {
         $this->prefix = $prefix;
     }
@@ -95,7 +95,7 @@ class BaseParameters {
     {
       return $this->language;
     }
-    public function setLanguage(int $language) 
+    public function setLanguage(int $language)
     {
         $this->language = $language;
     }
@@ -105,7 +105,7 @@ class BaseParameters {
       return $this->domain;
     }
 
-    public function setDomain(string $domain) 
+    public function setDomain(string $domain)
     {
         $this->domain = $domain;
     }
@@ -113,7 +113,7 @@ class BaseParameters {
     {
       return $this->timeZone;
     }
-    public function setTimeZone(string $timeZone) 
+    public function setTimeZone(string $timeZone)
     {
         $this->timeZone = $timeZone;
     }
@@ -122,16 +122,16 @@ class BaseParameters {
     {
       return $this->country;
     }
-    public function setCountry(string $country) 
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
 
-    public function getDb() : PDO 
+    public function getDb() : PDO
     {
         return $this->db;
     }
-    public function setDb(PDO $db) 
+    public function setDb(PDO $db)
     {
         $this->db = $db;
     }
@@ -140,7 +140,7 @@ class BaseParameters {
     {
         return $this->logger;
     }
-    public function setLogger(LoggerInterface $logger) 
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -152,7 +152,7 @@ class BaseParameters {
        return $this->tableController;
     }
 
-    public function setTableController(string $tableController) 
+    public function setTableController(string $tableController)
     {
         $this->tableController = $tableController;
     }

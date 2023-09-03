@@ -123,7 +123,7 @@ If the BackEnd does not start, see the log file in the path var/logs/*.log
 
 It can be installed on a local computer or on the same computer for testing its correct operation.
 
-Before starting the FrondEnd, you have to check the program setting file: /public/frontend/inc/setting.php, and modify
+Before starting the FrondEnd, you have to check the program setting file: /public/frontend/admin/inc/setting.php, and modify
 the information of the connection with the url of the BackEnd (route) and the url of the FrontEnd (urlWebClient and pathWebClient)
 In the example it is the same url for the BackEnd as for the FrontEnd.
 

@@ -1,5 +1,5 @@
 <?php
- /** 
+ /**
   * Delete.php
   * Description: Zone Services route path delete with token verification
   * @Author : M.V.M.

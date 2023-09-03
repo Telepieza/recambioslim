@@ -22,7 +22,7 @@
   (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
   (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
  
-  include_once $rutaEntity.'country.php';        // country
+  include_once $rutaEntity.'country.php';  // country
  
   include_once $ruteInc.'function.php';
   include_once $ruteInc.'setting.php';
@@ -133,8 +133,7 @@
                     } else { $url = "index.php"; }
                     echo "<div class=\"col-sm-2\">
                          <button type=\"button\" class=\"col-lg-8 btn btn-success btn-default pe-4 \">
-                         <a href=\" {$url} \">Exit</a></button></div>"; ?>
-              
+                         <a href=\" {$url} \">Exit</a></button></div>"; ?>      
               </div>
             </form>
             <div class="col-md-8">

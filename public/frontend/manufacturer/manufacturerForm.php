@@ -98,7 +98,7 @@ include_once $ruteTheme.'navbar.php';
                   <button type="button" class="col-lg-8 btn btn-success btn-info pe-4" ><a href="manufacturerForm.php?action=Cancel">Cancel</a></button>
                 </div>
 
-                <?php  if ('' != $id && $status == 200) { 
+                <?php  if ('' != $id && $status == 200) {
                   echo "<div class=\"col-sm-2\">
                       <button type=\"button\" class=\"col-lg-8 btn btn-success text-danger btn-warning pe-4 \">
                       <a onclick=\"return confirm('Delete customer #{$id}');\" href=\"manufacturerForm.php?action=Delete&amp;id={$id}\">Delete</a>

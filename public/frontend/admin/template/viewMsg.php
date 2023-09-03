@@ -3,7 +3,7 @@
   * viewMsg.php
   * Description: view message of the page
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
@@ -17,8 +17,6 @@ if ($isMobile):?>
 <label for="Alert" class="col-sm-2">&nbsp;</label>
 
 <?php
-
-
 
  if ($isMobile )
  {

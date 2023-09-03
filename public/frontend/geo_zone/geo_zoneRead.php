@@ -28,7 +28,7 @@ include_once $ruteInc.'setting.php';
 $pageParent  = 'geo_zoneRead.php';
 if ($isMobile) {
   $pageCreate = 'geo_zoneFormMovil.php';     // read id Mobile
- } else { 
+ } else {
   $pageCreate = 'geo_zoneForm.php';           // read id Desktop
 }
 
