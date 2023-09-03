@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseFind.php
   * Description: Principal object repository class of all templates
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -16,7 +16,8 @@ class BaseRepository
 {
     protected string $query;
     // Monta la sentencia "Select" de los fields and parameters para el query del PDO
-    public function query(PDO $db, string $table, string $fieldsId, string $fieldOrder, $pfields=array(), $pparams=array(), int $limit, int $offset)
+
+    public function query(PDO $db, object $tableClass, $parameter=array(), int $limit, int $offset)
     {
         $params       = array();
         $id           = 0;
@@ -29,42 +30,38 @@ class BaseRepository
         $status       = 'error';
         $results      = array();
         $pagination   = '';
-        $tableName    = $table;
-        if (strpos($table,'_')) 
+        $tableName    = $tableClass->toTable();
+        if (strpos($tableClass->toTable(),'_'))
         {
-            $tableName = substr($table, strpos($table, '_') + 1);
+           $tableName = substr($tableClass->toTable(), strpos($tableClass->toTable(), '_') + 1);
         }
         $baseUtils   = new BaseUtils();
-        $fields      = $baseUtils->buildingSqlFields($pfields);  // fields
- 
-        $this->query = "SELECT {$fields} FROM `{$table}` ";
+        $fields      = $baseUtils->buildingSqlFields($tableClass->toMapfields());  // fields
+        $this->query = "SELECT {$fields} FROM `{$tableClass->toTable()}` ";
         if ($limit > 0 ) {
-            $pagination = " LIMIT :limit OFFSET :offset "; 
+            $pagination = " LIMIT :limit OFFSET :offset ";
         }
-        $where  = $baseUtils->buildingSqlWhere($pparams,$fieldsId);    // where
+        $where  = $baseUtils->buildingSqlWhere($parameter,$tableClass->getFieldsId());    // where
         if (empty($where))
-        {   
-            if (!empty(trim($fieldOrder))) {
-               $sql = 'ORDER BY ' . $fieldOrder;  
-            }
-            else {
-                $sql = 'ORDER BY ' . $fieldsId;  
-            }
-        } 
+        {
+           if (!empty(trim($tableClass->toSortOrder()))) {
+              $sql = 'ORDER BY ' .$tableClass->toSortOrder();
+           }
+        }
         else
-        { 
+        {
             $sql = 'WHERE ' . $where;
-            $params = $baseUtils->buildingSqlParams($pparams,'select',$fieldsId, array());  // parameters
-            if (isset($params[$fieldsId])) 
-            { 
-               $id = $params[$fieldsId];
-            } 
-            else 
+            $params = $baseUtils->buildingSqlParams($parameter,'select', $tableClass->getFieldsId(), array());  // parameters
+            if (isset($params[$tableClass->getFieldsId()]))
             {
-               if (str_contains($sql,':' . $fieldsId)) 
+               $id = $params[$tableClass->getFieldsId()];
+            }
+            else
+            {
+               if (str_contains($sql,':' .  $tableClass->getFieldsId()))
                {
                   $id = 0;
-               } 
+               }
            }
         }
 
@@ -77,11 +74,11 @@ class BaseRepository
            $params['offset'] = $offset;
         }
 
-        if (is_numeric($id)) 
+        if (is_numeric($id))
         {
-           $statement = $db->prepare($this->query);  
-           try { 
-                $response = $statement->execute($params); 
+           $statement = $db->prepare($this->query);
+           try {
+                $response = $statement->execute($params);
                 if ($response)
                 {
                     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -93,26 +90,26 @@ class BaseRepository
                           $status  = $tableName;
                           $message = $results;
                         }
-                    } 
-                } 
+                    }
+                }
             }
             catch (PDOException $ex)
             {
                $code    = 500;
                $message = $ex->getMessage();
-            } 
+            }
 
             if ($code == 404)
             {
-                $msg = $id > 0  ? "A {$tableName} with {$fieldsId}  {' . $id . '} was not found."
+                $msg = $id > 0  ? "A {$tableName} with {$tableClass->getFieldsId()}  {' . $id . '} was not found."
                                 : "There is no information in the {$tableName} in database.";
-                $message =  $msg;   
-            }  
-        } 
+                $message =  $msg;
+            }
+        }
         else
         {
-                $message = "A {$tableName} with {$fieldsId} {' . $id . '} is not correct.";  
-        }    
+                $message = "A {$tableName} with {$tableClass->getFieldsId()} {' . $id . '} is not correct.";  
+        }
 
 //  echo  "query status: " . $status . " code: " . $code . " count: " . $count . " message: " . print_r($message);
 
@@ -124,7 +121,7 @@ class BaseRepository
     }
 
     // Monta la sentencia "Select count" para el query del PDO.
-    public function count(PDO $db, string $table,string $fieldsId, $pparams=array())
+    public function count(PDO $db, string $table,string $fieldsId, $parameter=array())
     {
         $params      = array();
         $id          = 0;
@@ -136,63 +133,63 @@ class BaseRepository
         $status      = 'error';
         $tableName   = $table;
         $where       = '';
-        if (strpos($table,'_')) 
+        if (strpos($table,'_'))
         {
             $tableName = substr($table, strpos($table, '_') + 1);
         }
 
         $baseUtils = new BaseUtils();
         $this->query = "SELECT COUNT(*) AS count FROM `{$table}` ";
-        if (!empty($pparams)) {
-          $where = $baseUtils->buildingSqlWhere($pparams,$fieldsId);       // where
+        if (!empty($parameter)) {
+          $where = $baseUtils->buildingSqlWhere($parameter,$fieldsId);       // where
         }
-        if (!empty($where)) 
+        if (!empty($where))
         {
             $sql = 'WHERE ' . $where;
-            $params = $baseUtils->buildingSqlParams($pparams,'select',$fieldsId,array());  // parameters
+            $params = $baseUtils->buildingSqlParams($parameter,'select',$fieldsId,array());  // parameters
             if (isset($params[$fieldsId]))
-            { 
+            {
                 $id = $params[$fieldsId];
             }
-            else 
+            else
             {
                 if (str_contains($sql,':' . $fieldsId . '')) 
                 {
                    $id = 0;
-                } 
+                }
             }
         }
 
         $this->query .= $sql;
 
-        if (is_numeric($id)) 
+        if (is_numeric($id))
         {
-            $statement = $db->prepare($this->query);   
-            try { 
-                $statement->execute($params); 
-                $result = $statement->fetch();  
+            $statement = $db->prepare($this->query);
+            try {
+                $statement->execute($params);
+                $result = $statement->fetch();
                 $count = $result['count'];
-                if ($count  > 0) 
-                {            
+                if ($count  > 0)
+                {
                    $code    = 200;
                    $status  = 'info';
                    $message = "count {' .$count . '}" ;
                 }
-                else 
+                else
                 {
                    $message = "There is no information in the {$tableName} in database.";
                 }
-            } 
+            }
             catch (PDOException $ex)
             {
                 $code    = 500;
                 $message = $ex->getMessage();
             }
-        }  
-        else 
+        }
+        else
         {
-             $message = "A {$tableName} with {$fieldsId}  {' . $id . '} is not correct. ";   
-        }    
+             $message = "A {$tableName} with {$fieldsId}  {' . $id . '} is not correct. ";
+        }
 // echo  "count status: " . $status . " code: " . $code . " count: " . $count . " message: " . print_r($message); 
         return [ 'status'  => $status,
                  'code'    => $code,
@@ -202,7 +199,7 @@ class BaseRepository
     }
     
     // Calculos y control de las datos de paginacion 
-    public function toPagination(int $perPage, int $count, int $limit, int $offset) 
+    public function toPagination(int $perPage, int $count, int $limit, int $offset)
     {
            
       if ($limit == 0) {
@@ -214,17 +211,17 @@ class BaseRepository
       $paginateEntity->setCurrentPage($page);  // Pagina 
       $paginateEntity->setCountRows($count);   // Total registros  
       $paginateEntity->setLimit($limit);       // Limite, si es 0 es $perPage
-      if ($count > 0) { 
-        $paginateEntity->setTotalLimit((int) ceil($count/$limit));                                               
-      } 
-      else 
+      if ($count > 0) {
+        $paginateEntity->setTotalLimit((int) ceil($count/$limit));
+      }
+      else
       {
-        $paginateEntity->setTotalLimit($count);                                               
-      } 
+        $paginateEntity->setTotalLimit($count);
+      }
       if ($offset == 0) {
-         $offset = (int) ($page - 1) * $limit;  
-      } 
-      $paginateEntity->setOffset((int) $offset); 
+         $offset = (int) ($page - 1) * $limit;
+      }
+      $paginateEntity->setOffset((int) $offset);
       return $paginateEntity;
     }
 

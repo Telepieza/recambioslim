@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * Find.php
   * Description: Service Category
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -21,10 +21,10 @@ use App\Service\BaseFind;
 */
  final class Find
  {
-    public function getAll(Request $request,BaseParameters $parameters) 
+    public function getAll(Request $request,BaseParameters $parameters)
     {
-      $body          = (array) $request->getParsedBody();                           
-      $query         = (array) $request->getQueryParams();    
+      $body          = (array) $request->getParsedBody();
+      $query         = (array) $request->getQueryParams();
       $tableClass    = new Category($parameters->getPrefix(),$body);                 // (1) Modify in the new class the tableClass, if the class is copied  
       $find          = new BaseFind($tableClass,$parameters);
       $result        = (array) $find->getAll($query);
@@ -33,7 +33,7 @@ use App\Service\BaseFind;
 
     public function getOne(Request $request,array $args, BaseParameters $parameters)
     {
-      $body         = (array) $request->getParsedBody();                          
+      $body         = (array) $request->getParsedBody();
       $tableClass   = new Category($parameters->getPrefix(),$body);                // (1) Modify in the new class the tableClass, if the class is copied  
       $find         = new BaseFind($tableClass,$parameters);
       $result       = (array) $find->getOne($args);

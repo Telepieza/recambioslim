@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * App.php
   * Description: Start the app (launch)
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -55,7 +55,7 @@ $callableResolver = $app->getCallableResolver();
 
 $container = $app->getContainer();
 
-// DataBase Mysql 
+// DataBase Mysql
 require __DIR__ . '/../app/Config/Dependencies.php';
 
 

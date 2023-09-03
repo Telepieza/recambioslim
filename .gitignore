@@ -1,5 +1,4 @@
 .env
-.gitignore
 /tests
-/var/cache/
+/var/cache/*
 /var/logs/*.log

@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * Update.php
   * Description: Service Category
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -22,9 +22,9 @@ use App\Service\BaseUpdate;
 
 final class Update  
 {
-  public function update(Request $request, array $args, BaseParameters $parameters) 
+  public function update(Request $request, array $args, BaseParameters $parameters)
   {
-    $body          = (array) $request->getParsedBody();                          
+    $body          = (array) $request->getParsedBody();
     $tableClass    = new Category($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied  
     $modify        = new BaseUpdate($tableClass,$parameters);
     $result        = (array) $modify->update($body,$args);

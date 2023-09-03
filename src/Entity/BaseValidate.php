@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseValidate.php
   * Description: validates the fields by their format (String, Integer, Boolean, DateTime)
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -24,11 +24,11 @@ class BaseValidate {
     public function validateBoolean($value)
     {
        (bool) $result = false;
-        if (is_bool($value)) 
+        if (is_bool($value))
         {
            $result = $value ? true : false;
         }
-        else if (is_numeric($value)) 
+        elseif (is_numeric($value))
         {
            $result = $value === 1 ? true : false;
         }
@@ -38,7 +38,7 @@ class BaseValidate {
     public function validateDateTimeImmutable($value)
     {
         $result = $value;
-        if (!$result instanceof DateTimeImmutable) 
+        if (!$result instanceof DateTimeImmutable)
         {
            $result = (new DateTimeImmutable('now'));
         }

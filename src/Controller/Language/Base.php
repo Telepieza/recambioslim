@@ -1,9 +1,9 @@
 <?php
- /** 
+ /**
   * Base.php
   * Description: Controller and router service language
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -18,7 +18,7 @@ use App\Service\Language\Update;
 abstract class Base extends BaseController
 {
 
-    protected function getLanguageTable() : string 
+    protected function getLanguageTable() : string
     {
         $tableName  = 'language';
         return $tableName;

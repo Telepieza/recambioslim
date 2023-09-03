@@ -1,9 +1,9 @@
 <?php
- /** 
+ /**
   * Base.php
-  * Description: Controller and router service userr
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * Description: Controller and router service user
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -14,7 +14,7 @@ use App\Service\User\Login;
 
 abstract class Base extends BaseController
 {
-    protected function getUserTable() : string 
+    protected function getUserTable() : string
     {
         $tableName  = 'user';
         return $tableName;

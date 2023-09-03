@@ -1,4 +1,10 @@
 <?php
+/**
+* Base.php
+* Description: Geo_zone Services route path delete for id with token verification
+*  * @Author : M.V.M.
+* @Version: 1.0.5
+*/
 
 declare(strict_types=1);
 
@@ -12,9 +18,9 @@ use App\Service\Geo_zone\Update;
 
 abstract class Base extends BaseController
 {
-    protected function getGeo_zoneTable() : string 
+    protected function getGeo_zoneTable() : string
     {
-        $tableName  = 'Geo_zone';
+        $tableName  = 'geo_zone';
         return $tableName;
     }
 

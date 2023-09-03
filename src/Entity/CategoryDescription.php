@@ -1,9 +1,10 @@
-<?php 
-/** 
+<?php
+/**
   * CategoryDescription.php
   * Description: category Description template
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
+  * 
 **/
 declare(strict_types=1);
 
@@ -14,32 +15,37 @@ final class CategoryDescription extends BaseValidate
 
     private $prefix     = "oc_";
     private $tablename  = "category_description";
-    private $fieldid    = 'category_id';                
-    private $field01    = 'language_id';             
-    private $field02    = 'name';         
-    private $field03    = 'meta_title';          
-    private $field04    = 'meta_description';  
-    private $field05    = 'meta_keyword';   
+    private $fieldid    = 'category_id';
+    private $field01    = 'language_id';
+    private $field02    = 'name';
+    private $field03    = 'description';
+    private $field04    = 'meta_title';
+    private $field05    = 'meta_description';
+    private $field06    = 'meta_keyword';
+
   
-    private int $id;                          // id
+    private bool   $isAutoIncrement = false;  // index id auto_increment
+    private int    $id;                       // id
     private int    $value01;                  // field01 (language_id)
     private string $value02;                  // field02 (name)
-    private string $value03;                  // field03 (meta_title)
-    private String $value04;                  // field04 (meta_description)
-    private string $value05;                  // field05 (meta_keyword)
+    private string $value03;                  // field03 (description)  text html
+    private string $value04;                  // field04 (meta_title)
+    private string $value05;                  // field05 (meta_description)
+    private string $value06;                  // field06 (meta_keyword)
 
     public function __construct(string $prefix, array $inputs)
     {
-        if (!is_null($prefix) && !empty($prefix)) 
-        { 
-            $this->prefix = $prefix; 
+        if (!is_null($prefix) && !empty($prefix))
+        {
+            $this->prefix = $prefix;
         }
-        $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );  
-        $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0);  
-        $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : ''); 
-        $this->setvalue03(isset($inputs[$this->field03]) ? $inputs[$this->field03] : '' );  
-        $this->setvalue04(isset($inputs[$this->field04]) ? $inputs[$this->field04] : '' );  
-        $this->setvalue05(isset($inputs[$this->field05]) ? $inputs[$this->field05] : '' );  
+        $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
+        $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0);
+        $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '');
+        $this->setvalue03(isset($inputs[$this->field03]) ? $inputs[$this->field03] : '' );
+        $this->setvalue04(isset($inputs[$this->field04]) ? $inputs[$this->field04] : '' );
+        $this->setvalue05(isset($inputs[$this->field05]) ? $inputs[$this->field05] : '' );
+        $this->setvalue06(isset($inputs[$this->field06]) ? $inputs[$this->field06] : '' );
     }
 
     public function jsonSerialize(string $action):array
@@ -49,10 +55,11 @@ final class CategoryDescription extends BaseValidate
          $arr[$this->fieldid] = $this->getid();
        }
        $arr[$this->field01] = $this->getvalue01(); // integer
-       if (trim($this->getvalue02()))  { $arr[$this->field01] = $this->getvalue02()  ; }  // string  
-       if (trim($this->getvalue03()))  { $arr[$this->field01] = $this->getvalue03()  ; }  // string  
-       if (trim($this->getvalue04()))  { $arr[$this->field01] = $this->getvalue04()  ; }  // string  
-       if (trim($this->getvalue05()))  { $arr[$this->field01] = $this->getvalue05()  ; }  // string  
+       if (trim($this->getvalue02()))  { $arr[$this->field02] = $this->getvalue02()  ; }  // string
+       if (trim($this->getvalue03()))  { $arr[$this->field03] = $this->getvalue03()  ; }  // string
+       if (trim($this->getvalue04()))  { $arr[$this->field04] = $this->getvalue04()  ; }  // string
+       if (trim($this->getvalue05()))  { $arr[$this->field05] = $this->getvalue05()  ; }  // string
+       if (trim($this->getvalue06()))  { $arr[$this->field06] = $this->getvalue06()  ; }  // string
        return $arr;
     }
 
@@ -62,13 +69,40 @@ final class CategoryDescription extends BaseValidate
         return $tableDB;
     }
 
-    public function toPrimaryKey(): array 
+    public function toTableName(): string
     {
+        return $this->tablename;
+    }
+
+    public function getFieldsId(): string
+    {
+        return $this->fieldid;
+    }
+
+    public function isKeyAutoIncrement(): bool
+    {
+        return $this->isAutoIncrement;
+    }
+
+    public function toPrimaryKey(): array
+    {
+        $arr[$this->fieldid] = $this->fieldid;
         $arr[$this->field01] = $this->field01;
         return $arr;
     }
 
-    public function toMapfields(): array 
+    public function toSecundaryKey(): ?array
+    {
+        $arr[$this->field02] = $this->field02;
+        return $arr;
+    }
+
+    public function toSortOrder(): string
+    {
+        return $this->fieldid;
+    }
+
+    public function toMapfields(): array
     {
         $arr[$this->fieldid] = $this->fieldid;
         $arr[$this->field01] = $this->field01;
@@ -76,6 +110,7 @@ final class CategoryDescription extends BaseValidate
         $arr[$this->field03] = $this->field03;
         $arr[$this->field04] = $this->field04;
         $arr[$this->field05] = $this->field05;
+        $arr[$this->field06] = $this->field06;
         return $arr;
     }
 
@@ -85,33 +120,38 @@ final class CategoryDescription extends BaseValidate
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
             $results[$this->fieldid] = $this->getid();
-        } 
+        }
 
         if (isset($results[$this->field01]))
         {
            $this->setvalue01($this->validateInteger($results[$this->field01]));
            $results[$this->field01] = $this->getvalue01();
-        } 
+        }
 
         if (isset($results[$this->field02])) {
            $this->setvalue02($this->validateString($results[$this->field02]));
            $results[$this->field02] = $this->getvalue02();
-        } 
+        }
 
         if (isset($results[$this->field03])) {
             $this->setvalue03($this->validateString($results[$this->field03]));
-            $results[$this->field03] = $this->getvalue03();
-         } 
+            $results[$this->field03] = html_entity_decode($this->getvalue03());  // convertir sentencias HTML en String
+        }
 
-         if (isset($results[$this->field04])) {
+        if (isset($results[$this->field04])) {
             $this->setvalue04($this->validateString($results[$this->field04]));
             $results[$this->field04] = $this->getvalue04();
-         } 
+        }
 
-         if (isset($results[$this->field05])) {
+        if (isset($results[$this->field05])) {
             $this->setvalue05($this->validateString($results[$this->field05]));
             $results[$this->field05] = $this->getvalue05();
-         } 
+        }
+
+        if (isset($results[$this->field06])) {
+            $this->setvalue06($this->validateString($results[$this->field06]));
+            $results[$this->field06] = $this->getvalue06();
+        }
         return $results;
     }
 
@@ -120,7 +160,7 @@ final class CategoryDescription extends BaseValidate
         return $this->id;
     }
 
-    public function setid($id):self 
+    public function setid($id):self
     {
         $this->id = $id;
         return $this;
@@ -149,14 +189,14 @@ final class CategoryDescription extends BaseValidate
     }
 
     public function getvalue03(): string
-    {    
+    {
             return $this->value03;
     }
 
 
     public function setvalue03( $value03): self
     {
-        $this->value03 = $value03; 
+        $this->value03 = $value03;
         return $this;
     }
 
@@ -182,6 +222,16 @@ final class CategoryDescription extends BaseValidate
         return $this;
     }
 
+    public function getvalue06(): string
+    {
+        return $this->value06;
+    }
+
+    public function setvalue06($value06):self
+    {
+        $this->value06 = $value06;
+        return $this;
+    }
     
     public function toJson(): object
     {

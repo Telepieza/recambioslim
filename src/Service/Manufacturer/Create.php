@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * Create.php
   * Description: Service Manufacturer
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -20,9 +20,9 @@ use App\Service\BaseCreate;
 
 final class Create
 {
-    public function create(Request $request, BaseParameters $parameters) { 
-        $body           = (array) $request->getParsedBody();                       
-        $tableClass     = new Manufacturer($parameters->getPrefix(),$body);        // (1) Modify in the new class the tableClass, if the class is copied 
+    public function create(Request $request, BaseParameters $parameters) {
+        $body           = (array) $request->getParsedBody();
+        $tableClass     = new Manufacturer($parameters->getPrefix(),$body);        // (1) Modify in the new class the tableClass, if the class is copied
         $create         = new BaseCreate($tableClass,$parameters);
         $result         = (array) $create->new($body);
         return $result;

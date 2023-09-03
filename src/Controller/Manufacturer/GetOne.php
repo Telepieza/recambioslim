@@ -2,8 +2,8 @@
 /** 
   * GetOne.php
   * Description: menufacturer Services route path read id with token verification
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -21,6 +21,6 @@ final class GetOne extends Base
         if ($result['code'] === 200) {
             $result = $this->getManufacturerFindService()->getOne($request, $args, $this->baseParameters);
         }
-        return $this->jsonWithData($response, $this->getPayload($result)); 
+        return $this->jsonWithData($response, $this->getPayload($result));
     } 
 }

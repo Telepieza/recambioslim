@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * GetLogin.php
   * Description: login Services route path read id generate token
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -23,6 +23,6 @@ final class GetLogin extends Base
         if ($payload->getStatus() === 'error') {
             $this->baseParameters->getLogger()->error($this->baseParameters->getTableController() . ' ' . $payload->getCode() . ' ' . $payload->getMessage());
         }
-        return $this->jsonWithData($response, $payload); 
-    } 
+        return $this->jsonWithData($response, $payload);
+    }
 }

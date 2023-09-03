@@ -1,5 +1,10 @@
 <?php
-
+/**
+  * GetOne.php
+  * Description: Geo_zone Services route path read id with token verification
+  * @Author : M.V.M.
+  * @Version 1.0.0
+**/
 declare(strict_types=1);
 
 namespace App\Controller\Geo_zone;
@@ -16,6 +21,6 @@ final class GetOne extends Base
         if ($result['code'] === 200) {
             $result = $this->getGeo_zoneFindService()->getOne($request, $args, $this->baseParameters);
         }
-        return $this->jsonWithData($response, $this->getPayload($result)); 
+        return $this->jsonWithData($response, $this->getPayload($result));
     } 
 }

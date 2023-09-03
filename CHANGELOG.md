@@ -1,4 +1,22 @@
 
+## 1.0.5 (2023-09-04)
+
+  * New procedures and functionalities in the backend.
+  * Redesign of the intuitive forms for adaptation and without errors.
+  * Security System in PHP program  defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );
+    for better security change the '_TEXEC', for a unique and secure key.
+  * Reorganization of FrontEnd folders
+  * Redesign of templates in FrontEnd.
+
+## 1.0.4 (2023-08-30)
+
+  * New zone templete is included in BackEnd and FrontEnd.
+
+## 1.0.3 (2023-08-29)
+
+  * New country  templete is included in BackEnd and FrontEnd.
+  * New language templete is included in BackEnd and FrontEnd.
+
 ## 1.0.2 (2023-08-27)
 
   * Fixed bug in mobile frontEnd.

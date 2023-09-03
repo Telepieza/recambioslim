@@ -1,0 +1,577 @@
+openapi: 3.0.2
+servers:
+  - url: https://telepieza.com/recambios
+    description:  [Telepieza Recambios](https://telepieza.com/recambios) Production server using Opencart.
+    
+  - url: https://recambioslim.com/recambios
+    description: My localhost server using PHP built-in web server.
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+info:
+  version: "1.0.0"
+  title: API Recambios Opencart
+  description:  |-
+    API Recambios Opencart [https://telepieza.com/recambios/](https://telepieza.com/recambios/).
+  contact: 
+    email: telepieza@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+- name: category_description
+  description: Manage category_description.
+  externalDocs:
+      description: Find out more about our store
+      url: 'https://telepieza.com/recambios'
+
+paths:
+  /api/category_description/read:
+    get:
+      tags:
+      - category_description
+      summary: Get All categories
+      operationId: GetAll
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: limit
+        in: query
+        description: How many rows to return at one time (max 100)
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 20
+      - name: offset
+        in: query
+        description: Gives the rows from the given position+1
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetAll'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/InvalidStatus'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+          
+  /api/category_description/read/{category_id}:
+    get:
+      tags:
+        - category_description
+      summary: Get One category_description by ID
+      operationId: GetOne
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: ID of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+
+      - name: language_id
+        in: path
+        description: language_id of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOne'
+        '400':
+          $ref: '#/components/responses/InvalidID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/category_description/new:
+    post:
+      tags:
+        - category_description
+      summary: Add a new category_description
+      description: Register a new category_description.
+      operationId: Create
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+              
+      responses:
+        '201':
+            $ref: '#/components/responses/CreateID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/NotCreate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category_description'
+        required: true
+         
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/category_description/update/{category_id}:
+    post:
+      tags:
+        - category_description
+      summary: Update an existing category_description
+      description: Update an existing category_description by category_id.
+      operationId: Update
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: ID of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+
+       - name: language_id
+        in: path
+        description: language_id of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotUpdate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Update an existent category_description in the table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category_description'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+
+  /api/category_description/delete/{category_id}:
+    post:
+      tags:
+        - category_description
+      summary: Delete category_description
+      description: Delete a category_description.
+      operationId: Deletecategory_description
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: category_id
+        in: path
+        description: category_id of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: language_id
+        in: path
+        description: language_id of category_description to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '202':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/InvalidID'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+ 
+components:
+
+  schemas:
+  
+    GetAll:
+      title: GetHelp
+      properties:
+        status: 
+          type: integer
+          format: int32
+          example : 200
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        category_description:
+          type: array
+          xml:
+            wrapped: true
+          items:
+             $ref: '#/components/schemas/category_description'
+    
+    GetOne:
+      title: GetOne
+      properties:
+        status:
+          type: integer
+          format: int200
+          example: 200
+        category_description:
+          $ref: '#/components/schemas/category_description'
+          
+    category_description:
+       title: category_description
+       type: object
+       properties:
+        category_id:
+          type: integer
+          format: int64
+          example: 3
+        language_id:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+          example: Amortiguadores Bilstein
+        description:
+          type: string
+          example: Amortiguadores B4
+        meta_title:
+          type: string
+          example: Amortiguadores Bilstein - Comprar Bilstein B4, B6 y B8
+        meta_description:
+          type: string
+          example: Todas las gamas de amortiguadores Bilstein. Los mejores precios de amortiguadores Bilstein B4, B6 y B8.
+        meta_keyword:
+          type: string
+          example : amortiguadores bilstein, amortiguadores delanteros bilstein, amortiguadores traseros bilstein, amortiguadores deportivos 
+
+       required:
+         - category_id
+         - language_id
+         - name
+         - description
+         
+       example:
+          category_id: 6
+          language_id: 2
+          name: Suspensión (Amortiguadores)
+          description: Todas las gamas de amortiguadores y sistemas de suspensíon.
+          meta_title: Amortiguadores Bilstein - Suspensión Bilstein - Amortiguadores KYB - Suspensión KAYABA
+          meta_description: Descubre las gamas de suspensión y amortiguadores Bilstein y Kayaba.
+          meta_keyword: amortiguadores, amortiguadores bilstein, amortiguadores delanteros, amortiguadores traseros, bilstein, suspension bilstein
+
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int64
+          example: 1
+        limit: 
+          type: integer
+          format: int32
+          example: 20
+        offset: 
+          type: integer
+          format: int32
+          example: 0
+        countRows:
+          type: integer
+          format: int64
+          example: 27
+        totalLimit: 
+          type: integer
+          format: int64
+          example: 1
+      required:
+          - currentPage
+          - limit
+          - offset
+          - countRows
+          - totalLimit
+      example:
+        currentPage: 1
+        limit: 20
+        offset: 0
+        countRows: 27
+        totalLimit: 1
+  
+    Token:
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ945rtyRTWTQYW
+      required:
+        - token_type
+        - access_token
+      example:
+        token_type: Bearer
+        access_token: '{{jwt}}'
+          
+    Status_200:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 200
+        info: successful operation
+
+    Status_201:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 201
+        info: The data has been created in the database with ID
+
+    Status_400:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 400
+        error: Invalid ID supplied
+
+    Status_401:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 401
+        error:  Access token is missing or invalid
+
+    Status_403:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 403
+        error:  Token invalid or Token required or Expired Token
+
+    Status_404:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 404
+        error:  Information not found
+  
+    Status_500:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 500
+        error: Problems connecting to the database
+
+  responses:
+  
+    Successful:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_200'
+  
+    NotFound:
+      description: Information not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+    
+    CreateID:
+      description: The data has been created in the database with ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_201'
+
+    NotCreate:
+      description: There has been an error creating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    NotUpdate:
+      description: There has been an error updating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_401'
+
+    ExpiredToken:
+      description: Token invalid or Token required or Expired Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_403'
+    
+    InvalidID:
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_400'        
+     
+    InvalidStatus:
+      description: Invalid status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'           
+
+    ErrorInDataBase:
+      description: Problems connecting to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_500' 
+ 
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,9 +1,9 @@
 <?php
- /** 
+ /**
   * Auth.php
   * Description: Authorization : Verify token, user and password
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -14,14 +14,14 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-use App\Service\User\Find;     
+use App\Service\User\Find;
 use PDO;
 
 class Auth
 {
     private int $code = 400;                           // default = 400
     private string $status = 'error';                  // default = 'error'
-    private string $message = '';                
+    private string $message = '';
     private int $count = 0;
     private $request;
     private string $keySecret;
@@ -35,7 +35,7 @@ class Auth
     }
 
     public function verifyToken()                                      // verificamos el token que nos llega del cliente
-    {            
+    {
         $jwtHeader = $this->request->getHeaderLine('Authorization');   // getHeaderLine   $authorization = explode(' ',$jwtHeader);
         $authorization = explode(' ',$jwtHeader); 
         $this->count   = count($authorization);                        // count array
@@ -71,8 +71,8 @@ class Auth
               $this->decoded = JWT::decode($credentials, new Key($this->keySecret, 'HS256'));  // decodificamos el token
               $this->status  = 'Auth';                                                         // status = Auth
               $this->code   = 200;                                                             // code = 200 (OK)
-           } 
-           catch (Exception $ex) 
+           }
+           catch (Exception $ex)
            {
              $this->code = 403;                                                 // Si hay exception pasamos el code de 400 a 403
              $this->message = $ex->getMessage();                                // recuperamos el error, para enviar por return
@@ -83,7 +83,7 @@ class Auth
             'status'  => $this->status,
             'code'    => $this->code ,
             'count'   => $this->count,
-        ]; 
+        ];
 
         if ($this->code === 200)                                               // si code = 200
         {
@@ -95,12 +95,12 @@ class Auth
             }
             $this->payload ['message'] = $result;                             // pasamos los datos al payload como array
         }
-        else 
-        { 
+        else
+        {
             $this->payload ['message'] = $this->message;                      // si es != 200, grabamos el mensaje de error como string
         }
        return $this->payload;                                                 // enviamos el payload.   
-    }  
+    }
 
     public function verifyUser(PDO $db,$prefix)                               // Verificamos el usuario de los datos recuperados del token.
     {

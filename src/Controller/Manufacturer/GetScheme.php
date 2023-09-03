@@ -2,8 +2,8 @@
 /** 
 * GetScheme.php
 * Description: category read structure and schemas.
-* @Author : M.V.M
-* @Version 1.0.0
+*  * @Author : M.V.M.
+* @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -23,7 +23,7 @@ final class GetScheme
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface{
-         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/Manufacturer.yaml'; 
+         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/Manufacturer.yaml';
          $viewData = [
              'spec' => json_encode(Yaml::parseFile($yamlFile)),
         ];

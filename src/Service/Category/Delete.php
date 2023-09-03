@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * Delete.php
   * Description: Service Category
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -21,9 +21,9 @@ use App\Service\BaseDelete;
 */
 final class Delete
 {
-  public function delete(Request $request, array $args, BaseParameters $parameters) 
+  public function delete(Request $request, array $args, BaseParameters $parameters)
   {
-     $body          = (array) $request->getParsedBody();                             
+     $body          = (array) $request->getParsedBody();
      $tableClass    = new Category($parameters->getPrefix(),$body);                 // (1) Modify in the new class the tableClass, if the class is copied 
      $erase         = new BaseDelete($tableClass,$parameters);
      $result        = (array) $erase->delete($args);

@@ -2,8 +2,8 @@
 /** 
   * GetAll.php
   * Description: menufacturer Services route path read all with token verification
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -21,6 +21,6 @@ final class GetAll extends Base
         if ($result['code'] === 200) {
             $result = $this->getManufacturerFindService()->getAll($request,  $this->baseParameters);
         }
-        return $this->jsonWithData($response, $this->getPayload($result)); 
+        return $this->jsonWithData($response, $this->getPayload($result));
     }
 }

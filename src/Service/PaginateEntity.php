@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * PaginateEntity.php
-  * Description: Principal object pagibnate entity class of all templates
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * Description: Principal object paginate entity class of all templates
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 

@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseUtils.php
   * Description: Principal object utils class of all templates
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -16,7 +16,7 @@ class BaseUtils {
         if (is_array($data)) {
            $keys = array_keys($data);
            $aks  = array();
-           foreach ($keys as $key) 
+           foreach ($keys as $key)
            {
               $aks[$key] = '`' . $key . '`';
            }
@@ -40,7 +40,7 @@ class BaseUtils {
         $countIteration = 0;
         $fields = '';
         $sql    = '';
-        foreach ($keys as $key) 
+        foreach ($keys as $key)
         {
            $countIteration = $countIteration + 1;
            if ($countPriKey > 0 && isset($primaryKey[$key]))
@@ -58,15 +58,15 @@ class BaseUtils {
            }
         }
         
-        if (!empty($fields)) 
+        if (!empty($fields))
         {
           $sql  = "UPDATE " . $table . " SET " . $fields ;
           $sql .= " WHERE " . '`' . $fieldId . '`' . " = :" . $fieldId ;
         }
         return $sql;
-    } 
+    }
 
-    // Monta en un string los valores del WHERE de las sentencia SELECT 
+    // Monta en un string los valores del WHERE de las sentencia SELECT
     public function buildingSqlWhere(array $inputs,string $fieldId)
     {
         $keys      = array_keys($inputs);
@@ -94,7 +94,7 @@ class BaseUtils {
       $fields = '';
       if (!empty($inputs)) {
          $keys  = array_keys($inputs);
-         foreach ($keys as $key) 
+         foreach ($keys as $key)
          { 
            if (!empty($fields)) {
               $fields .= ', ';
@@ -116,9 +116,9 @@ class BaseUtils {
        $countPriKey = count(array_keys($primaryKey));
        if ($count > 0) 
        {
-          foreach ($inputs as $key => $value) 
+          foreach ($inputs as $key => $value)
           {
-            if (!empty($key)) 
+            if (!empty($key))
             {
                if($key ===  $fieldId && $action === 'create') {
                   continue;
@@ -138,22 +138,22 @@ class BaseUtils {
    }
 
    // Monta el array params, con la key del nombre del campo y el valor input asociado para la PrimaryKey
-   public function buildingSqlPrimaryKey(array $PrimaryKey, array $inputs)
+   public function buildingSqlPrimaryKey(array $primaryKey, array $inputs)
    {
-      $count_pk    = count(array_keys($PrimaryKey));
+      $count_pk    = count(array_keys($primaryKey));
       $count_in    = count(array_keys($inputs));
 
       $params     = array();
-      if ($count_in > 0 && $count_pk > 0) 
+      if ($count_in > 0 && $count_pk > 0)
       {
-         foreach ($inputs as $key => $value) 
+         foreach ($inputs as $key => $value)
          {
-           if (!empty($key) && !empty($value)) 
+           if (!empty($key) && !empty($value))
            {
-              if (isset($PrimaryKey[$key]) && !empty($value))
+              if (isset($primaryKey[$key]) && !empty($value))
               {
                $params[$key] = trim($value);
-              } 
+              }
            }
          }
       }
@@ -162,21 +162,21 @@ class BaseUtils {
 
   // Compara si los valores de los campos de la clave primaria unica de la base de datos
   // son iguales a los valores de entrada en procesos como el UPDATE.
-  public function buildingCheckPrimaryKey(array  $dataKey, array $inputsKey)
+  public function buildingCheckPrimaryKey(array $dataKey, array $inputsKey)
    {
       $count_dk    = count(array_keys($dataKey));
       $count_in    = count(array_keys($inputsKey));
       $isEqual = true;
-      if ($count_in > 0 && $count_dk > 0) 
+      if ($count_in > 0 && $count_dk > 0)
       {
-         foreach ($dataKey as $key => $value) 
+         foreach ($dataKey as $key => $value)
          {
             if (isset($inputsKey[$key]) && trim($inputsKey[$key]) != trim($value))
             {
                $isEqual = false;
             }
          }
-      } 
+      }
    return $isEqual;
   }
   

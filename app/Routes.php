@@ -2,8 +2,8 @@
 /** 
   * Routes.php
   * Description: APP Routes
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -22,55 +22,59 @@ use App\Controller\Language;
 use App\Controller\Manufacturer;
 use App\Controller\User;
 use App\Controller\Geo_zone;
+use App\Controller\CategoryDescription;
+use App\Controller\Country;
+use App\Controller\Location;
+use App\Controller\Zone;
 
-return function (App $app) 
+return function (App $app)
 {
 
     $app->group('/opencard/api',function(Group $group)                                    // adaptar a la ruta del BackEnd
     {
-    
+
       $group->get('/', function (Request $request, Response $response)
         {
-            $result = ["hello" => 'Telepieza'];                                              
+            $result = ["hello" => 'Telepieza'];
             $response->getBody()->write((string)json_encode($result,JSON_PRETTY_PRINT));
             $response->withHeader('Content-Type', 'application/json');
             return $response;
         });
 
-        $group->group('/hello', function (Group $group) 
-        { 
+        $group->group('/hello', function (Group $group)
+        {
           $group->get('', Hello::class)->setName('hello');
           $group->get('/{name}', Hello::class)->setName('hello');
         });
 
-        $group->group('/home', function (Group $group) 
-        { 
+        $group->group('/home', function (Group $group)
+        {
             $group->get('',Home::class);
         });
 
-        $group->group('/helper', function (Group $group) 
-        { 
+        $group->group('/helper', function (Group $group)
+        {
            $group->get('',Helper::class);
         });
 
-        $group->group('/users', function (Group $group) 
-        { 
+        $group->group('/users', function (Group $group)
+        {
             $group->post('/login',User\GetLogin::class);
         });
         
-        $group->group('/category', function (Group $group) 
-        { 
+        $group->group('/category', function (Group $group)
+        {
            $group->get('/',Category\GetScheme::class);
            $group->get('/read',Category\GetAll::class);
            $group->get('/read/{category_id:[0-9]+}',Category\GetOne::class);
            $group->post('/new',Category\Create::class);
            $group->post('/delete/{category_id:[0-9]+}',Category\Delete::class);     // servidor (No admite put y delete -error 405)
            $group->post('/update/{category_id:[0-9]+}',Category\Update::class);     // servidor (No admite put y delete -error 405)
-           $group->put('/update/{category_id:[0-9]+}',Category\Update::class);      // servidor (admite put y delete) 
+           $group->put('/update/{category_id:[0-9]+}',Category\Update::class);      // servidor (admite put y delete)
            $group->delete('/delete/{category_id:[0-9]+}',Category\Delete::class);   // servidor (admite put y delete)
         });
 
-        $group->group('/language', function (Group $group) 
+        $group->group('/language', function (Group $group)
         {
           $group->get('/',Language\GetScheme::class);
           $group->get('/read',Language\GetAll::class);
@@ -78,11 +82,11 @@ return function (App $app)
           $group->post('/new',Language\Create::class);
           $group->post('/delete/{language_id:[0-9]+}',Language\Delete::class);       // servidor (No admite put y delete -error 405)
           $group->post('/update/{language_id:[0-9]+}',Language\Update::class);       // servidor (No admite put y delete -error 405)
-          $group->put('/update/{language_id:[0-9]+}',Language\Update::class);        // servidor (admite put y delete) 
-          $group->delete('/delete/{language_id:[0-9]+}',Language\Delete::class);     // servidor (admite put y delete) 
+          $group->put('/update/{language_id:[0-9]+}',Language\Update::class);        // servidor (admite put y delete)
+          $group->delete('/delete/{language_id:[0-9]+}',Language\Delete::class);     // servidor (admite put y delete)
         });
 
-        $group->group('/manufacturer', function (Group $group) 
+        $group->group('/manufacturer', function (Group $group)
         {
           $group->get('/',Manufacturer\GetScheme::class);
           $group->get('/read',Manufacturer\GetAll::class);
@@ -90,22 +94,69 @@ return function (App $app)
           $group->post('/new',Manufacturer\Create::class);
           $group->post('/delete/{manufacturer_id:[0-9]+}',Manufacturer\Delete::class);    // servidor (No admite put y delete -error 405)
           $group->post('/update/{manufacturer_id:[0-9]+}',Manufacturer\Update::class);    // servidor (No admite put y delete -error 405)
-          $group->put('/update/{manufacturer_id:[0-9]+}',Manufacturer\Update::class);     // servidor (admite put y delete) 
-          $group->delete('/delete/{manufacturer_id:[0-9]+}',Manufacturer\Delete::class);  // servidor (admite put y delete) 
+          $group->put('/update/{manufacturer_id:[0-9]+}',Manufacturer\Update::class);     // servidor (admite put y delete)
+          $group->delete('/delete/{manufacturer_id:[0-9]+}',Manufacturer\Delete::class);  // servidor (admite put y delete)
        });
 
-       $group->group('/geo_zone', function (Group $group) 
+       $group->group('/geo_zone', function (Group $group)
        {
          $group->get('/',Geo_zone\GetScheme::class);
          $group->get('/read',Geo_zone\GetAll::class);
          $group->get('/read/{geo_zone_id:[0-9]+}',Geo_zone\GetOne::class);
          $group->post('/new',geo_zone\Create::class);
-         $group->post('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);     
-         $group->post('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class); 
-         $group->put('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class);     // servidor (admite put y delete) 
-         $group->delete('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);  // servidor (admite put y delete)    
+         $group->post('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);
+         $group->post('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class);
+         $group->put('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class);     // servidor (admite put y delete)
+         $group->delete('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);  // servidor (admite put y delete)
       });
 
+      $group->group('/category_description', function (Group $group)
+      {
+        $group->get('/',CategoryDescription\GetScheme::class);
+        $group->get('/read',CategoryDescription\GetAll::class);
+        $group->get('/read/{category_id:[0-9]+}',CategoryDescription\GetOne::class);
+        $group->post('/new',category_description\Create::class);
+        $group->post('/delete/{category_id:[0-9]+}',CategoryDescription\Delete::class);
+        $group->post('/update/{category_id:[0-9]+}',CategoryDescription\Update::class);
+        $group->put('/update/{category_id:[0-9]+}',CategoryDescription\Update::class);     // servidor (admite put y delete)
+        $group->delete('/delete/{category_id:[0-9]+}',CategoryDescription\Delete::class);  // servidor (admite put y delete)
+     });
+
+     $group->group('/country', function (Group $group)
+     {
+       $group->get('/',Country\GetScheme::class);
+       $group->get('/read',Country\GetAll::class);
+       $group->get('/read/{country_id:[0-9]+}',Country\GetOne::class);
+       $group->post('/new',Country\Create::class);
+       $group->post('/delete/{country_id:[0-9]+}',Country\Delete::class);
+       $group->post('/update/{country_id:[0-9]+}',Country\Update::class);
+       $group->put('/update/{country_id:[0-9]+}',Country\Update::class);     // servidor (admite put y delete)
+       $group->delete('/delete/{country_id:[0-9]+}',Country\Delete::class);  // servidor (admite put y delete)
+    });
+
+    $group->group('/location', function (Group $group)
+    {
+      $group->get('/',Location\GetScheme::class);
+      $group->get('/read',Location\GetAll::class);
+      $group->get('/read/{location_id:[0-9]+}',Location\GetOne::class);
+      $group->post('/new',Location\Create::class);
+      $group->post('/delete/{location_id:[0-9]+}',Location\Delete::class);
+      $group->post('/update/{location_id:[0-9]+}',Location\Update::class);
+      $group->put('/update/{location_id:[0-9]+}',Location\Update::class);     // servidor (admite put y delete)
+      $group->delete('/delete/{location_id:[0-9]+}',Location\Delete::class);  // servidor (admite put y delete)
+   });
+
+   $group->group('/zone', function (Group $group)
+   {
+     $group->get('/',Zone\GetScheme::class);
+     $group->get('/read',Zone\GetAll::class);
+     $group->get('/read/{zone_id:[0-9]+}',Zone\GetOne::class);
+     $group->post('/new',Zone\Create::class);
+     $group->post('/delete/{zone_id:[0-9]+}',Zone\Delete::class);
+     $group->post('/update/{zone_id:[0-9]+}',Zone\Update::class);
+     $group->put('/update/{zone_id:[0-9]+}',Zone\Update::class);     // servidor (admite put y delete)
+     $group->delete('/delete/{zone_id:[0-9]+}',Zone\Delete::class);  // servidor (admite put y delete)
+  });
 
 
     });

@@ -2,7 +2,7 @@
 /** 
   * Dependencies.php
   * Description: Container PDO
-  * @Author : M.V.M
+  * @Author : M.V.M.
   * @Version 1.0.0
 **/
 declare(strict_types=1);

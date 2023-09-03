@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * BaseFind.php
   * Description: Principal object update class of all templates
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -20,45 +20,42 @@ use PDOException;
     ROUTE : $group->post('/{$this->tableClass->toTable()}/update/{id}','App\Controller\{$this->tableClass->toTable()}\Update:update');
 */
 
-final class BaseUpdate extends BaseRepository 
+final class BaseUpdate extends BaseRepository
 {
   protected object $tableClass;
   protected BaseParameters $parameters;
 
-  public function __construct(object $tableClass, BaseParameters $parameters)   
+  public function __construct(object $tableClass, BaseParameters $parameters)
  {
-      $this->tableClass   = $tableClass;  
+      $this->tableClass   = $tableClass;
       $this->parameters  = $parameters;
  }
 
-  public function update(array $body,array $args) 
+  public function update(array $body,array $args)
   {
-       
        $status        = 'error';                                                       // status (Nombre de la tabla, error o info)
        $isUpdate      = false;                                                         // Booleano. Nos indica si podemos realizar el UPDATE.
        $code          = 404;                                                           // El status de control, se inicia con el valor 404.
        $count         = 0;                                                             // count default 0
        $data          = array();                                                       // data default array null
-       $id = isset($args[$this->tableClass->getFieldsId()]) ? (int) $args[$this->tableClass->getFieldsId()] : 0;    // Recuperar el id desde $args
        $limit         = 0;
        $offset        = 0;
        $countKey      = 0;
        $paramKey      = null;
        $message       = '';
-       $noPrimaryKey = "NoPrimaryKey";  
+       $params        = array();
+       $noPrimaryKey = "NoPrimaryKey";
 
-       if ( $id > 0 && is_numeric($id))                                                // Controlar si el id es mayor a 0 y numerico
+       $id = isset($args[$this->tableClass->getFieldsId()]) ? (int) $args[$this->tableClass->getFieldsId()] : 0; // Recuperar el id desde $args
+       if ( $id > 0 && is_numeric($id))                                                 // Controlar si el id es mayor a 0 y numerico
        {
-            $params    = array();                                                      // Iniciamos $params (parametros del sql)
-            $fields    = (array)$this->tableClass->toMapfields();                      // Asignar las campos de la tabla a visualizar
-            $paramId   = [$this->tableClass->getFieldsId() => $id];                    // Asignar a parametros, el valor del id de la entrada
-            $result    = (array) $this->query($this->parameters->getDb(), $this->tableClass->toTable(), $this->tableClass->getFieldsId(),
-                                              $this->tableClass->toSortOrder(), $fields, $paramId, $limit, $offset);  
+            $params=[$this->tableClass->getFieldsId() => $id];                          // Asignar a parametros de id el valor id de entrada
+            $result  = (array) $this->query($this->parameters->getDb(), $this->tableClass, $params,(int) $limit, (int) $offset);  // Leemos base de datos
             $this->toDebugger($this->parameters->getLogger(),'query', $this->query);                          // Si debug = true, graba el query en el logger
             if ($result['status'] != 'error')
             {                                                                          // Si hay error, no genera el logger, lo genera la clase principal
               $this->toDebugger($this->parameters->getLogger(),'result', $result);     // Si debug = true, graba los resultados en el logger
-            }     
+            }
             if ($result['code'] == 200 &&  $result['count'] > 0)                       // Si existe el registro con el select query, recuperamos los datos de la DB.
             {
                 $data   = (array) $result['message'][0];                               // El primer registro de la matriz
@@ -92,29 +89,29 @@ final class BaseUpdate extends BaseRepository
                         $isUpdate = true;                                                       // Indicamos que se puede realizar el UPDATE
                       }
                     }
-                }  
+                }
                 else                                                                            // La tabla no tiene clave primaria (PrimaryKey Unique).
                 {
                     $isUpdate = true;                                                           // Indicamos que se puede realizar el UPDATE
-                } 
+                }
 
                 if ($isUpdate)                                                         // Se procede al UPDATE                                                      
-                {   
+                {
                     $sql  = $baseUtils->buildingSqlUpdate($inputs, $this->tableClass->toTable(),$this->tableClass->getFieldsId(), $primaryKey );    // Montar la sentencia UPDATE
-                    if (!empty($sql)) 
+                    if (!empty($sql))
                     {
-                        $params = (array) $baseUtils->buildingSqlParams($inputs, $this->tableClass->toTextUpdate(),$this->tableClass->getFieldsId(), $primaryKey ); 
+                        $params = (array) $baseUtils->buildingSqlParams($inputs, $this->tableClass->toTextUpdate(),$this->tableClass->getFieldsId(), $primaryKey );
                         $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
                         $this->toDebugger($this->parameters->getLogger(), '',$msgDebug);                       // Si debug = true, graba el sql y parametros en el logger
                         $stmt = $this->parameters->getDb()->prepare($sql);                                    // PDO: Preparamos la sentencia query y la enviamos.
-                        try 
+                        try
                         {
                            $stmt ->execute($params);                                                    // PDO: Ejecutamos  el Update con sus parametros.
                            $code    = 200;
                            $status  = 'Info';
                            $message = "The data has been updated in the {$this->tableClass->toTableName()} database";
-                        } 
-                        catch(PDOException $e) 
+                        }
+                        catch(PDOException $e)
                         {
                           $code    = 500;
                           $message = $e->getMessage();
@@ -122,26 +119,26 @@ final class BaseUpdate extends BaseRepository
                     }
                     else
                    {
-                       $message = "Invalid json structure."; 
+                       $message = "Invalid json structure.";
                    }
                 }
                 else
                 {
                   $value = str_replace('"','',json_encode($paramKey,JSON_PARTIAL_OUTPUT_ON_ERROR ));
-                  $message = "A {$this->tableClass->toTableName()} with {$this->tableClass->getFieldsId()} . {$args[$this->tableClass->getFieldsId()]} .'} and $value is not correct."; 
+                  $message = "A {$this->tableClass->toTableName()} with {$this->tableClass->getFieldsId()} . {$args[$this->tableClass->getFieldsId()]} .'} and $value is not correct.";
                 }
             }
-        }  
+        }
 
-        if ($code == 404) 
+        if ($code == 404)
         {
-            if (empty($message)) 
+            if (empty($message))
             {
               $message = "A {$this->tableClass->toTableName()} with {$this->tableClass->getFieldsId()} {' . {$args[$this->tableClass->getFieldsId()]} . '} is not correct.";
             }
         }
 
-        return  
+        return
            ['status'  => $status,
             'code'    => $code,
             'count'   => $count,
@@ -149,8 +146,8 @@ final class BaseUpdate extends BaseRepository
            ];
   }
 // Si el debug = true, se grabara la información en el logger
-  private function toDebugger(LoggerInterface $logger, $action, $message) 
-  {     
+  private function toDebugger(LoggerInterface $logger, $action, $message)
+  {
     if ($this->parameters->getDebug()) {
           $msg = $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
           $logger->debug($msg);

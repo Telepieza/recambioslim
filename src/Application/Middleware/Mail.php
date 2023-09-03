@@ -2,7 +2,7 @@
  /** 
   * Home.php
   * Description: working on the page
-  * @Author : M.V.M
+  * @Author : M.V.M.
   * @Version 1.0.0
 **/
 // Import PHPMailer classes into the global namespace

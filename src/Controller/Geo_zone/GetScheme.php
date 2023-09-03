@@ -1,5 +1,10 @@
 <?php
-
+/**
+* GetScheme.php
+* Description: Geo_zone read structure and schemas.
+*  * @Author : M.V.M.
+* @Version: 1.0.5
+*/
 declare(strict_types=1);
 
 namespace App\Controller\Geo_zone;
@@ -18,7 +23,7 @@ final class GetScheme
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface{
-         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/Geo_zone.yaml'; 
+         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/Geo_zone.yaml';
          $viewData = [
              'spec' => json_encode(Yaml::parseFile($yamlFile)),
         ];

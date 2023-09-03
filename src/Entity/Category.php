@@ -1,9 +1,9 @@
-<?php 
-/** 
+<?php
+/**
   * Category.php
   * Description: category template
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -16,18 +16,19 @@ final class Category extends BaseValidate
 
     private $prefix     = "oc_";
     private $tablename  = "category";
-    private $fieldid    = 'category_id';                
+    private $fieldid    = 'category_id';
     private $field00    = 'NoPrimaryKey';
-    private $field01    = 'image';             
-    private $field02    = 'parent_id';         
-    private $field03    = 'top';          
-    private $field04    = 'column';  
-    private $field05    = 'sort_order';   
-    private $field06    = 'status';   
-    private $field07    = 'date_added'; 
-    private $field08    = 'date_modified';             
+    private $field01    = 'image';
+    private $field02    = 'parent_id';
+    private $field03    = 'top';
+    private $field04    = 'column';
+    private $field05    = 'sort_order';
+    private $field06    = 'status';
+    private $field07    = 'date_added';
+    private $field08    = 'date_modified';
 
-    private int $id;                          // id
+    private bool   $isAutoIncrement = true;   // index id auto_increment
+    private int    $id;                       // id
     private string $value01;                  // field01 (image)
     private int    $value02;                  // field02 (parent_id)
     private int    $value03;                  // field03 (top)
@@ -39,20 +40,20 @@ final class Category extends BaseValidate
 
     public function __construct(string $prefix, array $inputs)
     {
-        if (!is_null($prefix) && !empty($prefix)) 
-        { 
-            $this->prefix = $prefix; 
+        if (!is_null($prefix) && !empty($prefix))
+        {
+            $this->prefix = $prefix;
         }
 
-        $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );  
-        $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '');  
-        $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0); 
-        $this->setvalue03(isset($inputs[$this->field03]) ? $inputs[$this->field03] : 0  );  
-        $this->setvalue04(isset($inputs[$this->field04]) ? $inputs[$this->field04] : 0  );  
-        $this->setvalue05(isset($inputs[$this->field05]) ? $inputs[$this->field05] : 0  );  
-        $this->setvalue06(isset($inputs[$this->field06]) ? $inputs[$this->field06] : 0  );  
-        $this->setvalue07(isset($inputs[$this->field07]) ? null : new DateTimeImmutable('now')); 
-        $this->setvalue08(isset($inputs[$this->field08]) ? null : new DateTimeImmutable('now')); 
+        $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
+        $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
+        $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0  );
+        $this->setvalue03(isset($inputs[$this->field03]) ? $inputs[$this->field03] : 0  );
+        $this->setvalue04(isset($inputs[$this->field04]) ? $inputs[$this->field04] : 0  );
+        $this->setvalue05(isset($inputs[$this->field05]) ? $inputs[$this->field05] : 0  );
+        $this->setvalue06(isset($inputs[$this->field06]) ? $inputs[$this->field06] : 0  );
+        $this->setvalue07(isset($inputs[$this->field07]) ? null : new DateTimeImmutable('now'));
+        $this->setvalue08(isset($inputs[$this->field08]) ? null : new DateTimeImmutable('now'));
     }
 
     public function jsonSerialize(string $action):array
@@ -61,7 +62,7 @@ final class Category extends BaseValidate
        if ($action != $this->toTextCreate()) {
           $arr[$this->fieldid] = $this->getid();
       }
-       if (trim($this->getvalue01()))  { $arr[$this->field01] = $this->getvalue01()  ; }  // string  
+       if (trim($this->getvalue01()))  { $arr[$this->field01] = $this->getvalue01()  ; }  // string
        $arr[$this->field02] = $this->getvalue02(); // integer
        $arr[$this->field03] = $this->getvalue03(); // integer
        $arr[$this->field04] = $this->getvalue04(); // integer
@@ -83,23 +84,33 @@ final class Category extends BaseValidate
         return $this->tablename;
     }
 
-    public function getFieldsId(): string 
+    public function getFieldsId(): string
     {
         return $this->fieldid;
     }
 
-    public function toPrimaryKey(): ?array 
+    public function isKeyAutoIncrement(): bool
+    {
+        return $this->isAutoIncrement;
+    }
+
+    public function toPrimaryKey(): ?array
     {
         $arr[$this->field00] = $this->field00;
         return $arr;
     }
 
-    public function toSortOrder(): string 
+    public function toSecundaryKey(): ?array
     {
-        return $this->fieldid;
+        return null;
     }
 
-    public function toMapfields(): array 
+    public function toSortOrder(): string
+    {
+        return $this->field05;
+    }
+
+    public function toMapfields(): array
     {
         $arr[$this->fieldid] = $this->fieldid;
         $arr[$this->field01] = $this->field01;
@@ -120,42 +131,42 @@ final class Category extends BaseValidate
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
             $results[$this->fieldid] = $this->getid();
-        } 
+        }
 
         if (isset($results[$this->field01])) {
            $this->setvalue01($this->validateString($results[$this->field01]));
            $results[$this->field01] = $this->getvalue01();
-        } 
+        }
        
         if (isset($results[$this->field02]))
         {
            $this->setvalue02($this->validateInteger($results[$this->field02]));
            $results[$this->field02] = $this->getvalue02();
-        } 
+        }
 
         if (isset($results[$this->field03]))
         {
            $this->setvalue03($this->validateInteger($results[$this->field03]));
            $results[$this->field03] = $this->getvalue03();
-        } 
+        }
 
         if (isset($results[$this->field04]))
         {
            $this->setvalue04($this->validateInteger($results[$this->field04]));
            $results[$this->field04] = $this->getvalue04();
-        } 
+        }
 
         if (isset($results[$this->field05]))
         {
            $this->setvalue05($this->validateInteger($results[$this->field05]));
            $results[$this->field05] = $this->getvalue05();
-        } 
+        }
 
         if (isset($results[$this->field06]))
         {
            $this->setvalue06($this->validateInteger($results[$this->field06]));
            $results[$this->field06] = $this->getvalue06();
-        } 
+        }
 
         if ($action === 'create') {
            if (isset($results[$this->field07])) 
@@ -164,29 +175,29 @@ final class Category extends BaseValidate
                if ($value instanceof DateTimeImmutable || is_null($value)) {
                   $this->setvalue07($this->validateDateTimeImmutable($value));
                   $value = $this->getvalue07()->format('Y-m-d H:i:s');
-               } 
-               else 
+               }
+               else
                {
                    $value = $results[$this->field07];
                }
                $results[$this->field07] = $value;
             }
-        } 
+        }
 
         if ($action === 'update') {
-          if (isset($results[$this->field08])) 
+          if (isset($results[$this->field08]))
           {
               $value = $results[$this->field08];
               if ($value instanceof DateTimeImmutable || is_null($value)) {
                  $this->setvalue08($this->validateDateTimeImmutable($value));
                  $value = $this->getvalue08()->format('Y-m-d H:i:s');
-              } 
-              else 
+              }
+              else
               {
                   $value = $results[$this->field08];
               }
               $results[$this->field08] = $value;
-           } 
+           }
         }
         return $results;
     }
@@ -196,7 +207,7 @@ final class Category extends BaseValidate
         return $this->id;
     }
 
-    public function setid($id):self 
+    public function setid($id):self
     {
         $this->id = $id;
         return $this;
@@ -225,14 +236,13 @@ final class Category extends BaseValidate
     }
 
     public function getvalue03(): int
-    {    
+    {
             return $this->value03;
     }
 
-
     public function setvalue03( $value03): self
     {
-        $this->value03 = $value03; 
+        $this->value03 = $value03;
         return $this;
     }
 
@@ -270,25 +280,25 @@ final class Category extends BaseValidate
     }
 
     public function getvalue07(): ?DateTimeImmutable
-    {    
+    {
             return $this->value07;
     }
 
     public function setvalue07( $value07): self
     {
-        $this->value07 = $value07; 
+        $this->value07 = $value07;
         return $this;
     }
 
 
     public function getvalue08(): ?DateTimeImmutable
-    {    
-            return $this->value08;
+    {
+           return $this->value08;
     }
 
     public function setvalue08( $value08): self
     {
-        $this->value08 = $value08; 
+        $this->value08 = $value08;
         return $this;
     }
 

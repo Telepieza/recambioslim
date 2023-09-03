@@ -2,8 +2,8 @@
  /** 
   * Base.php
   * Description: Controller and router service manufacturer
-  * @Author : M.V.M
-  * @Version 1.0.0
+  * @Author : M.V.M.
+  * @Version: 1.0.5
 **/
 declare(strict_types=1);
 
@@ -18,7 +18,7 @@ use App\Service\Manufacturer\Update;
 abstract class Base extends BaseController
 {
 
-    protected function getManufacturerTable() : string 
+    protected function getManufacturerTable() : string
     {
         $tableName  = 'manufacturer';
         return $tableName;
