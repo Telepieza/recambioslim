@@ -1,4 +1,7 @@
 
+## 1.0.6 (2023-09-05)
+
+ * New location templete is included in BackEnd and FrontEnd.
 ## 1.0.5 (2023-09-04)
 
   * New procedures and functionalities in the backend.

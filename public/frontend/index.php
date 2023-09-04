@@ -77,7 +77,10 @@ include $ruteTheme.'navbar.php';
                     <td><a target="new" href="zone/index.php">FrontEnd zone table</a></td>
                     <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
-
+                  <tr class="table-light">
+                    <td><a target="new" href="location/index.php">FrontEnd location table</a></td>
+                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
