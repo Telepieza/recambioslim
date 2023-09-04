@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * index.php
   * Description: Homepage or index
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.6
 **/
 
 if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
@@ -25,7 +25,7 @@ include $ruteTheme.'navbar.php';
   <main class="container-fluid">
     <div class="section_item container">
         <div class="d-lg-flex align-items-center mt-4">
-					<a href="index.php"><img src="images/company_98x82.png" alt="" width="98" height="82"></a>
+          <a href="index.php"><img src="<?php echo $urlTemplate ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
           <h1 class="text-light"><?php echo $company ; ?> Recambios - Test endpoints</h1>
         </div>
         <hr>
