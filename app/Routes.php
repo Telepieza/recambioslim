@@ -26,6 +26,9 @@ use App\Controller\CategoryDescription;
 use App\Controller\Country;
 use App\Controller\Location;
 use App\Controller\Zone;
+use App\Controller\Tax_class;
+use App\Controller\Tax_rate;
+use App\Controller\Tax_rule;
 
 return function (App $app)
 {
@@ -156,6 +159,42 @@ return function (App $app)
      $group->post('/update/{zone_id:[0-9]+}',Zone\Update::class);
      $group->put('/update/{zone_id:[0-9]+}',Zone\Update::class);     // servidor (admite put y delete)
      $group->delete('/delete/{zone_id:[0-9]+}',Zone\Delete::class);  // servidor (admite put y delete)
+  });
+
+  $group->group('/tax_class', function (Group $group)
+   {
+     $group->get('/',tax_class\GetScheme::class);
+     $group->get('/read',tax_class\GetAll::class);
+     $group->get('/read/{tax_class_id:[0-9]+}',tax_class\GetOne::class);
+     $group->post('/new',tax_class\Create::class);
+     $group->post('/delete/{tax_class_id:[0-9]+}',tax_class\Delete::class);
+     $group->post('/update/{tax_class_id:[0-9]+}',tax_class\Update::class);
+     $group->put('/update/{tax_class_id:[0-9]+}',tax_class\Update::class);     // servidor (admite put y delete)
+     $group->delete('/delete/{tax_class_id:[0-9]+}',tax_class\Delete::class);  // servidor (admite put y delete)
+  });
+
+  $group->group('/tax_rate', function (Group $group)
+   {
+     $group->get('/',tax_rate\GetScheme::class);
+     $group->get('/read',tax_rate\GetAll::class);
+     $group->get('/read/{tax_rate_id:[0-9]+}',tax_rate\GetOne::class);
+     $group->post('/new',tax_rate\Create::class);
+     $group->post('/delete/{tax_rate_id:[0-9]+}',tax_rate\Delete::class);
+     $group->post('/update/{tax_rate_id:[0-9]+}',tax_rate\Update::class);
+     $group->put('/update/{tax_rate_id:[0-9]+}',tax_rate\Update::class);     // servidor (admite put y delete)
+     $group->delete('/delete/{tax_rate_id:[0-9]+}',tax_rate\Delete::class);  // servidor (admite put y delete)
+  });
+
+  $group->group('/tax_rule', function (Group $group)
+   {
+     $group->get('/',tax_rule\GetScheme::class);
+     $group->get('/read',tax_rule\GetAll::class);
+     $group->get('/read/{tax_rule_id:[0-9]+}',tax_rule\GetOne::class);
+     $group->post('/new',tax_rule\Create::class);
+     $group->post('/delete/{tax_rule_id:[0-9]+}',tax_rule\Delete::class);
+     $group->post('/update/{tax_rule_id:[0-9]+}',tax_rule\Update::class);
+     $group->put('/update/{tax_rule_id:[0-9]+}',tax_rule\Update::class);     // servidor (admite put y delete)
+     $group->delete('/delete/{tax_rule_id:[0-9]+}',tax_rule\Delete::class);  // servidor (admite put y delete)
   });
 
 

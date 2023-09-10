@@ -1,7 +1,13 @@
+## 1.0.7 (2023-09-10)
+
+ * New tax-class template in included in BackEnd and FrontEnd.
+ * New tax-rate  template in included in backEnd and FrontEnd.
+ * New tax-rule  template in included in BackEnd and FrontEnd.
 
 ## 1.0.6 (2023-09-05)
 
- * New location templete is included in BackEnd and FrontEnd.
+ * New location template is included in BackEnd and FrontEnd.
+  
 ## 1.0.5 (2023-09-04)
 
   * New procedures and functionalities in the backend.
@@ -13,12 +19,12 @@
 
 ## 1.0.4 (2023-08-30)
 
-  * New zone templete is included in BackEnd and FrontEnd.
+  * New zone template is included in BackEnd and FrontEnd.
 
 ## 1.0.3 (2023-08-29)
 
-  * New country  templete is included in BackEnd and FrontEnd.
-  * New language templete is included in BackEnd and FrontEnd.
+  * New country  template is included in BackEnd and FrontEnd.
+  * New language template is included in BackEnd and FrontEnd.
 
 ## 1.0.2 (2023-08-27)
 

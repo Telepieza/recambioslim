@@ -1,0 +1,557 @@
+openapi: 3.0.2
+servers:
+  - url: https://telepieza.com/recambios
+    description:  [Telepieza Recambios](https://telepieza.com/recambios) Production server using Opencart.
+    
+  - url: https://recambioslim.com/recambios
+    description: My localhost server using PHP built-in web server.
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+info:
+  version: "1.0.0"
+  title: API Recambios Opencart
+  description:  |-
+    API Recambios Opencart [https://telepieza.com/recambios/](https://telepieza.com/recambios/).
+  contact: 
+    email: telepieza@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+- name: tax_rate
+  description: Manage tax_rate.
+  externalDocs:
+      description: Find out more about our store
+      url: 'https://telepieza.com/recambios'
+
+paths:
+  /api/tax_rate/read:
+    get:
+      tags:
+      - tax_rate
+      summary: Get All categories
+      operationId: GetAll
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: limit
+        in: query
+        description: How many rows to return at one time (max 100)
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 20
+      - name: offset
+        in: query
+        description: Gives the rows from the given position+1
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetAll'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/InvalidStatus'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+          
+  /api/tax_rate/read/{tax_rate_id}:
+    get:
+      tags:
+        - tax_rate
+      summary: Get One tax_rate by ID
+      operationId: GetOne
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: tax_rate_id
+        in: path
+        description: ID of tax_rate to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOne'
+        '400':
+          $ref: '#/components/responses/InvalidID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/tax_rate/new:
+    post:
+      tags:
+        - tax_rate
+      summary: Add a new tax_rate
+      description: Register a new tax_rate.
+      operationId: Create
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+              
+      responses:
+        '201':
+            $ref: '#/components/responses/CreateID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/NotCreate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tax_rate'
+        required: true
+         
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/tax_rate/update/{tax_rate_id}:
+    post:
+      tags:
+        - tax_rate
+      summary: Update an existing tax_rate
+      description: Update an existing tax_rate by tax_rate_id.
+      operationId: Update
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: tax_rate_id
+        in: path
+        description: ID of tax_rate to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotUpdate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Update an existent tax_rate in the table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tax_rate'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+
+  /api/tax_rate/delete/{tax_rate_id}:
+    post:
+      tags:
+        - tax_rate
+      summary: Delete tax_rate
+      description: Delete a tax_rate.
+      operationId: Deletetax_rate
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: tax_rate_id
+        in: path
+        description: tax_rate_id of tax_rate to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '202':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/InvalidID'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+ 
+components:
+
+  schemas:
+  
+    GetAll:
+      title: GetHelp
+      properties:
+        status: 
+          type: integer
+          format: int32
+          example : 200
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        tax_rate:
+          type: array
+          xml:
+            wrapped: true
+          items:
+             $ref: '#/components/schemas/tax_rate'
+    
+    GetOne:
+      title: GetOne
+      properties:
+        status:
+          type: integer
+          format: int200
+          example: 200
+        tax_rate:
+          $ref: '#/components/schemas/tax_rate'
+          
+    tax_rate:
+       title: tax_rate
+       type: object
+       properties:
+        tax_rate_id:
+          type: integer
+          format: int64
+          example: 9
+        geo_zone_id:
+          type: integer
+          format: int64
+          example: 2
+        name:
+          type: string
+          example: VAT EU
+        rate:
+          type: integer
+          format: double
+          example: 21.00
+        type:
+          type: string
+          example: P
+        date_added: 
+          type : string
+          format: date-time
+          example: 2023-08-01 12:42:14
+        date_modified: 
+          type : string
+          format: date-time
+          example: 2023-08-05 15:42:10
+        
+       required:
+         - tax_rate_id
+         - geo_zone_id
+         - name
+         - type
+         
+       example:
+          tax_rate_id: 3
+          geo_zone_id: 2
+          name: VAT EU
+          rate: 21.15
+          type: P
+          date_added: "2023-08-01 12:42:14"
+          date_modified: "2023-08-05 15:42:10"
+ 
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int64
+          example: 1
+        limit: 
+          type: integer
+          format: int32
+          example: 20
+        offset: 
+          type: integer
+          format: int32
+          example: 0
+        countRows:
+          type: integer
+          format: int64
+          example: 27
+        totalLimit: 
+          type: integer
+          format: int64
+          example: 1
+      required:
+          - currentPage
+          - limit
+          - offset
+          - countRows
+          - totalLimit
+      example:
+        currentPage: 1
+        limit: 20
+        offset: 0
+        countRows: 27
+        totalLimit: 1
+  
+    Token:
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ945rtyRTWTQYW
+      required:
+        - token_type
+        - access_token
+      example:
+        token_type: Bearer
+        access_token: '{{jwt}}'
+          
+    Status_200:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 200
+        info: successful operation
+
+    Status_201:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 201
+        info: The data has been created in the database with ID
+
+    Status_400:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 400
+        error: Invalid ID supplied
+
+    Status_401:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 401
+        error:  Access token is missing or invalid
+
+    Status_403:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 403
+        error:  Token invalid or Token required or Expired Token
+
+    Status_404:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 404
+        error:  Information not found
+  
+    Status_500:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 500
+        error: Problems connecting to the database
+
+  responses:
+  
+    Successful:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_200'
+  
+    NotFound:
+      description: Information not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+    
+    CreateID:
+      description: The data has been created in the database with ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_201'
+
+    NotCreate:
+      description: There has been an error creating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    NotUpdate:
+      description: There has been an error updating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_401'
+
+    ExpiredToken:
+      description: Token invalid or Token required or Expired Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_403'
+    
+    InvalidID:
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_400'        
+     
+    InvalidStatus:
+      description: Invalid status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'           
+
+    ErrorInDataBase:
+      description: Problems connecting to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_500' 
+ 
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

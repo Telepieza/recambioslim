@@ -15,6 +15,9 @@ use App\Service\CategoryDescription;
 use App\Service\Country;
 use App\Service\Location;
 use App\Service\Zone;
+use App\Service\Tax_class;
+use App\Service\Tax_rate;
+use App\Service\Tax_rule;
 
 use App\Service\User;
 
@@ -63,6 +66,21 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Zone_create_service'] = static fn (): Zone\Create=>new Zone\Create();
   $container['Zone_update_service'] = static fn (): Zone\Update=>new Zone\Update();
   $container['Zone_delete_service'] = static fn (): Zone\Delete=>new Zone\Delete();
+  // Tax_class
+  $container['Tax_class_find_service']   = static fn (): Tax_class\Find  =>new Tax_class\Find();
+  $container['Tax_class_create_service'] = static fn (): Tax_class\Create=>new Tax_class\Create();
+  $container['Tax_class_update_service'] = static fn (): Tax_class\Update=>new Tax_class\Update();
+  $container['Tax_class_delete_service'] = static fn (): Tax_class\Delete=>new Tax_class\Delete();
+  //Tax_rate
+  $container['Tax_rate_find_service']   = static fn (): Tax_rate\Find  =>new Tax_rate\Find();
+  $container['Tax_rate_create_service'] = static fn (): Tax_rate\Create=>new Tax_rate\Create();
+  $container['Tax_rate_update_service'] = static fn (): Tax_rate\Update=>new Tax_rate\Update();
+  $container['Tax_rate_delete_service'] = static fn (): Tax_rate\Delete=>new Tax_rate\Delete();
+  // Tax_rule
+  $container['Tax_rule_find_service']   = static fn (): Tax_rule\Find  =>new Tax_rule\Find();
+  $container['Tax_rule_create_service'] = static fn (): Tax_rule\Create=>new Tax_rule\Create();
+  $container['Tax_rule_update_service'] = static fn (): Tax_rule\Update=>new Tax_rule\Update();
+  $container['Tax_rule_delete_service'] = static fn (): Tax_rule\Delete=>new Tax_rule\Delete();
 
   // User
   // $container['user_find_service'] = static fn (): User\Find=>new User\Find();

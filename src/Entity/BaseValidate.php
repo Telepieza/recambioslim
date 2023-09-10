@@ -3,7 +3,7 @@
   * BaseValidate.php
   * Description: validates the fields by their format (String, Integer, Boolean, DateTime)
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.7
 **/
 declare(strict_types=1);
 
@@ -62,6 +62,24 @@ class BaseValidate {
          $result = 0;
        } else {
         $result = (int) $value;
+       }
+       return $result;
+    }
+    
+    public function validateFloat($value)
+    {
+       if (empty($value) || is_null($value)) {
+          $value = 0;
+       } else {
+         if (is_string($value)) {
+           $value = trim(str_replace("\"", '', $value));
+           $value = trim(str_replace("'" , '', $value));
+         }
+       }
+       if (is_numeric($value) || is_integer($value) || is_float($value) ) {
+        $result = (float) $value;
+       } else {
+        $result = 0;
        }
        return $result;
     }
