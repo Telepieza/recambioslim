@@ -3,7 +3,7 @@
   * geo_zoneForm.php
   * Description: Desktop geo_zone form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.8
   * ------------------- fields ------------------------------
   *  getfieldid() (int)    geo_zone_id
   *  getfield01() (string) name
@@ -17,22 +17,13 @@
   (string) $endpoint   = 'api/geo_zone';  // geo_zone
   (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
   (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-  (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+  (string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
   (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
  
-  include_once $rutaEntity.'geo_zone.php';        // geo_zone
+  include_once $ruteEntity.'geo_zone.php';        // geo_zone
  
-  include_once $ruteInc.'function.php';
-  include_once $ruteInc.'setting.php';
-  include_once $ruteInc.'getAction.php';
-  include_once $ruteInc.'create.php';
-  include_once $ruteInc.'update.php';
-  include_once $ruteInc.'delete.php';
-  include_once $ruteInc.'readId.php';
-  include_once $ruteInc.'action.php';
- 
-  include_once $ruteTheme.'header.php';
-  include_once $ruteTheme.'navbar.php';
+  $core = "readId";
+  include_once $ruteInc.'core.php';
 
 ?>
    <body>

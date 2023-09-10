@@ -3,7 +3,7 @@
   * manufacturerRead.php
   * Description: Read all language with datatable
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.8
   * ------------------- fields ------------------------------
   *  getfieldid() (int)     manufacturer_id
   *  getfield01() (string)  name
@@ -16,32 +16,23 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 (string) $endpoint   = 'api/manufacturer';  // endpoint manufacturer
 (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
 (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-(string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+(string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
 (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
-include_once $rutaEntity.'manufacturer.php';      //template manufacturer
+include_once $ruteEntity.'manufacturer.php';      //template manufacturer
 
-include_once $ruteInc.'function.php';
-include_once $ruteInc.'setting.php';
+$core = "";
+include $ruteInc.'core.php';
 
 $pageParent  = 'manufacturerRead.php';       // read all
 if ($isMobile) {
   $pageCreate = 'manufacturerFormMovil.php'; // read id Mobile
- } else { 
+ } else {
   $pageCreate = 'manufacturerForm.php';      // read id Desktop
 }
 
-$urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/
-$pageAction  = $urlParent . $pageCreate . $actionReadId ; // https://www.telepieza.com/recambios/frontend/manufacturerRead.php?action=Read&id=
-$pageCreate .= $actionCreate;                             // manufacturerForm.php?action=create
-$urlParent  .= $pageParent ;                              // https://www.telepieza.com/recambios/frontend/manufacturerRead.php
-
-include_once $ruteInc.'getAction.php';
-include_once $ruteInc.'readAll.php';
-include_once $ruteInc.'action.php';
-
-include_once $ruteTheme.'header.php';
-include_once $ruteTheme.'navbar.php';
+$core = "readAll";
+include $ruteInc.'core.php';
 
 ?>
 

@@ -1,3 +1,7 @@
+## 1.0.8 (2023-09-11)
+
+ * core.php is created in /adm/inc folder to place all the include_one in the FrontEnd templates.
+
 ## 1.0.7 (2023-09-10)
 
  * New tax-class template in included in BackEnd and FrontEnd.

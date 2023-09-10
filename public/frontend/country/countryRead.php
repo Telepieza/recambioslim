@@ -3,7 +3,7 @@
   * countryRead.php
   * Description: Read all language with datatable
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.8
   * --------------- Fields -----------------
   *  getfieldid() (int)    country_id
   *  getfield01() (string) name
@@ -24,27 +24,18 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 
 include_once $rutaEntity.'country.php';      //template  country
 
-include_once $ruteInc.'function.php';
-include_once $ruteInc.'setting.php';
+$core = "";
+include $ruteInc.'core.php';
 
 $pageParent  = 'countryRead.php';       // read all
-if ($isMobile) { 
+if ($isMobile) {
   $pageCreate = 'countryFormMovil.php'; // read id Mobile
- } else { 
+ } else {
   $pageCreate = 'countryForm.php';      // read id Desktop
 }
 
-$urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/
-$pageAction  = $urlParent . $pageCreate . $actionReadId ; // https://www.telepieza.com/recambios/frontend/countryRead.php?action=Read&id=
-$pageCreate .= $actionCreate;                             // countryForm.php?action=create
-$urlParent  .= $pageParent ;                              // https://www.telepieza.com/recambios/frontend/countryRead.php
-
-include_once $ruteInc.'getAction.php';
-include_once $ruteInc.'readAll.php';
-include_once $ruteInc.'action.php';
-
-include_once $ruteTheme.'header.php';
-include_once $ruteTheme.'navbar.php';
+$core = "readAll";
+include $ruteInc.'core.php';
   
 ?>
 

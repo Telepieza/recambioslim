@@ -3,7 +3,7 @@
   * tax_classRead.php
   * Description: Read all categories with datatable
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.8
   * --------------- Fields -----------------
   * getfieldid()  (int)    tax_class_id
   * getfield01()  (string) title
@@ -17,13 +17,13 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 (string) $endpoint   = 'api/tax_class';  // endpoint tax_class
 (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
 (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-(string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+(string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
 (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
-include_once $rutaEntity.'tax_class.php';        // template tax_class
+include_once $ruteEntity.'tax_class.php';        // template tax_class
 
-include_once $ruteInc.'function.php';
-include_once $ruteInc.'setting.php';
+$core = "";
+include $ruteInc.'core.php';
 
 $pageParent  = 'tax_classRead.php';
 if ($isMobile) {
@@ -32,16 +32,8 @@ if ($isMobile) {
   $pageCreate = 'tax_classForm.php';           // read id Desktop
 }
 
-$urlParent   = $urlWebClient . $pathWebClient.            // https://www.telepieza.com/recambios/frontend/
-$pageAction  = $urlParent . $pageCreate . $actionReadId ; // https://www.telepieza.com/recambios/frontend/tax_classForm.php?action=Read&id=
-$pageCreate .= $actionCreate;                             // tax_classForm.php?action=create
-$urlParent  .= $pageParent ;                              // https://www.telepieza.com/recambios/frontend/tax_classRead.php
-
-include_once $ruteInc.'getAction.php';
-include_once $ruteInc.'readAll.php';
-
-include_once $ruteTheme.'header.php';
-include_once $ruteTheme.'navbar.php';
+$core = "readAll";
+include $ruteInc.'core.php';
 
 ?>
 

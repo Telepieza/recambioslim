@@ -3,7 +3,7 @@
   * categoryFormMovil.php
   * Description: Mobile category form
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.8
   * --------------- Fields -----------------
   * getfieldid()  (int)    category_id
   * getfield01()  (string) image
@@ -21,22 +21,13 @@
  (string) $endpoint   = 'api/category';  // endpoint category
  (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
  (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
- (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+ (string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
  (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
- include_once $rutaEntity.'category.php';        // template category
+ include_once $ruteEntity.'category.php';        // template category
 
- include_once $ruteInc.'function.php';
- include_once $ruteInc.'setting.php';
- include_once $ruteInc.'getAction.php';
- include_once $ruteInc.'create.php';
- include_once $ruteInc.'update.php';
- include_once $ruteInc.'delete.php';
- include_once $ruteInc.'readId.php';
- include_once $ruteInc.'action.php';
-
- include_once $ruteTheme.'header.php';
- include_once $ruteTheme.'navbar.php';
+ $core = "readId";
+ include_once $ruteInc.'core.php';
 
  ?>
   <body>
@@ -117,7 +108,7 @@
       
                       <div class="form-floating mb-1">
                          <button class="col-lg-2 btn btn-success btn-default text-blank pe-2"><?php echo $action; ?></button>
-                         <button type="button" class="col-lg-2 btn btn-success btn-info pe-2 ><a href="categoryFormMovil.php?action=Cancel">Cancel</a></button>
+                         <button type="button" class="col-lg-2 btn btn-success btn-info pe-2 ><a href="categoryFormMovil.php?action=Cancel>Cancel</a></button>
                          <?php  if ('' != $id && $status == 200) { 
                            echo "<button type=\"button\" class=\"col-lg-2 btn btn-success text-danger btn-warning pe-24 \">
                            <a onclick=\"return confirm('Delete customer #{$id}');\" href=\"categoryFormMovil.php?action=Delete&amp;id={$id}\">Delete</a>

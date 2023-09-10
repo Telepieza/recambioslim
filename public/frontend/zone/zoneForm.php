@@ -3,7 +3,7 @@
   * zoneForm.php
   * Description: Desktop zone form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.8
   * ------------------- fields ------------------------------
   * getfieldid() (int)    zone_id
   * getfield01() (int)    country_id
@@ -17,22 +17,13 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 (string) $endpoint   = 'api/zone';  // zone
 (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
 (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-(string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+(string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
 (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
-include_once $rutaEntity.'zone.php';        // zone
+include_once $ruteEntity.'zone.php';        // zone
 
-include_once $ruteInc.'function.php';
-include_once $ruteInc.'setting.php';
-include_once $ruteInc.'getAction.php';
-include_once $ruteInc.'create.php';
-include_once $ruteInc.'update.php';
-include_once $ruteInc.'delete.php';
-include_once $ruteInc.'readId.php';
-include_once $ruteInc.'action.php';
-
-include_once $ruteTheme.'header.php';
-include_once $ruteTheme.'navbar.php';
+$core = "readId";
+include_once $ruteInc.'core.php';
  
  ?>
    <body>

@@ -3,7 +3,7 @@
   * zoneFormMovil.php
   * Description: Mobile zone form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.8
   * ------------------- fields ------------------------------
   * getfieldid() (int)    zone_id
   * getfield01() (int)    country_id
@@ -17,22 +17,13 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 (string) $endpoint   = 'api/zone';  // zone
 (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
 (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-(string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+(string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
 (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
- include_once $rutaEntity.DIRECTORY_SEPARATOR.'zone.php';        // zone
+ include_once $ruteEntity.DIRECTORY_SEPARATOR.'zone.php';        // zone
 
- include_once $ruteInc.DIRECTORY_SEPARATOR.'function.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'setting.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'getAction.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'create.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'update.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'delete.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'readId.php';
- include_once $ruteInc.DIRECTORY_SEPARATOR.'action.php';
- 
- include_once $ruteTheme.DIRECTORY_SEPARATOR.'header.php';
- include_once $ruteTheme.DIRECTORY_SEPARATOR.'navbar.php';
+ $core = "readId";
+ include_once $ruteInc.'core.php';
 
  ?>
   <body>
