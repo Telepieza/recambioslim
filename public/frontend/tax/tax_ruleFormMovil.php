@@ -74,7 +74,6 @@
                         <label for="<?php echo getfield04()?>"><?php echo getfield04()?>:</label>
                       </div>
 
-                     
                       <div class="form-floating mb-1">
                          <button class="col-lg-2 btn btn-success btn-default text-blank pe-2"><?php echo $action; ?></button>
                          <button type="button" class="col-lg-2 btn btn-success btn-info pe-2 ><a href="tax_ruleFormMovil.php?action=Cancel">Cancel</a></button>

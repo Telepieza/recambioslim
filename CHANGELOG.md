@@ -1,12 +1,24 @@
+
+## 1.0.9 (2023-12-07)
+
+* New Customer_activity    template in included in BackEnd and FrontEnd.
+* New Customer_approval    template in included in BackEnd and FrontEnd.
+* New Customer_field       template in included in BackEnd and FrontEnd.
+* New Customer_group       template in included in BackEnd and FrontEnd.
+* New Customer_history     template in included in BackEnd and FrontEnd.
+* New Customer_ip          template in included in BackEnd and FrontEnd.
+* New Customer_reward      template in included in BackEnd and FrontEnd.
+* New Customer_transaction template in included in BackEnd and FrontEnd.
+
 ## 1.0.8 (2023-09-11)
 
  * core.php is created in /adm/inc folder to place all the include_one in the FrontEnd templates.
 
 ## 1.0.7 (2023-09-10)
 
- * New tax-class template in included in BackEnd and FrontEnd.
- * New tax-rate  template in included in backEnd and FrontEnd.
- * New tax-rule  template in included in BackEnd and FrontEnd.
+ * New tax_class template in included in BackEnd and FrontEnd.
+ * New tax_rate  template in included in backEnd and FrontEnd.
+ * New tax_rule  template in included in BackEnd and FrontEnd.
 
 ## 1.0.6 (2023-09-05)
 

@@ -270,7 +270,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int32
           example: 200
         tax_rate:
           $ref: '#/components/schemas/tax_rate'
@@ -300,11 +300,11 @@ components:
         date_added: 
           type : string
           format: date-time
-          example: 2023-08-01 12:42:14
+          example: "2023-08-01 12:42:14"
         date_modified: 
           type : string
           format: date-time
-          example: 2023-08-05 15:42:10
+          example: "2023-08-05 15:42:10"
         
        required:
          - tax_rate_id

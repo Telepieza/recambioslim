@@ -77,18 +77,18 @@
                        </div>
 
                       <div class="form-floating mb-1 w-75">
-                          <label for="<?php echo getfield05()?>"><?php echo getfield05()?>:</label>
                          <input type="text" name="<?php echo getfield05()?>"
                          <?php if ($action != "create") {
-                             echo " class =\"form-control text-white \" readonly disabled ";
+                             echo " class =\"form-control \" readonly disabled ";
                            } else { echo " class =\"form-control\" ";} ?>
-                           placeholder="<?php echo $date; ?>" value="<?php if (isset($val[0][getfield05()])) {echo htmlspecialchars($val[0][getfield05()]);}?>"/>
+                           id = "<?php echo getfield05()?>" placeholder="<?php echo $date; ?>" size="20" value="<?php if (isset($val[0][getfield05()])) {echo htmlspecialchars($val[0][getfield05()]);}?>"/>
+                           <label for="<?php echo getfield05()?>"><?php echo getfield05()?>:</label>
                       </div>
 
                       <div class="form-floating mb-1 w-75">
                         <input type="text" name="<?php echo getfield06()?>"
                         <?php if ($action == "create") {
-                              echo " class =\"form-control text-white \" readonly disabled ";
+                              echo " class =\"form-control \" readonly disabled ";
                         } else { echo " class =\"form-control\" ";} ?>
                          id = "<?php echo getfield06()?>" placeholder="<?php echo $date; ?>" size="20" value="<?php if (isset($val[0][getfield06()])) {echo htmlspecialchars($val[0][getfield06()]);}?>"/>
                          <label for="<?php echo getfield06()?>"><?php echo getfield06()?>:</label>

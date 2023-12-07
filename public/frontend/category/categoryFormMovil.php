@@ -89,12 +89,12 @@
                       </div>
 
                       <div class="form-floating mb-1 w-75">
-                          <label for="<?php echo getfield07()?>"><?php echo getfield07()?>:</label>
                          <input type="text" name="<?php echo getfield07()?>"
                          <?php if ($action != "create") {
-                             echo " class =\"form-control text-white \" readonly disabled ";
+                             echo " class =\"form-control \" readonly disabled ";
                            } else { echo " class =\"form-control\" ";} ?>
-                           placeholder="<?php echo $date; ?>" value="<?php if (isset($val[0][getfield07()])) {echo htmlspecialchars($val[0][getfield07()]);}?>"/>
+                            id = "<?php echo getfield07()?>" placeholder="<?php echo $date; ?>" size="20" value="<?php if (isset($val[0][getfield07()])) {echo htmlspecialchars($val[0][getfield07()]);}?>"/>
+                           <label for="<?php echo getfield07()?>"><?php echo getfield07()?>:</label>
                       </div>
 
                       <div class="form-floating mb-1 w-75">

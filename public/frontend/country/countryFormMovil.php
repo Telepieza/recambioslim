@@ -22,7 +22,7 @@
   (string) $ruteEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
   (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
  
-  include_once $ruteEntity.'country.php';        // country
+  include_once $ruteEntity.'country.php';     // country
  
   $core = "readId";
   include_once $ruteInc.'core.php';

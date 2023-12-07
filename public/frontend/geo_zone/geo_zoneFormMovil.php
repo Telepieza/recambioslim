@@ -64,20 +64,19 @@ include_once $ruteInc.'core.php';
                            <label for="<?php echo getfield02()?>">* <?php echo getfield02()?>:</label>
                        </div>
 
-
                       <div class="form-floating mb-1 w-50">
-                          <label for="<?php echo getfield03()?>"><?php echo getfield03()?>:</label>
                          <input type="text" name="<?php echo getfield03()?>"
                          <?php if ($action != "create") {
                              echo " class =\"form-control text-white \" readonly disabled ";
                            } else { echo " class =\"form-control\" ";} ?>
-                           placeholder="<?php echo $date; ?>" value="<?php if (isset($val[0][getfield03()])) {echo htmlspecialchars($val[0][getfield03()]);}?>"/>
+                           id = "<?php echo getfield03()?>"  placeholder="<?php echo $date; ?>" size="20" value="<?php if (isset($val[0][getfield03()])) {echo htmlspecialchars($val[0][getfield03()]);}?>"/>
+                           <label for="<?php echo getfield03()?>"><?php echo getfield03()?>:</label>
                       </div>
 
                       <div class="form-floating mb-1 w-75">
                         <input type="text" name="<?php echo getfield04()?>"
                         <?php if ($action == "create") {
-                              echo " class =\"form-control text-white \" readonly disabled ";
+                              echo " class =\"form-control \" readonly disabled ";
                         } else { echo " class =\"form-control\" ";} ?>
                          id = "<?php echo getfield04()?>" placeholder="<?php echo $date; ?>" size="20" value="<?php if (isset($val[0][getfield04()])) {echo htmlspecialchars($val[0][getfield04()]);}?>"/>
                          <label for="<?php echo getfield04()?>"><?php echo getfield04()?>:</label>

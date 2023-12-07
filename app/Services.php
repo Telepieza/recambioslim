@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * Services.php
   * Description: Container Services by templates and table
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.9
 **/
 declare(strict_types=1);
 
@@ -18,6 +18,16 @@ use App\Service\Zone;
 use App\Service\Tax_class;
 use App\Service\Tax_rate;
 use App\Service\Tax_rule;
+use App\Service\Customer;
+use App\Service\Customer_activity;
+use App\Service\Customer_approval;
+use App\Service\Customer_field;
+use App\Service\Customer_group;
+use App\Service\Customer_history;
+use App\Service\Customer_ip;
+use App\Service\Customer_login;
+use App\Service\Customer_reward;
+use App\Service\Customer_transaction;
 
 use App\Service\User;
 
@@ -81,6 +91,56 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Tax_rule_create_service'] = static fn (): Tax_rule\Create=>new Tax_rule\Create();
   $container['Tax_rule_update_service'] = static fn (): Tax_rule\Update=>new Tax_rule\Update();
   $container['Tax_rule_delete_service'] = static fn (): Tax_rule\Delete=>new Tax_rule\Delete();
+  // Customer
+  $container['Customer_find_service']   = static fn (): Customer\Find  =>new Customer\Find();
+  $container['Customer_create_service'] = static fn (): Customer\Create=>new Customer\Create();
+  $container['Customer_update_service'] = static fn (): Customer\Update=>new Customer\Update();
+  $container['Customer_delete_service'] = static fn (): Customer\Delete=>new Customer\Delete();
+  // Customer_activity
+  $container['Customer_activity_find_service']   = static fn (): Customer_activity\Find  =>new Customer_activity\Find();
+  $container['Customer_activity_create_service'] = static fn (): Customer_activity\Create=>new Customer_activity\Create();
+  $container['Customer_activity_update_service'] = static fn (): Customer_activity\Update=>new Customer_activity\Update();
+  $container['Customer_activity_delete_service'] = static fn (): Customer_activity\Delete=>new Customer_activity\Delete();
+  // Customer_approval
+  $container['Customer_approval_find_service']   = static fn (): Customer_approval\Find  =>new Customer_approval\Find();
+  $container['Customer_approval_create_service'] = static fn (): Customer_approval\Create=>new Customer_approval\Create();
+  $container['Customer_approval_update_service'] = static fn (): Customer_approval\Update=>new Customer_approval\Update();
+  $container['Customer_approval_delete_service'] = static fn (): Customer_approval\Delete=>new Customer_approval\Delete();
+  // Customer_group
+  $container['Customer_group_find_service']   = static fn (): Customer_group\Find  =>new Customer_group\Find();
+  $container['Customer_group_create_service'] = static fn (): Customer_group\Create=>new Customer_group\Create();
+  $container['Customer_group_update_service'] = static fn (): Customer_group\Update=>new Customer_group\Update();
+  $container['Customer_group_delete_service'] = static fn (): Customer_group\Delete=>new Customer_group\Delete();
+  // Customer_history
+  $container['Customer_history_find_service']   = static fn (): Customer_history\Find  =>new Customer_history\Find();
+  $container['Customer_history_create_service'] = static fn (): Customer_history\Create=>new Customer_history\Create();
+  $container['Customer_history_update_service'] = static fn (): Customer_history\Update=>new Customer_history\Update();
+  $container['Customer_history_delete_service'] = static fn (): Customer_history\Delete=>new Customer_history\Delete();
+  // Customer_ip
+  $container['Customer_ip_find_service']   = static fn (): Customer_ip\Find  =>new Customer_ip\Find();
+  $container['Customer_ip_create_service'] = static fn (): Customer_ip\Create=>new Customer_ip\Create();
+  $container['Customer_ip_update_service'] = static fn (): Customer_ip\Update=>new Customer_ip\Update();
+  $container['Customer_ip_delete_service'] = static fn (): Customer_ip\Delete=>new Customer_ip\Delete();
+  // Customer_login
+  $container['Customer_login_find_service']   = static fn (): Customer_login\Find  =>new Customer_login\Find();
+  $container['Customer_login_create_service'] = static fn (): Customer_login\Create=>new Customer_login\Create();
+  $container['Customer_login_update_service'] = static fn (): Customer_login\Update=>new Customer_login\Update();
+  $container['Customer_login_delete_service'] = static fn (): Customer_login\Delete=>new Customer_login\Delete();
+  // Customer_reward
+  $container['Customer_reward_find_service']   = static fn (): Customer_reward\Find  =>new Customer_reward\Find();
+  $container['Customer_reward_create_service'] = static fn (): Customer_reward\Create=>new Customer_reward\Create();
+  $container['Customer_reward_update_service'] = static fn (): Customer_reward\Update=>new Customer_reward\Update();
+  $container['Customer_reward_delete_service'] = static fn (): Customer_reward\Delete=>new Customer_reward\Delete();
+  // Customer_transaction
+  $container['Customer_transaction_find_service']   = static fn (): Customer_transaction\Find  =>new Customer_transaction\Find();
+  $container['Customer_transaction_create_service'] = static fn (): Customer_transaction\Create=>new Customer_transaction\Create();
+  $container['Customer_transaction_update_service'] = static fn (): Customer_transaction\Update=>new Customer_transaction\Update();
+  $container['Customer_transaction_delete_service'] = static fn (): Customer_transaction\Delete=>new Customer_transaction\Delete();
+  // Customer_field
+  $container['Customer_field_find_service']   = static fn (): Customer_field\Find  =>new Customer_field\Find();
+  $container['Customer_field_create_service'] = static fn (): Customer_field\Create=>new Customer_field\Create();
+  $container['Customer_field_update_service'] = static fn (): Customer_field\Update=>new Customer_field\Update();
+  $container['Customer_field_delete_service'] = static fn (): Customer_field\Delete=>new Customer_field\Delete();
 
   // User
   // $container['user_find_service'] = static fn (): User\Find=>new User\Find();

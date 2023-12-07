@@ -210,7 +210,7 @@ paths:
         - language
       summary: Delete language
       description: Delete a language.
-      operationId: Deletelanguage
+      operationId: Delete language
       parameters:
       - name: token
         in: header
@@ -268,7 +268,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int32
           example: 200
         language:
           $ref: '#/components/schemas/language'

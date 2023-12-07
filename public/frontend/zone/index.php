@@ -60,7 +60,7 @@ include_once $ruteTheme.'navbar.php';
                     <td>Mobile test form zone table by ID</td>
                   </tr>
                   <tr class="table-info">
-                    <td><a target="new" href="../../index.php">Home Api Rest demo</a></td>
+                    <td><a target="new" href="../index.php">Home Api Rest demo</a></td>
                     <td>Telepieza Recambios - Test endpoints</td>
                   </tr>
                 </tbody>

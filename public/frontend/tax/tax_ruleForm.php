@@ -70,14 +70,12 @@
                 </div>
               </div>
               
-
               <div class="form-group row mb-1">
                 <label for="<?php echo getfield02()?>"  class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield02()?>:</label>
                 <div class="col-sm-2">
                   <input type="number"  class="form-control" name="<?php echo getfield02()?>" min="0" placeholder="<?php echo getfield02()?>" value="<?php if (isset($val[0][getfield02()])) {echo $val[0][getfield02()];} ?>"/>
                 </div>
               </div>
-
 
               <div class="form-group row mb-1">
                <label for="<?php echo getfield03()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield03()?>:</label>

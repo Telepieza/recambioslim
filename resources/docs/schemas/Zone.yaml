@@ -212,7 +212,7 @@ paths:
         - zone
       summary: Delete zone
       description: Delete a zone.
-      operationId: Deletezone
+      operationId: Delete zone
       parameters:
       - name: token
         in: header
@@ -270,7 +270,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int32
           example: 200
         zone:
           $ref: '#/components/schemas/zone'

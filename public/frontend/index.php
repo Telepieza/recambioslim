@@ -85,6 +85,10 @@ include $ruteTheme.'navbar.php';
                     <td><a target="new" href="tax/index.php">FrontEnd tax (class,rate,rule) table</a></td>
                     <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
+                  <tr class="table-light">
+                    <td><a target="new" href="customer/index.php">FrontEnd Customer (class,rate,rule) table</a></td>
+                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                  </tr>
                 </tbody>
               </table>
             </div>

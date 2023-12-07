@@ -270,7 +270,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int64
           example: 200
         tax_rule:
           $ref: '#/components/schemas/tax_rule'

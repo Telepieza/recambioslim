@@ -268,7 +268,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int32
           example: 200
         manufacturer:
           $ref: '#/components/schemas/manufacturer'

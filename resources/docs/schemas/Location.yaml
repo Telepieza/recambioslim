@@ -212,7 +212,7 @@ paths:
         - location
       summary: Delete location
       description: Delete a location.
-      operationId: Deletelocation
+      operationId: Delete location
       parameters:
       - name: token
         in: header
@@ -270,7 +270,7 @@ components:
       properties:
         status:
           type: integer
-          format: int200
+          format: int32
           example: 200
         location:
           $ref: '#/components/schemas/location'
