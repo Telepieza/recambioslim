@@ -3,7 +3,7 @@
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.10
 **/
 declare(strict_types=1);
 

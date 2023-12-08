@@ -1,5 +1,10 @@
 <?php
-
+/**
+  * ErrorController.php
+  * Description: Error controller for all templates
+  * @Author : M.V.M.
+  * @Version 1.0.10
+**/
 declare(strict_types=1);
 
 namespace App\Controller;

@@ -3,7 +3,7 @@
   * Home.php
   * Description: working on the page
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
