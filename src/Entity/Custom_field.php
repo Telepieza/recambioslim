@@ -1,7 +1,7 @@
 <?php
 /**
-  * Customer_field.php
-  * Description: Customer_field template
+  * custom_field.php
+  * Description: custom_field template
   * @Author : M.V.M.
   * @Version 1.0.9
 **/
@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-final class Customer_field extends BaseValidate {
+final class Custom_field extends BaseValidate {
 
     private $prefix     = "oc_";
-    private $tablename  = "customer_field";
-    private $fieldid    = 'customer_field_id';
+    private $tablename  = "custom_field";
+    private $fieldid    = 'custom_field_id';
     private $field00    = 'NoPrimaryKey';
     private $field01    = 'type';
     private $field02    = 'value';

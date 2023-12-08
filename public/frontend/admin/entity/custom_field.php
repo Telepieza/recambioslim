@@ -1,16 +1,16 @@
 <?php
 /**
-  * customer_field.php
-  * description: customer_field template
+  * custom_field.php
+  * description: custom_field template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.10
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // customer_field_id
+    $id      = $_REQUEST[getfieldid()];  // custom_field_id
     $value01 = $_REQUEST[getfield01()];  // type
     $value02 = $_REQUEST[getfield02()];  // value
     $value03 = $_REQUEST[getfield03()];  // validation
@@ -19,7 +19,7 @@ function setFormFields() {
     $value06 = $_REQUEST[getfield06()];  // sort_order
   
   $formFields = array(
-    getfieldid() => (int)    $id,         // customer_field_id
+    getfieldid() => (int)    $id,         // custom_field_id
     getfield01() => (string) $value01,    // type
     getfield02() => (string) $value02,    // value
     getfield03() => (string) $value03,    // validation
@@ -37,13 +37,13 @@ function viewTableThead($description) {
   }
 
   $header .=
-  '<th>' . getfieldid() . '</th>' .  // customer_field_id
+  '<th>' . getfield06() . '</th>' .  // sort_order
+  '<th>' . getfieldid() . '</th>' .  // custom_field_id
   '<th>' . getfield01() . '</th>' .  // type
   '<th>' . getfield02() . '</th>' .  // value
   '<th>' . getfield03() . '</th>' .  // validation
   '<th>' . getfield04() . '</th>' .  // location
-  '<th>' . getfield05() . '</th>' .  // status
-  '<th>' . getfield06() . '</th>' ;  // sort_order
+  '<th>' . getfield05() . '</th>' ;  // status
  return $header;
 }
 
@@ -52,14 +52,13 @@ function viewTableRows($description, $pageAction) {
   if (is_array($description) && count($description) > 0) {
     foreach($description as $row):
 
-    (int)    $id      = 0 ;   // customer_field_id
+    (int)    $id      = 0 ;   // custom_field_id
     (string) $value01 = '';   // type
     (string) $value02 = '' ;  // value
     (string) $value03 = '' ;  // validation
     (string) $value04 = '' ;  // location
     (int)    $value05 = 0 ;   // status
     (int)    $value06 = 0 ;   // sort_order
-
 
     if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
     if (isset($row[getfield01()])) trim($value01 = $row[getfield01()]);
@@ -71,20 +70,20 @@ function viewTableRows($description, $pageAction) {
 
     echo '<tr>';
        echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
-       echo '<td>' . $id      . '</td>';  // customer_field_id
+       echo '<td>' . $value06 . '</td>';  // sort_order
+       echo '<td>' . $id      . '</td>';  // custom_field_id
        echo '<td>' . $value01 . '</td>';  // type
        echo '<td>' . $value02 . '</td>';  // value
        echo '<td>' . $value03 . '</td>';  // validation
        echo '<td>' . $value04 . '</td>';  // location
        echo '<td>' . $value05 . '</td>';  // status
-       echo '<td>' . $value06 . '</td>';  // sort_order
     echo '</tr>';
     endforeach;
     }
   }
 
   function getfieldid() {
-    return 'customer_field_id';
+    return 'custom_field_id';
   }
   
   function getfield01() {
@@ -115,5 +114,4 @@ function viewTableRows($description, $pageAction) {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
   }
   
-
 ?>

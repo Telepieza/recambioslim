@@ -3,7 +3,7 @@
   * index.php
   * Description: Homepage or index
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.10
 **/
 
 if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
@@ -55,39 +55,39 @@ include $ruteTheme.'navbar.php';
                   </tr>
                   <tr class="table-light">
                   <td><a target="new" href="category/index.php">FrontEnd category table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-info">
                   <td><a target="new" href="language/index.php">FrontEnd language table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-light">
                   <td><a target="new" href="manufacturer/index.php">FrontEnd manufacturer table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-info">
                     <td><a target="new" href="geo_zone/index.php">FrontEnd geo-zone table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-light">
                     <td><a target="new" href="country/index.php">FrontEnd country table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-info">
                     <td><a target="new" href="zone/index.php">FrontEnd zone table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-light">
                     <td><a target="new" href="location/index.php">FrontEnd location table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-info">
                     <td><a target="new" href="tax/index.php">FrontEnd tax (class,rate,rule) table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                   <tr class="table-light">
-                    <td><a target="new" href="customer/index.php">FrontEnd Customer (class,rate,rule) table</a></td>
-                    <td>Schema, mobile and desktop form, with GET and POST methods in API Rest with Json.</td>
+                    <td><a target="new" href="customer/index.php">FrontEnd Customer table</a></td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                 </tbody>
               </table>

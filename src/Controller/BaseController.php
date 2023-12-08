@@ -105,10 +105,16 @@ class BaseController
  protected function getAuthUser(Request $request) {
    $auth = new Auth($request,$this->baseParameters->getKeyToken());
    $result = $auth->verifyToken();
+
    if ($result['code'] === 200) {
       $jsonRecord = $auth->verifyUser($this->baseParameters->getDb(),$this->baseParameters->getPrefix());
       $result = (array) json_decode($jsonRecord);
-   } 
+   }
+
+   /* Sin token
+      if ($result['code'] === 403) { $result['code'] = 200; }
+   */
+
    return $result;
 }
 

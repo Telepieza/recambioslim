@@ -1,7 +1,7 @@
 <?php
 /**
-  * index.php
-  * Description: customer table index
+  * index_field.php
+  * Description: custom_field table index
   * @Author : M.V.M.
   * @Version 1.0.10
 **/
@@ -24,7 +24,7 @@ include_once $ruteTheme.'navbar.php';
     <div class="section_item container">
        <div class="d-lg-flex align-items-center mt-4">
 					<a href="index.php"><img src="<?php echo $urlTemplate ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
-          <h1 class="text-light"><?php echo $company ; ?> Recambios - customer_activity</h1>
+          <h1 class="text-light"><?php echo $company ; ?> Recambios - custom_field</h1>
         </div>
         <hr>
         <div class="row">
@@ -43,40 +43,24 @@ include_once $ruteTheme.'navbar.php';
                     <td><a target="new" href="../admin/user/login.php">Login User demo</a></td>
                     <td>Generate token with user demo</td>
                   </tr>
+                  <tr class="table-warning">
+                    <td><a target="new" href="<?php echo $route;?>api/custom_field/">custom activity table documentation /api/custom_field/</a></td>
+                    <td>Schemas, json structure, type of data and error code</td>
+                  </tr>
                   <tr class="table-light">
-                    <td><a target="index" href="index_customer.php">Index customer</a></td>
-                    <td>Schemas, Desktop, Mobile customer</td>
+                  <td><a target="new" href="custom_fieldRead.php">Desk custom_field GET ALL /api/custom_field</a></td>
+                    <td>Desktop category of all rows table form.</td>
                   </tr>
                   <tr class="table-info">
-                    <td><a target="index" href="index_activity.php">Index customer activity</a></td>
-                    <td>Schemas, Desktop, Mobile customer activity</td>
+                  <td><a target="new" href="custom_fieldForm.php?action=index">Desk custom_field GET and POST /api/custom_field</a></td>
+                    <td>Desktop test form category table by ID</td>
                   </tr>
                   <tr class="table-light">
-                  <td><a target="index" href="index_approval.php">Index customer approval</a></td>
-                    <td>Schemas, Desktop, Mobile customer approval</td>
+                   <td><a target="new" href="custom_fieldFormMovil.php?action=index">Mobile custom_field GET and POST /api/custom_field</a></td>
+                   <td>Mobile test form category table by ID</td>
                   </tr>
                   <tr class="table-info">
-                  <td><a target="index" href="index_group.php">Index customer group</td>
-                    <td>Schemas, Desktop, Mobile customer group</td>
-                  </tr>
-                  <tr class="table-light">
-                   <td><a target="index" href="index_history.php">Index customer history</a></td>
-                   <td>Schemas, Desktop, Mobile customer history</td>
-                  </tr>
-                  <tr class="table-info">
-                   <td><a target="index" href="index_ip.php">Index customer ip</a></td>
-                   <td>Schemas, Desktop, Mobile customer ip</td>
-                  </tr>
-                  <tr class="table-light">
-                   <td><a target="index" href="index_reward.php">Index customer reward</a></td>
-                   <td>Schemas, Desktop, Mobile customer reward</td>
-                  </tr>
-                  <tr class="table-info">
-                   <td><a target="index" href="index_transaction.php">Index customer transaction</a></td>
-                   <td>Schemas, Desktop, Mobile customer transaction</td>
-                  </tr>
-                  <tr class="table-light">
-                    <td><a target="new" href="../index.php">Home Api Rest demo</a></td>
+                    <td><a target="new" href="index.php">Home Api Rest demo</a></td>
                     <td>Telepieza Recambios - Test endpoints</td>
                   </tr>
                 </tbody>

@@ -21,13 +21,14 @@ use App\Service\Tax_rule;
 use App\Service\Customer;
 use App\Service\Customer_activity;
 use App\Service\Customer_approval;
-use App\Service\Customer_field;
 use App\Service\Customer_group;
 use App\Service\Customer_history;
 use App\Service\Customer_ip;
 use App\Service\Customer_login;
 use App\Service\Customer_reward;
 use App\Service\Customer_transaction;
+
+use App\Service\Custom_field;
 
 use App\Service\User;
 
@@ -136,11 +137,11 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Customer_transaction_create_service'] = static fn (): Customer_transaction\Create=>new Customer_transaction\Create();
   $container['Customer_transaction_update_service'] = static fn (): Customer_transaction\Update=>new Customer_transaction\Update();
   $container['Customer_transaction_delete_service'] = static fn (): Customer_transaction\Delete=>new Customer_transaction\Delete();
-  // Customer_field
-  $container['Customer_field_find_service']   = static fn (): Customer_field\Find  =>new Customer_field\Find();
-  $container['Customer_field_create_service'] = static fn (): Customer_field\Create=>new Customer_field\Create();
-  $container['Customer_field_update_service'] = static fn (): Customer_field\Update=>new Customer_field\Update();
-  $container['Customer_field_delete_service'] = static fn (): Customer_field\Delete=>new Customer_field\Delete();
+  // Custom_field
+  $container['Custom_field_find_service']   = static fn (): Custom_field\Find  =>new Custom_field\Find();
+  $container['Custom_field_create_service'] = static fn (): Custom_field\Create=>new Custom_field\Create();
+  $container['Custom_field_update_service'] = static fn (): Custom_field\Update=>new Custom_field\Update();
+  $container['Custom_field_delete_service'] = static fn (): Custom_field\Delete=>new Custom_field\Delete();
 
   // User
   // $container['user_find_service'] = static fn (): User\Find=>new User\Find();

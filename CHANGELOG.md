@@ -1,9 +1,12 @@
 
+## 1.0.10 (2023-12-08)
+* New Custom_field       template in included in BackEnd and FrontEnd.
+* New Customer           template in included in BackEnd and FrontEnd.
+
 ## 1.0.9 (2023-12-07)
 
 * New Customer_activity    template in included in BackEnd and FrontEnd.
 * New Customer_approval    template in included in BackEnd and FrontEnd.
-* New Customer_field       template in included in BackEnd and FrontEnd.
 * New Customer_group       template in included in BackEnd and FrontEnd.
 * New Customer_history     template in included in BackEnd and FrontEnd.
 * New Customer_ip          template in included in BackEnd and FrontEnd.

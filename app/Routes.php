@@ -34,13 +34,14 @@ use App\Controller\Tax_rule;
 use App\Controller\Customer;
 use App\Controller\Customer_activity;
 use App\Controller\Customer_approval;
-use App\Controller\Customer_field;
 use App\Controller\Customer_group;
 use App\Controller\Customer_history;
 use App\Controller\Customer_ip;
 use App\Controller\Customer_login;
 use App\Controller\Customer_reward;
 use App\Controller\Customer_transaction;
+
+use App\Controller\Custom_field;
 
 return function (App $app)
 {
@@ -317,16 +318,16 @@ $group->group('/customer_transaction', function (Group $group)
    $group->delete('/delete/{customer_transaction_id:[0-9]+}',Customer_transaction\Delete::class);  // servidor (admite put y delete)
 });
 
-$group->group('/customer_field', function (Group $group)
+$group->group('/custom_field', function (Group $group)
  {
-   $group->get('/',Customer_field\GetScheme::class);
-   $group->get('/read',Customer_field\GetAll::class);
-   $group->get('/read/{customer_field_id:[0-9]+}',Customer_field\GetOne::class);
-   $group->post('/new',Customer_field\Create::class);
-   $group->post('/delete/{customer_field_id:[0-9]+}',Customer_field\Delete::class);
-   $group->post('/update/{customer_field_id:[0-9]+}',Customer_field\Update::class);
-   $group->put('/update/{customer_field_id:[0-9]+}',Customer_field\Update::class);     // servidor (admite put y delete)
-   $group->delete('/delete/{customer_field_id:[0-9]+}',Customer_field\Delete::class);  // servidor (admite put y delete)
+   $group->get('/',Custom_field\GetScheme::class);
+   $group->get('/read',Custom_field\GetAll::class);
+   $group->get('/read/{custom_field_id:[0-9]+}',Custom_field\GetOne::class);
+   $group->post('/new',Custom_field\Create::class);
+   $group->post('/delete/{custom_field_id:[0-9]+}',Custom_field\Delete::class);
+   $group->post('/update/{custom_field_id:[0-9]+}',Custom_field\Update::class);
+   $group->put('/update/{custom_field_id:[0-9]+}',Custom_field\Update::class);     // servidor (admite put y delete)
+   $group->delete('/delete/{custom_field_id:[0-9]+}',Custom_field\Delete::class);  // servidor (admite put y delete)
 });
 
     });

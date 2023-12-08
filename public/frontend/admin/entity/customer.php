@@ -79,20 +79,7 @@ function viewTableThead($data) {
   '<th>' . getfield05() . '</th>' .    // lastname
   '<th>' . getfield06() . '</th>' .    // email
   '<th>' . getfield07() . '</th>' .    // telephone
-  '<th>' . getfield08() . '</th>' .    // fax
-  '<th>' . getfield09() . '</th>' .    // password
-  '<th>' . getfield10() . '</th>' .    // salt
-  '<th>' . getfield11() . '</th>' .    // cart
-  '<th>' . getfield12() . '</th>' .    // wishlist
-  '<th>' . getfield13() . '</th>' .    // newsletter
-  '<th>' . getfield14() . '</th>' .    // address_id
-  '<th>' . getfield15() . '</th>' .    // custom_field
-  '<th>' . getfield16() . '</th>' .    // ip
-  '<th>' . getfield17() . '</th>' .    // status
-  '<th>' . getfield18() . '</th>' .    // safe
-  '<th>' . getfield19() . '</th>' .    // token
-  '<th>' . getfield20() . '</th>' .    // code
-  '<th>' . getfield21() . '</th>' ;    // date_added
+  '<th>' . getfield17() . '</th>' ;    // status
 
  return $header;
 }
@@ -160,20 +147,7 @@ function viewTableRows($data, $pageAction) {
        echo '<td>' . $value05 . '</td>' ;  // lastname
        echo '<td>' . $value06 . '</td>' ;  // email
        echo '<td>' . $value07 . '</td>' ;  // telephone
-       echo '<td>' . $value08 . '</td>' ;  // fax
-       echo '<td>' . $value09 . '</td>' ;  // password
-       echo '<td>' . $value10 . '</td>' ;  // salt
-       echo '<td>' . $value11 . '</td>' ;  // cart
-       echo '<td>' . $value12 . '</td>' ;  // wishlist
-       echo '<td>' . $value13 . '</td>' ;  // newsletter
-       echo '<td>' . $value14 . '</td>' ;  // address_id
-       echo '<td>' . $value15 . '</td>' ;  // custom_field
-       echo '<td>' . $value16 . '</td>' ;  // ip
        echo '<td>' . $value17 . '</td>' ;  // status
-       echo '<td>' . $value18 . '</td>' ;  // safe
-       echo '<td>' . $value19 . '</td>' ;  // token
-       echo '<td>' . $value20 . '</td>' ;  // code
-       echo '<td>' . $value21 . '</td>' ;  // date_added
     echo '</tr>';
     endforeach;
     }

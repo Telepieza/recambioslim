@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
   * BasePayLoad.php
   * Description: Base payload for all templates
   * @Author : M.V.M.
@@ -88,13 +88,13 @@ class BasePayLoad implements JsonSerializable
     {
         $payload = [
             'status' => $this->getCode(),
-        ]; 
+        ];
         if (!empty(trim($this->getToken()))) {
             $this->setstatus('token');
             $payload[$this->getstatus()] = trim($this->getToken());
         }
-        else 
-        { 
+        else
+        {
             if (!empty(trim($this->getPagination())))
             {
                 $payload['pagination'] = json_decode($this->getPagination());

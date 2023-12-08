@@ -17,7 +17,7 @@ use App\Service\Customer_activity\Update;
 
 abstract class Base extends BaseController
 {
-    protected function getCustomer_activityTable() : string 
+    protected function getCustomer_activityTable() : string
     {
         $tableName  = 'customer_activity';
         return $tableName;
