@@ -1,9 +1,9 @@
 <?php
- /** 
+ /**
   * Home.php
   * Description: working on the page
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -26,7 +26,7 @@ final class Home
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface{
-         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/category.yaml'; 
+         $yamlFile = __DIR__ .'/../../../resources/docs/schemas/category.yaml';
          $viewData = [
              'spec' => json_encode(Yaml::parseFile($yamlFile)),
         ];

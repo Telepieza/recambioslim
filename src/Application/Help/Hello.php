@@ -1,9 +1,9 @@
 <?php
- /** 
+ /**
   * Hello.php
   * Description: Test the route with hello
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.5
 **/
 declare(strict_types=1);
 
@@ -19,7 +19,7 @@ class Hello
         ResponseInterface $response,
         array $args = []
     ): ResponseInterface {
-		if(isset($args['name'])) 
+		if(isset($args['name']))
         {
             $name = (string)$args['name'];
         }
