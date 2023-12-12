@@ -45,7 +45,7 @@ include_once $ruteTheme.'navbar.php';
                   </tr>
 
                   <tr class="table-warning">
-                    <td><a target="new" href="<?php echo $rute;?>api/tax_class/">tax_class table documentation /api/tax_class/</a></td>
+                    <td><a target="new" href="<?php echo $route;?>api/tax_class/">tax_class table documentation /api/tax_class/</a></td>
                     <td>Schemas, json structure, type of data and error code</td>
                   </tr>
                   <tr class="table-light">
@@ -62,7 +62,7 @@ include_once $ruteTheme.'navbar.php';
                   </tr>
 
                   <tr class="table-warning">
-                    <td><a target="new" href="<?php echo $rute;?>api/tax_rate/">tax_rate table documentation /api/tax_rate/</a></td>
+                    <td><a target="new" href="<?php echo $route;?>api/tax_rate/">tax_rate table documentation /api/tax_rate/</a></td>
                     <td>Schemas, json structure, type of data and error code</td>
                   </tr>
                   <tr class="table-light">
@@ -79,7 +79,7 @@ include_once $ruteTheme.'navbar.php';
                   </tr>
 
                   <tr class="table-warning">
-                    <td><a target="new" href="<?php echo $rute;?>api/tax_rule/">tax_rule table documentation /api/tax_rule/</a></td>
+                    <td><a target="new" href="<?php echo $route;?>api/tax_rule/">tax_rule table documentation /api/tax_rule/</a></td>
                     <td>Schemas, json structure, type of data and error code</td>
                   </tr>
                   <tr class="table-light">

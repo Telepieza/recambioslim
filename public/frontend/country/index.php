@@ -44,7 +44,7 @@
                     <td>Generate token with user demo</td>
                   </tr>
                 <tr class="table-warning">
-                    <td><a target="new" href="<?php echo $rute;?>api/country/">country table documentation /api/country/</a></td>
+                    <td><a target="new" href="<?php echo $route;?>api/country/">country table documentation /api/country/</a></td>
                     <td>Schemas, json structure, type of data and error code</td>
                   </tr>
                   <tr class="table-light">

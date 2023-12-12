@@ -1,0 +1,670 @@
+openapi: 3.0.2
+servers:
+  - url: https://telepieza.com/recambios
+    description:  [Telepieza Recambios](https://telepieza.com/recambios) Production server using Opencart.
+    
+  - url: https://recambioslim.com/recambios
+    description: My localhost server using PHP built-in web server.
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+
+info:
+  version: "1.0.0"
+  title: API Recambios Opencart
+  description:  |-
+    API Recambios Opencart [https://telepieza.com/recambios/](https://telepieza.com/recambios/).
+  contact: 
+    email: telepieza@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+- name: product
+  description: Manage product.
+  externalDocs:
+      description: Find out more about our store
+      url: 'https://telepieza.com/recambios'
+
+paths:
+  /api/product/read:
+    get:
+      tags:
+      - product
+      summary: Get All categories
+      operationId: GetAll
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: limit
+        in: query
+        description: How many rows to return at one time (max 100)
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 20
+      - name: offset
+        in: query
+        description: Gives the rows from the given position+1
+        required: false
+        explode: true
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/GetAll'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/InvalidStatus'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+          
+  /api/product/read/{product_id}:
+    get:
+      tags:
+        - product
+      summary: Get One product by ID
+      operationId: GetOne
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: product_id
+        in: path
+        description: ID of product to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOne'
+        '400':
+          $ref: '#/components/responses/InvalidID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/product/new:
+    post:
+      tags:
+        - product
+      summary: Add a new product
+      description: Register a new product.
+      operationId: Create
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+              
+      responses:
+        '201':
+            $ref: '#/components/responses/CreateID'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+           $ref: '#/components/responses/NotCreate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+        required: true
+         
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+  /api/product/update/{product_id}:
+    post:
+      tags:
+        - product
+      summary: Update an existing product
+      description: Update an existing product by product_id.
+      operationId: Update
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: product_id
+        in: path
+        description: ID of product to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/NotUpdate'
+        '500':
+           $ref: '#/components/responses/ErrorInDataBase'
+      requestBody:
+        description: Update an existent product in the table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+
+  /api/product/delete/{product_id}:
+    post:
+      tags:
+        - product
+      summary: Delete product
+      description: Delete a product.
+      operationId: Delete product
+      parameters:
+      - name: token
+        in: header
+        required: true
+        style: simple
+        schema:
+          items:
+              $ref: '#/components/schemas/Token'
+
+      - name: product_id
+        in: path
+        description: product_id of product to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '202':
+          $ref: '#/components/responses/Successful'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ExpiredToken'
+        '404':
+          $ref: '#/components/responses/InvalidID'
+        '500':
+          $ref: '#/components/responses/ErrorInDataBase'
+          
+      security:
+        - bearerAuth: [] 
+      deprecated: false  
+ 
+components:
+
+  schemas:
+  
+    GetAll:
+      title: GetHelp
+      properties:
+        status: 
+          type: integer
+          format: int32
+          example : 200
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        product:
+          type: array
+          xml:
+            wrapped: true
+          items:
+             $ref: '#/components/schemas/product'
+    
+    GetOne:
+      title: GetOne
+      properties:
+        status:
+          type: integer
+          format: int32
+          example: 200
+        product:
+          $ref: '#/components/schemas/product'
+          
+    product:
+       title: product
+       type: object
+       properties:
+        product_id:
+          type: integer
+          format: int64
+          example: 4
+        model:
+          type: string
+          example: "BILSTEIN 19-019901"
+        sku:
+          type: string
+          example: 1
+        upc:
+          type: string
+          example: "651860472218"
+        ean:
+          type: string
+          example: "4025258472214"
+        jan:
+          type: string
+          example: "BNE-1990"
+        isbn:
+          type: string
+          example: " "
+        mpn:
+          type: string
+          example: "19-019901"
+        location:
+          type: string
+          example: "MADRID,BARCELONA"
+        quantity:
+          type: integer
+          format: int32
+          example: 2
+        stock_status_id:
+          type: integer
+          format: int64
+          example: 6
+        image:
+          type: string
+          example: "bilstein/19-019901.jpg"
+        manufacturer_id:
+          type: integer
+          format: int64
+          example: 11
+        shipping:
+          type: integer
+          format: int32
+          example: 1
+        price:
+          type: integer
+          format: double
+          example: 50.35
+        points:
+          type: integer
+          format: int64
+          example: 100
+        tax_class_id:
+          type: integer
+          format: int64
+          example: 11
+        date_available:
+          type: string
+          example: "2013-09-17"
+        weight:
+          type: integer
+          format: double
+          example: 1.78
+        weight_class_id:
+          type: integer
+          format: int32
+          example: 1
+        length:
+          type: integer
+          format: double
+          example: 685.0
+        width:
+          type: integer
+          format: double
+          example: 75.0
+        height:
+          type: integer
+          format: double
+          example: 75.0
+        length_class_id:
+          type: integer
+          format: int64
+          example: 6
+        subtract:
+          type: integer
+          format: int32
+          example: 1
+        minimum:
+          type: integer
+          format: int64
+          example: 1
+        sort_order:
+          type: integer
+          format: int64
+          example: 1
+        status:
+          type: integer
+          format: int32
+          example: 1
+        viewed:
+          type: integer
+          format: int32
+          example: 1375
+        date_added: 
+          type : string
+          format: date-time
+          example: "2023-12-01 12:42:14"
+        date_modified: 
+          type : string
+          format: date-time
+          example: "2023-12-02 12:42:24"
+        
+       required:
+         - product_id
+         - model
+         - sku
+         - upc
+         - ean
+
+       example:
+          product_id: 65
+          model: "BILSTEIN 19-104089"
+          sku: "19-104089"
+          upc: "651860470283"
+          ean: "4025258470289"
+          jan: "BNE-A408"
+          isbn: " " 
+          mpn: "19-104089"
+          location: "MADRID,BARCELONA"
+          quantity: 2
+          stock_status_id: 0
+          image: "bilstein/19-104089.jpg"
+          manufacturer_id: 11
+          shipping: 1
+          price: 46.30
+          points: 234
+          tax_class_id: 11
+          date_available: "2015-09-17"
+          weight: 2.17
+          weight_class_id: 1
+          length: 685.0
+          width: 90.0
+          height: 90.0
+          length_class_id: 6
+          subtract: 1
+          minimum: 1
+          sort_order: 1
+          status: 1
+          viewed: 730
+          date_added: "2023-12-07 12:42:14"
+          date_modified: "2023-12-07 12:42:14"
+ 
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          format: int64
+          example: 1
+        limit: 
+          type: integer
+          format: int32
+          example: 20
+        offset: 
+          type: integer
+          format: int32
+          example: 0
+        countRows:
+          type: integer
+          format: int64
+          example: 27
+        totalLimit: 
+          type: integer
+          format: int64
+          example: 1
+      required:
+          - currentPage
+          - limit
+          - offset
+          - countRows
+          - totalLimit
+      example:
+        currentPage: 1
+        limit: 20
+        offset: 0
+        countRows: 27
+        totalLimit: 1
+  
+    Token:
+      properties:
+        token_type:
+          type: string
+          example: Bearer
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ945rtyRTWTQYW
+      required:
+        - token_type
+        - access_token
+      example:
+        token_type: Bearer
+        access_token: '{{jwt}}'
+          
+    Status_200:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 200
+        info: successful operation
+
+    Status_201:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        info:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 201
+        info: The data has been created in the database with ID
+
+    Status_400:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 400
+        error: Invalid ID supplied
+
+    Status_401:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 401
+        error:  Access token is missing or invalid
+
+    Status_403:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 403
+        error:  Token invalid or Token required or Expired Token
+
+    Status_404:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 404
+        error:  Information not found
+  
+    Status_500:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        error:
+          type: string
+      required:
+        - code
+        - message
+      example:
+        status: 500
+        error: Problems connecting to the database
+
+  responses:
+  
+    Successful:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_200'
+  
+    NotFound:
+      description: Information not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+    
+    CreateID:
+      description: The data has been created in the database with ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_201'
+
+    NotCreate:
+      description: There has been an error creating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    NotUpdate:
+      description: There has been an error updating
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'
+            
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_401'
+
+    ExpiredToken:
+      description: Token invalid or Token required or Expired Token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_403'
+    
+    InvalidID:
+      description: Invalid ID supplied
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_400'        
+     
+    InvalidStatus:
+      description: Invalid status
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_404'           
+
+    ErrorInDataBase:
+      description: Problems connecting to the database
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Status_500' 
+ 
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

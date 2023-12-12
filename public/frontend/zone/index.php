@@ -44,7 +44,7 @@ include_once $ruteTheme.'navbar.php';
                     <td>Generate token with user demo</td>
                   </tr>
                   <tr class="table-warning">
-                    <td><a target="new" href="<?php echo $rute;?>api/zone/">zone table documentation /api/zone/</a></td>
+                    <td><a target="new" href="<?php echo $route;?>api/zone/">zone table documentation /api/zone/</a></td>
                     <td>Schemas, json structure, type of data and error code</td>
                   </tr>
                   <tr class="table-light">

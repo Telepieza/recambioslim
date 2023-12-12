@@ -1,12 +1,21 @@
 ## 1.0.11 (2023-12-12)
 
 * New Product              template included in BackEnd and FrontEnd.
-* New Product_attribute    template included in BackEnd and FrontEnd..
+* New Product_attribute    template included in BackEnd and FrontEnd.
 * New Product_related      template included in BackEnd and FrontEnd.
 * New Product_reward       template included in BackEnd and FrontEnd.
 * New Product_layout       template included in BackEnd and FrontEnd.
 * New Product_category     template included in BackEnd and FrontEnd.
 * New Product_store        template included in BackEnd and FrontEnd.
+
+* New Product              schemas in BackEnd.
+* New Product_description  schemas in BackEnd.
+* New Product_attribute    schemas in BackEnd.
+* New Product_related      schemas in BackEnd.
+* New Product_reward       schemas in BackEnd.
+* New Product_layout       schemas in BackEnd.
+* New Product_category     schemas in BackEnd.
+* New Product_store        schemas in BackEnd.
 
 * Fixed bug in Customer_reward template in BackEnd.
 * Fixed bug in Customer_transaction template in BackEnd.

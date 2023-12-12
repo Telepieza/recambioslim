@@ -8,10 +8,10 @@
 declare(strict_types=1);
 
 use App\Service\Category;
+use App\Service\Category_description;
 use App\Service\Language;
 use App\Service\Manufacturer;
 use App\Service\Geo_zone;
-use App\Service\CategoryDescription;
 use App\Service\Country;
 use App\Service\Location;
 use App\Service\Zone;
@@ -31,7 +31,7 @@ use App\Service\Customer_transaction;
 use App\Service\Product;
 use App\Service\Product_attribute;
 use App\Service\Product_related;
-use App\Service\ProductDescription;
+use App\Service\Product_description;
 use App\Service\Product_layout;
 use App\Service\Product_reward;
 use App\Service\Product_category;
@@ -51,11 +51,11 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Category_create_service'] = static fn (): Category\Create=>new Category\Create();
   $container['Category_update_service'] = static fn (): Category\Update=>new Category\Update();
   $container['Category_delete_service'] = static fn (): Category\Delete=>new Category\Delete();
-  // CategoryDescription
-  $container['CategoryDescription_find_service']   = static fn (): CategoryDescription\Find  =>new CategoryDescription\Find();
-  $container['CategoryDescription_create_service'] = static fn (): CategoryDescription\Create=>new CategoryDescription\Create();
-  $container['CategoryDescription_update_service'] = static fn (): CategoryDescription\Update=>new CategoryDescription\Update();
-  $container['CategoryDescription_delete_service'] = static fn (): CategoryDescription\Delete=>new CategoryDescription\Delete();
+  // Category_description
+  $container['Category_description_find_service']   = static fn (): Category_description\Find  =>new Category_description\Find();
+  $container['Category_description_create_service'] = static fn (): Category_description\Create=>new Category_description\Create();
+  $container['Category_description_update_service'] = static fn (): Category_description\Update=>new Category_description\Update();
+  $container['Category_description_delete_service'] = static fn (): Category_description\Delete=>new Category_description\Delete();
   // Country
   $container['Country_find_service']   = static fn (): Country\Find  =>new Country\Find();
   $container['Country_create_service'] = static fn (): Country\Create=>new Country\Create();
@@ -156,6 +156,11 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Product_create_service'] = static fn (): Product\Create=>new Product\Create();
   $container['Product_update_service'] = static fn (): Product\Update=>new Product\Update();
   $container['Product_delete_service'] = static fn (): Product\Delete=>new Product\Delete();
+  // Product_description
+  $container['Product_description_find_service']   = static fn (): Product_description\Find  =>new Product_description\Find();
+  $container['Product_description_create_service'] = static fn (): Product_description\Create=>new Product_description\Create();
+  $container['Product_description_update_service'] = static fn (): Product_description\Update=>new Product_description\Update();
+  $container['Product_description_delete_service'] = static fn (): Product_description\Delete=>new Product_description\Delete();
   // Product_attribute
   $container['Product_attribute_find_service']   = static fn (): Product_attribute\Find  =>new Product_attribute\Find();
   $container['Product_attribute_create_service'] = static fn (): Product_attribute\Create=>new Product_attribute\Create();
@@ -181,11 +186,6 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Product_store_create_service'] = static fn (): Product_store\Create=>new Product_store\Create();
   $container['Product_store_update_service'] = static fn (): Product_store\Update=>new Product_store\Update();
   $container['Product_store_delete_service'] = static fn (): Product_store\Delete=>new Product_store\Delete();
-  // ProductDescription
-  $container['ProductDescription_find_service']   = static fn (): ProductDescription\Find  =>new ProductDescription\Find();
-  $container['ProductDescription_create_service'] = static fn (): ProductDescription\Create=>new ProductDescription\Create();
-  $container['ProductDescription_update_service'] = static fn (): ProductDescription\Update=>new ProductDescription\Update();
-  $container['ProductDescription_delete_service'] = static fn (): ProductDescription\Delete=>new ProductDescription\Delete();
   // Product_reward
   $container['Product_reward_find_service']   = static fn (): Product_reward\Find  =>new Product_reward\Find();
   $container['Product_reward_create_service'] = static fn (): Product_reward\Create=>new Product_reward\Create();

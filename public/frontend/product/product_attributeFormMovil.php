@@ -3,7 +3,7 @@
   * product_attributeFormMovil.php
   * Description: Mobile product_attribute form
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.12
   * --------------- Fields -----------------
   * getfieldid() (int)    product_id
 	* getfield01() (string) attribute_id
@@ -53,15 +53,15 @@
                       </div>
                       <div class="form-floating mb-1 w-50">
                            <input type="number" class="form-control" name="<?php echo getfield01()?>" id="<?php echo getfield01()?>" min="1" placeholder="<?php echo getfield01()?>" value="<?php if (isset($val[0][getfield01()])) {echo $val[0][getfield01()];}?>"/>
-                           <label for="<?php echo getfield01()?>"><?php echo getfield01()?>:</label>
+                           <label for="<?php echo getfield01()?>">* <?php echo getfield01()?>:</label>
                       </div>
                       <div class="form-floating mb-1 w-50">
                            <input type="number" class="form-control" name="<?php echo getfield02()?>" id="<?php echo getfield02()?>" min="1" placeholder="<?php echo getfield02()?>" value="<?php if (isset($val[0][getfield02()])) {echo $val[0][getfield02()];}?>"/>
-                           <label for="<?php echo getfield02()?>"><?php echo getfield02()?>:</label>
+                           <label for="<?php echo getfield02()?>">* <?php echo getfield02()?>:</label>
                       </div>
                       <div class="form-floating mb-1">
                            <input type="text" class="form-control" name="<?php echo getfield03()?>" id="<?php echo getfield03()?>" placeholder="<?php echo getfield03()?>" value="<?php if (isset($val[0][getfield03()])) {echo htmlspecialchars($val[0][getfield03()]);}?>"/>
-                           <label for="<?php echo getfield03()?>"><?php echo getfield03()?>:</label>
+                           <label for="<?php echo getfield03()?>">* <?php echo getfield03()?>:</label>
                       </div>
                       <div class="form-floating mb-1">
                          <button class="col-lg-2 btn btn-success btn-default text-blank pe-2"><?php echo $action; ?></button>

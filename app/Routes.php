@@ -18,11 +18,11 @@ use App\Application\Help\Hello;
 use App\Application\Help\Helper;
 
 use App\Controller\Category;
+use App\Controller\Category_description;
 use App\Controller\Language;
 use App\Controller\Manufacturer;
 use App\Controller\User;
 use App\Controller\Geo_zone;
-use App\Controller\CategoryDescription;
 use App\Controller\Country;
 use App\Controller\Location;
 use App\Controller\Zone;
@@ -44,7 +44,7 @@ use App\Controller\Customer_transaction;
 use App\Controller\Product;
 use App\Controller\Product_attribute;
 use App\Controller\Product_related;
-use App\Controller\ProductDescription;
+use App\Controller\Product_description;
 use App\Controller\Product_layout;
 use App\Controller\Product_reward;
 use App\Controller\Product_category;
@@ -99,6 +99,18 @@ return function (App $app)
            $group->delete('/delete/{category_id:[0-9]+}',Category\Delete::class);   // servidor (admite put y delete)
         });
 
+        $group->group('/category_description', function (Group $group)
+        {
+          $group->get('/',Category_description\GetScheme::class);
+          $group->get('/read',Category_description\GetAll::class);
+          $group->get('/read/{category_id:[0-9]+}',Category_description\GetOne::class);
+          $group->post('/new',category_description\Create::class);
+          $group->post('/delete/{category_id:[0-9]+}',Category_description\Delete::class);
+          $group->post('/update/{category_id:[0-9]+}',Category_description\Update::class);
+          $group->put('/update/{category_id:[0-9]+}',Category_description\Update::class);     // servidor (admite put y delete)
+          $group->delete('/delete/{category_id:[0-9]+}',Category_description\Delete::class);  // servidor (admite put y delete)
+       });
+
         $group->group('/language', function (Group $group)
         {
           $group->get('/',Language\GetScheme::class);
@@ -134,18 +146,6 @@ return function (App $app)
          $group->put('/update/{geo_zone_id:[0-9]+}',Geo_zone\Update::class);     // servidor (admite put y delete)
          $group->delete('/delete/{geo_zone_id:[0-9]+}',Geo_zone\Delete::class);  // servidor (admite put y delete)
       });
-
-      $group->group('/category_description', function (Group $group)
-      {
-        $group->get('/',CategoryDescription\GetScheme::class);
-        $group->get('/read',CategoryDescription\GetAll::class);
-        $group->get('/read/{category_id:[0-9]+}',CategoryDescription\GetOne::class);
-        $group->post('/new',category_description\Create::class);
-        $group->post('/delete/{category_id:[0-9]+}',CategoryDescription\Delete::class);
-        $group->post('/update/{category_id:[0-9]+}',CategoryDescription\Update::class);
-        $group->put('/update/{category_id:[0-9]+}',CategoryDescription\Update::class);     // servidor (admite put y delete)
-        $group->delete('/delete/{category_id:[0-9]+}',CategoryDescription\Delete::class);  // servidor (admite put y delete)
-     });
 
      $group->group('/country', function (Group $group)
      {
@@ -339,6 +339,18 @@ return function (App $app)
       $group->delete('/delete/{product_id:[0-9]+}',Product\Delete::class);  // servidor (admite put y delete)
     });
 
+    $group->group('/product_description', function (Group $group)
+    {
+      $group->get('/',Product_description\GetScheme::class);
+      $group->get('/read',Product_description\GetAll::class);
+      $group->get('/read/{product_id:[0-9]+}',Product_description\GetOne::class);
+      $group->post('/new',Product_description\Create::class);
+      $group->post('/delete/{product_id:[0-9]+}',Product_description\Delete::class);
+      $group->post('/update/{product_id:[0-9]+}',Product_description\Update::class);
+      $group->put('/update/{product_id:[0-9]+}',Product_description\Update::class);     // servidor (admite put y delete)
+      $group->delete('/delete/{product_id:[0-9]+}',Product_description\Delete::class);  // servidor (admite put y delete)
+    });
+
     $group->group('/product_attribute', function (Group $group)
     {
       $group->get('/',Product_attribute\GetScheme::class);
@@ -385,18 +397,6 @@ return function (App $app)
       $group->post('/update/{product_id:[0-9]+}',Product_category\Update::class);
       $group->put('/update/{product_id:[0-9]+}',Product_category\Update::class);     // servidor (admite put y delete)
       $group->delete('/delete/{product_id:[0-9]+}',Product_category\Delete::class);  // servidor (admite put y delete)
-    });
-
-    $group->group('/product_description', function (Group $group)
-    {
-      $group->get('/',ProductDescripcion\GetScheme::class);
-      $group->get('/read',ProductDescripcion\GetAll::class);
-      $group->get('/read/{product_id:[0-9]+}',ProductDescripcion\GetOne::class);
-      $group->post('/new',ProductDescripcion\Create::class);
-      $group->post('/delete/{product_id:[0-9]+}',ProductDescripcion\Delete::class);
-      $group->post('/update/{product_id:[0-9]+}',ProductDescripcion\Update::class);
-      $group->put('/update/{product_id:[0-9]+}',ProductDescripcion\Update::class);     // servidor (admite put y delete)
-      $group->delete('/delete/{product_id:[0-9]+}',ProductDescripcion\Delete::class);  // servidor (admite put y delete)
     });
 
     $group->group('/product_store', function (Group $group)
