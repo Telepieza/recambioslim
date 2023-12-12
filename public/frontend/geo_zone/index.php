@@ -8,15 +8,15 @@
 
 if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 
-(string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
-(string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-(string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
+(string) $routeAdmin  = '..'.DIRECTORY_SEPARATOR.'admin'.DIRECTORY_SEPARATOR;
+(string) $routeInc    = $routeAdmin.'inc'.DIRECTORY_SEPARATOR;
+(string) $routeTheme  = $routeAdmin."template".DIRECTORY_SEPARATOR;
 
-include_once $ruteInc.'function.php';
-include_once $ruteInc.'setting.php';
+include_once $routeInc.'function.php';
+include_once $routeInc.'setting.php';
 
-include_once $ruteTheme.'header.php';
-include_once $ruteTheme.'navbar.php';
+include_once $routeTheme.'header.php';
+include_once $routeTheme.'navbar.php';
 
 ?>
 <body>
@@ -72,4 +72,4 @@ include_once $ruteTheme.'navbar.php';
     </div>
   </main>
   
-  <?php include_once $ruteTheme.'footer.php'; ?>
+  <?php include_once $routeTheme.'footer.php'; ?>

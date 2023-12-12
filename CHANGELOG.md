@@ -1,18 +1,31 @@
+## 1.0.11 (2023-12-12)
 
+* New Product              template included in BackEnd and FrontEnd.
+* New Product_attribute    template included in BackEnd and FrontEnd..
+* New Product_related      template included in BackEnd and FrontEnd.
+* New Product_reward       template included in BackEnd and FrontEnd.
+* New Product_layout       template included in BackEnd and FrontEnd.
+* New Product_category     template included in BackEnd and FrontEnd.
+* New Product_store        template included in BackEnd and FrontEnd.
+
+* Fixed bug in Customer_reward template in BackEnd.
+* Fixed bug in Customer_transaction template in BackEnd.
+* Include date validation in input template BackEnd.
+  
 ## 1.0.10 (2023-12-08)
 
-* New Custom_field       template in included in BackEnd and FrontEnd.
-* New Customer           template in included in BackEnd and FrontEnd.
+* New Custom_field       template included in BackEnd and FrontEnd.
+* New Customer           template included in BackEnd and FrontEnd.
 
 ## 1.0.9 (2023-12-07)
 
-* New Customer_activity    template in included in BackEnd and FrontEnd.
-* New Customer_approval    template in included in BackEnd and FrontEnd.
-* New Customer_group       template in included in BackEnd and FrontEnd.
-* New Customer_history     template in included in BackEnd and FrontEnd.
-* New Customer_ip          template in included in BackEnd and FrontEnd.
-* New Customer_reward      template in included in BackEnd and FrontEnd.
-* New Customer_transaction template in included in BackEnd and FrontEnd.
+* New Customer_activity    template included in BackEnd and FrontEnd.
+* New Customer_approval    template included in BackEnd and FrontEnd.
+* New Customer_group       template included in BackEnd and FrontEnd.
+* New Customer_history     template included in BackEnd and FrontEnd.
+* New Customer_ip          template included in BackEnd and FrontEnd.
+* New Customer_reward      template included in BackEnd and FrontEnd.
+* New Customer_transaction template included in BackEnd and FrontEnd.
 
 ## 1.0.8 (2023-09-11)
 
@@ -20,13 +33,13 @@
 
 ## 1.0.7 (2023-09-10)
 
- * New tax_class template in included in BackEnd and FrontEnd.
- * New tax_rate  template in included in backEnd and FrontEnd.
- * New tax_rule  template in included in BackEnd and FrontEnd.
+ * New tax_class template included in BackEnd and FrontEnd.
+ * New tax_rate  template included in backEnd and FrontEnd.
+ * New tax_rule  template included in BackEnd and FrontEnd.
 
 ## 1.0.6 (2023-09-05)
 
- * New location template is included in BackEnd and FrontEnd.
+ * New location template included in BackEnd and FrontEnd.
   
 ## 1.0.5 (2023-09-04)
 
@@ -43,8 +56,8 @@
 
 ## 1.0.3 (2023-08-29)
 
-  * New country  template is included in BackEnd and FrontEnd.
-  * New language template is included in BackEnd and FrontEnd.
+  * New country  template included in BackEnd and FrontEnd.
+  * New language template included in BackEnd and FrontEnd.
 
 ## 1.0.2 (2023-08-27)
 

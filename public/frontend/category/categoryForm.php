@@ -14,7 +14,6 @@
   * getfield06()  (int)    status
   * getfield07()  (string) date_added
   * getfield08()  (string) date_modified
-
 **/
 
  if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;

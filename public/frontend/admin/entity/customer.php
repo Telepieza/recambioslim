@@ -34,7 +34,6 @@ function setFormFields() {
     $value21 = isset($_REQUEST[getfield21()]) ? $_REQUEST[getfield21()] : '' ; // date_added
     if (empty($value21)) { $value21 = date('Y-m-d H:i:s'); }
 
-  
   $formFields = array(
     getfieldid() => (int)    $id,         // customer_id
     getfield01() => (int)    $value01,    // customer_group_id
@@ -224,5 +223,4 @@ function viewTableRows($data, $pageAction) {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
   }
   
-
 ?>

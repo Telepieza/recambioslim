@@ -64,13 +64,13 @@
                            <label for="<?php echo getfield02()?>">* <?php echo getfield02()?>:</label>
                        </div>
 
-                       <div class="form-floating mb-1 w-50">
-                           <input type="number" class="form-control" name="<?php echo getfield03()?>" id="<?php echo getfield03()?>" placeholder="<?php echo getfield03()?>" value="<?php if (isset($val[0][getfield03()])) {echo $val[0][getfield03()];}?>"/>
+                        <div class="form-floating mb-1">
+                           <input type="text" class="form-control" name="<?php echo getfield03()?>" id="<?php echo getfield03()?>" min="1" placeholder="<?php echo getfield03()?>" value="<?php if (isset($val[0][getfield03()])) {echo htmlspecialchars($val[0][getfield03()]);}?>"/>
                            <label for="<?php echo getfield03()?>">* <?php echo getfield03()?>:</label>
                        </div>
 
-                        <div class="form-floating mb-1">
-                           <input type="text" class="form-control" name="<?php echo getfield04()?>" id="<?php echo getfield04()?>" min="1" placeholder="<?php echo getfield04()?>" value="<?php if (isset($val[0][getfield04()])) {echo htmlspecialchars($val[0][getfield04()]);}?>"/>
+                       <div class="form-floating mb-1 w-50">
+                           <input type="number" class="form-control" name="<?php echo getfield04()?>" id="<?php echo getfield04()?>" placeholder="<?php echo getfield04()?>" value="<?php if (isset($val[0][getfield04()])) {echo $val[0][getfield04()];}?>"/>
                            <label for="<?php echo getfield04()?>">* <?php echo getfield04()?>:</label>
                        </div>
 

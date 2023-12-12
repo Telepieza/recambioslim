@@ -3,7 +3,7 @@
   * Services.php
   * Description: Container Services by templates and table
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.11
 **/
 declare(strict_types=1);
 
@@ -27,6 +27,15 @@ use App\Service\Customer_ip;
 use App\Service\Customer_login;
 use App\Service\Customer_reward;
 use App\Service\Customer_transaction;
+
+use App\Service\Product;
+use App\Service\Product_attribute;
+use App\Service\Product_related;
+use App\Service\ProductDescription;
+use App\Service\Product_layout;
+use App\Service\Product_reward;
+use App\Service\Product_category;
+use App\Service\Product_store;
 
 use App\Service\Custom_field;
 
@@ -142,6 +151,46 @@ return function (ContainerBuilder $containerBuilder) {
   $container['Custom_field_create_service'] = static fn (): Custom_field\Create=>new Custom_field\Create();
   $container['Custom_field_update_service'] = static fn (): Custom_field\Update=>new Custom_field\Update();
   $container['Custom_field_delete_service'] = static fn (): Custom_field\Delete=>new Custom_field\Delete();
+  // Product
+  $container['Product_find_service']   = static fn (): Product\Find  =>new Product\Find();
+  $container['Product_create_service'] = static fn (): Product\Create=>new Product\Create();
+  $container['Product_update_service'] = static fn (): Product\Update=>new Product\Update();
+  $container['Product_delete_service'] = static fn (): Product\Delete=>new Product\Delete();
+  // Product_attribute
+  $container['Product_attribute_find_service']   = static fn (): Product_attribute\Find  =>new Product_attribute\Find();
+  $container['Product_attribute_create_service'] = static fn (): Product_attribute\Create=>new Product_attribute\Create();
+  $container['Product_attribute_update_service'] = static fn (): Product_attribute\Update=>new Product_attribute\Update();
+  $container['Product_attribute_delete_service'] = static fn (): Product_attribute\Delete=>new Product_attribute\Delete();
+  // Product_related
+  $container['Product_related_find_service']   = static fn (): Product_related\Find  =>new Product_related\Find();
+  $container['Product_related_create_service'] = static fn (): Product_related\Create=>new Product_related\Create();
+  $container['Product_related_update_service'] = static fn (): Product_related\Update=>new Product_related\Update();
+  $container['Product_related_delete_service'] = static fn (): Product_related\Delete=>new Product_related\Delete();
+  // Product_layout
+  $container['Product_layout_find_service']   = static fn (): Product_layout\Find  =>new Product_layout\Find();
+  $container['Product_layout_create_service'] = static fn (): Product_layout\Create=>new Product_layout\Create();
+  $container['Product_layout_update_service'] = static fn (): Product_layout\Update=>new Product_layout\Update();
+  $container['Product_layout_delete_service'] = static fn (): Product_layout\Delete=>new Product_layout\Delete();
+  // Product_category
+  $container['Product_category_find_service']   = static fn (): Product_category\Find  =>new Product_category\Find();
+  $container['Product_category_create_service'] = static fn (): Product_category\Create=>new Product_category\Create();
+  $container['Product_category_update_service'] = static fn (): Product_category\Update=>new Product_category\Update();
+  $container['Product_category_delete_service'] = static fn (): Product_category\Delete=>new Product_category\Delete();
+  // Product_store
+  $container['Product_store_find_service']   = static fn (): Product_store\Find  =>new Product_store\Find();
+  $container['Product_store_create_service'] = static fn (): Product_store\Create=>new Product_store\Create();
+  $container['Product_store_update_service'] = static fn (): Product_store\Update=>new Product_store\Update();
+  $container['Product_store_delete_service'] = static fn (): Product_store\Delete=>new Product_store\Delete();
+  // ProductDescription
+  $container['ProductDescription_find_service']   = static fn (): ProductDescription\Find  =>new ProductDescription\Find();
+  $container['ProductDescription_create_service'] = static fn (): ProductDescription\Create=>new ProductDescription\Create();
+  $container['ProductDescription_update_service'] = static fn (): ProductDescription\Update=>new ProductDescription\Update();
+  $container['ProductDescription_delete_service'] = static fn (): ProductDescription\Delete=>new ProductDescription\Delete();
+  // Product_reward
+  $container['Product_reward_find_service']   = static fn (): Product_reward\Find  =>new Product_reward\Find();
+  $container['Product_reward_create_service'] = static fn (): Product_reward\Create=>new Product_reward\Create();
+  $container['Product_reward_update_service'] = static fn (): Product_reward\Update=>new Product_reward\Update();
+  $container['Product_reward_delete_service'] = static fn (): Product_reward\Delete=>new Product_reward\Delete();
 
   // User
   // $container['user_find_service'] = static fn (): User\Find=>new User\Find();

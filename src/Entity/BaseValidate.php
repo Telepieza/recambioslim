@@ -3,7 +3,7 @@
   * BaseValidate.php
   * Description: validates the fields by their format (String, Integer, Boolean, DateTime)
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.11
 **/
 declare(strict_types=1);
 
@@ -17,8 +17,7 @@ class BaseValidate {
         if (is_null($value)) {
             $value = '';
        }
-        $result = trim($value);
-        return $result;
+        return trim($value);
     }
 
     public function validateBoolean($value)
@@ -44,6 +43,19 @@ class BaseValidate {
         }
         if (is_null($result)) {
             $result =  (new DateTimeImmutable('now'));
+        }
+        return $result;
+    }
+
+    public function validateDate($value)
+    {
+        $result = $value;
+        if (!$result instanceof Date)
+        {
+           $result = (new Date('now'));
+        }
+        if (is_null($result)) {
+            $result =  (new Date('now'));
         }
         return $result;
     }
@@ -86,31 +98,26 @@ class BaseValidate {
 
     public function toTextCreate(): string
     {
-        $textCreate = "create";
-        return $textCreate;
+        return  "create";
     }
     public function toTextUpdate(): string
     {
-        $textUpdate = "update";
-        return $textUpdate;
+        return "update";
     }
 
     public function toTextFind(): string
     {
-        $textUpdate = "find";
-        return $textUpdate;
+        return "find";
     }
 
     public function toTextDelete(): string
     {
-        $textDelete = "Delete";
-        return $textDelete;
+        return "Delete";
     }
 
     public function toTextLogin(): string
     {
-        $textLogin = "Login";
-        return $textLogin;
+        return "Login";
     }
 
 }

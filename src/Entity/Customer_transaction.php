@@ -3,7 +3,7 @@
   * Customer_transaction.php
   * Description: Customer_transaction template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.11
 **/
 declare(strict_types=1);
 
@@ -55,15 +55,14 @@ final class Customer_transaction extends BaseValidate {
        $arr[$this->field01] = $this->getvalue01();                                        // integer
        $arr[$this->field02] = $this->getvalue02();                                        // integer
        if (trim($this->getvalue03()))  { $arr[$this->field03] = $this->getvalue03()  ; }  // string
-       $arr[$this->field03] = $this->getvalue03();                                        // float
+       $arr[$this->field04] = $this->getvalue04();                                        // float
        $arr[$this->field05] = $this->validateDateTimeImmutable($this->getvalue05());      // DateTimeImmutable
        return $arr;
     }
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string

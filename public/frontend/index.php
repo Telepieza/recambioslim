@@ -3,7 +3,7 @@
   * index.php
   * Description: Homepage or index
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.11
 **/
 
 if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
@@ -87,6 +87,10 @@ include $ruteTheme.'navbar.php';
                   </tr>
                   <tr class="table-light">
                     <td><a target="new" href="customer/index.php">FrontEnd Customer table</a></td>
+                    <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
+                  </tr>
+                  <tr class="table-info">
+                    <td><a target="new" href="product/index.php">FrontEnd Product table</a></td>
                     <td>Schema, Mobile and Desktop form, with GET and POST methods in API Rest with Json.</td>
                   </tr>
                 </tbody>
