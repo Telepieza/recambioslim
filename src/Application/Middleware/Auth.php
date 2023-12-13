@@ -3,7 +3,7 @@
   * Auth.php
   * Description: Authorization : Verify token, user and password
   * @Author : M.V.M.
-  * @Version: 1.0.5
+  * @Version: 1.0.12
 **/
 declare(strict_types=1);
 

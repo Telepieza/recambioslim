@@ -1,9 +1,9 @@
 <?php
 /**
   * BaseFind.php
-  * Description: Principal object repository class of all templates
+  * Description: Principal object User Agent class of login and delete
   * @Author : M.V.M.
-  * @Version 1.0.12
+  * @Version 1.0.13
 **/
 declare(strict_types=1);
 
@@ -17,27 +17,26 @@ class BaseUserAgent
   protected function getUserAgent(Request $request) {
     $this->agent       = [];
     if (is_array($request->getServerParams()) && count($request->getServerParams()) > 0) {
-        $keys = array_keys($request->getServerParams());
-        foreach ($keys as $key) {
+        foreach ($request->getServerParams() as $key => $val) {
           if (str_contains($key,'SERVER')) {
               if (str_contains($key,'ADDR') || str_contains($key,'PORT')) {
-                $this->setUserAgent($key,$request->getServerParams()[$key]);
+                $this->setUserAgent($key,$val);
               }
           } elseif (str_contains($key,'REQUEST'))  {
               if (str_contains($key,'SCHEME') || str_contains($key,'URI')) {
-                $this->setUserAgent($key,$request->getServerParams()[$key]);
+                $this->setUserAgent($key,$val);
               }
           } elseif (str_contains($key,'SCRIPT')) {
               if (str_contains($key,'NAME')) {
-                $this->setUserAgent($key,$request->getServerParams()[$key]);
+                $this->setUserAgent($key,$val);
               }
           } elseif (str_contains($key,'REMOTE')) {
               if (str_contains($key,'PORT')) {
-                $this->setUserAgent($key,$request->getServerParams()[$key]);
+                $this->setUserAgent($key,$val);
               }
           } elseif (str_contains($key,'PHP')) {
               if (str_contains($key,'SELF')) {
-                $this->setUserAgent($key,$request->getServerParams()[$key]);
+                $this->setUserAgent($key,$val);
               }
           }
         }
