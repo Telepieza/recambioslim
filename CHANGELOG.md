@@ -1,6 +1,5 @@
-## 1.0.12 (2023-12-13)
+## 1.0.13 (2023-12-13)
 
-* Connection control in login and delete methods in the BackEnd.
 * Upgrading slim/slim (v4.11.0 => V4.12.0)
 * Upgrading firebase/php-jwt (v6.8.1 => v6.10.0)
 * Upgrading graham-campbell/result-type (v1.1.1 => v1.1.2)
@@ -12,7 +11,9 @@
 * Upgrading symfony/yaml (v5.4.23 => v5.4.31)
 * Upgrading twig/twig (v3.7.0 => v3.8.0)
 * Upgrading vlucas/phpdotenv (v5.5.0 => v5.6.0)
+## 1.0.12 (2023-12-13)
 
+* Connection control in login and delete methods in the BackEnd.
 ## 1.0.11 (2023-12-12)
 
 * New Product              template included in BackEnd and FrontEnd.
