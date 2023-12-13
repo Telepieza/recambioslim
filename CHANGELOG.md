@@ -1,3 +1,7 @@
+## 1.0.12 (2023-12-13)
+
+* Connection control in login and delete methods in the BackEnd.
+
 ## 1.0.11 (2023-12-12)
 
 * New Product              template included in BackEnd and FrontEnd.

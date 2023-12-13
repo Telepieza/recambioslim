@@ -3,7 +3,7 @@
   * Login.php
   * Description: Service Login User
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.12
 */
 declare(strict_types=1);
 
@@ -14,24 +14,28 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Firebase\JWT\JWT;
 use App\Controller\BaseParameters;
+use App\Service\BaseUserAgent;
 use Exception;
 /*
   Observations :
     ROUTE : $group->post('/users/login');
 */
-final class Login
+final class Login extends BaseUserAgent
 {
-    protected bool $debug;
+    protected bool  $debug;
     protected array $result;
+    protected array $agent;
+    
     private   Find  $find;
+
     public function login(Request $request, BaseParameters $parameters)
     {
-        $body  = (array) $request->getParsedBody();                                    // POST, recupera el id o name o email, y el password 
+        $body  = (array) $request->getParsedBody();                                    // POST, recupera el id o name o email, y el password
         $this->debug = $parameters->getDebug();
         $this->find  = new Find($parameters->getDb(),$body,$parameters->getPrefix());  // instancia la clase Find, enviando objeto DB y los datos del body
         (string) $jsonResult = $this->find->getUser();                                 // analiza los datos con el usuario de la BD.
         $this->result = (array) json_decode($jsonResult);                              // decodifica el result para pasarlo a array, se trabaja mejor.
-        $this->toDebugger($parameters->getLogger(), ' ', $this->result);
+        $this->toDebugger($request, $parameters->getLogger(), ' ', $this->result);
         $this->result['token']   = '';
         if ($this->result['status'] != 'error' && $this->result['code'] === 200)       // comprueba que no sea error y code = 200.
         {
@@ -71,9 +75,14 @@ final class Login
           ];
     }
     // Grabar datos en el log si la variable debug de setting = true;
-    private function toDebugger(LoggerInterface $logger, $action, $message)
+    private function toDebugger(Request $request,LoggerInterface $logger, $action, $message)
     {
       if ($this->debug) {
+            $this->getUserAgent($request);
+            if (!is_null($this->agent) && count($this->agent) > 0) {
+               $msg = 'login ' . $action . ' ' . str_replace('\/','/',json_encode($this->agent));
+               $logger->debug($msg);
+            }
             $msg = 'login ' . $action . ' ' . json_encode($message);
             $logger->debug($msg);
       }

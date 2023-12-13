@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object repository class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.12
 **/
 declare(strict_types=1);
 
@@ -12,7 +12,7 @@ namespace App\Service;
 use PDOException;
 use PDO;
 // Clase principal extends de las clases BaseCreate, BaseDelete, BaseFind, BaseUpdate
-class BaseRepository 
+class BaseRepository
 {
     protected string $query;
     // Monta la sentencia "Select" de los fields and parameters para el query del PDO
@@ -207,9 +207,9 @@ class BaseRepository
       }
 
       $page = (int) ceil($offset / $limit) + 1;
-      $paginateEntity = new PaginateEntity(); 
-      $paginateEntity->setCurrentPage($page);  // Pagina 
-      $paginateEntity->setCountRows($count);   // Total registros  
+      $paginateEntity = new PaginateEntity();
+      $paginateEntity->setCurrentPage($page);  // Pagina
+      $paginateEntity->setCountRows($count);   // Total registros
       $paginateEntity->setLimit($limit);       // Limite, si es 0 es $perPage
       if ($count > 0) {
         $paginateEntity->setTotalLimit((int) ceil($count/$limit));

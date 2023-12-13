@@ -3,7 +3,7 @@
   * BaseDelete.php
   * Description: Principal object delete class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.12
 **/
 
 declare(strict_types=1);
@@ -23,13 +23,14 @@ final class BaseDelete extends BaseRepository
 {
    protected object $tableClass;
    protected BaseParameters $parameters;
+   protected string $userInfo = '';
 
    public function __construct(object $tableClass, BaseParameters $parameters)
   {
        $this->tableClass  = $tableClass;
        $this->parameters  = $parameters;
   }
-  public function delete(array $args)
+  public function delete(string $userInfo, array $args)
   {
       $count  = 0;                                                                                         // count default = 0
       $status = 'error';
@@ -40,13 +41,13 @@ final class BaseDelete extends BaseRepository
          $params  = [$this->tableClass->getFieldsId() => $id];                                             // Pasamos el id a parametros
          $result  = (array) $this->count( $this->parameters->getDb(),$this->tableClass->toTable(), $this->tableClass->getFieldsId(),$params);  //  leemos DDBB con id
          $msgDebug = 'count: '.$result['count'].' key: '.json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR );
-         $this->toDebugger($this->parameters->getLogger(), $msgDebug, $this->query);                 // Si debug = true, graba el sql y parametros en el logger
+         $this->toDebugger($userInfo, $this->parameters->getLogger(), $msgDebug, $this->query);                 // Si debug = true, graba el sql y parametros en el logger
          if ($result['code'] == 200 &&  $result['count'] > 0)                                        // Si existe el registro con el select count(*)
          {
             $sql  = "DELETE FROM `{$this->tableClass->toTable()}` WHERE `{$this->tableClass->getFieldsId()}`" . " = :" . $this->tableClass->getFieldsId(); // Delete DDBB
             $stmt = $this->parameters->getDb()->prepare($sql);                                                            // preparamos la sentencia sql
             $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
-            $this->toDebugger($this->parameters->getLogger(),'',$msgDebug);                                              // Si debug = true, graba el sql y parametros en el logger
+            $this->toDebugger($userInfo, $this->parameters->getLogger(),'',$msgDebug);                                              // Si debug = true, graba el sql y parametros en el logger
             try
             {
                $stmt->execute($params);                                   // Ejecutamos la sentencia
@@ -80,10 +81,10 @@ final class BaseDelete extends BaseRepository
             ];
   }
 // Si el debug = true, se grabara la informacion en el logger
-  private function toDebugger(LoggerInterface $logger, $action, $message)
+  private function toDebugger($userInfo, LoggerInterface $logger, $action, $message)
     {
       if ($this->parameters->getDebug()) {
-            $msg = $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
+            $msg = $userInfo . ' ' . $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
             $logger->debug($msg);
       }
     }

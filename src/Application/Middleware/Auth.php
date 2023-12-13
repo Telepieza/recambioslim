@@ -37,7 +37,10 @@ class Auth
     public function verifyToken()                                      // verificamos el token del input request del cliente
     {
         $jwtHeader = $this->request->getHeaderLine('Authorization');   // getHeaderLine   $authorization = explode(' ',$jwtHeader);
-        $authorization = explode(' ',$jwtHeader); 
+        if (is_null($jwtHeader) && isset($this->request->getServerParams()['HTTP_AUTHORIZATION'])) {
+            $jwtHeader = $this->request->getServerParams()["HTTP_AUTHORIZATION"];
+        }
+        $authorization = explode(' ',$jwtHeader);
         $this->count   = count($authorization);                        // count array
 
         (string) $type = '';
