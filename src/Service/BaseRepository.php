@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object repository class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.12
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -11,6 +11,9 @@ namespace App\Service;
 
 use PDOException;
 use PDO;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 // Clase principal extends de las clases BaseCreate, BaseDelete, BaseFind, BaseUpdate
 class BaseRepository
 {
@@ -223,6 +226,24 @@ class BaseRepository
       }
       $paginateEntity->setOffset((int) $offset);
       return $paginateEntity;
+    }
+
+    public function toMailer(PHPMailer $mailer, $ismail, $action, $table, $message)
+    {
+      $msg = '';
+      if ($ismail) {
+         $msg   = $action . ' ';
+         $mailer->Subject = $msg . 'table ' . $table . ' (RecambioSlim)';
+         $mailer->msgHTML(date('Y-m-d H:i:s'));
+         $mailContent = '<h1>User ' . $action . ' api RecambioSlim</h1>';
+         $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
+         if($mailer->send()) {
+             $msg .= 'Message has been sent';
+         } else {
+            $msg .= 'Mailer Error: ' . $mailer->ErrorInfo;
+         }
+      }
+      return $msg;
     }
 
 }

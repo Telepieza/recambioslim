@@ -14,8 +14,6 @@ use Psr\Log\LoggerInterface;
 use App\Service\BaseRepository;
 use App\Controller\BaseParameters;
 use PDOException;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 /*
    Observations :
@@ -50,7 +48,7 @@ final class BaseDelete extends BaseRepository
             $stmt = $this->parameters->getDb()->prepare($sql);                                                            // preparamos la sentencia sql
             $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
             $this->toDebugger($userInfo, $this->parameters->getLogger(),'',$msgDebug);                                              // Si debug = true, graba el sql y parametros en el logger
-            $msgMail = $this->toMailer($this->parameters->getMailer(), 'delete' , $msgDebug);
+            $msgMail = $this->toMailer($this->parameters->getMailer(), $this->parameters->getIsmail(), $this->tableClass->toTable(), 'delete' , $msgDebug);
             if (!empty($msgMail)) { $this->toDebugger($userInfo, $this->parameters->getLogger(), 'Mailer message: ', $msgMail); }
             try
             {
@@ -91,24 +89,6 @@ final class BaseDelete extends BaseRepository
             $msg = $userInfo . ' ' . $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
             $logger->debug($msg);
       }
-    }
-
-    private function toMailer(PHPMailer $mailer, $action, $message)
-    {
-      $msg = '';
-      if ($this->parameters->getIsmail()) {
-         $msg   = $action . ' ';
-         $mailer->Subject = $msg . 'table ' . $this->tableClass->toTable() . ' (RecambioSlim)';
-         $mailer->msgHTML(date('Y-m-d H:i:s'));
-         $mailContent = '<h1>User delete api RecambioSlim</h1>';
-         $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
-         if($mailer->send()) {
-             $msg .= 'Message has been sent';
-         } else {
-            $msg .= 'Mailer Error: ' . $mailer->ErrorInfo;
-         }
-      }
-      return $msg;
     }
 
 }
