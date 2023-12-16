@@ -3,7 +3,7 @@
   * Login.php
   * Description: Service Login User
   * @Author : M.V.M.
-  * @Version 1.0.12
+  * @Version 1.0.14
 */
 declare(strict_types=1);
 
@@ -98,16 +98,16 @@ final class Login extends BaseUserAgent
     {
       $msg = '';
       if ($this->ismail) {
-            $msg   = $action . ' ';
-            $mailer->Subject = $msg  . 'user connection (RecambioSlim)';
-            $mailer->msgHTML(date('Y-m-d H:i:s'));
-            $mailContent = '<h1>User login api RecambioSlim</h1>';
-            $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
+          $msg   = $action . ' ';
+          $mailer->Subject = $msg  . 'user connection (RecambioSlim)';
+          $mailer->msgHTML(date('Y-m-d H:i:s'));
+          $mailContent = '<h1>User login api RecambioSlim</h1>';
+          $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
           if($mailer->send()) {
              $msg .= 'Message has been sent';
-         } else {
+          } else {
             $msg .= 'Mailer Error: ' . $mailer->ErrorInfo;
-         }
+          }
       }
       return $msg;
     }
