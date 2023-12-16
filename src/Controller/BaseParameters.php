@@ -3,7 +3,7 @@
   * BaseParameter.php
   * Description: Base parameter for all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -11,28 +11,31 @@ namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use PDO;
+use PHPMailer\PHPMailer\PHPMailer;
+
 class BaseParameters {
-    protected bool  $debug;
-    protected string $locale;
+    protected bool    $debug;
+    protected string  $locale;
     protected ?string $appName = null;
     protected ?string $keyToken = null;
-    protected int $perPage = 0;
+    protected int     $perPage = 0;
     protected ?string $dev = null;
     protected ?string $tableController = null;
     protected ?string $prefix = null;
-    protected int $language = 0;
+    protected int     $language = 0;
     protected ?string $domain = null;
     protected ?string $timeZone = null;
-    protected ?string $country = null;
+    protected bool    $ismail;
 
-    protected PDO $db;
+    protected PDO             $db;
     protected LoggerInterface $logger;
+    protected PHPMailer       $mailer;
 
     public function getAppName() : string
     {
       return $this->appName;
     }
-    public function setAppName(string $appName) 
+    public function setAppName(string $appName)
     {
         $this->appName = $appName;
     }
@@ -53,6 +56,16 @@ class BaseParameters {
     public function setDebug(bool $debug)
     {
         $this->debug = $debug;
+    }
+
+    public function getIsmail() : bool
+    {
+      return $this->ismail;
+    }
+
+    public function setIsmail(bool $ismail)
+    {
+      $this->ismail = $ismail;
     }
 
     public function getKeyToken() : string
@@ -143,6 +156,15 @@ class BaseParameters {
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    public function getMailer() : PHPMailer
+    {
+        return $this->mailer;
+    }
+    public function setMailer(PHPMailer $mailer)
+    {
+        $this->mailer = $mailer;
     }
 
     public function getTableController() {

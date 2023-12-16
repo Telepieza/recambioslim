@@ -3,7 +3,7 @@
   * App.php
   * Description: Start the app (launch)
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -16,8 +16,6 @@ use Slim\Factory\ServerRequestCreatorFactory;
 
 
 require __DIR__ . '/../vendor/autoload.php';
-
-// require __DIR__ . '/../app/Slim-helper.php';
 
 if (!ini_get('date.timezone')) {
    date_default_timezone_set('UTC');
@@ -35,7 +33,7 @@ $settings($containerBuilder);
 $logger = require __DIR__ . '/../app/Logger.php';
 $logger($containerBuilder);
 
-// Services 
+// Services
  $services = require __DIR__ . '/../app/Services.php';
  $services($containerBuilder);
 
@@ -56,8 +54,10 @@ $callableResolver = $app->getCallableResolver();
 $container = $app->getContainer();
 
 // DataBase Mysql
-require __DIR__ . '/../app/Config/Dependencies.php';
+require __DIR__ . '/../app/Config/DataBase.php';
 
+// Mailer
+require __DIR__ . '/../app/Config/Mailer.php';
 
 // Create App
 $app = AppFactory::create();

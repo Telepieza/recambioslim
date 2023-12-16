@@ -3,7 +3,7 @@
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -33,24 +33,28 @@ class BaseController
         if (isset($this->container))
         {
           $this->baseParameters->setDb($this->container->get('db'));
+          $this->baseParameters->setMailer($this->container->get('mailer'));
           $this->appConfig($this->container);
         }
-      }    
+      }
       $this->baseParameters->setLogger($logger);
   }
   
   private function appConfig($container) {
+
      $this->baseParameters->setAppName('appName');
      $this->baseParameters->setLocale('es');
      $this->baseParameters->setDebug(false);
-     $this->baseParameters->setDev('development'); 
+     $this->baseParameters->setIsmail(false);
+     $this->baseParameters->setDev('development');
      $this->baseParameters->setKeyToken('t2l2p3ez1');
      $this->baseParameters->setPrefix('co_');
-     $this->baseParameters->setPerPage(0) ;
-     $this->baseParameters->setLanguage(2) ;
-     $this->baseParameters->setDomain('appDomain') ;
-     $this->baseParameters->setCountry('es_ES') ;
+     $this->baseParameters->setPerPage(0);
+     $this->baseParameters->setLanguage(2);
+     $this->baseParameters->setDomain('appDomain');
+     $this->baseParameters->setCountry('es_ES');
      $this->baseParameters->setTimeZone('UTC') ;
+
      $this->settings = $container->get(SettingsInterface::class);
      if (!is_null($this->settings))
      {
@@ -74,6 +78,10 @@ class BaseController
          if (isset($config['debug']))
          {
            $this->baseParameters->setDebug($config['debug']);
+         }
+         if (isset($config['email']))
+         {
+           $this->baseParameters->setIsmail($config['email']);
          }
          if (isset($config['dev']))
          {
@@ -126,7 +134,7 @@ class BaseController
     return $payload;
  }
 
-  protected function jsonWithData(Response $response, BasePayLoad $payload): Response 
+  protected function jsonWithData(Response $response, BasePayLoad $payload): Response
   {
       $json = json_encode($payload, JSON_PRETTY_PRINT);
       $response->getBody()->write($json);

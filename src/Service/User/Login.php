@@ -15,6 +15,8 @@ use Psr\Log\LoggerInterface;
 use Firebase\JWT\JWT;
 use App\Controller\BaseParameters;
 use App\Service\BaseUserAgent;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use Exception;
 /*
   Observations :
@@ -23,6 +25,7 @@ use Exception;
 final class Login extends BaseUserAgent
 {
     protected bool  $debug;
+    protected bool  $ismail;
     protected array $result;
     protected array $agent;
     
@@ -31,11 +34,15 @@ final class Login extends BaseUserAgent
     public function login(Request $request, BaseParameters $parameters)
     {
         $body  = (array) $request->getParsedBody();                                    // POST, recupera el id o name o email, y el password
-        $this->debug = $parameters->getDebug();
-        $this->find  = new Find($parameters->getDb(),$body,$parameters->getPrefix());  // instancia la clase Find, enviando objeto DB y los datos del body
-        (string) $jsonResult = $this->find->getUser();                                 // analiza los datos con el usuario de la BD.
-        $this->result = (array) json_decode($jsonResult);                              // decodifica el result para pasarlo a array, se trabaja mejor.
-        $this->toDebugger($request, $parameters->getLogger(), ' ', $this->result);
+        $this->getUserAgent($request);
+        $this->debug  = $parameters->getDebug();
+        $this->ismail = $parameters->getIsmail();
+        $this->find   = new Find($parameters->getDb(),$body,$parameters->getPrefix());  // instancia la clase Find, enviando objeto DB y los datos del body
+        (string) $jsonResult = $this->find->getUser();                                  // analiza los datos con el usuario de la BD.
+        $this->result = (array) json_decode($jsonResult);                               // decodifica el result para pasarlo a array, se trabaja mejor.
+        $this->toDebugger($parameters->getLogger(), 'login', $this->result);
+        $msg = $this->toMailer($parameters->getMailer(), 'login', $this->result);
+        if (!empty($msg)) {$this->toDebugger($parameters->getLogger(),'Mailer message: ', $msg); }
         $this->result['token']   = '';
         if ($this->result['status'] != 'error' && $this->result['code'] === 200)       // comprueba que no sea error y code = 200.
         {
@@ -49,7 +56,7 @@ final class Login extends BaseUserAgent
                ];
                $token = [
                  'info'  => json_encode($param),                                                 // generamos la key info, con json_encode de $param
-                 'iat'   => time(),                                                              // tiempo actual  
+                 'iat'   => time(),                                                              // tiempo actual
                  'exp'   => time() + (7 * 24 * 60 * 60),                                         // tiempo de caducidad del tocken (7 Días)
                ];
                try
@@ -75,16 +82,34 @@ final class Login extends BaseUserAgent
           ];
     }
     // Grabar datos en el log si la variable debug de setting = true;
-    private function toDebugger(Request $request,LoggerInterface $logger, $action, $message)
+    private function toDebugger(LoggerInterface $logger, $action, $message)
     {
       if ($this->debug) {
-            $this->getUserAgent($request);
-            if (!is_null($this->agent) && count($this->agent) > 0) {
-               $msg = 'login ' . $action . ' ' . str_replace('\/','/',json_encode($this->agent));
+            if (!is_null($this->agent) && count($this->agent) > 0 && $action == 'login') {
+               $msg = $action . ' ' . str_replace('\/','/',json_encode($this->agent));
                $logger->debug($msg);
             }
-            $msg = 'login ' . $action . ' ' . json_encode($message);
+            $msg = $action . ' ' . json_encode($message);
             $logger->debug($msg);
       }
     }
+
+    private function toMailer(PHPMailer $mailer, $action, $message)
+    {
+      $msg = '';
+      if ($this->ismail) {
+            $msg   = $action . ' ';
+            $mailer->Subject = $msg  . 'user connection (RecambioSlim)';
+            $mailer->msgHTML(date('Y-m-d H:i:s'));
+            $mailContent = '<h1>User login api RecambioSlim</h1>';
+            $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
+          if($mailer->send()) {
+             $msg .= 'Message has been sent';
+         } else {
+            $msg .= 'Mailer Error: ' . $mailer->ErrorInfo;
+         }
+      }
+      return $msg;
+    }
+
 }

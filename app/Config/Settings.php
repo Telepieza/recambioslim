@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * Settings.php
   * Description: Configuration App (depending file .env)
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -27,35 +27,42 @@ return function (ContainerBuilder $containerBuilder) {
                         'level' => Logger::DEBUG,
                     ],
                     'app' => [
-                        'name'     => $_ENV['APP_NAME'],
-                        'env'      => $_ENV['ENV'],
-                        'locale'   => $_ENV['LOCALE'],
-                        'timezone' => $_ENV['TIME_ZONE'],
-                        'country'  => $_ENV['COUNTRY'],
-                        'prefix'   => $_ENV['PREFIX'],
-                        'language' => filter_var($_ENV['LANGUAGE'],FILTER_VALIDATE_INT), 
-                        'perPage'  => filter_var($_ENV['PER_PAGE'],FILTER_VALIDATE_INT),
-                        'debug'    => filter_var($_ENV['DEBUG'],FILTER_VALIDATE_BOOLEAN),
-                        'domain'   => $_ENV['APP_DOMAIN'] ?? '',
-                        'secret'   => $_ENV['SECRET_KEY'],
+                        'name'      => $_ENV['APP_NAME']   ?? '',
+                        'env'       => $_ENV['ENV']        ?? '',
+                        'locale'    => $_ENV['LOCALE']     ?? '',
+                        'timezone'  => $_ENV['TIME_ZONE']  ?? '',
+                        'country'   => $_ENV['COUNTRY']    ?? '',
+                        'prefix'    => $_ENV['PREFIX']     ?? '',
+                        'language'  => filter_var($_ENV['LANGUAGE'],FILTER_VALIDATE_INT),
+                        'perPage'   => filter_var($_ENV['PER_PAGE'],FILTER_VALIDATE_INT),
+                        'debug'     => filter_var($_ENV['APP_DEBUG'],FILTER_VALIDATE_BOOLEAN),
+                        'domain'    => $_ENV['APP_DOMAIN'] ?? '',
+                        'secret'    => $_ENV['SECRET_KEY'] ?? '',
+                        'email'     => filter_var($_ENV['APP_EMAIL'],FILTER_VALIDATE_BOOLEAN),
                     ],
                     'dbConfig' => [
-                        'conn'     => $_ENV['DB_CONN'],
-                        'host'     => $_ENV['DB_HOST'],
-                        'name'     => $_ENV['DB_NAME'],
-                        'user'     => $_ENV['DB_USER'],
-                        'pass'     => $_ENV['DB_PASS'],
-                        'port'     => $_ENV['DB_PORT'],
-                        'char'     => $_ENV['DB_CHAR'],
+                        'conn'      => $_ENV['DB_CONN'] ?? '',
+                        'host'      => $_ENV['DB_HOST'] ?? '',
+                        'name'      => $_ENV['DB_NAME'] ?? '',
+                        'user'      => $_ENV['DB_USER'] ?? '',
+                        'pass'      => $_ENV['DB_PASS'] ?? '',
+                        'port'      => $_ENV['DB_PORT'] ?? '',
+                        'char'      => $_ENV['DB_CHAR'] ?? '',
                     ],
-                    'email' => [
-                        'type'      =>  $_ENV['EMAIL_TYPE'],
-                        'host'      =>  $_ENV['EMAIL_HOST'],
-                        'port'      =>  $_ENV['EMAIL_PORT'],
-                        'secure'    =>  $_ENV['EMAIL_SECURE'],
-                        'from'      =>  $_ENV['EMAIL_FROM'],
-                        'from_name' =>  $_ENV['EMAIL_FROM_NAME'],
-                        'to'        =>  $_ENV['EMAIL_TO']
+                    'mailerConfig' => [
+                        'host'      => $_ENV['EMAIL_HOST']      ?? '',
+                        'port'      => $_ENV['EMAIL_PORT']      ?? '',
+                        'char'      => $_ENV['EMAIL_CHAR']      ?? '',
+                        'from'      => $_ENV['EMAIL_FROM']      ?? '',
+                        'from_name' => $_ENV['EMAIL_FROM_NAME'] ?? '',
+                        'user'      => $_ENV['EMAIL_USER']      ?? '',
+                        'pass'      => $_ENV['EMAIL_PASS']      ?? '',
+                        'to'        => $_ENV['EMAIL_TO']        ?? '',
+                        'secure'    => $_ENV['EMAIL_SECURE']    ?? '',
+                        'smtp'      => filter_var($_ENV['EMAIL_SMTP'],FILTER_VALIDATE_BOOLEAN),
+                        'html'      => filter_var($_ENV['EMAIL_HTML'],FILTER_VALIDATE_BOOLEAN),
+                        'auth'      => filter_var($_ENV['EMAIL_AUTH'],FILTER_VALIDATE_BOOLEAN),
+                        'debug'     => filter_var($_ENV['EMAIL_DEBUG'],FILTER_VALIDATE_BOOLEAN),
                     ],
                      'view' => [
                          'path_templates' => __DIR__ . '/../../'.$_ENV['TEMPLATES'],
@@ -72,5 +79,3 @@ return function (ContainerBuilder $containerBuilder) {
         }
     ]);
 };
-
-

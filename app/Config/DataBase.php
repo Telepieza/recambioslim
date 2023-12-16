@@ -1,9 +1,9 @@
 <?php
-/** 
-  * Dependencies.php
+/**
+  * DataBase.php
   * Description: Container PDO
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.14
 **/
 declare(strict_types=1);
 
@@ -25,7 +25,5 @@ $container->set('db',function(ContainerInterface $ci){
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
     return $pdo;
-   
 });

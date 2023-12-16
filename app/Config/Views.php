@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
   * Views.php
   * Description: Twing configuration container
   * @Author : M.V.M.
@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 use Slim\Views\Twig;
 use Twig\Extension\DebugExtension;
 
-return function (ContainerBuilder $containerBuilder) 
+return function (ContainerBuilder $containerBuilder)
 {
     $containerBuilder->addDefinitions([
         Twig::class => function (ContainerInterface $c)

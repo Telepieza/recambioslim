@@ -1,3 +1,9 @@
+## 1.0.14 (2023-12-16)
+
+* Include in vendor packet phpmailer/phpmailer
+* Configuration mailer in Setting and Controller
+* Send email in login and delete table
+
 ## 1.0.13 (2023-12-13)
 
 * Upgrading slim/slim (v4.11.0 => V4.12.0)
