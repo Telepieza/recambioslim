@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object User Agent class of login and delete
   * @Author : M.V.M.
-  * @Version 1.0.13
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
@@ -58,7 +58,7 @@ class BaseUserAgent
        $userIP = $this->agent['SERVER_ADDR'];
       }
       if ($this->agent['SERVER_PORT'] != null) {
-        if (!is_null($userIP) || !is_empty($userIP)) {
+        if (!is_null($userIP) || !empty($userIP)) {
            $userIP .= ':';
         }
         $userIP .= $this->agent['SERVER_PORT'];

@@ -3,19 +3,18 @@
   * tax_rule.php
   * Description: tax_rule template
   * @Author : M.V.M.
-  * @Version 1.0.6
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // tax_rule_id
-    $value01 = $_REQUEST[getfield01()];  // tax_class_id
-    $value02 = $_REQUEST[getfield02()];  // tax_rate_id
-    $value03 = $_REQUEST[getfield03()];  // based
-    $value04 = $_REQUEST[getfield04()];  // priority
-   
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // tax_rule_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ; // tax_class_id
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ; // tax_rate_id
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // based
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ; // priority
    
   $formFields = array(
     getfieldid() => (int)    $id,        // tax_rule_id
@@ -23,7 +22,6 @@ function setFormFields() {
     getfield02() => (int)    $value02,   // tax_rate_id
     getfield03() => (string) $value03,   // based
     getfield04() => (int)    $value04) ; // priority
-
     return $formFields;
 }
 
@@ -51,7 +49,7 @@ function viewTableRows($data, $pageAction) {
     (int)    $value01 = 0 ; // tax_class_id
     (int)    $value02 = 0 ; // tax_rate_id
     (string) $value03 = ''; // based
-    (int)    $value04 = 0;  // priority
+    (int)    $value04 = 0 ; // priority
 
     if (isset($row[getfieldid()])) $id      = $row[getfieldid()];
     if (isset($row[getfield01()])) $value01 = $row[getfield01()];
@@ -95,5 +93,4 @@ function viewTableRows($data, $pageAction) {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
   }
   
-
 ?>

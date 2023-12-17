@@ -3,22 +3,21 @@
   * product_layout.php
   * Description: product_layout template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // product_id
-    $value01 = $_REQUEST[getfield01()];  // store_id
-    $value02 = $_REQUEST[getfield02()];  // layout_id
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // product_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ; // store_id
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ; // layout_id
    
   $formFields = array(
-    getfieldid() => (int)    $id,        // product_id
-    getfield01() => (int)    $value01,   // store_id
-    getfield02() => (int)    $value02);  // layout_id
-
+    getfieldid() => (int) $id,        // product_id
+    getfield01() => (int) $value01,   // store_id
+    getfield02() => (int) $value02);  // layout_id
     return $formFields;
 }
 
@@ -40,9 +39,9 @@ function viewTableRows($data, $pageAction) {
   if (is_array($data) && count($data) > 0) {
     foreach($data as $row):
 
-    (int)    $id      = 0 ; // product_id
-    (int)    $value01 = 0 ; // store_id
-    (int)    $value02 = 0 ; // layout_id
+    (int) $id      = 0 ; // product_id
+    (int) $value01 = 0 ; // store_id
+    (int) $value02 = 0 ; // layout_id
 
     if (isset($row[getfieldid()])) $id      = $row[getfieldid()];
     if (isset($row[getfield01()])) $value01 = $row[getfield01()];

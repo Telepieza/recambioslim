@@ -3,17 +3,17 @@
   * product_attribute.php
   * Description: product_attribute template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // product_id
-    $value01 = $_REQUEST[getfield01()];  // attribute_id
-    $value02 = $_REQUEST[getfield02()];  // language_id
-    $value03 = $_REQUEST[getfield03()];  // text
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
    
   $formFields = array(
     getfieldid() => (int)    $id,        // product_id

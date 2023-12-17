@@ -3,20 +3,21 @@
   * custom_field.php
   * description: custom_field template
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // custom_field_id
-    $value01 = $_REQUEST[getfield01()];  // type
-    $value02 = $_REQUEST[getfield02()];  // value
-    $value03 = $_REQUEST[getfield03()];  // validation
-    $value04 = $_REQUEST[getfield04()];  // location
-    $value05 = $_REQUEST[getfield05()];  // status
-    $value06 = $_REQUEST[getfield06()];  // sort_order
+
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;
+    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : 0  ;
+    $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : 0  ;
   
   $formFields = array(
     getfieldid() => (int)    $id,         // custom_field_id

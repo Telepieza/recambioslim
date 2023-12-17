@@ -3,16 +3,16 @@
   * geo_zone.php
   * Description: geo_zone template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // geo_zone_id
-    $value01 = $_REQUEST[getfield01()];  // name
-    $value02 = $_REQUEST[getfield02()];  // description
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;  // geo_zone_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;  // name
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;  // description
     $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;  // date_added
     $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;  // date_modified
     if (empty($value03)) { $value03 = date('Y-m-d H:i:s'); }

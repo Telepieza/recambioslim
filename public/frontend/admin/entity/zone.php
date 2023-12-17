@@ -3,25 +3,25 @@
   * zone.php
   * Description: zone template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
  
-  $id      = $_REQUEST[getfieldid()]; // zone_id
-  $value01 = $_REQUEST[getfield01()]; // country_id
-  $value02 = $_REQUEST[getfield02()]; // name
-  $value03 = $_REQUEST[getfield03()]; // code
-  $value04 = $_REQUEST[getfield04()]; // status
+       $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // zone_id
+  $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ; // country_id
+  $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // name
+  $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // code
+  $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ; // status
  
   $formFields = array(
-    getfieldid() => (int)    $id,        // zone_id
-    getfield01() => (int)    $value01,   // country_id
-    getfield02() => (string) $value02,   // name
-    getfield03() => (string) $value03,   // code
-    getfield04() => (int)    $value04);  // status
+    getfieldid() => (int)    $id,       // zone_id
+    getfield01() => (int)    $value01,  // country_id
+    getfield02() => (string) $value02,  // name
+    getfield03() => (string) $value03,  // code
+    getfield04() => (int)    $value04); // status
     return $formFields;
 }
 

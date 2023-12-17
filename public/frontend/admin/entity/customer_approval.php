@@ -3,18 +3,17 @@
   * customer_approval.php
   * Description: customer_approval template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // customer_approval_id
-    $value01 = $_REQUEST[getfield01()];  // customer_id
-    $value02 = $_REQUEST[getfield02()];  // type
-
-    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // date_added
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
     if (empty($value03)) { $value03 = date('Y-m-d H:i:s'); }
 
   

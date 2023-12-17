@@ -3,34 +3,34 @@
   * customer.php
   * Description: customer template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // customer_id
-    $value01 = $_REQUEST[getfield01()];  // customer_group_id
-    $value02 = $_REQUEST[getfield02()];  // store_id
-    $value03 = $_REQUEST[getfield03()];  // language_id
-    $value04 = $_REQUEST[getfield04()];  // firstname
-    $value05 = $_REQUEST[getfield05()];  // lastname
-    $value06 = $_REQUEST[getfield06()];  // email
-    $value07 = $_REQUEST[getfield07()];  // telephone
-    $value08 = $_REQUEST[getfield08()];  // fax
-    $value09 = $_REQUEST[getfield09()];  // password
-    $value10 = $_REQUEST[getfield10()];  // salt
-    $value11 = $_REQUEST[getfield11()];  // cart
-    $value12 = $_REQUEST[getfield12()];  // wishlist
-    $value13 = $_REQUEST[getfield13()];  // newsletter
-    $value14 = $_REQUEST[getfield14()];  // address_id
-    $value15 = $_REQUEST[getfield15()];  // custom_field
-    $value16 = $_REQUEST[getfield16()];  // ip
-    $value17 = $_REQUEST[getfield17()];  // status
-    $value18 = $_REQUEST[getfield18()];  // safe
-    $value19 = $_REQUEST[getfield19()];  // token
-    $value20 = $_REQUEST[getfield20()];  // code
+    $id      = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;  // customer_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;  // customer_group_id
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;  // store_id
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : 0  ;  // language_id
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;  // firstname
+    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;  // lastname
+    $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ;  // email
+    $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : '' ;  // telephone
+    $value08 = isset($_REQUEST[getfield08()]) ? $_REQUEST[getfield08()] : '' ;  // fax
+    $value09 = isset($_REQUEST[getfield09()]) ? $_REQUEST[getfield09()] : '' ;  // password
+    $value10 = isset($_REQUEST[getfield10()]) ? $_REQUEST[getfield10()] : '' ;  // salt
+    $value11 = isset($_REQUEST[getfield11()]) ? $_REQUEST[getfield11()] : '' ;  // cart
+    $value12 = isset($_REQUEST[getfield12()]) ? $_REQUEST[getfield12()] : '' ;  // wishlist
+    $value13 = isset($_REQUEST[getfield13()]) ? $_REQUEST[getfield13()] : 0  ;  // newsletter
+    $value14 = isset($_REQUEST[getfield14()]) ? $_REQUEST[getfield14()] : 0  ;  // address_id
+    $value15 = isset($_REQUEST[getfield15()]) ? $_REQUEST[getfield15()] : '' ;  // custom_field
+    $value16 = isset($_REQUEST[getfield16()]) ? $_REQUEST[getfield16()] : '' ;  // ip
+    $value17 = isset($_REQUEST[getfield17()]) ? $_REQUEST[getfield17()] : 0  ;  // status
+    $value18 = isset($_REQUEST[getfield18()]) ? $_REQUEST[getfield18()] : 0  ;  // safe
+    $value19 = isset($_REQUEST[getfield19()]) ? $_REQUEST[getfield19()] : '' ;  // token
+    $value20 = isset($_REQUEST[getfield20()]) ? $_REQUEST[getfield20()] : '' ;  // code
     $value21 = isset($_REQUEST[getfield21()]) ? $_REQUEST[getfield21()] : '' ; // date_added
     if (empty($value21)) { $value21 = date('Y-m-d H:i:s'); }
 

@@ -3,7 +3,7 @@
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
@@ -43,6 +43,7 @@ class BaseController
   private function appConfig($container) {
 
      $this->baseParameters->setAppName('appName');
+     $this->baseParameters->setAppProduct('RecambioSlim');
      $this->baseParameters->setLocale('es');
      $this->baseParameters->setDebug(false);
      $this->baseParameters->setIsmail(false);
@@ -62,6 +63,10 @@ class BaseController
          if (isset($config['name']))
          {
            $this->baseParameters->setAppName($config['name']);
+         }
+         if (isset($config['product']))
+         {
+           $this->baseParameters->setAppProduct($config['product']);
          }
          if (isset($config['locale']))
          {

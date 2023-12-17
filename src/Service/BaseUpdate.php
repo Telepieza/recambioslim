@@ -3,12 +3,11 @@
   * BaseFind.php
   * Description: Principal object update class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
 namespace App\Service;
-use Psr\Log\LoggerInterface;
 use App\Service\BaseRepository;
 use App\Service\BaseUtils;
 use App\Controller\BaseParameters;
@@ -27,7 +26,7 @@ final class BaseUpdate extends BaseRepository
 
   public function __construct(object $tableClass, BaseParameters $parameters)
  {
-      $this->tableClass   = $tableClass;
+      $this->tableClass  = $tableClass;
       $this->parameters  = $parameters;
  }
 
@@ -44,17 +43,17 @@ final class BaseUpdate extends BaseRepository
        $paramKey      = null;
        $message       = '';
        $params        = array();
-       $noPrimaryKey = "NoPrimaryKey";
-
+       $noPrimaryKey  = "NoPrimaryKey";
+       $msgName       = $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ';
        $id = isset($args[$this->tableClass->getFieldsId()]) ? (int) $args[$this->tableClass->getFieldsId()] : 0; // Recuperar el id desde $args
        if ( $id > 0 && is_numeric($id))                                                 // Controlar si el id es mayor a 0 y numerico
        {
             $params=[$this->tableClass->getFieldsId() => $id];                          // Asignar a parametros de id el valor id de entrada
             $result  = (array) $this->query($this->parameters->getDb(), $this->tableClass, $params,(int) $limit, (int) $offset);  // Leemos base de datos
-            $this->toDebugger($this->parameters->getLogger(),'query', $this->query);                          // Si debug = true, graba el query en el logger
+            $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'query',$this->query);    // Si debug = true, graba el query en el logger
             if ($result['status'] != 'error')
-            {                                                                          // Si hay error, no genera el logger, lo genera la clase principal
-              $this->toDebugger($this->parameters->getLogger(),'result', $result);     // Si debug = true, graba los resultados en el logger
+            {                                                                           // Si hay error, no genera el logger, lo genera la clase principal
+              $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'result',$result);     // Si debug = true, graba los resultados en el logger
             }
             if ($result['code'] == 200 &&  $result['count'] > 0)                       // Si existe el registro con el select query, recuperamos los datos de la DB.
             {
@@ -77,12 +76,12 @@ final class BaseUpdate extends BaseRepository
                     }
                     else                                                               // Los valores de los campos de primaryKey son diferentes entre la DB e inputs
                     {
-                      $result  = $this->count($this->parameters->getDb(),$this->tableClass->toTable(),$this->tableClass->getFieldsId(),$paramKey); // PDO: Analizar si existen filas con clave primaria y su valor nuevo (inputs)
-                      $this->toDebugger($this->parameters->getLogger(),'count',  $this->query); // Si debug = true, graba el query en el logger
-                      if ($result['status'] != 'Error') 
+                      $result  = $this->toCount($this->parameters->getDb(),$this->tableClass->toTable(),$this->tableClass->getFieldsId(),$paramKey); // PDO: Analizar si existen filas con clave primaria y su valor nuevo (inputs)
+                      $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'count',$this->query); // Si debug = true, graba el query en el logger
+                      if ($result['status'] != 'Error')
                       {                                                                         // Si hay error, no genera el logger, lo genera la clase principal
-                        $this->toDebugger($this->parameters->getLogger(),'result', $result);    // Si debug = true, graba los resultados en el logger
-                      } 
+                        $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'result',$result);    // Si debug = true, graba los resultados en el logger
+                      }
                       if ($result['code'] == 404 &&  $result['count'] == 0)                     // El code=404 ,indica que no existe el valor nuevo de la clave primaria;
                       {
                         $primaryKey = array();                                                  // PrimaryKey se inicializa,para que actualice los nuevos valores.
@@ -102,7 +101,7 @@ final class BaseUpdate extends BaseRepository
                     {
                         $params = (array) $baseUtils->buildingSqlParams($inputs, $this->tableClass->toTextUpdate(),$this->tableClass->getFieldsId(), $primaryKey );
                         $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
-                        $this->toDebugger($this->parameters->getLogger(), '',$msgDebug);                       // Si debug = true, graba el sql y parametros en el logger
+                        $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'query',$msgDebug);  // Si debug = true, graba el sql y parametros en el logger
                         $stmt = $this->parameters->getDb()->prepare($sql);                                    // PDO: Preparamos la sentencia query y la enviamos.
                         try
                         {
@@ -144,14 +143,6 @@ final class BaseUpdate extends BaseRepository
             'count'   => $count,
             'message' => $message
            ];
-  }
-// Si el debug = true, se grabara la información en el logger
-  private function toDebugger(LoggerInterface $logger, $action, $message)
-  {
-    if ($this->parameters->getDebug()) {
-          $msg = $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
-          $logger->debug($msg);
-    }
   }
 }
  

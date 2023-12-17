@@ -3,23 +3,21 @@
   * customer_transaction.php
   * description: customer_transaction template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // customer_transaction_id
-    $value01 = $_REQUEST[getfield01()];  // customer_id
-    $value02 = $_REQUEST[getfield02()];  // order_id
-    $value03 = $_REQUEST[getfield03()];  // description
-    $value04 = $_REQUEST[getfield04()];  // amount
-
-    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // date_added
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ;
+    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;
     if (empty($value05)) { $value05 = date('Y-m-d H:i:s'); }
 
-  
   $formFields = array(
     getfieldid() => (int)    $id,         // customer_transaction_id
     getfield01() => (int)    $value01,    // customer_id

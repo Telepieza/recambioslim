@@ -3,21 +3,21 @@
   * language.php
   * Description: language template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-  $id      = $_REQUEST[getfieldid()];  // language_id
-  $value01 = $_REQUEST[getfield01()];  // name
-  $value02 = $_REQUEST[getfield02()];  // code
-  $value03 = $_REQUEST[getfield03()];  // locale
-  $value04 = $_REQUEST[getfield04()];  // image
-  $value05 = $_REQUEST[getfield05()];  // directory
-  $value06 = $_REQUEST[getfield06()];  // sort_order
-  $value07 = $_REQUEST[getfield07()];  // status
+       $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+  $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;
+  $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;
+  $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
+  $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;
+  $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;
+  $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : 0  ;
+  $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : 0  ;
 
   if (empty($value04)) { $value04 = '/image'; }
 
@@ -30,9 +30,7 @@ function setFormFields() {
     getfield05() => (string) $value05,  // directory
     getfield06() => (int)    $value06,  // sort_order
     getfield07() => (int)    $value07); // status
-
     if (empty($value04)) { unset($formFields[getfield04()]); } // image
-  
     return $formFields;
 }
 

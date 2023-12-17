@@ -3,18 +3,17 @@
   * manufacturer.php
   * Description: manufacturer template
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-  $id      = $_REQUEST[getfieldid()];  // manufacturer_id
-  $value01 = $_REQUEST[getfield01()];  // name
-  $value02 = $_REQUEST[getfield02()];  // image
-  $value03 = $_REQUEST[getfield03()];  // sort_order
-
+       $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // manufacturer_id
+  $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // name
+  $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // image
+  $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : 0  ; // sort_order
   if (empty($value02)) { $value02 = '/image'; }
 
   $formFields = array(

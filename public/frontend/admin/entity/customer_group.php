@@ -3,22 +3,21 @@
   * customer_group.php
   * Description: customer_group template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // customer_group_id
-    $value01 = $_REQUEST[getfield01()];  // approval
-    $value02 = $_REQUEST[getfield02()];  // sort_order
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;
   
   $formFields = array(
-    getfieldid() => (int)  $id,         // customer_group_id
-    getfield01() => (int)  $value01,    // approval
-    getfield02() => (int)  $value02);    // sort_order
-  
+    getfieldid() => (int) $id,         // customer_group_id
+    getfield01() => (int) $value01,    // approval
+    getfield02() => (int) $value02);   // sort_order
     return $formFields;
 }
 

@@ -3,7 +3,7 @@
   * Settings.php
   * Description: Configuration App (depending file .env)
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
@@ -27,12 +27,13 @@ return function (ContainerBuilder $containerBuilder) {
                         'level' => Logger::DEBUG,
                     ],
                     'app' => [
-                        'name'      => $_ENV['APP_NAME']   ?? '',
-                        'env'       => $_ENV['ENV']        ?? '',
-                        'locale'    => $_ENV['LOCALE']     ?? '',
-                        'timezone'  => $_ENV['TIME_ZONE']  ?? '',
-                        'country'   => $_ENV['COUNTRY']    ?? '',
-                        'prefix'    => $_ENV['PREFIX']     ?? '',
+                        'name'      => $_ENV['APP_NAME']    ?? '',
+                        'product'   => $_ENV['APP_PRODUCT'] ?? '',
+                        'env'       => $_ENV['ENV']         ?? '',
+                        'locale'    => $_ENV['LOCALE']      ?? '',
+                        'timezone'  => $_ENV['TIME_ZONE']   ?? '',
+                        'country'   => $_ENV['COUNTRY']     ?? '',
+                        'prefix'    => $_ENV['PREFIX']      ?? '',
                         'language'  => filter_var($_ENV['LANGUAGE'],FILTER_VALIDATE_INT),
                         'perPage'   => filter_var($_ENV['PER_PAGE'],FILTER_VALIDATE_INT),
                         'debug'     => filter_var($_ENV['APP_DEBUG'],FILTER_VALIDATE_BOOLEAN),

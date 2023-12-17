@@ -3,7 +3,7 @@
   * BaseParameter.php
   * Description: Base parameter for all templates
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
@@ -17,6 +17,7 @@ class BaseParameters {
     protected bool    $debug;
     protected string  $locale;
     protected ?string $appName = null;
+    protected ?string $appProduct = null;
     protected ?string $keyToken = null;
     protected int     $perPage = 0;
     protected ?string $dev = null;
@@ -38,6 +39,15 @@ class BaseParameters {
     public function setAppName(string $appName)
     {
         $this->appName = $appName;
+    }
+
+    public function getAppProduct() : string
+    {
+      return $this->appProduct;
+    }
+    public function setAppProduct(string $appProduct)
+    {
+        $this->appProduct = $appProduct;
     }
 
     public function getLocale() : string

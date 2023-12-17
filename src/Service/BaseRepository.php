@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object repository class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.15
 **/
 declare(strict_types=1);
 
@@ -11,8 +11,8 @@ namespace App\Service;
 
 use PDOException;
 use PDO;
+use Psr\Log\LoggerInterface;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 // Clase principal extends de las clases BaseCreate, BaseDelete, BaseFind, BaseUpdate
 class BaseRepository
@@ -20,7 +20,7 @@ class BaseRepository
     protected string $query;
     // Monta la sentencia "Select" de los fields and parameters para el query del PDO
 
-    public function query(PDO $db, object $tableClass, $parameter=array(), int $limit, int $offset)
+    protected function query(PDO $db, object $tableClass, $parameter=array(), int $limit, int $offset)
     {
         $params       = array();
         $id           = 0;
@@ -124,7 +124,7 @@ class BaseRepository
     }
 
     // Monta la sentencia "Select count" para el query del PDO.
-    public function count(PDO $db, string $table,string $fieldsId, $parameter=array())
+    protected function toCount(PDO $db, string $table,string $fieldsId, $parameter=array())
     {
         $params      = array();
         $id          = 0;
@@ -202,7 +202,7 @@ class BaseRepository
     }
     
     // Calculos y control de las datos de paginacion 
-    public function toPagination(int $perPage, int $count, int $limit, int $offset)
+    protected function toPagination(int $perPage, int $count, int $limit, int $offset)
     {
            
       if ($limit == 0) {
@@ -228,15 +228,32 @@ class BaseRepository
       return $paginateEntity;
     }
 
-    public function toMailer(PHPMailer $mailer, $ismail, $action, $table, $message)
+    protected function toDebugger(LoggerInterface $logger, $isDebug, $msgName, $action, $message)
     {
       $msg = '';
+      if ($isDebug) {
+        if (!empty($msgName)) {
+            $msg = $msgName;
+        }
+        if (!empty($action)) {
+            $msg .= $action . ' ';
+        }
+        $msg .= str_replace('\/','/',json_encode($message));
+        $logger->debug($msg);
+      }
+    }
+
+    protected function toMailer(PHPMailer $mailer, $ismail, $product, $action, $table, $message)
+    {
+      $msg         = '';
+      $mailContent = '';
       if ($ismail) {
-         $msg   = $action . ' ';
-         $mailer->Subject = $msg . 'table ' . $table . ' (RecambioSlim)';
+         $msg   = $action . ' table ' . $table . ' ' . $product;
+         $mailer->Subject = $msg;
          $mailer->msgHTML(date('Y-m-d H:i:s'));
-         $mailContent = '<h1>User ' . $action . ' api RecambioSlim</h1>';
-         $mailer->Body = $mailContent . '<p>' . json_encode($message) . '</p>';
+         $mailContent = '<h1>User ' . $action . ' api ' . $product . '</h1><p>' . json_encode($message) . '</p>';
+         $mailer->Body    = $mailContent;
+         $mailer->AltBody = json_encode($message);
          if($mailer->send()) {
              $msg .= 'Message has been sent';
          } else {

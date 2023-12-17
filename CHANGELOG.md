@@ -1,3 +1,9 @@
+## 1.0.15 (2023-12-17)
+
+* All frontend templates are change when reading the Request.
+* New fields in sending data by email.
+* New controls on data recording in the debug file.
+  
 ## 1.0.14 (2023-12-16)
 
 * Include in vendor packet phpmailer/phpmailer

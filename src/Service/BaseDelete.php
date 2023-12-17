@@ -3,14 +3,13 @@
   * BaseDelete.php
   * Description: Principal object delete class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.15
 **/
 
 declare(strict_types=1);
 
 namespace App\Service;
                                                           
-use Psr\Log\LoggerInterface;
 use App\Service\BaseRepository;
 use App\Controller\BaseParameters;
 use PDOException;
@@ -35,21 +34,24 @@ final class BaseDelete extends BaseRepository
       $count  = 0;                                                                                         // count default = 0
       $status = 'error';
       $message = '';
+      $msgName = $userInfo . ' ' . $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ';
       $id = isset($args[$this->tableClass->getFieldsId()]) ? $args[$this->tableClass->getFieldsId()] : 0;  // Recuperar el id desde $args
       if ( $id > 0 && is_numeric($id))                                                                     // Controlar si el id es mayor a 0 y numerico
       {
          $params  = [$this->tableClass->getFieldsId() => $id];                                             // Pasamos el id a parametros
-         $result  = (array) $this->count( $this->parameters->getDb(),$this->tableClass->toTable(), $this->tableClass->getFieldsId(),$params);  //  leemos DDBB con id
-         $msgDebug = 'count: '.$result['count'].' key: '.json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR );
-         $this->toDebugger($userInfo, $this->parameters->getLogger(), $msgDebug, $this->query);            // Si debug = true, graba el sql y parametros en el logger  
+         $result  = (array) $this->toCount( $this->parameters->getDb(),$this->tableClass->toTable(), $this->tableClass->getFieldsId(),$params);  //  leemos DDBB con id
+         $action = 'count: '.$result['count'].' key: '.json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR );
+         $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(), $msgName, $action, $this->query);  // Si debug = true, graba el sql y parametros en el logger
          if ($result['code'] == 200 &&  $result['count'] > 0)                                              // Si existe el registro con el select count(*)
          {
             $sql  = "DELETE FROM `{$this->tableClass->toTable()}` WHERE `{$this->tableClass->getFieldsId()}`" . " = :" . $this->tableClass->getFieldsId(); // Delete DDBB
             $stmt = $this->parameters->getDb()->prepare($sql);                                                            // preparamos la sentencia sql
             $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
-            $this->toDebugger($userInfo, $this->parameters->getLogger(),'',$msgDebug);                                              // Si debug = true, graba el sql y parametros en el logger
-            $msgMail = $this->toMailer($this->parameters->getMailer(), $this->parameters->getIsmail(), $this->tableClass->toTable(), 'delete' , $msgDebug);
-            if (!empty($msgMail)) { $this->toDebugger($userInfo, $this->parameters->getLogger(), 'Mailer message: ', $msgMail); }
+            $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'query',$msgDebug);  // Si debug = true, graba el sql y parametros en el logger
+            $msgMail = $this->toMailer($this->parameters->getMailer(),$this->parameters->getIsmail(),$this->parameters->getAppProduct(),$this->tableClass->toTable(),'delete',$msgDebug);
+            if (!empty($msgMail)) {
+               $this->toDebugger($this->parameters->getLogger(), $this->parameters->getDebug(),$msgName,'mailer',$msgMail);
+            }
             try
             {
                $stmt->execute($params);                                   // Ejecutamos la sentencia
@@ -82,13 +84,5 @@ final class BaseDelete extends BaseRepository
                'message' => $message
             ];
   }
-// Si el debug = true, se grabara la informacion en el logger
-  private function toDebugger($userInfo, LoggerInterface $logger, $action, $message)
-    {
-      if ($this->parameters->getDebug()) {
-            $msg = $userInfo . ' ' . $this->tableClass->toTableName() . ' ' . $this->tableClass->toTextFind() . ' ' . $action . ' ' . json_encode($message);
-            $logger->debug($msg);
-      }
-    }
 
 }

@@ -3,18 +3,18 @@
   * tax_rate.php
   * Description: tax_rate template
   * @Author : M.V.M.
-  * @Version 1.0.6
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // tax_rate_id
-    $value01 = $_REQUEST[getfield01()];  // geo_zone_id
-    $value02 = $_REQUEST[getfield02()];  // name
-    $value03 = $_REQUEST[getfield03()];  // rate
-    $value04 = $_REQUEST[getfield04()];  // type
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // tax_rate_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ; // geo_zone_id
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // name
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : 0  ; // rate
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // type
     $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // date_added
     $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ; // date_modified
     if (empty($value05)) { $value05 = date('Y-m-d H:i:s'); }
@@ -64,7 +64,6 @@ function viewTableRows($data, $pageAction) {
     (string) $value04  = '';  // type
     (string) $value05  = '';  // date_added
     (string) $value06  = '';  // date_modified
-
 
     if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
     if (isset($row[getfield01()])) $value01      = $row[getfield01()];

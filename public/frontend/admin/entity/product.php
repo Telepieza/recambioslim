@@ -3,45 +3,44 @@
   * product.php
   * Description: product template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // product_id
-    $value01 = $_REQUEST[getfield01()];  // model
-    $value02 = $_REQUEST[getfield02()];  // sku
-    $value03 = $_REQUEST[getfield03()];  // upc
-    $value04 = $_REQUEST[getfield04()];  // ean
-    $value05 = $_REQUEST[getfield05()];  // jan
-    $value06 = $_REQUEST[getfield06()];  // isbn
-    $value07 = $_REQUEST[getfield07()];  // mpn
-    $value08 = $_REQUEST[getfield08()];  // location
-    $value09 = $_REQUEST[getfield09()];  // quantity
-    $value10 = $_REQUEST[getfield10()];  // stock_status_id
-    $value11 = $_REQUEST[getfield11()];  // image
-    $value12 = $_REQUEST[getfield12()];  // manufacturer_id
-    $value13 = $_REQUEST[getfield13()];  // shipping
-    $value14 = $_REQUEST[getfield14()];  // price
-    $value15 = $_REQUEST[getfield15()];  // points
-    $value16 = $_REQUEST[getfield16()];  // tax_class_id
-    $value17 = $_REQUEST[getfield17()];  // date_available
-    $value18 = $_REQUEST[getfield18()];  // weight
-    $value19 = $_REQUEST[getfield19()];  // weight_class_id
-    $value20 = $_REQUEST[getfield20()];  // length
-    $value21 = $_REQUEST[getfield21()];  // width
-    $value22 = $_REQUEST[getfield22()];  // height
-    $value23 = $_REQUEST[getfield23()];  // length_class_id
-    $value24 = $_REQUEST[getfield24()];  // subtract
-    $value25 = $_REQUEST[getfield25()];  // minimum
-    $value26 = $_REQUEST[getfield26()];  // sort_order
-    $value27 = $_REQUEST[getfield27()];  // status
-    $value28 = $_REQUEST[getfield28()];  // viewed
+         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // product_id
+    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // model
+    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // sku
+    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // upc
+    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // ean
+    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // jan
+    $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ; // isbn
+    $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : '' ; // mpn
+    $value08 = isset($_REQUEST[getfield08()]) ? $_REQUEST[getfield08()] : '' ; // location
+    $value09 = isset($_REQUEST[getfield09()]) ? $_REQUEST[getfield09()] : 0  ; // quantity
+    $value10 = isset($_REQUEST[getfield10()]) ? $_REQUEST[getfield10()] : 0  ; // stock_status_id
+    $value11 = isset($_REQUEST[getfield11()]) ? $_REQUEST[getfield11()] : '' ; // image
+    $value12 = isset($_REQUEST[getfield12()]) ? $_REQUEST[getfield12()] : 0  ; // manufacturer_id
+    $value13 = isset($_REQUEST[getfield13()]) ? $_REQUEST[getfield13()] : 0  ; // shipping
+    $value14 = isset($_REQUEST[getfield14()]) ? $_REQUEST[getfield14()] : 0  ; // price
+    $value15 = isset($_REQUEST[getfield15()]) ? $_REQUEST[getfield15()] : 0  ; // points
+    $value16 = isset($_REQUEST[getfield16()]) ? $_REQUEST[getfield16()] : 0  ; // tax_class_id
+    $value17 = isset($_REQUEST[getfield17()]) ? $_REQUEST[getfield17()] : '' ; // date_available
+    $value18 = isset($_REQUEST[getfield18()]) ? $_REQUEST[getfield18()] : 0  ; // weight
+    $value19 = isset($_REQUEST[getfield19()]) ? $_REQUEST[getfield19()] : 0  ; // weight_class_id
+    $value20 = isset($_REQUEST[getfield20()]) ? $_REQUEST[getfield20()] : 0  ; // length
+    $value21 = isset($_REQUEST[getfield21()]) ? $_REQUEST[getfield21()] : 0  ; // width
+    $value22 = isset($_REQUEST[getfield22()]) ? $_REQUEST[getfield22()] : 0  ; // height
+    $value23 = isset($_REQUEST[getfield23()]) ? $_REQUEST[getfield23()] : 0  ; // length_class_id
+    $value24 = isset($_REQUEST[getfield24()]) ? $_REQUEST[getfield24()] : 0  ; // subtract
+    $value25 = isset($_REQUEST[getfield25()]) ? $_REQUEST[getfield25()] : 0  ; // minimum
+    $value26 = isset($_REQUEST[getfield26()]) ? $_REQUEST[getfield26()] : 0  ; // sort_order
+    $value27 = isset($_REQUEST[getfield27()]) ? $_REQUEST[getfield27()] : 0  ; // status
+    $value28 = isset($_REQUEST[getfield28()]) ? $_REQUEST[getfield28()] : 0  ; // viewed
     $value29 = isset($_REQUEST[getfield29()]) ? $_REQUEST[getfield29()] : '' ; // date_added
     $value30 = isset($_REQUEST[getfield30()]) ? $_REQUEST[getfield30()] : '' ; // date_modified
-    
     if (empty($value17)) { $value17 = date('Y-m-d');       }
     if (empty($value29)) { $value29 = date('Y-m-d H:i:s'); }
     if (empty($value30)) { $value30 = date('Y-m-d H:i:s'); }
@@ -78,11 +77,9 @@ function setFormFields() {
     getfield28() => (int)    $value28,    // viewed
     getfield29() => (string) $value29,    // date_added
     getfield30() => (string) $value30);   // date_modified
-
     if (empty($value17)) { unset($formFields[getfield17()]); } // date_available
     if (empty($value29)) { unset($formFields[getfield29()]); } // date_added
     if (empty($value30)) { unset($formFields[getfield30()]); } // date_modified
-  
     return $formFields;
 }
 
@@ -102,7 +99,6 @@ function viewTableThead($data) {
   '<th>' . getfield07() . '</th>' .    // mpn
   '<th>' . getfield11() . '</th>' .    // image
   '<th>' . getfield27() . '</th>' ;    // status
-
  return $header;
 }
 

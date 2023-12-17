@@ -3,24 +3,24 @@
   * location.php
   * Description: location template
   * @Author : M.V.M.
-  * @Version 1.0.6
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // location_id
-    $value01 = $_REQUEST[getfield01()];  // name
-    $value02 = $_REQUEST[getfield02()];  // address
-    $value03 = $_REQUEST[getfield03()];  // telephone
-    $value04 = $_REQUEST[getfield04()];  // fax
-    $value05 = $_REQUEST[getfield05()];  // geocode
-    $value06 = $_REQUEST[getfield06()];  // image
-    $value07 = $_REQUEST[getfield07()];  // open
-    $value08 = $_REQUEST[getfield08()];  // comment
+        $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+   $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;
+   $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;
+   $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
+   $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;
+   $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;
+   $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ;
+   $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : '' ;
+   $value08 = isset($_REQUEST[getfield08()]) ? $_REQUEST[getfield08()] : '' ;
 
-    if (empty($value06)) { $value06 = '/image'; }
+   if (empty($value06)) { $value06 = '/image'; }
   
   $formFields = array(
     getfieldid() => (int)    $id,        // location_id
@@ -32,9 +32,7 @@ function setFormFields() {
     getfield06() => (string) $value06,   // image
     getfield07() => (string) $value07,   // open
     getfield08() => (string) $value08) ; // comment
-
     if (empty($value06)) { unset($formFields[getfield06()]); } // image
-
     return $formFields;
 }
 

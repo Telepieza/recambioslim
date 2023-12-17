@@ -3,26 +3,26 @@
   * category.php
   * Description: category template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.15
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
 
-    $id      = $_REQUEST[getfieldid()];  // category_id
-    $value01 = $_REQUEST[getfield01()];  // image
-    $value02 = $_REQUEST[getfield02()];  // parent_id
-    $value03 = $_REQUEST[getfield03()];  // top
-    $value04 = $_REQUEST[getfield04()];  // column
-    $value05 = $_REQUEST[getfield05()];  // sort_order
-    $value06 = $_REQUEST[getfield06()];  // status
+       $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
+  $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;
+  $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;
+  $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : 0  ;
+  $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ;
+  $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : 0  ;
+  $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : 0  ;
+  $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : '' ;
+  $value08 = isset($_REQUEST[getfield08()]) ? $_REQUEST[getfield08()] : '' ;
 
-    $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : '' ; // date_added
-    $value08 = isset($_REQUEST[getfield08()]) ? $_REQUEST[getfield08()] : '' ; // date_modified
-    if (empty($value07)) { $value07 = date('Y-m-d H:i:s'); }
-    if (empty($value08)) { $value08 = date('Y-m-d H:i:s'); }
-    if (empty($value01)) { $value01 = '/image'; }
+  if (empty($value07)) { $value07 = date('Y-m-d H:i:s'); }
+  if (empty($value08)) { $value08 = date('Y-m-d H:i:s'); }
+  if (empty($value01)) { $value01 = '/image'; }
   
   $formFields = array(
     getfieldid() => (int)    $id,        // category_id
