@@ -3,7 +3,7 @@
   * Category_description.php
   * Description: product Description template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
   * 
 **/
 declare(strict_types=1);
@@ -12,10 +12,10 @@ namespace App\Entity;
 
 final class Category_description extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "product_description";
     private $fieldid    = 'product_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'language_id';
     private $field02    = 'name';
     private $field03    = 'description';
@@ -167,7 +167,6 @@ final class Category_description extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -178,7 +177,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -189,7 +187,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -200,8 +197,6 @@ final class Category_description extends BaseValidate
     {
             return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -212,7 +207,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -223,7 +217,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value05;
     }
-
     public function setvalue05($value05):self
     {
         $this->value05 = $value05;
@@ -234,7 +227,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
@@ -245,7 +237,6 @@ final class Category_description extends BaseValidate
     {
         return $this->value07;
     }
-
     public function setvalue07($value07):self
     {
         $this->value07 = $value07;

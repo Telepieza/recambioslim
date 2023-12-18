@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service manufacturer
   * @Author : M.V.M.
-  * @Version: 1.0.5
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -20,8 +20,7 @@ abstract class Base extends BaseController
 
     protected function getManufacturerTable() : string
     {
-        $tableName  = 'manufacturer';
-        return $tableName;
+        return 'manufacturer';
     }
     
     protected function getManufacturerFindService(): Find

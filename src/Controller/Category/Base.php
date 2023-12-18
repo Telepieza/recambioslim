@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service category
   * @Author : M.V.M.
-  * @Version: 1.0.5
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -17,10 +17,9 @@ use App\Service\Category\Update;
 
 abstract class Base extends BaseController
 {
-    protected function getCategoryTable() : string 
+    protected function getCategoryTable() : string
     {
-        $tableName  = 'category';
-        return $tableName;
+        return 'category';
     }
 
     protected function getCategoryFindService(): Find

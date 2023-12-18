@@ -1,21 +1,20 @@
-<?php 
+<?php
 /** 
   * Location.php
   * Description: location template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
 final class Location extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "location";
     private $fieldid    = 'location_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'name';
     private $field02    = 'address';
     private $field03    = 'telephone';
@@ -39,7 +38,7 @@ final class Location extends BaseValidate
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -72,8 +71,7 @@ final class Location extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -185,7 +183,6 @@ final class Location extends BaseValidate
         $this->id = $id;
         return $this;
     }
-
     public function getvalue01(): string
     {
         return $this->value01;
@@ -196,7 +193,6 @@ final class Location extends BaseValidate
         $this->value01 = $value01;
         return $this;
     }
-
     public function getvalue02(): string
     {
         return $this->value02;
@@ -212,8 +208,6 @@ final class Location extends BaseValidate
     {
             return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -224,7 +218,6 @@ final class Location extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -235,7 +228,6 @@ final class Location extends BaseValidate
     {
         return $this->value05;
     }
-
     public function setvalue05($value05):self
     {
         $this->value05 = $value05;
@@ -246,7 +238,6 @@ final class Location extends BaseValidate
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
@@ -257,7 +248,6 @@ final class Location extends BaseValidate
     {
         return $this->value07;
     }
-
     public function setvalue07($value07):self
     {
         $this->value07 = $value07;
@@ -268,7 +258,6 @@ final class Location extends BaseValidate
     {
         return $this->value08;
     }
-
     public function setvalue08($value08):self
     {
         $this->value08 = $value08;

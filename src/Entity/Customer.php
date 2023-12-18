@@ -3,7 +3,7 @@
   * customer.php
   * Description: customer template
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,7 +13,6 @@ use DateTimeImmutable;
 
 final class Customer extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "customer";
     private $fieldid    = 'customer_id';
@@ -127,8 +126,7 @@ final class Customer extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -309,20 +307,18 @@ final class Customer extends BaseValidate
             $results[$this->field20] = $this->getvalue20();
          }
 
-        if ($action === 'create') {
-           if (isset($results[$this->field21]))
-           {
-               $value = $results[$this->field21];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue21($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue21()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field21];
-               }
-               $results[$this->field21] = $value;
+        if ($action === 'create' && isset($results[$this->field21]))
+        {
+            $value = $results[$this->field21];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue21($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue21()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field21];
+            }
+            $results[$this->field21] = $value;
         }
 
         return $results;
@@ -332,7 +328,6 @@ final class Customer extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -343,7 +338,6 @@ final class Customer extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -354,7 +348,6 @@ final class Customer extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -365,7 +358,6 @@ final class Customer extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03($value03): self
     {
         $this->value03 = $value03;
@@ -376,7 +368,6 @@ final class Customer extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -393,12 +384,10 @@ final class Customer extends BaseValidate
         $this->value05 = $value05;
         return $this;
     }
-
     public function getvalue06(): string
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
@@ -409,7 +398,6 @@ final class Customer extends BaseValidate
     {
         return $this->value07;
     }
-
     public function setvalue07($value07):self
     {
         $this->value07 = $value07;
@@ -424,6 +412,7 @@ final class Customer extends BaseValidate
         $this->value08 = $value08;
         return $this;
     }
+
     public function getvalue09(): string
     {
         return $this->value09;
@@ -433,6 +422,7 @@ final class Customer extends BaseValidate
         $this->value09 = $value09;
         return $this;
     }
+
     public function getvalue10(): string
     {
         return $this->value10;
@@ -442,6 +432,7 @@ final class Customer extends BaseValidate
         $this->value10 = $value10;
         return $this;
     }
+
     public function getvalue11(): string
     {
         return $this->value11;
@@ -456,7 +447,6 @@ final class Customer extends BaseValidate
     {
         return $this->value12;
     }
-
     public function setvalue12($value12):self
     {
         $this->value12 = $value12;
@@ -467,7 +457,6 @@ final class Customer extends BaseValidate
     {
         return $this->value13;
     }
-
     public function setvalue13($value13):self
     {
         $this->value13 = $value13;
@@ -498,7 +487,6 @@ final class Customer extends BaseValidate
     {
         return $this->value16;
     }
-
     public function setvalue16($value16):self
     {
         $this->value16 = $value16;
@@ -509,7 +497,6 @@ final class Customer extends BaseValidate
     {
         return $this->value17;
     }
-
     public function setvalue17($value17):self
     {
         $this->value17 = $value17;
@@ -550,7 +537,6 @@ final class Customer extends BaseValidate
     {
             return $this->value21;
     }
-
     public function setvalue21( $value21): self
     {
         $this->value21 = $value21;

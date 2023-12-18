@@ -3,7 +3,7 @@
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -11,7 +11,6 @@ namespace App\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use App\Application\Settings\SettingsInterface;
@@ -55,7 +54,6 @@ class BaseController
      $this->baseParameters->setDomain('appDomain');
      $this->baseParameters->setCountry('es_ES');
      $this->baseParameters->setTimeZone('UTC') ;
-
      $this->settings = $container->get(SettingsInterface::class);
      if (!is_null($this->settings))
      {
@@ -115,30 +113,27 @@ class BaseController
      }
   }
 
- protected function getAuthUser(Request $request) {
-   $auth = new Auth($request,$this->baseParameters->getKeyToken());
-   $result = $auth->verifyToken();
-
-   if ($result['code'] === 200) {
+  protected function getAuthUser(Request $request) {
+    $auth = new Auth($request,$this->baseParameters->getKeyToken());
+    $result = $auth->verifyToken();
+    if ($result['code'] === 200) {
       $jsonRecord = $auth->verifyUser($this->baseParameters->getDb(),$this->baseParameters->getPrefix());
       $result = (array) json_decode($jsonRecord);
-   }
-
-   /* Sin token
+    }
+    
+    /* Sin token
       if ($result['code'] === 403) { $result['code'] = 200; }
-   */
+    */
+    return $result;
+  }
 
-   return $result;
-}
-
- protected function getPayload($result) {
+  protected function getPayload($result) {
     $payload = new BasePayLoad($result);
     if ($payload->getStatus() === 'error') {
        $this->baseParameters->getLogger()->error($this->baseParameters->getTableController() . ' ' . $payload->getCode() . ' ' . $payload->getMessage());
     }
     return $payload;
- }
-
+  }
   protected function jsonWithData(Response $response, BasePayLoad $payload): Response
   {
       $json = json_encode($payload, JSON_PRETTY_PRINT);

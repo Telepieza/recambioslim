@@ -3,7 +3,7 @@
   * Product_layout.php
   * Description: Product_layout template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -31,7 +31,6 @@ final class Product_layout extends BaseValidate {
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0 );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0 );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0 );
@@ -92,7 +91,6 @@ final class Product_layout extends BaseValidate {
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -110,7 +108,6 @@ final class Product_layout extends BaseValidate {
            $this->setvalue02($this->validateInteger($results[$this->field02]));
            $results[$this->field02] = $this->getvalue02();
         }
-
         return $results;
     }
 
@@ -118,7 +115,6 @@ final class Product_layout extends BaseValidate {
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -129,7 +125,6 @@ final class Product_layout extends BaseValidate {
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -140,14 +135,12 @@ final class Product_layout extends BaseValidate {
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
         return $this;
     }
 
- 
     public function toJson(): object
     {
         return json_decode((string) json_encode(get_object_vars($this)), false);

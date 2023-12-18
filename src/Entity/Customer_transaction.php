@@ -3,7 +3,7 @@
   * Customer_transaction.php
   * Description: Customer_transaction template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -11,8 +11,8 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 
-final class Customer_transaction extends BaseValidate {
-
+final class Customer_transaction extends BaseValidate 
+{
     private $prefix     = "oc_";
     private $tablename  = "customer_transaction";
     private $fieldid    = 'customer_transaction_id';
@@ -93,7 +93,7 @@ final class Customer_transaction extends BaseValidate {
 
     public function toSortOrder(): string
     {
-        return $this->fieldid;
+        return $this->field02;
     }
 
     public function toMapfields(): array
@@ -137,24 +137,21 @@ final class Customer_transaction extends BaseValidate {
         if (isset($results[$this->field04])) {
             $this->setvalue04($this->validateFloat($results[$this->field04]));
             $results[$this->field04] = $this->getvalue04();
-         }
-
-        if ($action === 'create') {
-           if (isset($results[$this->field05]))
-           {
-               $value = $results[$this->field05];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue05($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue05()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field05];
-               }
-               $results[$this->field05] = $value;
-            }
         }
 
+        if ($action === 'create' && isset($results[$this->field05]))
+        {
+            $value = $results[$this->field05];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue05($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue05()->format('Y-m-d H:i:s');
+            }
+            else
+            {
+                $value = $results[$this->field05];
+            }
+            $results[$this->field05] = $value;
+        }
         return $results;
     }
 
@@ -162,7 +159,6 @@ final class Customer_transaction extends BaseValidate {
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -173,7 +169,6 @@ final class Customer_transaction extends BaseValidate {
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -184,7 +179,6 @@ final class Customer_transaction extends BaseValidate {
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -195,7 +189,6 @@ final class Customer_transaction extends BaseValidate {
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -206,7 +199,6 @@ final class Customer_transaction extends BaseValidate {
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -217,7 +209,6 @@ final class Customer_transaction extends BaseValidate {
     {
             return $this->value05;
     }
-
     public function setvalue05( $value05): self
     {
         $this->value05 = $value05;

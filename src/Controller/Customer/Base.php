@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Customer
   * @Author : M.V.M.
-  * @Version: 1.0.9
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -17,10 +17,9 @@ use App\Service\Customer\Update;
 
 abstract class Base extends BaseController
 {
-    protected function getCustomerTable() : string 
+    protected function getCustomerTable() : string
     {
-        $tableName  = 'customer';
-        return $tableName;
+        return 'customer';
     }
 
     protected function getCustomerFindService(): Find

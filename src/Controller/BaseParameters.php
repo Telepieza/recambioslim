@@ -3,7 +3,7 @@
   * BaseParameter.php
   * Description: Base parameter for all templates
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -14,19 +14,20 @@ use PDO;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class BaseParameters {
-    protected bool    $debug;
-    protected string  $locale;
-    protected ?string $appName = null;
+    protected bool    $debug    = false;
+    protected ?string $locale   = null;
+    protected ?string $appName  = null;
     protected ?string $appProduct = null;
     protected ?string $keyToken = null;
-    protected int     $perPage = 0;
-    protected ?string $dev = null;
+    protected int     $perPage  = 0;
+    protected ?string $dev      = null;
     protected ?string $tableController = null;
-    protected ?string $prefix = null;
+    protected ?string $prefix   = null;
     protected int     $language = 0;
-    protected ?string $domain = null;
+    protected ?string $country  = null;
+    protected ?string $domain   = null;
     protected ?string $timeZone = null;
-    protected bool    $ismail;
+    protected bool    $ismail   = false;
 
     protected PDO             $db;
     protected LoggerInterface $logger;

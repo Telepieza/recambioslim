@@ -3,7 +3,7 @@
   * Customer_ip.php
   * Description: Customer_ip template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,10 +13,10 @@ use DateTimeImmutable;
 
 final class Customer_ip extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "customer_ip";
     private $fieldid    = 'customer_ip_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'customer_id';
     private $field02    = 'ip';
     private $field03    = 'date_added';
@@ -33,7 +33,6 @@ final class Customer_ip extends BaseValidate
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0 );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '' );
@@ -54,8 +53,7 @@ final class Customer_ip extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -100,13 +98,11 @@ final class Customer_ip extends BaseValidate
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
             $results[$this->fieldid] = $this->getid();
         }
-
          
         if (isset($results[$this->field01]))
         {
@@ -120,22 +116,19 @@ final class Customer_ip extends BaseValidate
            $results[$this->field02] = $this->getvalue02();
         }
 
-        if ($action === 'create') {
-           if (isset($results[$this->field03]))
-           {
-               $value = $results[$this->field03];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue03($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue03()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field03];
-               }
-               $results[$this->field03] = $value;
+        if ($action === 'create' && isset($results[$this->field03]))
+        {
+            $value = $results[$this->field03];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue03($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue03()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field03];
+            }
+            $results[$this->field03] = $value;
         }
-
         return $results;
     }
 
@@ -143,7 +136,6 @@ final class Customer_ip extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -154,7 +146,6 @@ final class Customer_ip extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -165,7 +156,6 @@ final class Customer_ip extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -176,7 +166,6 @@ final class Customer_ip extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;

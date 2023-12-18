@@ -3,7 +3,7 @@
   * BaseDelete.php
   * Description: Principal object delete class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 
 declare(strict_types=1);
@@ -48,7 +48,7 @@ final class BaseDelete extends BaseRepository
             $stmt = $this->parameters->getDb()->prepare($sql);                                                            // preparamos la sentencia sql
             $msgDebug = 'sql: '.$sql.' params: '.str_replace('"','',json_encode($params,JSON_PARTIAL_OUTPUT_ON_ERROR ));
             $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(),$msgName,'query',$msgDebug);  // Si debug = true, graba el sql y parametros en el logger
-            $msgMail = $this->toMailer($this->parameters->getMailer(),$this->parameters->getIsmail(),$this->parameters->getAppProduct(),$this->tableClass->toTable(),'delete',$msgDebug);
+            $msgMail = $this->toMailer($this->parameters->getMailer(),$this->parameters->getIsmail(),$this->parameters->getAppProduct(),$this->tableClass->toTable(),'delete',$msgName.' <<>> '.$msgDebug);
             if (!empty($msgMail)) {
                $this->toDebugger($this->parameters->getLogger(), $this->parameters->getDebug(),$msgName,'mailer',$msgMail);
             }

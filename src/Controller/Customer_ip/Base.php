@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Customer_ip
   * @Author : M.V.M.
-  * @Version: 1.0.9
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getCustomer_ipTable() : string 
     {
-        $tableName  = 'customer_ip';
-        return $tableName;
+        return 'customer_ip';
     }
 
     protected function getCustomer_ipFindService(): Find

@@ -3,21 +3,19 @@
   * tax_class.php
   * Description: tax_class template
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
-
-         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // tax_class_id
-    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // title
-    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // description
-    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // date_added
-    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // date_modified
-    if (empty($value03)) { $value03 = date('Y-m-d H:i:s'); }
-    if (empty($value04)) { $value04 = date('Y-m-d H:i:s'); }
-  
+  (int)         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // tax_class_id
+  (string) $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // title
+  (string) $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // description
+  (string) $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // date_added
+  (string) $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // date_modified
+  if (empty($value03)) { $value03 = date('Y-m-d H:i:s'); }
+  if (empty($value04)) { $value04 = date('Y-m-d H:i:s'); }
   $formFields = array(
     getfieldid() => (int)    $id,        // tax_class_id
     getfield01() => (string) $value01,   // title
@@ -34,7 +32,6 @@ function viewTableThead($data) {
   if (is_array($data) && count($data) > 0) {
     $header .= '<th>action</th>';
   }
-
   $header .=
   '<th>' . getfieldid() . '</th>' .  // tax_class_id
   '<th>' . getfield01() . '</th>' .  // title
@@ -45,60 +42,44 @@ function viewTableThead($data) {
 }
 
 function viewTableRows($data, $pageAction) {
-
   if (is_array($data) && count($data) > 0) {
     foreach($data as $row):
-
-    (int)    $id      = 0 ; // tax_class_id
-    (string) $value01 = ''; // title
-    (int)    $value02 = ''; // description
-    (string) $value03 = ''; // date_added
-    (string) $value04 = ''; // date_modified
-
-    if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
-    if (isset($row[getfield01()])) trim($value01 = $row[getfield01()]);
-    if (isset($row[getfield02()])) trim($value02 = $row[getfield02()]);
-    if (isset($row[getfield03()])) trim($value03 = $row[getfield03()]);
-    if (isset($row[getfield04()])) trim($value04 = $row[getfield04()]);
-    
-    if (strlen($value03) > 10) { $value03 = substr($value03,0,10); }
-    if (strlen($value04) > 10) { $value04 = substr($value04,0,10); }
-
-    echo '<tr>';
-       echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
-       echo '<td>' . $id      . '</td>';  // tax_class_id
-       echo '<td>' . $value01 . '</td>';  // title
-       echo '<td>' . $value02 . '</td>';  // description
-       echo '<td>' . $value03 . '</td>';  // date_added
-       echo '<td>' . $value04 . '</td>';  // date_modified
-    echo '</tr>';
+      (int)         $id = isset($row[getfieldid()]) ? $row[getfieldid()] : 0  ; // tax_class_id
+      (string) $value01 = isset($row[getfield01()]) ? $row[getfield01()] : '' ; // title
+      (string) $value02 = isset($row[getfield02()]) ? $row[getfield02()] : '' ; // description
+      (string) $value03 = isset($row[getfield03()]) ? $row[getfield03()] : '' ; // date_added
+      (string) $value04 = isset($row[getfield04()]) ? $row[getfield04()] : '' ; // date_modified
+      if (strlen($value03) > 10) { $value03 = substr($value03,0,10); }
+      if (strlen($value04) > 10) { $value04 = substr($value04,0,10); }
+      echo '<tr>';
+        echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
+        echo '<td>' . $id      . '</td>';  // tax_class_id
+        echo '<td>' . $value01 . '</td>';  // title
+        echo '<td>' . $value02 . '</td>';  // description
+        echo '<td>' . $value03 . '</td>';  // date_added
+        echo '<td>' . $value04 . '</td>';  // date_modified
+      echo '</tr>';
     endforeach;
-    }
   }
+}
 
-  function getfieldid() {
+function getfieldid() {
     return 'tax_class_id';
-  }
-  
-  function getfield01() {
+}
+function getfield01() {
     return 'title';
-  }
-  
-  function getfield02() {
+}
+function getfield02() {
     return 'description';
-  }
-  
-  function getfield03() {
+}
+function getfield03() {
     return 'date_added';
-  }
-  
-  function getfield04() {
+}
+function getfield04() {
     return 'date_modified';
-  }
-  
-  function getbuttonAction() {
+}
+function getbuttonAction() {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
-  }
-  
+}
 
 ?>

@@ -3,7 +3,7 @@
   * User.php
   * Description: user template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -14,6 +14,7 @@ final class User extends BaseValidate
     private $prefix     = "oc_";
     private $tablename  = "user";
     private $fieldid    = 'user_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'username';
     private $field02    = 'email';
     private $field03    = 'password';
@@ -47,8 +48,7 @@ final class User extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function isKeyAutoIncrement(): bool
@@ -114,7 +114,6 @@ final class User extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -125,7 +124,6 @@ final class User extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -136,7 +134,6 @@ final class User extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -147,7 +144,6 @@ final class User extends BaseValidate
     {
         return $this->value03;
     }
-
     public function setvalue03($value03):self
     {
         $this->value03 = $value03;

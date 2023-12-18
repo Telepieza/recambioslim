@@ -3,7 +3,7 @@
   * Customer_history.php
   * Description: Customer_history template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,7 +13,6 @@ use DateTimeImmutable;
 
 final class Customer_history extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "customer_history";
     private $fieldid    = 'customer_history_id';
@@ -55,8 +54,7 @@ final class Customer_history extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -101,7 +99,6 @@ final class Customer_history extends BaseValidate
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -122,22 +119,19 @@ final class Customer_history extends BaseValidate
         }
 
 
-        if ($action === 'create') {
-           if (isset($results[$this->field03]))
-           {
-               $value = $results[$this->field03];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue03($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue03()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field03];
-               }
-               $results[$this->field03] = $value;
+        if ($action === 'create' && isset($results[$this->field03]))
+        {
+            $value = $results[$this->field03];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue03($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue03()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field03];
+            }
+            $results[$this->field03] = $value;
         }
-
         return $results;
     }
 
@@ -145,7 +139,6 @@ final class Customer_history extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -156,7 +149,6 @@ final class Customer_history extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -167,7 +159,6 @@ final class Customer_history extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -178,7 +169,6 @@ final class Customer_history extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;

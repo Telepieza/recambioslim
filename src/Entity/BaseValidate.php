@@ -3,7 +3,7 @@
   * BaseValidate.php
   * Description: validates the fields by their format (String, Integer, Boolean, DateTime)
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -47,19 +47,6 @@ class BaseValidate {
         return $result;
     }
 
-    public function validateDate($value)
-    {
-        $result = $value;
-        if (!$result instanceof Date)
-        {
-           $result = (new Date('now'));
-        }
-        if (is_null($result)) {
-            $result =  (new Date('now'));
-        }
-        return $result;
-    }
-  
     public function validateInteger($value)
     {
        if (empty($value) || is_null($value)) {

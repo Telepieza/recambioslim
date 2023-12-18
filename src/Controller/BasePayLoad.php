@@ -3,7 +3,7 @@
   * BasePayLoad.php
   * Description: Base payload for all templates
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -90,8 +90,8 @@ class BasePayLoad implements JsonSerializable
             'status' => $this->getCode(),
         ];
         if (!empty(trim($this->getToken()))) {
-            $this->setstatus('token');
-            $payload[$this->getstatus()] = trim($this->getToken());
+            $this->setStatus('token');
+            $payload[$this->getStatus()] = trim($this->getToken());
         }
         else
         {
@@ -100,18 +100,18 @@ class BasePayLoad implements JsonSerializable
                 $payload['pagination'] = json_decode($this->getPagination());
             }
 
-            if (is_null($this->getstatus() && is_array($this->getMessage())))
+            if (is_null($this->getStatus() && is_array($this->getMessage())))
             {
-               $this->setstatus('data');
+               $this->setStatus('data');
             } 
-            elseif (is_null($this->getstatus() && !is_array($this->getMessage())))
+            elseif (is_null($this->getStatus() && !is_array($this->getMessage())))
             {
-                $this->setstatus('info');
+                $this->setStatus('info');
             }
 
             if ($this->getMessage() !== null)
             {
-               $payload[$this->getstatus()] = $this->getMessage();
+               $payload[$this->getStatus()] = $this->getMessage();
             }
         }
         return $payload;

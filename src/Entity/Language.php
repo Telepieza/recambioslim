@@ -1,18 +1,16 @@
-<?php 
-/** 
+<?php
+/**
   * Language.php
   * Description: language template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
 final class Language extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "language";
     private $fieldid    = 'language_id';
@@ -37,7 +35,7 @@ final class Language extends BaseValidate
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -68,8 +66,7 @@ final class Language extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string

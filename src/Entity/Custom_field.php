@@ -3,14 +3,14 @@
   * custom_field.php
   * Description: custom_field template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-final class Custom_field extends BaseValidate {
-
+final class Custom_field extends BaseValidate
+{
     private $prefix     = "oc_";
     private $tablename  = "custom_field";
     private $fieldid    = 'custom_field_id';
@@ -37,7 +37,6 @@ final class Custom_field extends BaseValidate {
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0 );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '' );
@@ -64,8 +63,7 @@ final class Custom_field extends BaseValidate {
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -113,7 +111,6 @@ final class Custom_field extends BaseValidate {
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -153,7 +150,6 @@ final class Custom_field extends BaseValidate {
              $this->setvalue06($this->validateInteger($results[$this->field06]));
              $results[$this->field06] = $this->getvalue06();
          }
-    
         return $results;
     }
 
@@ -161,7 +157,6 @@ final class Custom_field extends BaseValidate {
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -172,7 +167,6 @@ final class Custom_field extends BaseValidate {
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -183,7 +177,6 @@ final class Custom_field extends BaseValidate {
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -194,7 +187,6 @@ final class Custom_field extends BaseValidate {
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -205,7 +197,6 @@ final class Custom_field extends BaseValidate {
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -216,7 +207,6 @@ final class Custom_field extends BaseValidate {
     {
         return $this->value05;
     }
-
     public function setvalue05($value05):self
     {
         $this->value05 = $value05;
@@ -227,14 +217,12 @@ final class Custom_field extends BaseValidate {
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
         return $this;
     }
-    
-    
+       
     public function toJson(): object
     {
         return json_decode((string) json_encode(get_object_vars($this)), false);

@@ -3,7 +3,7 @@
   * tax_rule.php
   * Description: tax_rule template
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -12,10 +12,10 @@ namespace App\Entity;
 
 final class Tax_rule extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "tax_rule";
     private $fieldid    = 'tax_rule_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'tax_class_id';
     private $field02    = 'tax_rate_id';
     private $field03    = 'based';
@@ -31,7 +31,7 @@ final class Tax_rule extends BaseValidate
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -56,8 +56,7 @@ final class Tax_rule extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -77,7 +76,7 @@ final class Tax_rule extends BaseValidate
 
     public function toPrimaryKey(): ?array
     {
-        $arr[$this->field02] = $this->field02;
+        $arr[$this->field00] = $this->field00;
         return $arr;
     }
 
@@ -136,7 +135,6 @@ final class Tax_rule extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -147,7 +145,6 @@ final class Tax_rule extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -158,7 +155,6 @@ final class Tax_rule extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -169,8 +165,6 @@ final class Tax_rule extends BaseValidate
     {
             return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -181,7 +175,6 @@ final class Tax_rule extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;

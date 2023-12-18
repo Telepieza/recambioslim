@@ -3,24 +3,21 @@
   * language.php
   * Description: language template
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
-
-       $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
-  $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ;
-  $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ;
-  $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
-  $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ;
-  $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;
-  $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : 0  ;
-  $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : 0  ;
-
+  (int)         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // language_id
+  (string) $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // name
+  (string) $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // code
+  (string) $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // locale
+  (string) $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // image
+  (string) $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // directory
+  (int)    $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : 0  ; // sort_order
+  (int)    $value07 = isset($_REQUEST[getfield07()]) ? $_REQUEST[getfield07()] : 0  ;  // status
   if (empty($value04)) { $value04 = '/image'; }
-
   $formFields = array(
     getfieldid() => (int)    $id,       // language_id
     getfield01() => (string) $value01,  // name
@@ -39,7 +36,6 @@ function viewTableThead($data) {
   if (is_array($data) && count($data) > 0) {
     $header .= '<th>action</th>';
   }
-
   $header .=
   '<th>' . getfield06() . '</th>' .  // sort_order
   '<th>' . getfieldid() . '</th>' .  // language_id
@@ -53,28 +49,16 @@ function viewTableThead($data) {
 }
 
 function viewTableRows($data, $pageAction) {
-
   if (is_array($data) && count($data) > 0) {
     foreach($data as $row):
-
-      (int)    $id      = 0 ; // language_id
-      (string) $value01 ='' ; // name
-      (string) $value02 ='' ; // code
-      (string) $value03 ='' ; // locale
-      (string) $value04 ='' ; // image
-      (string) $value05 ='' ; // directory
-      (int)    $value06 = 0 ; // sort_order
-      (int)    $value07 = 0 ; // status
-
-      if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
-      if (isset($row[getfield01()])) trim($value01 = $row[getfield01()]);
-      if (isset($row[getfield02()])) trim($value02 = $row[getfield02()]);
-      if (isset($row[getfield03()])) trim($value03 = $row[getfield03()]);
-      if (isset($row[getfield04()])) trim($value04 = $row[getfield04()]);
-      if (isset($row[getfield05()])) trim($value05 = $row[getfield05()]);
-      if (isset($row[getfield06()])) $value06 = $row[getfield06()];
-      if (isset($row[getfield07()])) $value07 = $row[getfield07()];
-      
+      (int)         $id = isset($row[getfieldid()]) ? $row[getfieldid()] : 0  ; // language_id
+      (string) $value01 = isset($row[getfield01()]) ? $row[getfield01()] : '' ; // name
+      (string) $value02 = isset($row[getfield02()]) ? $row[getfield02()] : '' ; // code
+      (string) $value03 = isset($row[getfield03()]) ? $row[getfield03()] : '' ; // locale
+      (string) $value04 = isset($row[getfield04()]) ? $row[getfield04()] : '' ; // image
+      (string) $value05 = isset($row[getfield05()]) ? $row[getfield05()] : '' ; // directory
+      (int)    $value06 = isset($row[getfield06()]) ? $row[getfield06()] : 0  ; // sort_order
+      (int)    $value07 = isset($row[getfield07()]) ? $row[getfield07()] : 0  ;  // status
       echo '<tr>';
         echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
         echo '<td>' . $value06 . '</td>';  // sort_order
@@ -86,45 +70,36 @@ function viewTableRows($data, $pageAction) {
         echo '<td>' . $value05 . '</td>';  // directory
         echo '<td>' . $value07 . '</td>';  // status
       echo '</tr>';
-    
     endforeach;
-   }
+  }
 }
 
-  function getfieldid() {
+function getfieldid() {
     return 'language_id';
-  }
-  
-  function getfield01() {
+}
+function getfield01() {
     return 'name';
-  }
-  
-  function getfield02() {
+}
+function getfield02() {
     return 'code';
-  }
-  
-  function getfield03() {
+}
+function getfield03() {
     return 'locale';
-  }
-
-  function getfield04() {
+}
+function getfield04() {
     return 'image';
-  }
-  
-  function getfield05() {
+}
+function getfield05() {
     return 'directory';
-  }
-  
-  function getfield06() {
+}
+function getfield06() {
     return 'sort_order';
-  }
-  
-  function getfield07() {
+}
+function getfield07() {
     return 'status';
-  }
-  
-  function getbuttonAction() {
+}
+function getbuttonAction() {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
-  }
+}
 
 ?>

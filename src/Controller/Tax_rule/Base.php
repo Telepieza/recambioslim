@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Tax_rule
   * @Author : M.V.M.
-  * @Version: 1.0.7
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getTax_ruleTable() : string 
     {
-        $tableName  = 'Tax_rule';
-        return $tableName;
+        return 'tax_rule';
     }
 
     protected function getTax_ruleFindService(): Find

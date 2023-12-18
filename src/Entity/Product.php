@@ -3,7 +3,7 @@
   * product.php
   * Description: product template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -87,7 +87,6 @@ final class Product extends BaseValidate
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '' );
@@ -377,38 +376,33 @@ final class Product extends BaseValidate
            $results[$this->field28] = $this->getvalue28();
         }
 
-        if ($action === 'create') {
-           if (isset($results[$this->field29]))
-           {
-               $value = $results[$this->field29];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue29($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue29()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field29];
-               }
-               $results[$this->field29] = $value;
+        if ($action === 'create' && isset($results[$this->field29]))
+        {
+            $value = $results[$this->field29];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue29($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue29()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field29];
+            }
+            $results[$this->field29] = $value;
         }
 
-        if ($action === 'update') {
-            if (isset($results[$this->field30]))
+        if ($action === 'update'  && isset($results[$this->field30]))
+        {
+            $value = $results[$this->field30];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue30($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue30()->format('Y-m-d H:i:s');
+            }
+            else
             {
                 $value = $results[$this->field30];
-                if ($value instanceof DateTimeImmutable || is_null($value)) {
-                   $this->setvalue30($this->validateDateTimeImmutable($value));
-                   $value = $this->getvalue30()->format('Y-m-d H:i:s');
-                }
-                else
-                {
-                    $value = $results[$this->field30];
-                }
-                $results[$this->field30] = $value;
-             }
-          }
-
+            }
+            $results[$this->field30] = $value;
+        }
         return $results;
     }
 
@@ -416,7 +410,6 @@ final class Product extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -427,7 +420,6 @@ final class Product extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -438,7 +430,6 @@ final class Product extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -449,7 +440,6 @@ final class Product extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03($value03): self
     {
         $this->value03 = $value03;
@@ -460,7 +450,6 @@ final class Product extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -471,7 +460,6 @@ final class Product extends BaseValidate
     {
         return $this->value05;
     }
-
     public function setvalue05($value05):self
     {
         $this->value05 = $value05;
@@ -482,7 +470,6 @@ final class Product extends BaseValidate
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
@@ -493,7 +480,6 @@ final class Product extends BaseValidate
     {
         return $this->value07;
     }
-
     public function setvalue07($value07):self
     {
         $this->value07 = $value07;
@@ -504,7 +490,6 @@ final class Product extends BaseValidate
     {
         return $this->value08;
     }
-
     public function setvalue08($value08):self
     {
         $this->value08 = $value08;
@@ -515,7 +500,6 @@ final class Product extends BaseValidate
     {
         return $this->value09;
     }
-
     public function setvalue09($value09):self
     {
         $this->value09 = $value09;
@@ -526,7 +510,6 @@ final class Product extends BaseValidate
     {
         return $this->value10;
     }
-
     public function setvalue10($value10):self
     {
         $this->value10 = $value10;
@@ -537,7 +520,6 @@ final class Product extends BaseValidate
     {
         return $this->value11;
     }
-
     public function setvalue11($value11):self
     {
         $this->value11= $value11;
@@ -548,7 +530,6 @@ final class Product extends BaseValidate
     {
         return $this->value12;
     }
-
     public function setvalue12($value12):self
     {
         $this->value12 = $value12;
@@ -559,7 +540,6 @@ final class Product extends BaseValidate
     {
         return $this->value13;
     }
-
     public function setvalue13($value13):self
     {
         $this->value13 = $value13;
@@ -590,7 +570,6 @@ final class Product extends BaseValidate
     {
         return $this->value16;
     }
-
     public function setvalue16($value16):self
     {
         $this->value16 = $value16;
@@ -601,7 +580,6 @@ final class Product extends BaseValidate
     {
         return $this->value17;
     }
-
     public function setvalue17($value17):self
     {
         $this->value17 = $value17;
@@ -622,7 +600,6 @@ final class Product extends BaseValidate
     {
         return $this->value19;
     }
-    
     public function setvalue19($value19):self
     {
         $this->value19= $value19;
@@ -633,12 +610,12 @@ final class Product extends BaseValidate
     {
         return $this->value20;
     }
-
     public function setvalue20($value20):self
     {
         $this->value20= $value20;
         return $this;
     }
+
     public function getvalue21(): float
     {
         return $this->value21;
@@ -648,6 +625,7 @@ final class Product extends BaseValidate
         $this->value21= $value21;
         return $this;
     }
+
     public function getvalue22(): float
     {
         return $this->value22;
@@ -657,6 +635,7 @@ final class Product extends BaseValidate
         $this->value22= $value22;
         return $this;
     }
+
     public function getvalue23(): int
     {
         return $this->value23;
@@ -666,6 +645,7 @@ final class Product extends BaseValidate
         $this->value23= $value23;
         return $this;
     }
+
     public function getvalue24(): int
     {
         return $this->value24;
@@ -675,6 +655,7 @@ final class Product extends BaseValidate
         $this->value24= $value24;
         return $this;
     }
+
     public function getvalue25(): int
     {
         return $this->value25;
@@ -684,6 +665,7 @@ final class Product extends BaseValidate
         $this->value25= $value25;
         return $this;
     }
+
     public function getvalue26(): int
     {
         return $this->value26;
@@ -693,6 +675,7 @@ final class Product extends BaseValidate
         $this->value26= $value26;
         return $this;
     }
+
     public function getvalue27(): int
     {
         return $this->value27;
@@ -702,6 +685,7 @@ final class Product extends BaseValidate
         $this->value27= $value27;
         return $this;
     }
+
     public function getvalue28(): int
     {
         return $this->value28;
@@ -711,6 +695,7 @@ final class Product extends BaseValidate
         $this->value28= $value28;
         return $this;
     }
+
     public function getvalue29(): ?DateTimeImmutable
     {
             return $this->value29;
@@ -725,7 +710,6 @@ final class Product extends BaseValidate
     {
             return $this->value30;
     }
-
     public function setvalue30( $value30): self
     {
         $this->value30 = $value30;

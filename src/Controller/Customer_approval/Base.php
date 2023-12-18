@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Customer_approval
   * @Author : M.V.M.
-  * @Version: 1.0.9
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getCustomer_approvalTable() : string 
     {
-        $tableName  = 'customer_approval';
-        return $tableName;
+        return 'customer_approval';
     }
 
     protected function getCustomer_approvalFindService(): Find

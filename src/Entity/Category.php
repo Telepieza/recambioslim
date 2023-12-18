@@ -3,7 +3,7 @@
   * Category.php
   * Description: category template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,7 +13,6 @@ use DateTimeImmutable;
 
 final class Category extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "category";
     private $fieldid    = 'category_id';
@@ -44,7 +43,6 @@ final class Category extends BaseValidate
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0  );
@@ -75,8 +73,7 @@ final class Category extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -126,7 +123,6 @@ final class Category extends BaseValidate
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -168,36 +164,32 @@ final class Category extends BaseValidate
            $results[$this->field06] = $this->getvalue06();
         }
 
-        if ($action === 'create') {
-           if (isset($results[$this->field07])) 
-           {
-               $value = $results[$this->field07];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue07($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue07()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field07];
-               }
-               $results[$this->field07] = $value;
+        if ($action === 'create' && isset($results[$this->field07]))
+        {
+            $value = $results[$this->field07];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue07($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue07()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field07];
+            }
+            $results[$this->field07] = $value;
         }
 
-        if ($action === 'update') {
-          if (isset($results[$this->field08]))
-          {
-              $value = $results[$this->field08];
-              if ($value instanceof DateTimeImmutable || is_null($value)) {
-                 $this->setvalue08($this->validateDateTimeImmutable($value));
-                 $value = $this->getvalue08()->format('Y-m-d H:i:s');
-              }
-              else
-              {
-                  $value = $results[$this->field08];
-              }
-              $results[$this->field08] = $value;
-           }
+        if ($action === 'update' && isset($results[$this->field08]))
+        {
+            $value = $results[$this->field08];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue08($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue08()->format('Y-m-d H:i:s');
+            }
+            else
+            {
+                $value = $results[$this->field08];
+            }
+            $results[$this->field08] = $value;
         }
         return $results;
     }
@@ -206,7 +198,6 @@ final class Category extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -217,7 +208,6 @@ final class Category extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -228,7 +218,6 @@ final class Category extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -239,7 +228,6 @@ final class Category extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -250,7 +238,6 @@ final class Category extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;
@@ -261,7 +248,6 @@ final class Category extends BaseValidate
     {
         return $this->value05;
     }
-
     public function setvalue05($value05):self
     {
         $this->value05 = $value05;
@@ -272,7 +258,6 @@ final class Category extends BaseValidate
     {
         return $this->value06;
     }
-
     public function setvalue06($value06):self
     {
         $this->value06 = $value06;
@@ -283,19 +268,16 @@ final class Category extends BaseValidate
     {
             return $this->value07;
     }
-
     public function setvalue07( $value07): self
     {
         $this->value07 = $value07;
         return $this;
     }
 
-
     public function getvalue08(): ?DateTimeImmutable
     {
            return $this->value08;
     }
-
     public function setvalue08( $value08): self
     {
         $this->value08 = $value08;

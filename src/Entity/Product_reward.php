@@ -3,7 +3,7 @@
   * Product_reward.php
   * Description: Product_reward template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -33,7 +33,6 @@ final class Product_reward extends BaseValidate {
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0 );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0 );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0 );
@@ -99,7 +98,6 @@ final class Product_reward extends BaseValidate {
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -122,7 +120,6 @@ final class Product_reward extends BaseValidate {
             $this->setvalue03($this->validateInteger($results[$this->field03]));
             $results[$this->field03] = $this->getvalue03();
          }
-
         return $results;
     }
 
@@ -130,7 +127,6 @@ final class Product_reward extends BaseValidate {
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -141,7 +137,6 @@ final class Product_reward extends BaseValidate {
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -152,7 +147,6 @@ final class Product_reward extends BaseValidate {
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -163,14 +157,12 @@ final class Product_reward extends BaseValidate {
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
         return $this;
     }
 
-   
     public function toJson(): object
     {
         return json_decode((string) json_encode(get_object_vars($this)), false);

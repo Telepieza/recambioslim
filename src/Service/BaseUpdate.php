@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object update class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -93,7 +93,6 @@ final class BaseUpdate extends BaseRepository
                 {
                     $isUpdate = true;                                                           // Indicamos que se puede realizar el UPDATE
                 }
-
                 if ($isUpdate)                                                                  // Se procede al UPDATE
                 {
                     $sql  = $baseUtils->buildingSqlUpdate($inputs, $this->tableClass->toTable(),$this->tableClass->getFieldsId(), $primaryKey );    // Montar la sentencia UPDATE

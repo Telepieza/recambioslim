@@ -1,9 +1,9 @@
-<?php 
+<?php
 /**
   * tax_class.php
   * Description: Tax_class template
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,7 +13,6 @@ use DateTimeImmutable;
 
 final class Tax_class extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "tax_class";
     private $fieldid    = 'tax_class_id';
@@ -33,10 +32,9 @@ final class Tax_class extends BaseValidate
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '' );
@@ -59,8 +57,7 @@ final class Tax_class extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -122,36 +119,33 @@ final class Tax_class extends BaseValidate
             $this->setvalue02($this->validateString($results[$this->field02]));
             $results[$this->field02] = $this->getvalue02();
         }
-        if ($action === 'create') {
-           if (isset($results[$this->field03]))
-           {
-               $value = $results[$this->field03];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue03($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue03()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field03];
-               }
-               $results[$this->field03] = $value;
+
+        if ($action === 'create' && isset($results[$this->field03]))
+        {
+            $value = $results[$this->field03];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue03($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue03()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field03];
+            }
+            $results[$this->field03] = $value;
         }
 
-        if ($action === 'update') {
-          if (isset($results[$this->field04]))
-          {
-              $value = $results[$this->field04];
-              if ($value instanceof DateTimeImmutable || is_null($value)) {
-                 $this->setvalue04($this->validateDateTimeImmutable($value));
-                 $value = $this->getvalue04()->format('Y-m-d H:i:s');
-              }
-              else
-              {
-                  $value = $results[$this->field04];
-              }
-              $results[$this->field04] = $value;
-           }
+        if ($action === 'update'  && isset($results[$this->field04]))
+        {
+            $value = $results[$this->field04];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+               $this->setvalue04($this->validateDateTimeImmutable($value));
+               $value = $this->getvalue04()->format('Y-m-d H:i:s');
+            }
+            else
+            {
+                $value = $results[$this->field04];
+            }
+            $results[$this->field04] = $value;
         }
         return $results;
     }
@@ -160,7 +154,6 @@ final class Tax_class extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -191,19 +184,16 @@ final class Tax_class extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
         return $this;
     }
 
-
     public function getvalue04(): ?DateTimeImmutable
     {
             return $this->value04;
     }
-
     public function setvalue04( $value04): self
     {
         $this->value04 = $value04;

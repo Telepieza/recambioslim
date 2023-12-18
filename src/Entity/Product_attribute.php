@@ -3,7 +3,7 @@
   * Product_attribute.php
   * Description: product_attribute template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -12,10 +12,10 @@ namespace App\Entity;
 
 final class Product_attribute extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "product_attribute";
     private $fieldid    = 'product_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'attribute_id';
     private $field02    = 'language_id';
     private $field03    = 'text';
@@ -125,7 +125,6 @@ final class Product_attribute extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -136,7 +135,6 @@ final class Product_attribute extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -147,7 +145,6 @@ final class Product_attribute extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -158,8 +155,6 @@ final class Product_attribute extends BaseValidate
     {
             return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;

@@ -3,7 +3,7 @@
   * Customer_group.php
   * Description: Customer_group template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,7 +13,6 @@ use DateTimeImmutable;
 
 final class Customer_group extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "customer_group";
     private $fieldid    = 'customer_group_id';
@@ -32,7 +31,6 @@ final class Customer_group extends BaseValidate
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : 0  );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : 0  );
@@ -51,8 +49,7 @@ final class Customer_group extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -96,7 +93,6 @@ final class Customer_group extends BaseValidate
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -123,7 +119,6 @@ final class Customer_group extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -134,7 +129,6 @@ final class Customer_group extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -145,7 +139,6 @@ final class Customer_group extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;

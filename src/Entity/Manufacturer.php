@@ -3,19 +3,18 @@
   * Manufacture.php
   * Description: manufacture template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
 final class manufacturer extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "manufacturer";
     private $fieldid    = 'manufacturer_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'name';
     private $field02    = 'image';
     private $field03    = 'sort_order';
@@ -52,8 +51,7 @@ final class manufacturer extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -84,7 +82,7 @@ final class manufacturer extends BaseValidate
 
     public function toSortOrder(): ?string
     {
-        return $this->fieldid;
+        return $this->field03;
     }
 
     public function toMapfields(): array
@@ -126,7 +124,6 @@ final class manufacturer extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -137,7 +134,6 @@ final class manufacturer extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -148,7 +144,6 @@ final class manufacturer extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -159,8 +154,6 @@ final class manufacturer extends BaseValidate
     {
             return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;

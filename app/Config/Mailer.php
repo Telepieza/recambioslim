@@ -3,33 +3,31 @@
   * Mailer.php
   * Description: Container Mailer
   * @Author : M.V.M.
-  * @Version 1.0.14
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use App\Application\Settings\SettingsInterface;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 $container->set('mailer',function(ContainerInterface $ci){
-    $settings = $ci->get(SettingsInterface::class);
-    $mail = $settings->get("mailerConfig");
-    $mailer = new PHPMailer(true);
-    $mailer->isSMTP($mail['smtp']);
-    $mailer->SMTPDebug  = $mail['debug'];
-    $mailer->Host       = $mail['host'];
-    $mailer->SMTPAuth   = $mail['auth'];
-    $mailer->Username   = $mail['user'];
-    $mailer->Password   = $mail['pass'];
-    $mailer->SMTPSecure = $mail['secure'];
-    $mailer->CharSet    = $mail['char'];
-    $mailer->Port       = $mail['port'];
-    $mailer->From       = $mail['from'];
-    $mailer->FromName   = $mail['from_name'];
-    $mailer->addReplyTo($mail['from']);
-    $mailer->addAddress($mail['to']);
-    $mailer->isHTML($mail['html']);
-    return $mailer;
+  $settings = $ci->get(SettingsInterface::class);
+  $mail = $settings->get("mailerConfig");
+  $mailer = new PHPMailer(true);
+  $mailer->SMTPDebug  = isset($mail['debug'])     ? $mail['debug']     : 0 ;
+  $mailer->Host       = isset($mail['host'])      ? $mail['host']      : '' ;
+  $mailer->Username   = isset($mail['user'])      ? $mail['user']      : '' ;
+  $mailer->Password   = isset($mail['pass'])      ? $mail['pass']      : '' ;
+  $mailer->SMTPSecure = isset($mail['secure'])    ? $mail['secure']    : '' ;
+  $mailer->CharSet    = isset($mail['char'])      ? $mail['char']      : 'UTF-8' ;
+  $mailer->Port       = isset($mail['port'])      ? $mail['port']      : 25 ;
+  $mailer->From       = isset($mail['from'])      ? $mail['from']      : '' ;
+  $mailer->FromName   = isset($mail['from_name']) ? $mail['from_name'] : '' ;
+  if (isset($mail['from'])) { $mailer->addReplyTo($mail['from']); }
+  if (isset($mail['to']))   { $mailer->addAddress($mail['to'])  ; }
+  if (isset($mail['smtp']) && $mail['smtp']) { $mailer->isSMTP();        }
+  if (isset($mail['auth']) && $mail['auth']) { $mailer->SMTPAuth = true; }
+  if (isset($mail['html']) && $mail['html']) { $mailer->isHTML(true);    }
+  return $mailer;
 });
-

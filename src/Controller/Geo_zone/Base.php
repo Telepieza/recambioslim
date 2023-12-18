@@ -3,7 +3,7 @@
 * Base.php
 * Description: Geo_zone Services route path delete for id with token verification
 * @Author : M.V.M.
-* @Version: 1.0.5
+* @Version: 1.0.16
 */
 
 declare(strict_types=1);
@@ -20,8 +20,7 @@ abstract class Base extends BaseController
 {
     protected function getGeo_zoneTable() : string
     {
-        $tableName  = 'geo_zone';
-        return $tableName;
+        return 'geo_zone';
     }
 
     protected function getGeo_zoneFindService(): Find

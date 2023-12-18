@@ -3,7 +3,7 @@
   * Zone.php
   * Description: zone template
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -16,6 +16,7 @@ final class Zone extends BaseValidate
     private $prefix     = "oc_";
     private $tablename  = "zone";
     private $fieldid    = 'zone_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'country_id';
     private $field02    = 'name';
     private $field03    = 'code';
@@ -31,7 +32,7 @@ final class Zone extends BaseValidate
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -56,8 +57,7 @@ final class Zone extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -91,7 +91,7 @@ final class Zone extends BaseValidate
         return $this->fieldid;
     }
 
-    public function toMapfields(): array 
+    public function toMapfields(): array
     {
         $arr[$this->fieldid] = $this->fieldid;
         $arr[$this->field01] = $this->field01;
@@ -128,7 +128,6 @@ final class Zone extends BaseValidate
             $this->setvalue04($this->validateInteger($results[$this->field04]));
             $results[$this->field04] = $this->getvalue04();
         }
-
         return $results;
     }
 
@@ -136,7 +135,6 @@ final class Zone extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -147,7 +145,6 @@ final class Zone extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -158,7 +155,6 @@ final class Zone extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -167,13 +163,11 @@ final class Zone extends BaseValidate
 
     public function getvalue03(): string
     {
-            return $this->value03;
+        return $this->value03;
     }
-
-
     public function setvalue03( $value03): self
     {
-        $this->value03 = $value03; 
+        $this->value03 = $value03;
         return $this;
     }
 
@@ -181,7 +175,6 @@ final class Zone extends BaseValidate
     {
         return $this->value04;
     }
-
     public function setvalue04($value04):self
     {
         $this->value04 = $value04;

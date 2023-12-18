@@ -14,6 +14,9 @@
   * getfield06()  (string) date_modified
 **/
 
+
+
+
  if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
  
  (string) $endpoint   = 'api/tax_rate';  // endpoint tax_rate

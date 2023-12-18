@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service custom_field
   * @Author : M.V.M.
-  * @Version: 1.0.10
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getcustom_fieldTable() : string
     {
-        $tableName  = 'custom_field';
-        return $tableName;
+        return 'custom_field';
     }
 
     protected function getcustom_fieldFindService(): Find

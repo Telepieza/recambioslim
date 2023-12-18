@@ -3,30 +3,28 @@
   * Product_related.php
   * Description: Product_related template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
 final class Product_related extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "product_related";
     private $fieldid    = 'product_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'related_id';
    
     private bool   $isAutoIncrement = true;   // index id auto_increment
     private int    $id;                       // id (product_id)
     private int    $value01;                  // field01 (related_id)
 
-   
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -97,8 +95,6 @@ final class Product_related extends BaseValidate
             $this->setvalue01($this->validateInteger($results[$this->field01]));
            $results[$this->field01] = $this->getvalue01();
         }
-       
-
         return $results;
     }
 
@@ -106,7 +102,6 @@ final class Product_related extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -117,7 +112,6 @@ final class Product_related extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;

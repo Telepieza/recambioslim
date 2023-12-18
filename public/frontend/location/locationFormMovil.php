@@ -51,7 +51,7 @@
                 </form>
               
                 <form method="post" action="locationFormMovil.php?action=<?php echo $action."&amp;id={$id}"; ?>"
-                              onsubmit="return verifForm([<?php echo getfield02()?>,<?php echo getfield03()?>],'Error : fields marked with an asterisk are mandatory!');">
+                              onsubmit="return verifForm([<?php echo getfield01()?>,<?php echo getfield02()?>,<?php echo getfield03()?>],'Error : fields marked with an asterisk are mandatory!');">
 
                         <div class="form-floating mb-1 w-50">
                           <input type="number" class="form-control" readonly disabled name="<?php echo getfieldid()?>" placeholder="<?php echo getfieldid()?>" value="<?php { echo $id ; } ?>"/>
@@ -60,7 +60,7 @@
 
                         <div class="form-floating mb-1">
                            <input type="text" class="form-control" name="<?php echo getfield01()?>" id="<?php echo getfield01()?>" placeholder="<?php echo getfield01()?>" value="<?php if (isset($val[0][getfield01()])) {echo htmlspecialchars($val[0][getfield01()]);}?>"/>
-                           <label for="<?php echo getfield01()?>"><?php echo getfield01()?>:</label>
+                           <label for="<?php echo getfield01()?>">* <?php echo getfield01()?>:</label>
                        </div>
 
                        <div class="form-floating mb-1">

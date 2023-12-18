@@ -3,7 +3,7 @@
   * BaseFind.php
   * Description: Principal object repository class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -18,7 +18,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 class BaseRepository
 {
     protected string $query;
-    // Monta la sentencia "Select" de los fields and parameters para el query del PDO
 
     protected function query(PDO $db, object $tableClass, $parameter=array(), int $limit, int $offset)
     {
@@ -69,14 +68,10 @@ class BaseRepository
         }
 
         $this->query .= $sql . $pagination ;
-
-// echo "query:" .  $this->query . "\n";
-
         if ($limit > 0 ) {
            $params['limit']  = $limit;
            $params['offset'] = $offset;
         }
-
         if (is_numeric($id))
         {
            $statement = $db->prepare($this->query);
@@ -101,7 +96,6 @@ class BaseRepository
                $code    = 500;
                $message = $ex->getMessage();
             }
-
             if ($code == 404)
             {
                 $msg = $id > 0  ? "A {$tableName} with {$tableClass->getFieldsId()}  {' . $id . '} was not found."
@@ -111,11 +105,8 @@ class BaseRepository
         }
         else
         {
-                $message = "A {$tableName} with {$tableClass->getFieldsId()} {' . $id . '} is not correct.";  
+            $message = "A {$tableName} with {$tableClass->getFieldsId()} {' . $id . '} is not correct.";
         }
-
-//  echo  "query status: " . $status . " code: " . $code . " count: " . $count . " message: " . print_r($message);
-
         return [ 'status'  => $status,
                  'code'    => $code,
                  'count'   => $count,
@@ -123,7 +114,6 @@ class BaseRepository
         ];
     }
 
-    // Monta la sentencia "Select count" para el query del PDO.
     protected function toCount(PDO $db, string $table,string $fieldsId, $parameter=array())
     {
         $params      = array();
@@ -140,7 +130,6 @@ class BaseRepository
         {
             $tableName = substr($table, strpos($table, '_') + 1);
         }
-
         $baseUtils = new BaseUtils();
         $this->query = "SELECT COUNT(*) AS count FROM `{$table}` ";
         if (!empty($parameter)) {
@@ -156,15 +145,13 @@ class BaseRepository
             }
             else
             {
-                if (str_contains($sql,':' . $fieldsId . '')) 
+                if (str_contains($sql,':' . $fieldsId . ''))
                 {
                    $id = 0;
                 }
             }
         }
-
         $this->query .= $sql;
-
         if (is_numeric($id))
         {
             $statement = $db->prepare($this->query);
@@ -193,7 +180,6 @@ class BaseRepository
         {
              $message = "A {$tableName} with {$fieldsId}  {' . $id . '} is not correct. ";
         }
-// echo  "count status: " . $status . " code: " . $code . " count: " . $count . " message: " . print_r($message); 
         return [ 'status'  => $status,
                  'code'    => $code,
                  'count'   => $count,
@@ -201,14 +187,12 @@ class BaseRepository
         ];
     }
     
-    // Calculos y control de las datos de paginacion 
+    // Calculos y control de las datos de paginacion
     protected function toPagination(int $perPage, int $count, int $limit, int $offset)
     {
-           
       if ($limit == 0) {
          $limit = $perPage;
       }
-
       $page = (int) ceil($offset / $limit) + 1;
       $paginateEntity = new PaginateEntity();
       $paginateEntity->setCurrentPage($page);  // Pagina
@@ -227,7 +211,7 @@ class BaseRepository
       $paginateEntity->setOffset((int) $offset);
       return $paginateEntity;
     }
-
+    
     protected function toDebugger(LoggerInterface $logger, $isDebug, $msgName, $action, $message)
     {
       $msg = '';
@@ -249,11 +233,12 @@ class BaseRepository
       $mailContent = '';
       if ($ismail) {
          $msg   = $action . ' table ' . $table . ' ' . $product;
+         $msgJson = str_replace('\/','/',json_encode($message));
          $mailer->Subject = $msg;
          $mailer->msgHTML(date('Y-m-d H:i:s'));
-         $mailContent = '<h1>User ' . $action . ' api ' . $product . '</h1><p>' . json_encode($message) . '</p>';
+         $mailContent = '<h1>User '. $action . ' api ' . $product . '</h1><p>' . $msgJson . '</p>';
          $mailer->Body    = $mailContent;
-         $mailer->AltBody = json_encode($message);
+         $mailer->AltBody = $msgJson;
          if($mailer->send()) {
              $msg .= 'Message has been sent';
          } else {

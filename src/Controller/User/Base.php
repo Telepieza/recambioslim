@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service user
   * @Author : M.V.M.
-  * @Version: 1.0.5
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -16,8 +16,7 @@ abstract class Base extends BaseController
 {
     protected function getUserTable() : string
     {
-        $tableName  = 'user';
-        return $tableName;
+        return 'user';
     }
     protected function getUserLoginService(): Login
     {

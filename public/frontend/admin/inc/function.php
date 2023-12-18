@@ -3,7 +3,7 @@
   * function.php
   * Description: Create start session and FontEnd functions
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
@@ -34,8 +34,7 @@ function session_login() {
 // Message error or info
 function msgError($action, $status, $error, $info, $id ) {
 
-   $message = '';
-   $msg     = '';
+   (string) $message = '';
    if ($status == 500)  {
      if (is_array($error)) {
         $message = $error['type'] . ' ' . $error['description'] ;
@@ -55,10 +54,16 @@ function msgError($action, $status, $error, $info, $id ) {
    }
 
    if (!empty($message)) {
+      $msg ='';
       if (isset($action)) {
         $msg = $action;
       }
-       $msg .= ' Error '. $message;
+      $msg .= ' Error ';
+      if (is_array($message)) {
+        $msg .= json_encode($message);
+      } else {
+        $msg .= $message;
+      }
    } else {
      if (!empty($info)) {
        $msg = $info;
@@ -154,15 +159,9 @@ function CallAPI($method, $url, $token, $data = false)
 // Pagination request variables
 function setPageFields()
 {
-   $limit  = 0;
-   $offset = 0;
-   if (isset($_REQUEST['limit']))   $limit   = $_REQUEST['limit'];
-   if (isset($_REQUEST['offset']))  $offset  = $_REQUEST['offset'];
-  
-   $formFields = array(
-     'limit'   => (int) $limit,
-     'offset'  => (int) $offset);
-   return $formFields;
+   $limit  = isset($_REQUEST['limit'])  ? $_REQUEST['limit']  : 0 ;
+   $offset = isset($_REQUEST['offset']) ? $_REQUEST['offset'] : 0 ;
+   return array('limit' => (int) $limit, 'offset' => (int) $offset);
 }
 
 // Header (Parent)

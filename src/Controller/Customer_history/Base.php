@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Customer_history
   * @Author : M.V.M.
-  * @Version: 1.0.9
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -17,10 +17,9 @@ use App\Service\Customer_history\Update;
 
 abstract class Base extends BaseController
 {
-    protected function getCustomer_historyTable() : string 
+    protected function getCustomer_historyTable() : string
     {
-        $tableName  = 'customer_history';
-        return $tableName;
+        return 'customer_history';
     }
 
     protected function getCustomer_historyFindService(): Find

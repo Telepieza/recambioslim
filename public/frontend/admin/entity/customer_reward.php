@@ -3,21 +3,19 @@
   * customer_reward.php
   * description: customer_reward template
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
-
-         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ;
-    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ;
-    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ;
-    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ;
-    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ;
-    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ;
-    if (empty($value05)) { $value05 = date('Y-m-d H:i:s'); }
-
+  (int)         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // customer_reward_id
+  (int)    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : 0  ; // customer_id
+  (int)    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : 0  ; // order_id
+  (string) $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // description
+  (int)    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : 0  ; // points
+  (string) $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // date_added
+  if (empty($value05)) { $value05 = date('Y-m-d H:i:s'); }
   $formFields = array(
     getfieldid() => (int)    $id,         // customer_reward_id
     getfield01() => (int)    $value01,    // customer_id
@@ -25,9 +23,7 @@ function setFormFields() {
     getfield03() => (string) $value03,    // description
     getfield04() => (int)    $value04,    // points
     getfield05() => (string) $value05 );  // date_added
-  
     if (empty($value05)) { unset($formFields[getfield05()]); } // date_added
-  
     return $formFields;
 }
 
@@ -36,7 +32,6 @@ function viewTableThead($description) {
   if (is_array($description) && count($description) > 0) {
     $header .= '<th>action</th>';
   }
-
   $header .=
   '<th>' . getfield02() . '</th>' .  // order_id
   '<th>' . getfieldid() . '</th>' .  // customer_reward_id
@@ -48,66 +43,48 @@ function viewTableThead($description) {
 }
 
 function viewTableRows($description, $pageAction) {
-
   if (is_array($description) && count($description) > 0) {
     foreach($description as $row):
-
-    (int)    $id      = 0 ;  // customer_reward_id
-    (int)    $value01 = 0;   // customer_id
-    (int)    $value02 = 0 ;  // order_id
-    (string) $value03 = '' ; // description
-    (int)    $value04 = 0  ; // points
-    (string) $value05 = '';  // date_added
-
-    if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
-    if (isset($row[getfield01()])) $value01      = $row[getfield01()];
-    if (isset($row[getfield02()])) $value02      = $row[getfield02()];
-    if (isset($row[getfield03()])) trim($value03 = $row[getfield03()]);
-    if (isset($row[getfield04()])) $value04      = $row[getfield04()];
-    if (isset($row[getfield05()])) trim($value05 = $row[getfield05()]);
-    
-    if (strlen($value05) > 10) { $value05 = substr($value05,0,10); }
-
-    echo '<tr>';
-       echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
-       echo '<td>' . $value02 . '</td>';  // order_id
-       echo '<td>' . $id      . '</td>';  // customer_reward_id
-       echo '<td>' . $value01 . '</td>';  // customer_id
-       echo '<td>' . $value03 . '</td>';  // description
-       echo '<td>' . $value04 . '</td>';  // points
-       echo '<td>' . $value05 . '</td>';  // date_added
-    echo '</tr>';
+      (int)         $id = isset($row[getfieldid()]) ? $row[getfieldid()] : 0  ; // customer_reward_id
+      (int)    $value01 = isset($row[getfield01()]) ? $row[getfield01()] : 0  ; // customer_id
+      (int)    $value02 = isset($row[getfield02()]) ? $row[getfield02()] : 0  ; // order_id
+      (string) $value03 = isset($row[getfield03()]) ? $row[getfield03()] : '' ; // description
+      (int)    $value04 = isset($row[getfield04()]) ? $row[getfield04()] : 0  ; // points
+      (string) $value05 = isset($row[getfield05()]) ? $row[getfield05()] : '' ; // date_added
+      if (strlen($value05) > 10) { $value05 = substr($value05,0,10); }
+      echo '<tr>';
+        echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
+        echo '<td>' . $value02 . '</td>';  // order_id
+        echo '<td>' . $id      . '</td>';  // customer_reward_id
+        echo '<td>' . $value01 . '</td>';  // customer_id
+        echo '<td>' . $value03 . '</td>';  // description
+        echo '<td>' . $value04 . '</td>';  // points
+        echo '<td>' . $value05 . '</td>';  // date_added
+      echo '</tr>';
     endforeach;
-    }
   }
+}
 
-  function getfieldid() {
+function getfieldid() {
     return 'customer_reward_id';
-  }
-  
-  function getfield01() {
+}
+function getfield01() {
     return 'customer_id';
-  }
-  
-  function getfield02() {
+}
+function getfield02() {
     return 'order_id';
-  }
-  
-  function getfield03() {
+}
+function getfield03() {
     return 'description';
-  }
-  
-  function getfield04() {
+}
+function getfield04() {
     return 'points';
-  }
-  
-  function getfield05() {
+}
+function getfield05() {
     return 'date_added';
-  }
-  
-  function getbuttonAction() {
+}
+function getbuttonAction() {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
-  }
-  
+}
 
 ?>

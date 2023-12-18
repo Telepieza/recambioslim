@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
   * Dotenv.php
   * Description: Read file .env and control variables
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 

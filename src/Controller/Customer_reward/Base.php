@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Customer_reward
   * @Author : M.V.M.
-  * @Version: 1.0.9
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getCustomer_rewardTable() : string 
     {
-        $tableName  = 'customer_reward';
-        return $tableName;
+        return 'customer_reward';
     }
 
     protected function getCustomer_rewardFindService(): Find

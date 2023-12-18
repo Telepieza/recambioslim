@@ -1,3 +1,8 @@
+## 1.0.16 (2023-12-18)
+
+* Simplify php code in frontend templates
+* Fixed bug in frontend templates.
+  
 ## 1.0.15 (2023-12-17)
 
 * All frontend templates are change when reading the Request.

@@ -3,14 +3,13 @@
   * BaseCreate.php
   * Description: Principal object create class of all templates
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Service;
                               
 use App\Controller\BaseParameters;
-use Psr\Log\LoggerInterface;
 use App\Service\BaseRepository;
 use App\Service\BaseUtils;
 use PDOException;
@@ -41,10 +40,10 @@ final class BaseCreate extends BaseRepository
         $inputs  = (array) $this->tableClass->toCheckValue($this->tableClass->toTextCreate(),$body);
         $this->toDebugger($this->parameters->getLogger(),$this->parameters->getDebug(), $msgName,'inputs', $inputs);
         $primaryKey = $this->tableClass->toPrimaryKey();                                          // Campos de la clave primaria de la tabla.
-        $baseUtils  = new BaseUtils();                                                             // nueva instancia clase BaseUitls;
-        if (!is_null($primaryKey) && is_array($primaryKey) && !isset($primaryKey[$noPrimaryKey]))  // Si la tabla tiene clave primaria
+        $baseUtils  = new BaseUtils();                                                            // nueva instancia clase BaseUitls;
+        if (!is_null($primaryKey) && is_array($primaryKey) && !isset($primaryKey[$noPrimaryKey])) // Si la tabla tiene clave primaria
         {
-           $paramKey = $baseUtils->buildingSqlPrimaryKey($primaryKey, $inputs);                    // Asignar los valores a los campos de la clave primaria
+           $paramKey = $baseUtils->buildingSqlPrimaryKey($primaryKey, $inputs);                   // Asignar los valores a los campos de la clave primaria
            $result  = (array) $this->toCount($this->parameters->getDb(),$this->tableClass->toTable(),$this->tableClass->getFieldsId(),$paramKey); // Leemos base datos
            $msgDebug = 'count: '.$result['count'].' key: '. json_encode($paramKey,JSON_PARTIAL_OUTPUT_ON_ERROR );
            $this->toDebugger($this->parameters->getLogger(), $this->parameters->getDebug(), $msgName, $msgDebug, $this->query);   // Si debug = true, graba el query en el logger

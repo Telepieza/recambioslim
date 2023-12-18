@@ -59,7 +59,7 @@
             </form>
 
             <form class="form-horizontal mb-2" method="post" action="locationForm.php?action=<?php echo $action."&amp;id={$id}"; ?>"
-                        onsubmit="return verifForm([<?php echo getfield02()?>,<?php echo getfield03()?>],'Error : fields marked with an asterisk are mandatory!');">
+                        onsubmit="return verifForm([<?php echo getfield01()?>,<?php echo getfield02()?>,<?php echo getfield03()?>],'Error : fields marked with an asterisk are mandatory!');">
 
               <div class="form-group row mb-2">
                 <label for="<?php echo getfieldid()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 "><?php echo getfieldid()?>:</label>
@@ -68,9 +68,8 @@
                 </div>
               </div>
 
-
               <div class="form-group row mb-1">
-               <label for="<?php echo getfield01()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 "><?php echo getfield01()?>:</label>
+               <label for="<?php echo getfield01()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield01()?>:</label>
                 <div class="col-sm-2 col-lg-6">
                  <input type="text" class="form-control" name="<?php echo getfield01()?>" placeholder="<?php echo getfield01()?>" value="<?php if (isset($val[0][getfield01()])) {echo htmlspecialchars($val[0][getfield01()]);}?>"/>
                 </div>
@@ -91,14 +90,14 @@
               </div>
 
               <div class="form-group row mb-1">
-               <label for="<?php echo getfield04()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield04()?>:</label>
+               <label for="<?php echo getfield04()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 "><?php echo getfield04()?>:</label>
                 <div class="col-sm-2 col-lg-6">
                   <input type="text" class="form-control" name="<?php echo getfield04()?>" min="0" placeholder="<?php echo getfield04()?>" value="<?php if (isset($val[0][getfield04()])) {echo htmlspecialchars($val[0][getfield04()]);}?>"/>
                 </div>
               </div>
 
               <div class="form-group row mb-1">
-                <label for="<?php echo getfield05()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield05()?>:</label>
+                <label for="<?php echo getfield05()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 "><?php echo getfield05()?>:</label>
                 <div class="col-sm-2 col-lg-6">
                   <input type="text"  class="form-control" name="<?php echo getfield05()?>" min="0" placeholder="<?php echo getfield05()?>" value="<?php if (isset($val[0][getfield05()])) {echo htmlspecialchars($val[0][getfield05()]);}?>"/>
                 </div>
@@ -112,7 +111,7 @@
               </div>
 
               <div class="form-group row mb-1">
-                <label for="<?php echo getfield07()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 ">* <?php echo getfield07()?>:</label>
+                <label for="<?php echo getfield07()?>" class="col-sm-2 d-flex justify-content-end align-items-center pe-3 "><?php echo getfield07()?>:</label>
                 <div class="col-sm-2 col-lg-6">
                   <input type="text"  class="form-control" name="<?php echo getfield07()?>" min="0" placeholder="<?php echo getfield07()?>" value="<?php if (isset($val[0][getfield07()])) {echo htmlspecialchars($val[0][getfield07()]);}?>"/>
                 </div>

@@ -3,18 +3,17 @@
   * Product_to_category.php
   * Description: product_to_category template
   * @Author : M.V.M.
-  * @Version 1.0.11
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
 namespace App\Entity;
 
-
 final class Product_category extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "product_to_category";
+    private $field00    = 'NoPrimaryKey';
     private $fieldid    = 'product_id';
     private $field01    = 'category_id';
    
@@ -22,11 +21,10 @@ final class Product_category extends BaseValidate
     private int    $id;                       // id (product_id)
     private int    $value01;                  // field01 (category_id)
 
-   
     public function __construct(string $prefix, array $inputs)
     {
         if (!is_null($prefix) && !empty($prefix))
-        { 
+        {
             $this->prefix = $prefix;
         }
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
@@ -97,8 +95,6 @@ final class Product_category extends BaseValidate
             $this->setvalue01($this->validateInteger($results[$this->field01]));
            $results[$this->field01] = $this->getvalue01();
         }
-       
-
         return $results;
     }
 
@@ -106,7 +102,6 @@ final class Product_category extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -117,7 +112,6 @@ final class Product_category extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;

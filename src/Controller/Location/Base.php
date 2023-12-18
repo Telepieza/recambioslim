@@ -3,7 +3,7 @@
   * Base.php
   * Description: Controller and router service Location
   * @Author : M.V.M.
-  * @Version: 1.0.5
+  * @Version: 1.0.16
 **/
 declare(strict_types=1);
 
@@ -19,8 +19,7 @@ abstract class Base extends BaseController
 {
     protected function getLocationTable() : string
     {
-        $tableName  = 'location';
-        return $tableName;
+        return 'location';
     }
 
     protected function getLocationFindService(): Find

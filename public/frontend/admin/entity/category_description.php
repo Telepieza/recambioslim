@@ -3,22 +3,20 @@
   * category_description.php
   * Description: category_description template
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.16
 **/
 
 defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // run php program safely
 
 function setFormFields() {
-
-         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // category_id
-    $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // language_id
-    $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // name
-    $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // description
-    $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // meta_title
-    $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // meta_description
-    $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ; // meta_keyword
-
-  $formFields = array(
+  (int)         $id = isset($_REQUEST[getfieldid()]) ? $_REQUEST[getfieldid()] : 0  ; // category_id
+  (string) $value01 = isset($_REQUEST[getfield01()]) ? $_REQUEST[getfield01()] : '' ; // language_id
+  (string) $value02 = isset($_REQUEST[getfield02()]) ? $_REQUEST[getfield02()] : '' ; // name
+  (string) $value03 = isset($_REQUEST[getfield03()]) ? $_REQUEST[getfield03()] : '' ; // description
+  (string) $value04 = isset($_REQUEST[getfield04()]) ? $_REQUEST[getfield04()] : '' ; // meta_title
+  (string) $value05 = isset($_REQUEST[getfield05()]) ? $_REQUEST[getfield05()] : '' ; // meta_description
+  (string) $value06 = isset($_REQUEST[getfield06()]) ? $_REQUEST[getfield06()] : '' ; // meta_keyword
+  return array(
     getfieldid() => (int)    $id,        // category_id
     getfield01() => (string) $value01,   // language_id
     getfield02() => (string) $value02,   // name
@@ -26,7 +24,6 @@ function setFormFields() {
     getfield04() => (string) $value04,   // meta_title
     getfield05() => (string) $value05,   // meta_description
     getfield06() => (string) $value06);  // meta_keyword
-    return $formFields;
 }
 
 function viewTableThead($data) {
@@ -34,7 +31,6 @@ function viewTableThead($data) {
   if (is_array($data) && count($data) > 0) {
     $header .= '<th>action</th>';
   }
-
   $header .=
   '<th>' . getfieldid() . '</th>' .  // category_id
   '<th>' . getfield01() . '</th>' .  // language_id
@@ -47,70 +43,52 @@ function viewTableThead($data) {
 }
 
 function viewTableRows($data, $pageAction) {
-
   if (is_array($data) && count($data) > 0) {
     foreach($data as $row):
-
-    (int)    $id      = 0 ; // category_id
-    (string) $value01 = ''; // language_id
-    (string) $value02 = ''; // name
-    (string) $value03 = ''; // description
-    (string) $value04 = ''; // meta_title
-    (string) $value05 = ''; // meta_description
-    (string) $value06 = ''; // meta_keyword
-
-    if (isset($row[getfieldid()])) $id           = $row[getfieldid()];
-    if (isset($row[getfield01()])) trim($value01 = $row[getfield01()]);
-    if (isset($row[getfield02()])) trim($value02 = $row[getfield02()]);
-    if (isset($row[getfield03()])) trim($value03 = $row[getfield03()]);
-    if (isset($row[getfield04()])) trim($value04 = $row[getfield04()]);
-    if (isset($row[getfield05()])) trim($value05 = $row[getfield05()]);
-    if (isset($row[getfield06()])) trim($value06 = $row[getfield06()]);
-    
-    echo '<tr>';
-       echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
-       echo '<td>' . $id      . '</td>';  // category_id
-       echo '<td>' . $value01 . '</td>';  // language_id
-       echo '<td>' . $value02 . '</td>';  // name
-       echo '<td>' . $value03 . '</td>';  // description
-       echo '<td>' . $value04 . '</td>';  // meta_title
-       echo '<td>' . $value05 . '</td>';  // meta_description
-       echo '<td>' . $value06 . '</td>';  // meta_keyword
-    echo '</tr>';
+         (int)      $id = isset($row[getfieldid()]) ? $row[getfieldid()] : 0  ; // category_id
+      (string) $value01 = isset($row[getfield01()]) ? $row[getfield01()] : '' ; // language_id
+      (string) $value02 = isset($row[getfield02()]) ? $row[getfield02()] : '' ; // name
+      (string) $value03 = isset($row[getfield03()]) ? $row[getfield03()] : '' ; // description
+      (string) $value04 = isset($row[getfield04()]) ? $row[getfield04()] : '' ; // meta_title
+      (string) $value05 = isset($row[getfield05()]) ? $row[getfield05()] : '' ; // meta_description
+      (string) $value06 = isset($row[getfield06()]) ? $row[getfield06()] : '' ; // meta_keyword
+      echo '<tr>';
+         echo '<td><a href=' . $pageAction .  $id . getbuttonAction() . '</td>';
+         echo '<td>' . $id      . '</td>';
+         echo '<td>' . $value01 . '</td>';
+         echo '<td>' . $value02 . '</td>';
+         echo '<td>' . $value03 . '</td>';
+         echo '<td>' . $value04 . '</td>';
+         echo '<td>' . $value05 . '</td>';
+         echo '<td>' . $value06 . '</td>';
+      echo '</tr>';
     endforeach;
-    }
   }
+}
 
-  function getfieldid() {
+function getfieldid() {
     return 'category_id';
-  }
-  
-  function getfield01() {
+}
+function getfield01() {
     return 'language_id';
-  }
-  
-  function getfield02() {
+}
+function getfield02() {
     return 'name';
-  }
-  
-  function getfield03() {
+}
+function getfield03() {
     return 'description';
-  }
-  
-  function getfield04() {
+}
+function getfield04() {
     return 'meta_title';
-  }
-  
-  function getfield05() {
+}
+function getfield05() {
     return 'meta_description';
-  }
-
-  function getfield06() {
+}
+function getfield06() {
     return 'meta_keyword';
-  }
-  
-  function getbuttonAction() {
+}
+function getbuttonAction() {
     return ' target="_blank" class="btn btn-secondary btn-sm py-0"><i class="fa fa-angle-double-right"></i<small>Details</small></a';
-  }
+}
 
 ?>

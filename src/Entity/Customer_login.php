@@ -3,7 +3,7 @@
   * Customer_login.php
   * Description: Customer_login template
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.16
 **/
 declare(strict_types=1);
 
@@ -13,10 +13,10 @@ use DateTimeImmutable;
 
 final class Customer_login extends BaseValidate
 {
-
     private $prefix     = "oc_";
     private $tablename  = "customer_login";
     private $fieldid    = 'customer_login_id';
+    private $field00    = 'NoPrimaryKey';
     private $field01    = 'email';
     private $field02    = 'ip';
     private $field03    = 'total';
@@ -37,7 +37,6 @@ final class Customer_login extends BaseValidate
         {
             $this->prefix = $prefix;
         }
-
         $this->setid(isset($inputs[$this->fieldid])      ? $inputs[$this->fieldid] : 0  );
         $this->setvalue01(isset($inputs[$this->field01]) ? $inputs[$this->field01] : '' );
         $this->setvalue02(isset($inputs[$this->field02]) ? $inputs[$this->field02] : '' );
@@ -62,8 +61,7 @@ final class Customer_login extends BaseValidate
 
     public function toTable(): string
     {
-        $tableDB = $this->prefix . $this->tablename;
-        return $tableDB;
+        return $this->prefix . $this->tablename;
     }
 
     public function toTableName(): string
@@ -111,7 +109,6 @@ final class Customer_login extends BaseValidate
 
     public function toCheckValue($action,$results)
     {
-
         if (isset($results[$this->fieldid]))
         {
             $this->setid($this->validateInteger($results[$this->fieldid]));
@@ -136,38 +133,33 @@ final class Customer_login extends BaseValidate
             $results[$this->field03] = $this->getvalue03();
          }
 
-        if ($action === 'create') {
-           if (isset($results[$this->field04]))
-           {
-               $value = $results[$this->field04];
-               if ($value instanceof DateTimeImmutable || is_null($value)) {
-                  $this->setvalue04($this->validateDateTimeImmutable($value));
-                  $value = $this->getvalue04()->format('Y-m-d H:i:s');
-               }
-               else
-               {
-                   $value = $results[$this->field04];
-               }
-               $results[$this->field04] = $value;
+        if ($action === 'create' && isset($results[$this->field04]))
+         {
+            $value = $results[$this->field04];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue04($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue04()->format('Y-m-d H:i:s');
             }
+            else
+            {
+                $value = $results[$this->field04];
+            }
+            $results[$this->field04] = $value;
         }
 
-        if ($action === 'update') {
-            if (isset($results[$this->field05]))
+        if ($action === 'update' &&  isset($results[$this->field05]))
+         {
+            $value = $results[$this->field05];
+            if ($value instanceof DateTimeImmutable || is_null($value)) {
+                $this->setvalue05($this->validateDateTimeImmutable($value));
+                $value = $this->getvalue05()->format('Y-m-d H:i:s');
+            }
+            else
             {
                 $value = $results[$this->field05];
-                if ($value instanceof DateTimeImmutable || is_null($value)) {
-                   $this->setvalue05($this->validateDateTimeImmutable($value));
-                   $value = $this->getvalue05()->format('Y-m-d H:i:s');
-                }
-                else
-                {
-                    $value = $results[$this->field05];
-                }
-                $results[$this->field05] = $value;
-             }
-          }
-
+            }
+            $results[$this->field05] = $value;
+         }
         return $results;
     }
 
@@ -175,7 +167,6 @@ final class Customer_login extends BaseValidate
     {
         return $this->id;
     }
-
     public function setid($id):self
     {
         $this->id = $id;
@@ -186,7 +177,6 @@ final class Customer_login extends BaseValidate
     {
         return $this->value01;
     }
-
     public function setvalue01($value01):self
     {
         $this->value01 = $value01;
@@ -197,7 +187,6 @@ final class Customer_login extends BaseValidate
     {
         return $this->value02;
     }
-
     public function setvalue02($value02):self
     {
         $this->value02 = $value02;
@@ -208,7 +197,6 @@ final class Customer_login extends BaseValidate
     {
             return $this->value03;
     }
-
     public function setvalue03( $value03): self
     {
         $this->value03 = $value03;
@@ -219,7 +207,6 @@ final class Customer_login extends BaseValidate
     {
             return $this->value04;
     }
-
     public function setvalue04( $value04): self
     {
         $this->value04 = $value04;
@@ -230,7 +217,6 @@ final class Customer_login extends BaseValidate
     {
            return $this->value05;
     }
-
     public function setvalue05( $value05): self
     {
         $this->value05 = $value05;
