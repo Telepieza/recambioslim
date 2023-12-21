@@ -83,7 +83,7 @@ defined( '_TEXEC' ) or die( 'defines_ Restricted access - Access Denied' );  // 
 </div>
 
 <div class="row">
-   <img class = "mb-3" src="<?php echo $urlTemplate ?>/images/bg_table.jpg" alt="">            
+   <img class = "mb-3" src="<?php echo $urlTemplate ?>/images/bg_table.jpg" alt="">
      <div class="d-lg-flex align-items-center text-light mb-2">
 	   <a href="index.php"><img src="<?php echo $urlTemplate ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
 	    &copy; <?php echo date('Y') . ' ' . $company ; ?> 

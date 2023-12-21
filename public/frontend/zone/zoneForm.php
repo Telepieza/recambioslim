@@ -3,7 +3,7 @@
   * zoneForm.php
   * Description: Desktop zone form
   * @Author : M.V.M.
-  * @Version 1.0.8
+  * @Version 1.0.17
   * ------------------- fields ------------------------------
   * getfieldid() (int)    zone_id
   * getfield01() (int)    country_id
@@ -32,10 +32,10 @@ include_once $ruteInc.'core.php';
          <div class="col-md-8">
            <div class="row">
              <div class="d-lg-flex align-items-center mb-2">
-					     <a href="index.php"><img src="<?php echo $urlTemplate ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
+					     <a href="index.php"><img src="<?php echo $ruteTheme ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
                <h1 class="text-white"><?php echo $company ; ?> TEST API Zone</h1>
              </div>
-             <img class = "mb-3" src="<?php echo $urltemplate ?>/images/bg_table.jpg" alt="">
+             <img class = "mb-3" src="<?php echo $ruteTheme ?>/images/bg_table.jpg" alt="">
            </div>
         </div>
 

@@ -3,7 +3,7 @@
   * tax_ruleRead.php
   * Description: Read all categories with datatable
   * @Author : M.V.M.
-  * @Version 1.0.8
+  * @Version 1.0.17
   * --------------- Fields -----------------
   * getfieldid()  (int)    tax_rule_id
   * getfield01()  (int)    tax_class_id
@@ -43,10 +43,10 @@ include $ruteInc.'core.php';
       <div class="col-md-12">
         <div class="row">
            <div class="d-lg-flex align-items-center mb-2">
-               <a href="index.php"><img src="<?php echo $urlTemplate ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
+               <a href="index.php"><img src="<?php echo $ruteTheme ?>/images/company_98x82.png" alt="" width="98" height="82"></a>
                <h1 class="text-white"><?php echo $company ; ?> TEST API tax_rule</h1>
             </div>
-            <img class = "mb-3" src="<?php echo $urltemplate ?>/images/bg_table.jpg" alt="">
+            <img class = "mb-3" src="<?php echo $ruteTheme ?>/images/bg_table.jpg" alt="">
         </div>
       </div>
 
