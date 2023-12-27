@@ -3,7 +3,7 @@
   * Update.php
   * Description: Service Tax_rule
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -20,16 +20,13 @@ use App\Service\BaseUpdate;
     ROUTE : $group->post('/{$this->tableClass->toTable()}/update/{id}','App\Controller\{$this->tableClass->toTable()}\Update:update');
 */
 
-final class Update  
+final class Update
 {
   public function update(Request $request, array $args, BaseParameters $parameters)
   {
     $body          = (array) $request->getParsedBody();
     $tableClass    = new Tax_rule($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied  
     $modify        = new BaseUpdate($tableClass,$parameters);
-    $result        = (array) $modify->update($body,$args);
-    return $result;
+    return (array) $modify->update($body,$args);
    }
-
 }
- 

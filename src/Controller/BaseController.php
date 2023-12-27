@@ -3,7 +3,7 @@
   * BaseController.php
   * Description: Base controller for all templates
   * @Author : M.V.M.
-  * @Version 1.0.16
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -16,12 +16,14 @@ use Psr\Log\LoggerInterface;
 use App\Application\Settings\SettingsInterface;
 use App\Controller\BaseParameters;
 use App\Application\Middleware\Auth;
+use App\Application\Middleware\Mail;
 
 class BaseController
 {
   protected ContainerInterface $container;
   protected $settings = null;
   protected BaseParameters $baseParameters;
+  protected Mail  $mail;
 
   public function __construct(ContainerInterface $ci, LoggerInterface $logger)
   {
@@ -116,14 +118,17 @@ class BaseController
   protected function getAuthUser(Request $request) {
     $auth = new Auth($request,$this->baseParameters->getKeyToken());
     $result = $auth->verifyToken();
+
     if ($result['code'] === 200) {
       $jsonRecord = $auth->verifyUser($this->baseParameters->getDb(),$this->baseParameters->getPrefix());
       $result = (array) json_decode($jsonRecord);
     }
     
-    /* Sin token
-      if ($result['code'] === 403) { $result['code'] = 200; }
-    */
+    if ($result['code'] !== 200) {
+      $this->mail = new Mail($request, $this->baseParameters,$result);
+      $this->mail->send('BaseController');
+    }
+
     return $result;
   }
 

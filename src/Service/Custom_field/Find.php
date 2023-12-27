@@ -27,8 +27,7 @@ use App\Service\BaseFind;
       $query         = (array) $request->getQueryParams();
       $tableClass    = new Custom_field($parameters->getPrefix(),$body);                 // (1) Modify in the new class the tableClass, if the class is copied  
       $find          = new BaseFind($tableClass,$parameters);
-      $result        = (array) $find->getAll($query);
-      return $result;
+      return (array) $find->getAll($query);
     }
 
     public function getOne(Request $request,array $args, BaseParameters $parameters)
@@ -36,9 +35,6 @@ use App\Service\BaseFind;
       $body         = (array) $request->getParsedBody();
       $tableClass   = new Custom_field($parameters->getPrefix(),$body);                // (1) Modify in the new class the tableClass, if the class is copied  
       $find         = new BaseFind($tableClass,$parameters);
-      $result       = (array) $find->getOne($args);
-      return $result;
+      return (array) $find->getOne($args);
     }
-
 }
-

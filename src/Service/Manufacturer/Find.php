@@ -3,7 +3,7 @@
   * Find.php
   * Description: Service Manufacturer
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -27,8 +27,7 @@ final class Find
         $query         = (array) $request->getQueryParams();
         $tableClass    = new Manufacturer($parameters->getPrefix(),$body);                // (1) Modificar si se copia la clase. (Nombre de la clase)
         $find          = new BaseFind($tableClass,$parameters);
-        $result        = (array) $find->getAll($query);
-        return $result;
+        return (array) $find->getAll($query);
     }
   
     public function getOne(Request $request,array $args, BaseParameters $parameters)
@@ -36,7 +35,6 @@ final class Find
         $body         = (array) $request->getParsedBody();
         $tableClass   = new Manufacturer($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied
         $find         = new BaseFind($tableClass,$parameters);
-        $result       = (array) $find->getOne($args);
-        return $result;
+        return (array) $find->getOne($args);
     }
 }

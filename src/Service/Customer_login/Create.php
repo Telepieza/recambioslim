@@ -3,7 +3,7 @@
   * Create.php
   * Description: Service Customer_login
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -24,8 +24,6 @@ final class Create
       $body           = (array) $request->getParsedBody();
       $tableClass     = new Customer_login($parameters->getPrefix(),$body);            // (1) Modify in the new class the tableClass, if the class is copied 
       $create         = new BaseCreate($tableClass,$parameters);
-      $result         = (array) $create->new($body);
-      return $result;
+      return (array) $create->new($body);
    }
 }
- 

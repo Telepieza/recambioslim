@@ -1,19 +1,20 @@
 <?php
 /**
-  * BaseFind.php
-  * Description: Principal object User Agent class of login and delete
+  * UserAgent.php
+  * Description: Principal object User Agent class of login
   * @Author : M.V.M.
-  * @Version 1.0.15
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Application\Middleware;
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class BaseUserAgent
+class UserAgent
 {
   protected array $agent;
-
+  
   protected function getUserAgent(Request $request) {
     $this->agent = [];
     if (is_array($request->getServerParams()) && count($request->getServerParams()) > 0) {
@@ -52,26 +53,6 @@ class BaseUserAgent
 
   protected function getAgent() {
     return $this->agent;
-  }
-
-  protected function getUserAgentURI() {
-    $userIP = '';
-    if (!is_null($this->agent && count($this->agent) > 0))
-    {
-      if ($this->agent['SERVER_ADDR'] != null) {
-       $userIP = $this->agent['SERVER_ADDR'];
-      }
-      if ($this->agent['SERVER_PORT'] != null) {
-        if (!is_null($userIP) || !empty($userIP)) {
-           $userIP .= ':';
-        }
-        $userIP .= $this->agent['SERVER_PORT'];
-      }
-    }
-    if ($this->agent['REQUEST_URI'] != null) {
-      $userIP .= $this->agent['REQUEST_URI'];
-    }
-    return $userIP;
   }
 
 }

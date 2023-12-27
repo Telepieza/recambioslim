@@ -3,7 +3,7 @@
   * Create.php
   * Description: Service Tax_class
   * @Author : M.V.M.
-  * @Version 1.0.7
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -24,8 +24,7 @@ final class Create
       $body           = (array) $request->getParsedBody();
       $tableClass     = new Tax_class($parameters->getPrefix(),$body);            // (1) Modify in the new class the tableClass, if the class is copied 
       $create         = new BaseCreate($tableClass,$parameters);
-      $result         = (array) $create->new($body);
-      return $result;
+      return (array) $create->new($body);
    }
 }
  

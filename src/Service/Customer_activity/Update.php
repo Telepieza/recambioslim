@@ -3,7 +3,7 @@
   * Update.php
   * Description: Service Customer_activity
   * @Author : M.V.M.
-  * @Version 1.0.9
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -27,9 +27,6 @@ final class Update
     $body          = (array) $request->getParsedBody();
     $tableClass    = new Customer_activity($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied  
     $modify        = new BaseUpdate($tableClass,$parameters);
-    $result        = (array) $modify->update($body,$args);
-    return $result;
+    return (array) $modify->update($body,$args);
    }
-
 }
- 

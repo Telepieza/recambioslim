@@ -3,7 +3,7 @@
   * Auth.php
   * Description: Authorization : Verify token, user and password
   * @Author : M.V.M.
-  * @Version: 1.0.16
+  * @Version: 1.0.18
 **/
 declare(strict_types=1);
 
@@ -35,9 +35,10 @@ class Auth
 
     public function verifyToken()                                    // verificamos el token del input request del cliente
     {
+
         $jwtHeader = $this->request->getHeaderLine('Authorization'); // getHeaderLine   $authorization = explode(' ',$jwtHeader);
         if (is_null($jwtHeader) && isset($this->request->getServerParams()['HTTP_AUTHORIZATION'])) {
-            $jwtHeader = $this->request->getServerParams()["HTTP_AUTHORIZATION"];
+          $jwtHeader = $this->request->getServerParams()["HTTP_AUTHORIZATION"];
         }
         $authorization = explode(' ',$jwtHeader);
         $this->count   = count($authorization);                      // count array
@@ -55,12 +56,12 @@ class Auth
         if ($type !== 'Bearer')                                       // si tipo != Bearer mensaje de error
         {
             $this->code = 403;                                        // cambiamos el code 400 por 403
-            $this->message = 'Forbidden: (Bearer) You are not authorized. Token invalid.';
+            $this->message = 'Forbidden: (Bearer) You are not authorized. Login authentication required.';
         }
         elseif (empty($credentials))                                  // si no existe token mensaje error
         {
             $this->code    = 403;                                     // cambiamos el code 400 por 403
-            $this->message = 'Forbidden: (Credentials) You are not authorized. Token required.';
+            $this->message = 'Forbidden: (Credentials) You are not authorized. Login authentication required.' ;
         }
         if ($this->code !== 403)                                      // si es 400 o != 403
         {

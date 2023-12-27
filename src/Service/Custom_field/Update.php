@@ -3,7 +3,7 @@
   * Update.php
   * Description: Service custom_field
   * @Author : M.V.M.
-  * @Version 1.0.10
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -27,8 +27,7 @@ final class Update
     $body          = (array) $request->getParsedBody();
     $tableClass    = new Custom_field($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied  
     $modify        = new BaseUpdate($tableClass,$parameters);
-    $result        = (array) $modify->update($body,$args);
-    return $result;
+    return (array) $modify->update($body,$args);
    }
 
 }

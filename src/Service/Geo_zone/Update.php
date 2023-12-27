@@ -3,7 +3,7 @@
   * Update.php
   * Description: Service Geo_zone
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.18
 **/
 declare(strict_types=1);
 
@@ -26,9 +26,6 @@ final class Update
     $body          = (array) $request->getParsedBody();
     $tableClass    = new Geo_zone($parameters->getPrefix(),$body);               // (1) Modify in the new class the tableClass, if the class is copied
     $modify        = new BaseUpdate($tableClass,$parameters);
-    $result        = (array) $modify->update($body,$args);
-    return $result;
+    return (array) $modify->update($body,$args);
    }
-
 }
- 
