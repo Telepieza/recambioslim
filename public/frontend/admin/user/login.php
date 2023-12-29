@@ -3,7 +3,7 @@
   * login.php
   * Description: Login form
   * @Author : M.V.M.
-  * @Version 1.0.0
+  * @Version 1.0.19
 **/
 
 if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
@@ -14,7 +14,6 @@ if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
 (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
 (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
 (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
-
 
 include_once $rutaEntity.'login.php';        // template login
 
@@ -81,6 +80,8 @@ include_once $ruteTheme.'navbar.php';
                     <input type="password" class="form-control" required name="password" placeholder="password" value="telepieza" />
                   </div>
                   <button class="btn btn-primary px-4 me-2 text-center"><b>Login</b></button>
+                  <button type="button" class="btn btn-success px-4 me-2 text-center"><a href="index.php"><b>Exit</b></a></button>
+              </div>
               </form>
                 <?php include_once $ruteTheme.'viewMsg.php'; ?>
             </div>

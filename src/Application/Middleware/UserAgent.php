@@ -3,7 +3,7 @@
   * UserAgent.php
   * Description: Principal object User Agent class of login
   * @Author : M.V.M.
-  * @Version 1.0.18
+  * @Version 1.0.19
 **/
 declare(strict_types=1);
 
@@ -15,7 +15,8 @@ class UserAgent
 {
   protected array $agent;
   
-  protected function getUserAgent(Request $request) {
+  protected function getUserAgent(Request $request)
+  {
     $this->agent = [];
     if (is_array($request->getServerParams()) && count($request->getServerParams()) > 0) {
         foreach ($request->getServerParams() as $key => $val) {

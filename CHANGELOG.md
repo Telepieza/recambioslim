@@ -1,3 +1,7 @@
+## 1.0.19 (2013-12-29)
+
+* Include exit button in login template Frontend.
+
 ## 1.0.18 (2013-12-28)
 
 * New class mailer control to login, controller and auth.

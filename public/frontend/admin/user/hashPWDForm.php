@@ -3,20 +3,22 @@
   * hashPWDForm.php
   * Description: hash password form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.19
 **/
 
-  if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
+  if (!defined('_TEXEC'))  {
+    define( '_TEXEC' , 1) ;
+  }
 
-    (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR;
-    (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
-    (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
-    (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
+  (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR;
+  (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;
+  (string) $rutaEntity = $ruteAdmin.'entity'.DIRECTORY_SEPARATOR;
+  (string) $ruteTheme  = $ruteAdmin."template".DIRECTORY_SEPARATOR;
 
-    include_once $ruteInc.'function.php';
-    include_once $ruteInc.'setting.php';
-    include_once $ruteTheme.'header.php';
-    include_once $ruteTheme.'navbar.php';
+  include_once $ruteInc.'function.php';
+  include_once $ruteInc.'setting.php';
+  include_once $ruteTheme.'header.php';
+  include_once $ruteTheme.'navbar.php';
 
   $password = (isset($_POST['password'])) ? $_POST['password'] : '';
 ?>

@@ -1,12 +1,14 @@
 <?php
-/** 
+/**
   * checkJWTForm.php
   * Description: check JWT (token) form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.19
 **/
     
-    if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
+    if (!defined('_TEXEC'))  {
+      define( '_TEXEC' , 1) ;
+    }
 
     (string) $ruteAdmin  = '..'.DIRECTORY_SEPARATOR;
     (string) $ruteInc    = $ruteAdmin.'inc'.DIRECTORY_SEPARATOR;

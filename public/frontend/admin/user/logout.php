@@ -3,10 +3,12 @@
   * logout.php
   * Description: logout form
   * @Author : M.V.M.
-  * @Version 1.0.5
+  * @Version 1.0.19
 **/
   
-  if (!defined('_TEXEC'))  define( '_TEXEC' , 1) ;
+  if (!defined('_TEXEC'))  {
+    define( '_TEXEC' , 1) ;
+  }
 
 // If token exists, remove session and cookie
   if (isset($_SESSION['token'])) {

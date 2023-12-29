@@ -3,7 +3,7 @@
   * Mail.php
   * Description: Service Mail and debug
   * @Author : M.V.M.
-  * @Version 1.0.18
+  * @Version 1.0.19
 */
 declare(strict_types=1);
 
@@ -13,14 +13,13 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use App\Controller\BaseParameters;
 use PHPMailer\PHPMailer\PHPMailer;
-use Exception;
 
 class Mail extends UserAgent
 {
     protected array $result;
     protected BaseParameters $parameters;
     protected Request        $request;
-    protected BaseUserAgent  $useragent;
+    protected UserAgent  $useragent;
 
     public function __construct(Request $request,BaseParameters $parameters, array $result)   // Constructor
     {
@@ -59,15 +58,6 @@ class Mail extends UserAgent
       }
     }
     
-    // Grabar datos en el log si la variable debug de setting = true;
-    private function toDebugger(LoggerInterface $logger, $action, $message)
-    {
-      if ($this->parameters->getDebug()) {
-          $msg = $action . ' ' . $message;
-          $logger->debug($msg);
-      }
-    }
-
     private function toMailer(PHPMailer $mailer, $action, $product, $msgHTML, $msgTXT)
     {
       $msg = '';
@@ -86,6 +76,15 @@ class Mail extends UserAgent
           }
       }
       return $msg;
+    }
+
+    // Grabar datos en el log si la variable debug de setting = true;
+    private function toDebugger(LoggerInterface $logger, $action, $message)
+    {
+      if ($this->parameters->getDebug()) {
+          $msg = $action . ' ' . $message;
+          $logger->debug($msg);
+      }
     }
 
 }
